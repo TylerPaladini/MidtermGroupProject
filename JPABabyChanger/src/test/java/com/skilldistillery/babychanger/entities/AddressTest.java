@@ -47,7 +47,7 @@ class AddressTest {
 	@Test
 	void test_address_mappings() {
 		Location location = em.find(Location.class, 1);
-		assertEquals("1210 Toledo St", location.getAddress()); 
+		assertEquals("1210 Toledo St", location.getAddress().getStreet()); 
 	}
 
 }
