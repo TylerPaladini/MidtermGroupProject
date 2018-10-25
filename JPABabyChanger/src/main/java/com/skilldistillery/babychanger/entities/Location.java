@@ -12,6 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 public class Location {
@@ -31,7 +35,15 @@ public class Location {
 	private boolean purchaseRequired;
 	
 	private String phone;
+	
+	@Column(name = "open_time")
+	@Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
 	private Date openTime;
+	
+	@Column(name = "closed_time")
+	@Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
 	private Date closeTime;
 	
 	@OneToMany(mappedBy="location")
