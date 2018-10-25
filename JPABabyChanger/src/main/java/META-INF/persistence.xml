@@ -10,7 +10,11 @@
     </provider>
 
 		<!-- entities listed here (need fully qualified name) -->
-		<class>com.skilldistillery.monopoly.entities.XXXXXXXX</class>
+		<class>com.skilldistillery.babychanger.entities.Address</class>
+		<class>com.skilldistillery.babychanger.entities.Comment</class>
+		<class>com.skilldistillery.babychanger.entities.Location</class>
+		<class>com.skilldistillery.babychanger.entities.Restroom</class>
+		<class>com.skilldistillery.babychanger.entities.User</class>
 		
 
 		<properties>
