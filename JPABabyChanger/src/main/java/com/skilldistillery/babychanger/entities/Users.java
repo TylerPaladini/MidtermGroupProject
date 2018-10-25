@@ -1,12 +1,15 @@
 package com.skilldistillery.babychanger.entities;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Users {
@@ -35,12 +38,45 @@ public class Users {
 	
 	private boolean admin;
 	
+	@OneToMany(mappedBy="user")
+	private List<Comment> comments;
+			
+	
 
 	
 	public Users() {
 		
 	}
+	
+	
+	public void addComment(Comment comment) {
+		if(comments == null) comments = new ArrayList<>();
+		
+		if(!comments.contains(comment)) {
+			comments.add(comment);
+			if(comment.getUser() != null) {
+				comment.getUser().getComments().remove(comment);
+			}
+			comment.setUser(this);
+		}
+	}
+	public void removeComment(Comment comment) {
+		comment.setUser(null);
+		if(comments != null) {
+			comments.remove(comment);
+		}
+	}
 
+
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
 
 
 	public String getUserName() {

@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,6 +37,7 @@ public class Restroom {
 	@Column(name="flagged_date")
 	private Date flaggedDate; 
 	
+	@Enumerated(EnumType.STRING)
 	private Enum gender; 
 	
 	private String directions; 
@@ -299,21 +302,22 @@ public class Restroom {
 	}
 
 	public void addComment(Comment comment) {
-        if(this.comments == null) {
-            this.comments = new ArrayList<>();
-        }
-        if(!comments.contains(comments)) {
-            comments.add(comment);
-            comment.addRestroom(this);
-        }
-    }
-    
-    public void removeComment(Comment comment) {
-        if(this.comments != null && this.comments.contains(comment)) {
-            this.comments.remove(comment);
-            comment.removeRestroom(this);
-        }
-    }
+		if(comments == null) comments = new ArrayList<>();
+		
+		if(!comments.contains(comment)) {
+			comments.add(comment);
+			if(comment.getRestroom() != null) {
+				comment.getRestroom().getComments().remove(comment);
+			}
+			comment.setRestroom(this);
+		}
+	}
+	public void removeComment(Comment comment) {
+		comment.setRestroom(null);
+		if(comments != null) {
+			comments.remove(comment);
+		}
+	}
     
 
 

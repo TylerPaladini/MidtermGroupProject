@@ -23,13 +23,17 @@ public class Location {
 	@OneToOne
 	@JoinColumn(name = "address_id")
 	private Address address;
+	
 	@Column(name = "access_limits")
 	private String accessLimits;
+	
 	@Column(name = "purchase_required")
 	private boolean purchaseRequired;
+	
 	private String phone;
 	private Date openTime;
 	private Date closeTime;
+	
 	@OneToMany(mappedBy="location")
 	private List<Restroom> restrooms;
 	
@@ -104,21 +108,30 @@ public class Location {
 	}
 	
 	public void addRestroom(Restroom restroom) {
-        if(this.restrooms == null) {
-            this.restrooms = new ArrayList<>();
-        }
-        if(!restrooms.contains(restrooms)) {
-        	restrooms.add(restroom);
-            restroom.addLocation(this);
-        }
-    }
-    
-    public void removeRestroom(Restroom restroom) {
-        if(this.restrooms != null && this.restrooms.contains(restroom)) {
-            this.restrooms.remove(restroom);
-            restroom.removeLocation(this);
-        }
-    }
+		if(restrooms == null) restrooms = new ArrayList<>();
+		
+		if(!restrooms.contains(restroom)) {
+			restrooms.add(restroom);
+			if(restroom.getLocation() != null) {
+				restroom.getLocation().getRestrooms().remove(restroom);
+			}
+			restroom.setLocation(this);
+		}
+	}
+	public void removeRestroom(Restroom restroom) {
+		restroom.setLocation(null);
+		if(restrooms != null) {
+			restrooms.remove(restroom);
+		}
+	}
+
+	public List<Restroom> getRestrooms() {
+		return restrooms;
+	}
+
+	public void setRestrooms(List<Restroom> restrooms) {
+		this.restrooms = restrooms;
+	}
 
 	@Override
 	public int hashCode() {
