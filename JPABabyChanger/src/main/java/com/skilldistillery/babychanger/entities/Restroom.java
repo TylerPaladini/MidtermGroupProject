@@ -20,12 +20,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name="restroom")
 public class Restroom {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id; 
-
-	@Column(name="location_id")
-	private int locationId; 
 	
 	private String picture; 
 	
@@ -63,40 +61,12 @@ public class Restroom {
 	@OneToMany(mappedBy="restroom")
 	private List<Comment> comments;
 
-	
-	public Restroom() {
-		
+	public int getId() {
+		return id;
 	}
-	
-	public Restroom(int id, int locationId, String picture, boolean flagged, String flaggedReason, Date flaggedDate,
-			Enum gender, String directions, boolean pAccess, int userId, Date dateCreated, String description,
-			boolean changingTable, Location location, List<Comment> comments) {
-		super();
+
+	public void setId(int id) {
 		this.id = id;
-		this.locationId = locationId;
-		this.picture = picture;
-		this.flagged = flagged;
-		this.flaggedReason = flaggedReason;
-		this.flaggedDate = flaggedDate;
-		this.gender = gender;
-		this.directions = directions;
-		this.pAccess = pAccess;
-		this.userId = userId;
-		this.dateCreated = dateCreated;
-		this.description = description;
-		this.changingTable = changingTable;
-		this.location = location;
-		this.comments = comments;
-	}
-
-	
-
-	public int getLocationId() {
-		return locationId;
-	}
-
-	public void setLocationId(int locationId) {
-		this.locationId = locationId;
 	}
 
 	public String getPicture() {
@@ -203,13 +173,6 @@ public class Restroom {
 		this.comments = comments;
 	}
 
-	public int getId() {
-		return id;
-	}
-
-	
-	
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -225,7 +188,6 @@ public class Restroom {
 		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((location == null) ? 0 : location.hashCode());
-		result = prime * result + locationId;
 		result = prime * result + (pAccess ? 1231 : 1237);
 		result = prime * result + ((picture == null) ? 0 : picture.hashCode());
 		result = prime * result + userId;
@@ -287,8 +249,6 @@ public class Restroom {
 				return false;
 		} else if (!location.equals(other.location))
 			return false;
-		if (locationId != other.locationId)
-			return false;
 		if (pAccess != other.pAccess)
 			return false;
 		if (picture == null) {
@@ -301,28 +261,40 @@ public class Restroom {
 		return true;
 	}
 
-	public void addComment(Comment comment) {
-		if(comments == null) comments = new ArrayList<>();
-		
-		if(!comments.contains(comment)) {
-			comments.add(comment);
-			if(comment.getRestroom() != null) {
-				comment.getRestroom().getComments().remove(comment);
-			}
-			comment.setRestroom(this);
-		}
+	@Override
+	public String toString() {
+		return "Restroom [id=" + id + ", picture=" + picture + ", flagged=" + flagged + ", flaggedReason="
+				+ flaggedReason + ", flaggedDate=" + flaggedDate + ", gender=" + gender + ", directions=" + directions
+				+ ", pAccess=" + pAccess + ", userId=" + userId + ", dateCreated=" + dateCreated + ", description="
+				+ description + ", changingTable=" + changingTable + ", location=" + location + ", comments=" + comments
+				+ "]";
 	}
-	public void removeComment(Comment comment) {
-		comment.setRestroom(null);
-		if(comments != null) {
-			comments.remove(comment);
-		}
+
+	public Restroom() {
+		super();
 	}
-    
 
-
+	public Restroom(int id, String picture, boolean flagged, String flaggedReason, Date flaggedDate, Enum gender,
+			String directions, boolean pAccess, int userId, Date dateCreated, String description, boolean changingTable,
+			Location location, List<Comment> comments) {
+		super();
+		this.id = id;
+		this.picture = picture;
+		this.flagged = flagged;
+		this.flaggedReason = flaggedReason;
+		this.flaggedDate = flaggedDate;
+		this.gender = gender;
+		this.directions = directions;
+		this.pAccess = pAccess;
+		this.userId = userId;
+		this.dateCreated = dateCreated;
+		this.description = description;
+		this.changingTable = changingTable;
+		this.location = location;
+		this.comments = comments;
+	}
 
 	
 	
-	
+			
 }
