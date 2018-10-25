@@ -28,7 +28,7 @@ class LocationTest {
 
 	@Test
 	void test() {
-		fail("Not yet implemented");
+		assertEquals(1, em.)
 	}
 
 }

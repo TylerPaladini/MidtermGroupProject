@@ -20,7 +20,7 @@
 		<properties>
 			<!-- connection to the database -->
 			<property name="javax.persistence.jdbc.url"
-				value="jdbc:mysql://localhost:3306/monopolydb?useSSL=false" />
+				value="jdbc:mysql://localhost:3306/babychangerdb?useSSL=false" />
 			<property name="javax.persistence.jdbc.user" value="stercus" />
 			<property name="javax.persistence.jdbc.password"
 				value="stercus" />
