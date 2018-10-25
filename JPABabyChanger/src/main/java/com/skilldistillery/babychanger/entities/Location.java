@@ -1,12 +1,17 @@
 package com.skilldistillery.babychanger.entities;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Location {
@@ -15,7 +20,8 @@ public class Location {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
-	@Column(name = "address_id")
+	@OneToOne
+	@JoinColumn(name = "address_id")
 	private Address address;
 	@Column(name = "access_limits")
 	private String accessLimits;
@@ -24,6 +30,8 @@ public class Location {
 	private String phone;
 	private Date openTime;
 	private Date closeTime;
+	@OneToMany(mappedBy="location")
+	private List<Restroom> restrooms;
 	
 	
 	/*
@@ -94,6 +102,23 @@ public class Location {
 	public void setCloseTime(Date closeTime) {
 		this.closeTime = closeTime;
 	}
+	
+	public void addRestroom(Restroom restroom) {
+        if(this.restrooms == null) {
+            this.restrooms = new ArrayList<>();
+        }
+        if(!restrooms.contains(restrooms)) {
+        	restrooms.add(restroom);
+            restroom.addLocation(this);
+        }
+    }
+    
+    public void removeRestroom(Restroom restroom) {
+        if(this.restrooms != null && this.restrooms.contains(restroom)) {
+            this.restrooms.remove(restroom);
+            restroom.removeLocation(this);
+        }
+    }
 
 	@Override
 	public int hashCode() {
