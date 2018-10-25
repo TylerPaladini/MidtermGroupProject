@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+
+	<!-- reference the persistence-unit by the name -->
+	<persistence-unit name="babychangerdb">
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider
+    </provider>
+
+		<!-- entities listed here (need fully qualified name) -->
+		<class>com.skilldistillery.monopoly.entities.XXXXXXXX</class>
+		
+
+		<properties>
+			<!-- connection to the database -->
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://localhost:3306/monopolydb?useSSL=false" />
+			<property name="javax.persistence.jdbc.user" value="stercus" />
+			<property name="javax.persistence.jdbc.password"
+				value="stercus" />
+			<property name="javax.persistence.jdbc.driver"
+				value="com.mysql.jdbc.Driver" />
+
+			<!-- turn value to true to see the sql in the console -->
+			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.format_sql" value="false" />
+
+			<!-- keeps the connection alive (like a heart beat to keep it awake when 
+				it is deployed to the website) -->
+			<property name="hibernate.dialect"
+				value="org.hibernate.dialect.MySQLDialect" />
+			<property name="hibernate.connection.provider_class"
+				value="org.hibernate.connection.C3P0ConnectionProvider" />
+
+			<property name="hibernate.c3p0.max_size" value="5" />
+			<property name="hibernate.c3p0.min_size" value="0" />
+			<property name="hibernate.c3p0.acquire_increment" value="1" />
+			<property name="hibernate.c3p0.idle_test_period" value="300" />
+			<property name="hibernate.c3p0.max_statements" value="0" />
+			<property name="hibernate.c3p0.timeout" value="60" />
+		</properties>
+	</persistence-unit>
+</persistence>
