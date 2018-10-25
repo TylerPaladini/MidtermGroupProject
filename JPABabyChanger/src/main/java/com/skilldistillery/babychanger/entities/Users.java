@@ -1,5 +1,5 @@
 package com.skilldistillery.babychanger.entities;
 
-public class User {
+public class Users {
 
 }
