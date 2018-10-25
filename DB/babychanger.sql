@@ -16,18 +16,17 @@ CREATE SCHEMA IF NOT EXISTS `babychangerdb` DEFAULT CHARACTER SET utf8 ;
 USE `babychangerdb` ;
 
 -- -----------------------------------------------------
--- Table `comment`
+-- Table `address`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `comment` ;
+DROP TABLE IF EXISTS `address` ;
 
-CREATE TABLE IF NOT EXISTS `comment` (
+CREATE TABLE IF NOT EXISTS `address` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `user_id` INT NULL DEFAULT NULL,
-  `comment` VARCHAR(150) NULL DEFAULT NULL,
-  `restroom_id` INT NULL DEFAULT NULL,
-  `flag_comment` TINYINT(1) NULL DEFAULT NULL,
-  `rating` ENUM('1', '2', '3', '4', '5') NULL DEFAULT NULL,
-  `active` TINYINT(1) NULL DEFAULT NULL,
+  `street` VARCHAR(45) NULL DEFAULT NULL,
+  `street2` VARCHAR(45) NULL DEFAULT NULL,
+  `city` VARCHAR(45) NULL DEFAULT NULL,
+  `state` VARCHAR(45) NULL DEFAULT NULL,
+  `zip` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
@@ -43,10 +42,11 @@ CREATE TABLE IF NOT EXISTS `users` (
   `first_name` VARCHAR(45) NULL DEFAULT NULL,
   `last_name` VARCHAR(45) NULL DEFAULT NULL,
   `username` VARCHAR(45) NULL DEFAULT NULL,
-  `email` VARCHAR(45) NULL DEFAULT NULL,
+  `email` VARCHAR(250) NULL DEFAULT NULL,
   `password` VARCHAR(45) NULL DEFAULT NULL,
   `active` TINYINT(1) NULL DEFAULT NULL,
   `admin` TINYINT(1) NULL DEFAULT NULL,
+  `date_created` DATETIME NULL DEFAULT current_timestamp,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
@@ -58,30 +58,23 @@ DEFAULT CHARACTER SET = utf8;
 DROP TABLE IF EXISTS `location` ;
 
 CREATE TABLE IF NOT EXISTS `location` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NULL,
-  `address_id` INT NULL,
-  `access_limits` VARCHAR(45) NULL,
-  `purchase_required` TINYINT(1) NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `address`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `address` ;
-
-CREATE TABLE IF NOT EXISTS `address` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `street` VARCHAR(45) NULL,
-  `street2` VARCHAR(45) NULL,
-  `city` VARCHAR(45) NULL,
-  `state` VARCHAR(45) NULL,
-  `zip` VARCHAR(45) NULL,
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `address_id` INT(11) NULL DEFAULT NULL,
+  `access_limits` VARCHAR(500) NULL DEFAULT NULL,
+  `purchase_required` TINYINT(1) NULL DEFAULT NULL,
   `phone` VARCHAR(45) NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+  `open_time` TIME NULL,
+  `closed_time` TIME NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_address_location_idx` (`address_id` ASC),
+  CONSTRAINT `fk_address_location`
+    FOREIGN KEY (`address_id`)
+    REFERENCES `address` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
@@ -90,18 +83,65 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `restroom` ;
 
 CREATE TABLE IF NOT EXISTS `restroom` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `condition` VARCHAR(45) NULL,
-  `location_id` INT NULL,
-  `picture` VARCHAR(45) NULL,
-  `flagged` TINYINT(1) NULL,
-  `flagged_reason` VARCHAR(45) NULL,
-  `flagged_date` DATETIME NULL,
-  `gender` ENUM('M', 'W', 'U', 'F') NULL,
-  `directions` VARCHAR(150) NULL,
-  `public` TINYINT(1) NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `location_id` INT(11) NOT NULL,
+  `picture` VARCHAR(1000) NULL DEFAULT NULL,
+  `flagged` TINYINT(1) NULL DEFAULT NULL,
+  `flagged_reason` TEXT NULL DEFAULT NULL,
+  `flagged_date` DATETIME NULL DEFAULT NULL,
+  `gender` ENUM('M', 'F', 'U') NULL DEFAULT NULL,
+  `directions` VARCHAR(500) NULL DEFAULT NULL,
+  `public` TINYINT(1) NULL DEFAULT NULL,
+  `user_id` INT NOT NULL,
+  `date_created` DATETIME NULL DEFAULT current_timestamp,
+  `description` TEXT NULL,
+  `changing_table` TINYINT(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_restroom_location1_idx` (`location_id` ASC),
+  INDEX `fk_restroom_user_idx` (`user_id` ASC),
+  CONSTRAINT `fk_restroom_location1`
+    FOREIGN KEY (`location_id`)
+    REFERENCES `location` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_restroom_user`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `users` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `comment`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `comment` ;
+
+CREATE TABLE IF NOT EXISTS `comment` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `user_id` INT(11) NOT NULL,
+  `comment` TEXT NULL DEFAULT NULL,
+  `restroom_id` INT(11) NOT NULL,
+  `flag_comment` TINYINT(1) NULL DEFAULT NULL,
+  `rating` ENUM('1', '2', '3', '4', '5') NULL DEFAULT NULL,
+  `active` TINYINT(1) NULL DEFAULT NULL,
+  `date_created` DATETIME NOT NULL DEFAULT current_timestamp,
+  PRIMARY KEY (`id`),
+  INDEX `fk_comment_users1_idx` (`user_id` ASC),
+  INDEX `fk_comment_restroom1_idx` (`restroom_id` ASC),
+  CONSTRAINT `fk_comment_users1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `users` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_comment_restroom1`
+    FOREIGN KEY (`restroom_id`)
+    REFERENCES `restroom` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
 SET SQL_MODE = '';
 DROP USER IF EXISTS stercus@localhost;
@@ -113,3 +153,37 @@ GRANT SELECT, INSERT, TRIGGER, UPDATE, DELETE ON TABLE * TO 'stercus'@'localhost
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- -----------------------------------------------------
+-- Data for table `users`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `babychangerdb`;
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `active`, `admin`, `date_created`) VALUES (1, 'Jane', 'Doe', 'janedoe', 'janedoe@gmail.com', 'janedoe', true, false, NULL);
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `active`, `admin`, `date_created`) VALUES (2, 'John', 'Doe', 'johndoe', 'johndoe@hotmail.com', 'johndoe', true, true, NULL);
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `active`, `admin`, `date_created`) VALUES (3, 'Mike', 'Myers', 'mikem', 'mikeym@aol.com', 'mikeym', true, false, NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `location`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `babychangerdb`;
+INSERT INTO `location` (`id`, `name`, `address_id`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`) VALUES (1, 'Solarium', NULL, 'have to be a student', false, '7194406626', '08:00', '18:00');
+INSERT INTO `location` (`id`, `name`, `address_id`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`) VALUES (2, 'Gas Station E Orchard', NULL, 'must get key from attendant', true, '7203154567', NULL, NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `restroom`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `babychangerdb`;
+INSERT INTO `restroom` (`id`, `location_id`, `picture`, `flagged`, `flagged_reason`, `flagged_date`, `gender`, `directions`, `public`, `user_id`, `date_created`, `description`, `changing_table`) VALUES (1, 1, NULL, NULL, NULL, NULL, 'M', 'gound floor north tower east end down hallway', true, 2, NULL, 'changing room w/showers', false);
+INSERT INTO `restroom` (`id`, `location_id`, `picture`, `flagged`, `flagged_reason`, `flagged_date`, `gender`, `directions`, `public`, `user_id`, `date_created`, `description`, `changing_table`) VALUES (2, 1, NULL, NULL, NULL, NULL, 'F', 'ground floor n tower ', true, 1, NULL, 'nice tp', true);
+
+COMMIT;
+
