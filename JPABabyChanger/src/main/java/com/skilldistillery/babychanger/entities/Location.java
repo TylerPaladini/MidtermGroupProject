@@ -16,7 +16,7 @@ public class Location {
 	private int id;
 	private String name;
 	@Column(name = "address_id")
-	private Integer address;
+	private Address address;
 	@Column(name = "access_limits")
 	private String accessLimits;
 	@Column(name = "purchase_required")
@@ -25,55 +25,76 @@ public class Location {
 	private Date openTime;
 	private Date closeTime;
 	
+	
 	/*
 	 * getters / setters
 	 */
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public Integer getAddress() {
-		return address;
-	}
-	public void setAddress(Integer address) {
-		this.address = address;
-	}
-	public String getAccessLimits() {
-		return accessLimits;
-	}
-	public void setAccessLimits(String accessLimits) {
-		this.accessLimits = accessLimits;
-	}
-	public boolean isPurchaseRequired() {
-		return purchaseRequired;
-	}
-	public void setPurchaseRequired(boolean purchaseRequired) {
-		this.purchaseRequired = purchaseRequired;
-	}
-	public String getPhone() {
-		return phone;
-	}
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-	public Date getOpenTime() {
-		return openTime;
-	}
-	public void setOpenTime(Date openTime) {
-		this.openTime = openTime;
-	}
-	public Date getCloseTime() {
-		return closeTime;
-	}
-	public void setCloseTime(Date closeTime) {
-		this.closeTime = closeTime;
-	}
+	
+	
 	public int getId() {
 		return id;
 	}
-	
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public String getAccessLimits() {
+		return accessLimits;
+	}
+
+	public void setAccessLimits(String accessLimits) {
+		this.accessLimits = accessLimits;
+	}
+
+	public boolean isPurchaseRequired() {
+		return purchaseRequired;
+	}
+
+	public void setPurchaseRequired(boolean purchaseRequired) {
+		this.purchaseRequired = purchaseRequired;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public Date getOpenTime() {
+		return openTime;
+	}
+
+	public void setOpenTime(Date openTime) {
+		this.openTime = openTime;
+	}
+
+	public Date getCloseTime() {
+		return closeTime;
+	}
+
+	public void setCloseTime(Date closeTime) {
+		this.closeTime = closeTime;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -106,8 +127,8 @@ public class Location {
 	public Location() {
 		super();
 	}
-	
-	public Location(int id, String name, Integer address, String accessLimits, boolean purchaseRequired, String phone,
+
+	public Location(int id, String name, Address address, String accessLimits, boolean purchaseRequired, String phone,
 			Date openTime, Date closeTime) {
 		super();
 		this.id = id;
@@ -119,6 +140,5 @@ public class Location {
 		this.openTime = openTime;
 		this.closeTime = closeTime;
 	}
-	
 	
 }
