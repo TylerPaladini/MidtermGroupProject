@@ -1,6 +1,8 @@
 package com.skilldistillery.babychanger.entities;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -54,17 +57,17 @@ public class Restroom {
 	@JoinColumn(name="location_id")
 	private Location location; 
 	
-	//getters and setters 
-	
-	
+	@OneToMany(mappedBy="restroom")
+	private List<Comment> comments;
 
-	public int getLocationId() {
-		return locationId;
+	
+	public Restroom() {
+		
 	}
-
+	
 	public Restroom(int id, int locationId, String picture, boolean flagged, String flaggedReason, Date flaggedDate,
 			Enum gender, String directions, boolean pAccess, int userId, Date dateCreated, String description,
-			boolean changingTable, Location location) {
+			boolean changingTable, Location location, List<Comment> comments) {
 		super();
 		this.id = id;
 		this.locationId = locationId;
@@ -80,14 +83,13 @@ public class Restroom {
 		this.description = description;
 		this.changingTable = changingTable;
 		this.location = location;
+		this.comments = comments;
 	}
 
-	public Location getLocation() {
-		return location;
-	}
+	
 
-	public void setLocation(Location location) {
-		this.location = location;
+	public int getLocationId() {
+		return locationId;
 	}
 
 	public void setLocationId(int locationId) {
@@ -182,53 +184,35 @@ public class Restroom {
 		this.changingTable = changingTable;
 	}
 
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
 	public int getId() {
 		return id;
 	}
 
-	//to String 
 	
-	@Override
-	public String toString() {
-		return "Restroom [id=" + id + ", locationId=" + locationId + ", picture=" + picture + ", flagged=" + flagged
-				+ ", flaggedReason=" + flaggedReason + ", flaggedDate=" + flaggedDate + ", gender=" + gender
-				+ ", directions=" + directions + ", pAccess=" + pAccess + ", userId=" + userId + ", dateCreated="
-				+ dateCreated + ", description=" + description + ", changingTable=" + changingTable + ", location="
-				+ location + "]";
-	}
 	
-	//constructors
-
-	public Restroom(int id, int locationId, String picture, boolean flagged, String flaggedReason, Date flaggedDate,
-			Enum gender, String directions, boolean pAccess, int userId, Date dateCreated, String description,
-			boolean changingTable) {
-		super();
-		this.id = id;
-		this.locationId = locationId;
-		this.picture = picture;
-		this.flagged = flagged;
-		this.flaggedReason = flaggedReason;
-		this.flaggedDate = flaggedDate;
-		this.gender = gender;
-		this.directions = directions;
-		this.pAccess = pAccess;
-		this.userId = userId;
-		this.dateCreated = dateCreated;
-		this.description = description;
-		this.changingTable = changingTable;
-	} 
-	
-	public Restroom() {
-		
-	}
-
-	//hash and equals 
 	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + (changingTable ? 1231 : 1237);
+		result = prime * result + ((comments == null) ? 0 : comments.hashCode());
 		result = prime * result + ((dateCreated == null) ? 0 : dateCreated.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((directions == null) ? 0 : directions.hashCode());
@@ -237,6 +221,7 @@ public class Restroom {
 		result = prime * result + ((flaggedReason == null) ? 0 : flaggedReason.hashCode());
 		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
 		result = prime * result + id;
+		result = prime * result + ((location == null) ? 0 : location.hashCode());
 		result = prime * result + locationId;
 		result = prime * result + (pAccess ? 1231 : 1237);
 		result = prime * result + ((picture == null) ? 0 : picture.hashCode());
@@ -254,6 +239,11 @@ public class Restroom {
 			return false;
 		Restroom other = (Restroom) obj;
 		if (changingTable != other.changingTable)
+			return false;
+		if (comments == null) {
+			if (other.comments != null)
+				return false;
+		} else if (!comments.equals(other.comments))
 			return false;
 		if (dateCreated == null) {
 			if (other.dateCreated != null)
@@ -289,6 +279,11 @@ public class Restroom {
 			return false;
 		if (id != other.id)
 			return false;
+		if (location == null) {
+			if (other.location != null)
+				return false;
+		} else if (!location.equals(other.location))
+			return false;
 		if (locationId != other.locationId)
 			return false;
 		if (pAccess != other.pAccess)
@@ -302,6 +297,27 @@ public class Restroom {
 			return false;
 		return true;
 	}
+
+	public void addComment(Comment comment) {
+        if(this.comments == null) {
+            this.comments = new ArrayList<>();
+        }
+        if(!comments.contains(comments)) {
+            comments.add(comment);
+            comment.addRestroom(this);
+        }
+    }
+    
+    public void removeComment(Comment comment) {
+        if(this.comments != null && this.comments.contains(comment)) {
+            this.comments.remove(comment);
+            comment.removeRestroom(this);
+        }
+    }
+    
+
+
+
 	
 	
 	
