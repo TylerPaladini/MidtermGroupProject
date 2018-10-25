@@ -191,3 +191,16 @@ INSERT INTO `restroom` (`id`, `location_id`, `picture`, `flagged`, `flagged_reas
 
 COMMIT;
 
+
+-- -----------------------------------------------------
+-- Data for table `comment`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `babychangerdb`;
+INSERT INTO `comment` (`id`, `user_id`, `comment`, `restroom_id`, `flag_comment`, `rating`, `active`, `date_created`) VALUES (1, 1, 'poop all over the walls', 1, NULL, '1', true, DEFAULT);
+INSERT INTO `comment` (`id`, `user_id`, `comment`, `restroom_id`, `flag_comment`, `rating`, `active`, `date_created`) VALUES (2, 1, 'nice towels!', 2, NULL, '5', true, DEFAULT);
+INSERT INTO `comment` (`id`, `user_id`, `comment`, `restroom_id`, `flag_comment`, `rating`, `active`, `date_created`) VALUES (3, 2, 'Nice potty, needs a changing table', 1, NULL, '4', true, DEFAULT);
+INSERT INTO `comment` (`id`, `user_id`, `comment`, `restroom_id`, `flag_comment`, `rating`, `active`, `date_created`) VALUES (4, 3, 'Who am I? What am I doing with my life?', 2, NULL, '5', true, DEFAULT);
+
+COMMIT;
+
