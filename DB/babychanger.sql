@@ -60,19 +60,12 @@ DROP TABLE IF EXISTS `location` ;
 CREATE TABLE IF NOT EXISTS `location` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL DEFAULT NULL,
-  `address_id` INT(11) NULL DEFAULT NULL,
   `access_limits` VARCHAR(500) NULL DEFAULT NULL,
   `purchase_required` TINYINT(1) NULL DEFAULT NULL,
   `phone` VARCHAR(45) NULL,
   `open_time` TIME NULL,
   `closed_time` TIME NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_address_location_idx` (`address_id` ASC),
-  CONSTRAINT `fk_address_location`
-    FOREIGN KEY (`address_id`)
-    REFERENCES `address` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -155,6 +148,17 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 -- -----------------------------------------------------
+-- Data for table `address`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `babychangerdb`;
+INSERT INTO `address` (`id`, `street`, `street2`, `city`, `state`, `zip`) VALUES (1, '1210 Toledo St', NULL, 'Henderson', 'NV', '80918');
+INSERT INTO `address` (`id`, `street`, `street2`, `city`, `state`, `zip`) VALUES (2, '317 Columbine Rd', NULL, 'Palmer Lake', 'CO', '80133');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
 -- Data for table `users`
 -- -----------------------------------------------------
 START TRANSACTION;
@@ -171,8 +175,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `babychangerdb`;
-INSERT INTO `location` (`id`, `name`, `address_id`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`) VALUES (1, 'Solarium', NULL, 'have to be a student', false, '7194406626', '08:00', '18:00');
-INSERT INTO `location` (`id`, `name`, `address_id`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`) VALUES (2, 'Gas Station E Orchard', NULL, 'must get key from attendant', true, '7203154567', NULL, NULL);
+INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`) VALUES (1, 'Solarium', 'have to be a student', false, '7194406626', '08:00', '18:00');
+INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`) VALUES (2, 'Gas Station E Orchard', 'must get key from attendant', true, '7203154567', NULL, NULL);
 
 COMMIT;
 
