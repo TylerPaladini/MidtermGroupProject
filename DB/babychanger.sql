@@ -104,8 +104,38 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` VARCHAR(45) NULL DEFAULT NULL,
   `active` TINYINT(1) NULL DEFAULT NULL,
   `admin` TINYINT(1) NULL DEFAULT NULL,
+<<<<<<< HEAD
   `date_created` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`))
+=======
+  `date_created` DATETIME NULL DEFAULT current_timestamp,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `location`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `location` ;
+
+CREATE TABLE IF NOT EXISTS `location` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `access_limits` VARCHAR(500) NULL DEFAULT NULL,
+  `purchase_required` TINYINT(1) NULL DEFAULT NULL,
+  `phone` VARCHAR(45) NULL,
+  `open_time` TIME NULL,
+  `closed_time` TIME NULL,
+  `address_id` INT(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_location_address1_idx` (`address_id` ASC),
+  CONSTRAINT `fk_location_address1`
+    FOREIGN KEY (`address_id`)
+    REFERENCES `address` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+>>>>>>> cdfe33be8336057b2af2d350ca47294ee68df3ba
 ENGINE = InnoDB
 AUTO_INCREMENT = 4
 DEFAULT CHARACTER SET = utf8;
@@ -192,6 +222,7 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 -- -----------------------------------------------------
+<<<<<<< HEAD
 -- Data for table `land`
 -- -----------------------------------------------------
 START TRANSACTION;
@@ -207,6 +238,48 @@ INSERT INTO `land` (`id`, `name`, `color`, `type`, `purchase_price`, `rent_price
 INSERT INTO `land` (`id`, `name`, `color`, `type`, `purchase_price`, `rent_price`, `position`, `number_of_houses`, `number_of_hotels`, `status`, `description`) VALUES (9, 'Vermont Avenue', 'LIGHT_BLUE', 'PROPERTY', 100, 6, 9, 0, 0, 'NOT_OWNED', NULL);
 INSERT INTO `land` (`id`, `name`, `color`, `type`, `purchase_price`, `rent_price`, `position`, `number_of_houses`, `number_of_hotels`, `status`, `description`) VALUES (10, 'Connecticut Avenue', 'LIGHT_BLUE', 'PROPERTY', 120, 8, 10, 0, 0, 'NOT_OWNED', NULL);
 INSERT INTO `land` (`id`, `name`, `color`, `type`, `purchase_price`, `rent_price`, `position`, `number_of_houses`, `number_of_hotels`, `status`, `description`) VALUES (11, 'Jail', 'NONE', 'JAIL', NULL, NULL, 11, NULL, NULL, 'NOT_OWNED', NULL);
+=======
+-- Data for table `address`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `babychangerdb`;
+INSERT INTO `address` (`id`, `street`, `street2`, `city`, `state`, `zip`) VALUES (1, '1210 Toledo St', NULL, 'Henderson', 'NV', '80918');
+INSERT INTO `address` (`id`, `street`, `street2`, `city`, `state`, `zip`) VALUES (2, '317 Columbine Rd', NULL, 'Palmer Lake', 'CO', '80133');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `users`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `babychangerdb`;
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `active`, `admin`, `date_created`) VALUES (1, 'Jane', 'Doe', 'janedoe', 'janedoe@gmail.com', 'janedoe', true, false, NULL);
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `active`, `admin`, `date_created`) VALUES (2, 'John', 'Doe', 'johndoe', 'johndoe@hotmail.com', 'johndoe', true, true, NULL);
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `active`, `admin`, `date_created`) VALUES (3, 'Mike', 'Myers', 'mikem', 'mikeym@aol.com', 'mikeym', true, false, NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `location`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `babychangerdb`;
+INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`) VALUES (1, 'Solarium', 'have to be a student', false, '7194406626', '08:00', '18:00', 1);
+INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`) VALUES (2, 'Gas Station E Orchard', 'must get key from attendant', true, '7203154567', NULL, NULL, 2);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `restroom`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `babychangerdb`;
+INSERT INTO `restroom` (`id`, `location_id`, `picture`, `flagged`, `flagged_reason`, `flagged_date`, `gender`, `directions`, `public`, `user_id`, `date_created`, `description`, `changing_table`) VALUES (1, 1, NULL, NULL, NULL, NULL, 'M', 'gound floor north tower east end down hallway', true, 2, NULL, 'changing room w/showers', false);
+INSERT INTO `restroom` (`id`, `location_id`, `picture`, `flagged`, `flagged_reason`, `flagged_date`, `gender`, `directions`, `public`, `user_id`, `date_created`, `description`, `changing_table`) VALUES (2, 1, NULL, NULL, NULL, NULL, 'F', 'ground floor n tower ', true, 1, NULL, 'nice tp', true);
+>>>>>>> cdfe33be8336057b2af2d350ca47294ee68df3ba
 
 COMMIT;
 

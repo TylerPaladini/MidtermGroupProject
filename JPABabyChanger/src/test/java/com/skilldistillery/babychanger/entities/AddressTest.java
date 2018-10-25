@@ -1,6 +1,11 @@
 package com.skilldistillery.babychanger.entities;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -10,25 +15,39 @@ import org.junit.jupiter.api.Test;
 
 class AddressTest {
 
-	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
-	}
+	private EntityManagerFactory emf;
 
-	@AfterAll
-	static void tearDownAfterClass() throws Exception {
-	}
+	private EntityManager em;
 
+//	@BeforeAll
+//	static void setUpBeforeClass() throws Exception {
+//	}
+//
+//	@AfterAll
+//	static void tearDownAfterClass() throws Exception {
+//	}
+	
 	@BeforeEach
-	void setUp() throws Exception {
+	public void setUp() throws Exception {
+		emf = Persistence.createEntityManagerFactory("babychangerdb");
+		em = emf.createEntityManager();
 	}
 
 	@AfterEach
-	void tearDown() throws Exception {
+	public void tearDown() throws Exception {
+		em.close();
+		emf.close();
 	}
 
+//	@Test
+//	void test() {
+//		fail("Not yet implemented");
+//	}
+	
 	@Test
-	void test() {
-		fail("Not yet implemented");
+	void test_address_mappings() {
+		Location location = em.find(Location.class, 1);
+		assertEquals("1210 Toledo St", location.getAddress()); 
 	}
 
 }
