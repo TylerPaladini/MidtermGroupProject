@@ -12,7 +12,7 @@ public interface UsersDAO {
 	
 	public boolean disableUser(int id, Users users);
 	
-	public boolean deleteUsers(int id, Users users);
+	public boolean deleteUsers(int id);
 	
 	public List<Users> listAllUsers ();
 	
