@@ -105,7 +105,7 @@ public class Location {
 		this.phone = phone;
 	}
 
-	public Date getOpenTime() {
+	public Time getOpenTime() {
 		return openTime;
 	}
 
@@ -113,7 +113,7 @@ public class Location {
 		this.openTime = openTime;
 	}
 
-	public Date getCloseTime() {
+	public Time getCloseTime() {
 		return closeTime;
 	}
 

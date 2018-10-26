@@ -28,14 +28,14 @@ public class RestroomDAOImpl implements RestroomDAO {
 	}
 
 	@Override
-	public Restroom create(Restroom restroom) {
+	public Restroom createRestroom(Restroom restroom) {
 		em.persist(restroom);
 		em.flush();
 		return restroom;
 	}
 
 	@Override
-	public Restroom update(int id, Restroom updatedRR) {
+	public Restroom updateRestroom(int id, Restroom updatedRR) {
 		Restroom restroom = em.find(Restroom.class, id); 
 		
 		restroom.setLocation(updatedRR.getLocation());
@@ -55,10 +55,21 @@ public class RestroomDAOImpl implements RestroomDAO {
 	}
 
 	@Override
-	public boolean destroy(int id) {
+	public boolean destroyRestroom(int id) {
 		Restroom restroom = em.find(Restroom.class, id);
 		em.remove(restroom);
 		return true;
+	}
+	
+	@Override
+	public boolean disableRestroom(int id, Restroom restroom) {
+		Restroom toDisable = em.find(Restroom.class, id);
+		boolean disabled = false;
+		if(toDisable != null) {
+			toDisable.setFlagged(true);
+			disabled = true;
+		}
+		return disabled;
 	}
 
 }
