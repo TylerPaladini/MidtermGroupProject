@@ -41,7 +41,7 @@ class CommentTest {
 
 	@Test
 	void test_comment_comment_mapping() {
-		String expected = "poop all over the walls";
+		String expected = "test comment";
 		assertEquals(expected, comment.getComment());
 	}
 	
@@ -53,7 +53,7 @@ class CommentTest {
 	@Test
 	void test_comment_restroom_mapping() {
 		assertEquals("changing room w/showers", comment.getRestroom().getDescription());
-		assertEquals("'gound floor north tower east end down hallway'", comment.getRestroom().getDirections());
+		assertEquals("gound floor north tower east end down hallway", comment.getRestroom().getDirections());
 	}
 	
 	@Test
@@ -72,7 +72,7 @@ class CommentTest {
 	
 	@Test
 	void test_comment_date_created_mapping() {
-		assertEquals("2018-10-25 16:11:41", comment.getDateCreated());
+		assertEquals("2018-10-25 17:56:05.0", comment.getDateCreated());
 	}
 	
 	
