@@ -65,7 +65,14 @@ CREATE TABLE IF NOT EXISTS `location` (
   `phone` VARCHAR(45) NULL,
   `open_time` TIME NULL,
   `closed_time` TIME NULL,
-  PRIMARY KEY (`id`))
+  `address_id` INT(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_location_address1_idx` (`address_id` ASC),
+  CONSTRAINT `fk_location_address1`
+    FOREIGN KEY (`address_id`)
+    REFERENCES `address` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -175,8 +182,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `babychangerdb`;
-INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`) VALUES (1, 'Solarium', 'have to be a student', false, '7194406626', '08:00', '18:00');
-INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`) VALUES (2, 'Gas Station E Orchard', 'must get key from attendant', true, '7203154567', NULL, NULL);
+INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`) VALUES (1, 'Solarium', 'have to be a student', false, '7194406626', '08:00', '18:00', 1);
+INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`) VALUES (2, 'Gas Station E Orchard', 'must get key from attendant', true, '7203154567', NULL, NULL, 2);
 
 COMMIT;
 
@@ -197,10 +204,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `babychangerdb`;
-INSERT INTO `comment` (`id`, `user_id`, `comment`, `restroom_id`, `flag_comment`, `rating`, `active`, `date_created`) VALUES (1, 1, 'poop all over the walls', 1, NULL, '1', true, DEFAULT);
-INSERT INTO `comment` (`id`, `user_id`, `comment`, `restroom_id`, `flag_comment`, `rating`, `active`, `date_created`) VALUES (2, 1, 'nice towels!', 2, NULL, '5', true, DEFAULT);
-INSERT INTO `comment` (`id`, `user_id`, `comment`, `restroom_id`, `flag_comment`, `rating`, `active`, `date_created`) VALUES (3, 2, 'Nice potty, needs a changing table', 1, NULL, '4', true, DEFAULT);
-INSERT INTO `comment` (`id`, `user_id`, `comment`, `restroom_id`, `flag_comment`, `rating`, `active`, `date_created`) VALUES (4, 3, 'Who am I? What am I doing with my life?', 2, NULL, '5', true, DEFAULT);
+INSERT INTO `comment` (`id`, `user_id`, `comment`, `restroom_id`, `flag_comment`, `rating`, `active`, `date_created`) VALUES (1, 1, 'test comment', 1, NULL, '1', true, DEFAULT);
+INSERT INTO `comment` (`id`, `user_id`, `comment`, `restroom_id`, `flag_comment`, `rating`, `active`, `date_created`) VALUES (2, 1, 'test another comment', 1, NULL, '5', true, DEFAULT);
 
 COMMIT;
 

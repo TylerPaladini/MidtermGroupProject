@@ -1,5 +1,6 @@
 package com.skilldistillery.babychanger.entities;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,8 +32,12 @@ public class Location {
 	private boolean purchaseRequired;
 	
 	private String phone;
-	private Date openTime;
-	private Date closeTime;
+	
+	@Column(name = "open_time")
+	private Time openTime;
+	
+	@Column(name = "closed_time")
+	private Time closeTime;
 	
 	@OneToMany(mappedBy="location")
 	private List<Restroom> restrooms;
@@ -95,7 +100,7 @@ public class Location {
 		return openTime;
 	}
 
-	public void setOpenTime(Date openTime) {
+	public void setOpenTime(Time openTime) {
 		this.openTime = openTime;
 	}
 
@@ -103,7 +108,7 @@ public class Location {
 		return closeTime;
 	}
 
-	public void setCloseTime(Date closeTime) {
+	public void setCloseTime(Time closeTime) {
 		this.closeTime = closeTime;
 	}
 	
@@ -167,7 +172,7 @@ public class Location {
 	}
 
 	public Location(int id, String name, Address address, String accessLimits, boolean purchaseRequired, String phone,
-			Date openTime, Date closeTime) {
+			Time openTime, Time closeTime) {
 		super();
 		this.id = id;
 		this.name = name;

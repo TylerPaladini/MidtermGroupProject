@@ -34,12 +34,12 @@ public class Comment {
 	private String comment;
 
 	@Column(name = "flag_comment")
-	private boolean flagComment;
+	private Boolean flagComment;
 
 	@Enumerated(EnumType.ORDINAL)
 	private Rating rating;
 
-	private boolean active;
+	private Boolean active;
 
 	@Column(name="date_created")
     @Temporal(TemporalType.TIMESTAMP)
@@ -49,8 +49,8 @@ public class Comment {
 	public Comment() {
 	}
 
-	public Comment(int id, Users user, Restroom restroom, String comment, boolean flagComment, Rating rating,
-			boolean active, Date dateCreated) {
+	public Comment(int id, Users user, Restroom restroom, String comment, Boolean flagComment, Rating rating,
+			Boolean active, Date dateCreated) {
 		super();
 		this.id = id;
 		this.user = user;
@@ -108,11 +108,11 @@ public class Comment {
 		this.comment = comment;
 	}
 
-	public boolean isFlagComment() {
+	public Boolean isFlagComment() {
 		return flagComment;
 	}
 
-	public void setFlagComment(boolean flagComment) {
+	public void setFlagComment(Boolean flagComment) {
 		this.flagComment = flagComment;
 	}
 
@@ -124,11 +124,11 @@ public class Comment {
 		this.rating = rating;
 	}
 
-	public boolean isActive() {
+	public Boolean isActive() {
 		return active;
 	}
 
-	public void setActive(boolean active) {
+	public void setActive(Boolean active) {
 		this.active = active;
 	}
 
@@ -150,9 +150,9 @@ public class Comment {
 		builder.append("Comment [id=");
 		builder.append(id);
 		builder.append(", user=");
-		builder.append(user);
+		builder.append(user.getFirstName());
 		builder.append(", restroom=");
-		builder.append(restroom);
+		builder.append(restroom.getDescription());
 		builder.append(", comment=");
 		builder.append(comment);
 		builder.append(", flagComment=");
