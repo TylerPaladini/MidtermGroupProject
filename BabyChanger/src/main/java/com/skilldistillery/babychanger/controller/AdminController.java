@@ -16,7 +16,7 @@ import com.skilldistillery.babychanger.entities.Users;
 
 @Controller
 public class AdminController {
-	
+
 	@Autowired
 	private AddressDAO addressDAO;
 	@Autowired
@@ -28,7 +28,69 @@ public class AdminController {
 	@Autowired
 	private UsersDAO usersDAO;
 
-	
+	// create new user
+
+	@RequestMapping(path = "createUserAdmin.do", method = RequestMethod.POST)
+	public ModelAndView createUser(Users newUser, RedirectAttributes redir) {
+		ModelAndView mv = new ModelAndView();
+
+		Users userCreated = usersDAO.createUsers(newUser);
+		redir.addFlashAttribute("user", userCreated);
+		mv.setViewName("redirect:createdUser.do");
+
+		return mv;
+	}
+
+	@RequestMapping(path = "createdUserAdmin.do", method = RequestMethod.GET)
+	public ModelAndView createdUser() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("profile");
+
+		return mv;
+
+	}
+
+	// Update user profile
+
+	@RequestMapping(path = "updateUserAdmin.do", method = RequestMethod.POST)
+	public ModelAndView updateUser(Users updatedUser, int id, RedirectAttributes redir) {
+		ModelAndView mv = new ModelAndView();
+
+		Users userUpdated = usersDAO.updateUsers(id, updatedUser);
+		redir.addFlashAttribute("user", userUpdated);
+		mv.setViewName("redirect:updatedUser.do");
+
+		return mv;
+	}
+
+	@RequestMapping(path = "updatedUserAdmin.do", method = RequestMethod.GET)
+	public ModelAndView updatedUser() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("profile");
+
+		return mv;
+	}
+
+	// Disable user profile
+	@RequestMapping(path = "disableUserAdmin.do", method = RequestMethod.POST)
+	public ModelAndView disableUser(int userId) {
+		ModelAndView mv = new ModelAndView();
+
+		usersDAO.disableUser(userId);
+		mv.setViewName("redirect:disabledUser.do");
+
+		return mv;
+	}
+
+	@RequestMapping(path = "disabledUser.do", method = RequestMethod.GET)
+	public ModelAndView disabledUser() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("profile");
+
+		return mv;
+
+	}
+
 	// comes here when admin has confirmed they are deleting
 	// a profile completely from the Database and redirects
 	// preventing refresh errors
@@ -40,7 +102,7 @@ public class AdminController {
 		mv.setViewName("redirect:deleteComplete.do");
 		return mv;
 	}
-	
+
 	// comes here when redirected from confirmDelete and confirms
 	// to admin if delete was successful or not
 	@RequestMapping(path = "deleteCompleteAdmin.do", method = RequestMethod.GET)
@@ -49,8 +111,5 @@ public class AdminController {
 		mv.setViewName("confirmation");
 		return mv;
 	}
-	
-	
-	
 
 }

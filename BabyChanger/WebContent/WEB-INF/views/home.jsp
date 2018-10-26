@@ -25,7 +25,7 @@
 </form><br>
 	
 	<h5>Create User</h5>
-<form action="createUser.do" method="POST">
+<form action="createUserAdmin.do" method="POST">
 
 User Name:
 <input type="text" name="userName"/><br>
@@ -43,7 +43,7 @@ First Name:
 
 
 	<h5>Update User</h5>
-<form action="updateUser.do" method="POST">
+<form action="updateUserAdmin.do" method="POST">
 ID#
 <input type="number" name="id"/><br>
 User Name:
@@ -64,7 +64,7 @@ First Name:
 
 
 
-<form action="disableUser.do" method="POST">
+<form action="disableUserAdmin.do" method="POST">
   <input type="number" name="userId"/><br>
   <input type="Submit" value="Delete"/>
 </form>
