@@ -10,6 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 public class Users {
@@ -31,7 +35,10 @@ public class Users {
 	@Column(name="last_name")
 	private String lastName;
 	
+	
 	@Column(name="date_created")
+	@Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
 	private Date dateCreated;
 	
 	private boolean active;
@@ -41,9 +48,6 @@ public class Users {
 	@OneToMany(mappedBy="user")
 	private List<Comment> comments;
 			
-	
-
-	
 	public Users() {
 		
 	}
