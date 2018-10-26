@@ -6,14 +6,13 @@ import com.skilldistillery.babychanger.entities.Address;
 
 public interface AddressDAO {
 
-	public Address getAddressById();
+	public Address getAddressById(int id);
 	
 	public List<Address> getAllAddresses();
 	
-	public Address createAddress();
+	public Address createAddress(Address address);
 	
-	public boolean deleteAddress();
-	
-	public Address updateAddress();
-	
+	public boolean deleteAddress(int id);
+
+	public Address updateAddress(int id, Address address);
 }
