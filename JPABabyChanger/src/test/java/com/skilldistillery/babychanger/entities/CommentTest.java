@@ -72,7 +72,7 @@ class CommentTest {
 	
 	@Test
 	void test_comment_date_created_mapping() {
-		assertEquals("2018-10-25 17:56:05.0", comment.getDateCreated().toString());
+		assertEquals("2018-10-26 10:55:15.0", comment.getDateCreated().toString());
 	}
 	
 	
