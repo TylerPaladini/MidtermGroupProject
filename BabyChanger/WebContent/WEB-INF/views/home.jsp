@@ -10,9 +10,9 @@
 	<h1>POOP</h1>
 	
 	
-<form action="createUser.do" method="GET">
-  <input type="text" name="firstName"/>
-  <input type="Submit" value="FirstName"/>
+<form action="getBathrooms.do" method="GET">
+  <input type="text" name="id"/>
+  <input type="Submit" value="Get Bathroom"/>
 </form>
 	
 </body>
