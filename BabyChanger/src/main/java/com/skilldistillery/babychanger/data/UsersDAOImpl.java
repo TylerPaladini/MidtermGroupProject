@@ -44,6 +44,8 @@ public class UsersDAOImpl implements UsersDAO {
 			updateUser.setLastName(users.getLastName());
 			updateUser.setEmail(users.getEmail());
 			updateUser.setPassword(users.getPassword());
+			updateUser.setUserName(users.getUserName());
+			
 
 		}
 		return updateUser;
