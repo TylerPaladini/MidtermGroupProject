@@ -9,7 +9,7 @@
 		
 			<div class="col-2"></div>
 			<div class="col-8">
-				<form action="getLocationsByKeyword.do">
+				<form action="getLocationsByKeywordSearch.do">
 
 					<table>
 						<tr>
