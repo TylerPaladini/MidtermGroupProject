@@ -2,6 +2,7 @@ package com.skilldistillery.babychanger.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -53,11 +54,11 @@ public class SearchController {
 		return mv;
 	}
 	
-	@RequestMapping(path = "getLocationsByKeyword.do", method = RequestMethod.GET)
+	@RequestMapping(path = "getLocationsByKeywordSearch.do", method = RequestMethod.GET)
 	public ModelAndView getLocationsByKeyword(@RequestParam("keyword") String keyword) {
 		ModelAndView mv = new ModelAndView();
 		
-		List<Location> location = locationDAO.getLocationByKeyword(keyword);    
+		Set<Location> location = locationDAO.getLocationsByKeyword(keyword);    
 		
 		mv.addObject("location", location);
 		mv.setViewName("results");
@@ -68,7 +69,7 @@ public class SearchController {
 	public ModelAndView getLocationLikeAddress(@RequestParam("addressLike") String addressLike) {
 		ModelAndView mv = new ModelAndView();
 		
-		List<Location> location = locationDAO.getLocationLikeAddress(addressLike);    
+		List<Location> location = locationDAO.getLocationsLikeAddress(addressLike);    
 		
 		mv.addObject("location", location);
 		mv.setViewName("results");
@@ -79,7 +80,7 @@ public class SearchController {
 	public ModelAndView getLocationByGender(@RequestParam("addressLike") Gender gender) {
 		ModelAndView mv = new ModelAndView();
 		
-		List<Location> location = locationDAO.getLocationByGender(gender);    
+		List<Location> location = locationDAO.getLocationsByGender(gender);    
 		
 		mv.addObject("location", location);
 		mv.setViewName("results");
@@ -90,7 +91,7 @@ public class SearchController {
 	public ModelAndView getLocationByName(@RequestParam("name") String name) {
 		ModelAndView mv = new ModelAndView();
 		
-		List<Location> location = locationDAO.getLocationByName(name);    
+		List<Location> location = locationDAO.getLocationsByName(name);    
 		
 		mv.addObject("location", location);
 		mv.setViewName("results");
@@ -101,7 +102,7 @@ public class SearchController {
 	public ModelAndView getLocationByZipCode(@RequestParam("zipCode") String zipCode) {
 		ModelAndView mv = new ModelAndView();
 		
-		List<Location> location = locationDAO.getLocationByName(zipCode);    
+		List<Location> location = locationDAO.getLocationsByName(zipCode);    
 		
 		mv.addObject("location", location);
 		mv.setViewName("results");
@@ -112,7 +113,7 @@ public class SearchController {
 	public ModelAndView getLocationByRating(@RequestParam("rating") Rating rating) {
 		ModelAndView mv = new ModelAndView();
 		
-		List<Location> location = locationDAO.getLocationByRating(rating);    
+		List<Location> location = locationDAO.getLocationsByRating(rating);    
 		
 		mv.addObject("location", location);
 		mv.setViewName("results");
@@ -123,7 +124,7 @@ public class SearchController {
 	public ModelAndView getLocationByFlag(@RequestParam("flag") Boolean flag) {
 		ModelAndView mv = new ModelAndView();
 		
-		List<Location> location = locationDAO.getLocationByFlag(flag);    
+		List<Location> location = locationDAO.getLocationsByFlag(flag);    
 		
 		mv.addObject("location", location);
 		mv.setViewName("results");
@@ -134,7 +135,7 @@ public class SearchController {
 	public ModelAndView getLocationByOpen(Date open, Date close) {
 		ModelAndView mv = new ModelAndView();
 		
-		List<Location> location = locationDAO.getLocationByOpen(open, close);    
+		List<Location> location = locationDAO.getLocationsByOpen(open, close);    
 		
 		mv.addObject("location", location);
 		mv.setViewName("results");

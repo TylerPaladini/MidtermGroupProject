@@ -2,6 +2,7 @@ package com.skilldistillery.babychanger.data;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import com.skilldistillery.babychanger.entities.Gender;
 import com.skilldistillery.babychanger.entities.Location;
@@ -23,19 +24,19 @@ public interface LocationDAO {
 	
 	public List<Location> getLocationsByState(String state);
 	
-	public List<Location> getLocationByKeyword(String keyword);
+	public Set<Location> getLocationsByKeyword(String keyword);
 	
-	public List<Location> getLocationLikeAddress(String addressLike);
+	public List<Location> getLocationsLikeAddress(String addressLike);
 	
-	public List<Location> getLocationByGender(Gender gender);
+	public List<Location> getLocationsByGender(Gender gender);
 	
-	public List<Location> getLocationByName(String name);
+	public List<Location> getLocationsByName(String name);
 	
-	public List<Location> getLocationByZipCode(String zipCode);
+	public List<Location> getLocationsByZipCode(String zipCode);
 	
-	public List<Location> getLocationByRating(Rating rating);
+	public List<Location> getLocationsByRating(Rating rating);
 	
-	public List<Location> getLocationByFlag(Boolean flag);
+	public List<Location> getLocationsByFlag(Boolean flag);
 	
-	public List<Location> getLocationByOpen(Date open, Date close);
+	public List<Location> getLocationsByOpen(Date open, Date close);
 }
