@@ -50,6 +50,8 @@ public class UsersDAOImpl implements UsersDAO {
 
 		}
 		return updateUser;
+		
+		
 	}
 //  Changes the user from active to inactive, does not delete from the database. 
 	@Override
