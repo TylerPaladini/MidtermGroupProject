@@ -77,7 +77,7 @@ public class LocationDAOImpl implements LocationDAO{
 
 	@Override
 	public List<Location> getLocationsByCity(String city) {
-		String query = "SELECT location FROM Location location WHERE location.address.city IS LIKE :city";
+		String query = "SELECT location FROM Location location WHERE location.address.city LIKE :city";
 		List<Location> locationByCity = em.createQuery(query, Location.class)
 											.setParameter("city", city)
 											.getResultList();
