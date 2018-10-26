@@ -66,6 +66,7 @@ CREATE TABLE IF NOT EXISTS `location` (
   `open_time` TIME NULL,
   `closed_time` TIME NULL,
   `address_id` INT(11) NOT NULL,
+  `date_created` DATETIME NULL DEFAULT current_timestamp,
   PRIMARY KEY (`id`),
   INDEX `fk_location_address1_idx` (`address_id` ASC),
   CONSTRAINT `fk_location_address1`
@@ -182,8 +183,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `babychangerdb`;
-INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`) VALUES (1, 'Solarium', 'have to be a student', false, '7194406626', '08:00', '18:00', 1);
-INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`) VALUES (2, 'Gas Station E Orchard', 'must get key from attendant', true, '7203154567', NULL, NULL, 2);
+INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (1, 'Solarium', 'have to be a student', false, '7194406626', '08:00', '18:00', 1, NULL);
+INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (2, 'Gas Station E Orchard', 'must get key from attendant', true, '7203154567', NULL, NULL, 2, NULL);
 
 COMMIT;
 
