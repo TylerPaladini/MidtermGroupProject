@@ -7,15 +7,15 @@
 	<!-- reference the persistence-unit by the name -->
 	<persistence-unit name="babychangerdb">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider
-    </provider>
+    	</provider>
 
 		<!-- entities listed here (need fully qualified name) -->
 		<class>com.skilldistillery.babychanger.entities.Address</class>
 		<class>com.skilldistillery.babychanger.entities.Comment</class>
 		<class>com.skilldistillery.babychanger.entities.Location</class>
 		<class>com.skilldistillery.babychanger.entities.Restroom</class>
-		<class>com.skilldistillery.babychanger.entities.User</class>
-		
+		<class>com.skilldistillery.babychanger.entities.Users</class>
+
 
 		<properties>
 			<!-- connection to the database -->

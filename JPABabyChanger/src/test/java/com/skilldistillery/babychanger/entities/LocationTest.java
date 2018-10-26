@@ -28,7 +28,7 @@ class LocationTest {
 
 	@Test
 	void test() {
-		assertEquals(1, em.)
+//		assertEquals(1, em.)
 	}
 
 }
