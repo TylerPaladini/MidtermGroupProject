@@ -33,7 +33,7 @@ public interface LocationDAO {
 	
 	public List<Location> getLocationByZipCode(String zipCode);
 	
-	public List<Location> getLocationByRating(Rating rating); // 
+	public List<Location> getLocationByRating(Rating rating);
 	
 	public List<Location> getLocationByFlag(Boolean flag);
 	
