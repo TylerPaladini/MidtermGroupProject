@@ -7,6 +7,7 @@ import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.swing.plaf.synth.SynthSeparatorUI;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -77,17 +78,20 @@ public class LocationDAOImpl implements LocationDAO{
 
 	@Override
 	public List<Location> getLocationsByCity(String city) {
-		String query = "SELECT location FROM Location location WHERE location.address.city LIKE :city";
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		System.out.println(city);
+		String query = "SELECT location FROM Location location WHERE location.address.city = :city";
 		List<Location> locationByCity = em.createQuery(query, Location.class)
 											.setParameter("city", city)
 											.getResultList();
+		System.out.println(locationByCity);
 		return locationByCity;
 	}
 
 	@Override
 	public List<Location> getLocationsByState(String state) {
 //						SELECT location FROM Location location JOIN Address address ON address.id = location.address_id WHERE state LIKE 'CO';
-		String query = "SELECT location FROM Location location WHERE location.address.state LIKE \'%\' :state \'%\'";
+		String query = "SELECT location FROM Location location WHERE location.address.state LIKE :state ";
 		List<Location> locationByCity = em.createQuery(query, Location.class)
 											.setParameter("state", state)
 											.getResultList();

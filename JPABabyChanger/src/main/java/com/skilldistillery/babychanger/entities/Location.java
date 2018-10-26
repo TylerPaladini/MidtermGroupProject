@@ -24,7 +24,10 @@ public class Location {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
+	
 	private String name;
+	
 	@OneToOne
 	@JoinColumn(name = "address_id")
 	private Address address;
@@ -181,7 +184,7 @@ public class Location {
 	public String toString() {
 		return "Location [id=" + id + ", name=" + name + ", address=" + address + ", accessLimits=" + accessLimits
 				+ ", purchaseRequired=" + purchaseRequired + ", phone=" + phone + ", openTime=" + openTime
-				+ ", closeTime=" + closeTime + ", restrooms=" + restrooms + ", dateCreated=" + dateCreated + "]";
+				+ ", closeTime=" + closeTime + ", restrooms=" + restrooms.size() + ", dateCreated=" + dateCreated + "]";
 	}
 	
 	public Location() {

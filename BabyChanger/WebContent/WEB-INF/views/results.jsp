@@ -8,7 +8,7 @@
 </head>
 <body>
 
-${location.name}
+${location }
 
 </body>
 </html>
