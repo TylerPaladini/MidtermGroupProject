@@ -52,21 +52,16 @@ class LocationTest {
 		assertEquals("18:00:00", location.getCloseTime().toString());
 	}
 	
-	/*
-	 * unable to set location to em.find(Location.class, 1)
-	 */
 	@Test
 	@DisplayName("Confirm list restroom")
 	void test_add_remove_restroom_list() {
 		assertEquals(2, location.getRestrooms().size());
 		Restroom restroom = new Restroom();
 		restroom.setChangingTable(true);
-		restroom.setLocation(em.find(Location.class, 2));
 		restroom.setUserId(1);
 		location.addRestroom(restroom);
 		assertEquals(3, location.getRestrooms().size());
 		location.removeRestroom(restroom);
 		assertEquals(2, location.getRestrooms().size());
 	}
-
 }
