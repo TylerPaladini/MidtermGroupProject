@@ -1,5 +1,7 @@
 package com.skilldistillery.babychanger.data;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -8,4 +10,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class LocationDAOImpl implements LocationDAO{
 
+	@PersistenceContext
+	private EntityManager em;
+	
+	
 }
