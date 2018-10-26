@@ -44,7 +44,7 @@ public class Restroom {
 	private String directions;
 
 	@Column(name = "public")
-	private boolean pAccess;
+	private Boolean pAccess;
 
 	@Column(name = "user_id")
 	private int userId;
@@ -74,14 +74,8 @@ public class Restroom {
 	@OneToMany(mappedBy = "restroom")
 	private List<Comment> comments;
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
+	
+	
 	public String getPicture() {
 		return picture;
 	}
@@ -90,11 +84,11 @@ public class Restroom {
 		this.picture = picture;
 	}
 
-	public boolean isFlagged() {
+	public Boolean getFlagged() {
 		return flagged;
 	}
 
-	public void setFlagged(boolean flagged) {
+	public void setFlagged(Boolean flagged) {
 		this.flagged = flagged;
 	}
 
@@ -114,14 +108,6 @@ public class Restroom {
 		this.flaggedDate = flaggedDate;
 	}
 
-	public Boolean getFlagged() {
-		return flagged;
-	}
-
-	public void setFlagged(Boolean flagged) {
-		this.flagged = flagged;
-	}
-
 	public Gender getGender() {
 		return gender;
 	}
@@ -138,11 +124,11 @@ public class Restroom {
 		this.directions = directions;
 	}
 
-	public boolean ispAccess() {
+	public Boolean getpAccess() {
 		return pAccess;
 	}
 
-	public void setpAccess(boolean pAccess) {
+	public void setpAccess(Boolean pAccess) {
 		this.pAccess = pAccess;
 	}
 
@@ -170,14 +156,6 @@ public class Restroom {
 		this.description = description;
 	}
 
-	public boolean isChangingTable() {
-		return changingTable;
-	}
-
-	public void setChangingTable(boolean changingTable) {
-		this.changingTable = changingTable;
-	}
-
 	public Location getLocation() {
 		return location;
 	}
@@ -194,29 +172,17 @@ public class Restroom {
 		this.comments = comments;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((changingTable == null) ? 0 : changingTable.hashCode());
-		result = prime * result + ((comments == null) ? 0 : comments.hashCode());
-		result = prime * result + ((dateCreated == null) ? 0 : dateCreated.hashCode());
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + ((directions == null) ? 0 : directions.hashCode());
-		result = prime * result + ((flagged == null) ? 0 : flagged.hashCode());
-		result = prime * result + ((flaggedDate == null) ? 0 : flaggedDate.hashCode());
-		result = prime * result + ((flaggedReason == null) ? 0 : flaggedReason.hashCode());
-		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
-		result = prime * result + id;
-		result = prime * result + ((location == null) ? 0 : location.hashCode());
-		result = prime * result + (pAccess ? 1231 : 1237);
-		result = prime * result + ((picture == null) ? 0 : picture.hashCode());
-		result = prime * result + userId;
-		return result;
+	public int getId() {
+		return id;
 	}
 
+	
+	public Restroom () {
+		
+	}
+	
 	public Restroom(int id, String picture, Boolean flagged, String flaggedReason, Date flaggedDate, Gender gender,
-			String directions, boolean pAccess, int userId, Date dateCreated, String description, Boolean changingTable,
+			String directions, Boolean pAccess, int userId, Date dateCreated, String description, Boolean changingTable,
 			Location location, List<Comment> comments) {
 		super();
 		this.id = id;
@@ -233,6 +199,28 @@ public class Restroom {
 		this.changingTable = changingTable;
 		this.location = location;
 		this.comments = comments;
+	}
+
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((changingTable == null) ? 0 : changingTable.hashCode());
+		result = prime * result + ((comments == null) ? 0 : comments.hashCode());
+		result = prime * result + ((dateCreated == null) ? 0 : dateCreated.hashCode());
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((directions == null) ? 0 : directions.hashCode());
+		result = prime * result + ((flagged == null) ? 0 : flagged.hashCode());
+		result = prime * result + ((flaggedDate == null) ? 0 : flaggedDate.hashCode());
+		result = prime * result + ((flaggedReason == null) ? 0 : flaggedReason.hashCode());
+		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
+		result = prime * result + id;
+		result = prime * result + ((location == null) ? 0 : location.hashCode());
+		result = prime * result + ((pAccess == null) ? 0 : pAccess.hashCode());
+		result = prime * result + ((picture == null) ? 0 : picture.hashCode());
+		result = prime * result + userId;
+		return result;
 	}
 
 	@Override
@@ -293,7 +281,10 @@ public class Restroom {
 				return false;
 		} else if (!location.equals(other.location))
 			return false;
-		if (pAccess != other.pAccess)
+		if (pAccess == null) {
+			if (other.pAccess != null)
+				return false;
+		} else if (!pAccess.equals(other.pAccess))
 			return false;
 		if (picture == null) {
 			if (other.picture != null)
@@ -314,29 +305,6 @@ public class Restroom {
 				+ "]";
 	}
 
-	public Restroom() {
-		super();
-	}
-
-	public Restroom(String picture, boolean flagged, String flaggedReason, Date flaggedDate, Gender gender,
-			String directions, boolean pAccess, int userId, Date dateCreated, String description, boolean changingTable,
-			Location location, List<Comment> comments) {
-		super();
-		this.picture = picture;
-		this.flagged = flagged;
-		this.flaggedReason = flaggedReason;
-		this.flaggedDate = flaggedDate;
-		this.gender = gender;
-		this.directions = directions;
-		this.pAccess = pAccess;
-		this.userId = userId;
-		this.dateCreated = dateCreated;
-		this.description = description;
-		this.changingTable = changingTable;
-		this.location = location;
-		this.comments = comments;
-	}
-	
 	public void addComment(Comment comment) {
 		if(comments == null) comments = new ArrayList<>();
 		
