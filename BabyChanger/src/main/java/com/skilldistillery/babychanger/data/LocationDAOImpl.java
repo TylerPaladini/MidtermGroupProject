@@ -7,7 +7,6 @@ import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.swing.plaf.synth.SynthSeparatorUI;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -78,11 +77,9 @@ public class LocationDAOImpl implements LocationDAO{
 
 	@Override
 	public List<Location> getLocationsByCity(String city) {
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!");
-		System.out.println(city);
-		String query = "SELECT location FROM Location location WHERE location.address.city = :city";
+		String query = "SELECT location FROM Location location WHERE location.address.city LIKE :city";
 		List<Location> locationByCity = em.createQuery(query, Location.class)
-											.setParameter("city", city)
+											.setParameter("city", "%" + city + "%")
 											.getResultList();
 		System.out.println(locationByCity);
 		return locationByCity;
@@ -93,7 +90,7 @@ public class LocationDAOImpl implements LocationDAO{
 //						SELECT location FROM Location location JOIN Address address ON address.id = location.address_id WHERE state LIKE 'CO';
 		String query = "SELECT location FROM Location location WHERE location.address.state LIKE :state ";
 		List<Location> locationByCity = em.createQuery(query, Location.class)
-											.setParameter("state", state)
+											.setParameter("state", "%" + state + "%")
 											.getResultList();
 		return locationByCity;
 	}
@@ -114,16 +111,16 @@ public class LocationDAOImpl implements LocationDAO{
 
 	@Override
 	public List<Location> getLocationsLikeAddress(String addressLike) {
-		String query = "SELECT location FROM Location location WHERE location.address.address LIKE \'%\' :address \'%\'";
+		String query = "SELECT location FROM Location location WHERE location.address.street LIKE :address";
 		List<Location> locationByAddress = em.createQuery(query, Location.class)
-											.setParameter("address", addressLike)
+											.setParameter("address", "%" + addressLike + "%")
 											.getResultList();
 		return locationByAddress;
 	}
 
 	@Override
 	public List<Location> getLocationsByGender(Gender gender) {
-		String query = "SELECT location FROM Location location WHERE location.restroom.gender LIKE \'%\' :gender \'%\'";
+		String query = "SELECT location FROM Location location WHERE location.restroom.gender = :gender";
 		List<Location> locationByCity = em.createQuery(query, Location.class)
 											.setParameter("gender", gender)
 											.getResultList();
@@ -132,25 +129,25 @@ public class LocationDAOImpl implements LocationDAO{
 
 	@Override
 	public List<Location> getLocationsByName(String name) {
-		String query = "SELECT location FROM Location location WHERE location.name LIKE \'%\' :name \'%\'";
+		String query = "SELECT location FROM Location location WHERE location.name LIKE :name ";
 		List<Location> locationByCity = em.createQuery(query, Location.class)
-											.setParameter("name", name)
+											.setParameter("name", "%" + name + "%")
 											.getResultList();
 		return locationByCity;
 	}
 
 	@Override
 	public List<Location> getLocationsByZipCode(String zipCode) {
-		String query = "SELECT location FROM Location location WHERE location.address.zipCode LIKE \'%\' :zipCode \'%\'";
+		String query = "SELECT location FROM Location location WHERE location.address.zipCode LIKE :zipCode";
 		List<Location> locationByCity = em.createQuery(query, Location.class)
-											.setParameter("zipCode", zipCode)
+											.setParameter("zipCode", "%" + zipCode + "%")
 											.getResultList();
 		return locationByCity;
 	}
 
 	@Override
 	public List<Location> getLocationsByRating(Rating rating) {
-		String query = "SELECT location FROM Location location WHERE location.restroom.rating LIKE \'%\' :rating \'%\'";
+		String query = "SELECT location FROM Location location WHERE location.restroom.rating = :rating";
 		List<Location> locationByCity = em.createQuery(query, Location.class)
 											.setParameter("rating", rating)
 											.getResultList();
@@ -159,7 +156,7 @@ public class LocationDAOImpl implements LocationDAO{
 
 	@Override
 	public List<Location> getLocationsByFlag(Boolean flag) {
-		String query = "SELECT location FROM Location location WHERE location.restroom.flagged LIKE \'%\' :flagged \'%\'";
+		String query = "SELECT location FROM Location location WHERE location.restroom.flagged = :flagged";
 		List<Location> locationByCity = em.createQuery(query, Location.class)
 											.setParameter("flagged", flag)
 											.getResultList();
