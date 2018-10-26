@@ -1,5 +1,6 @@
 package com.skilldistillery.babychanger.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -111,6 +112,28 @@ public class SearchController {
 		ModelAndView mv = new ModelAndView();
 		
 		List<Location> location = locationDAO.getLocationByRating(rating);    
+		
+		mv.addObject("location", location);
+		mv.setViewName("results");
+		return mv;
+	}
+	
+	@RequestMapping(path = "getLocationByFlag.do", method = RequestMethod.GET)
+	public ModelAndView getLocationByFlag(@RequestParam("flag") Boolean flag) {
+		ModelAndView mv = new ModelAndView();
+		
+		List<Location> location = locationDAO.getLocationByFlag(flag);    
+		
+		mv.addObject("location", location);
+		mv.setViewName("results");
+		return mv;
+	}
+	
+	@RequestMapping(path = "getLocationByOpen.do", method = RequestMethod.GET)
+	public ModelAndView getLocationByOpen(Date open, Date close) {
+		ModelAndView mv = new ModelAndView();
+		
+		List<Location> location = locationDAO.getLocationByOpen(open, close);    
 		
 		mv.addObject("location", location);
 		mv.setViewName("results");
