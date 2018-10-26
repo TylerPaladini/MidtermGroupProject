@@ -61,10 +61,10 @@ public class UsersController {
 	}
 	// Disable user profile
 	@RequestMapping(path = "disableUser.do", method = RequestMethod.POST)
-	public ModelAndView disableUser(Users disableUser, int id) {
+	public ModelAndView disableUser(int userId) {
 		ModelAndView mv = new ModelAndView();
 		
-		usersDAO.disableUser(id, disableUser);
+		usersDAO.disableUser(userId);
 		mv.setViewName("redirect:disabledUser.do");
 		
 		
