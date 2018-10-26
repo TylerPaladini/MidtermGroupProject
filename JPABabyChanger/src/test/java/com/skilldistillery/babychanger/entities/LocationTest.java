@@ -50,6 +50,7 @@ class LocationTest {
 		assertEquals("7194406626", location.getPhone());
 		assertEquals("08:00:00", location.getOpenTime().toString());
 		assertEquals("18:00:00", location.getCloseTime().toString());
+		assertEquals("", location.getDateCreated().toString());
 	}
 	
 	@Test
