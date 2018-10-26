@@ -1,8 +1,6 @@
 package com.skilldistillery.babychanger.data;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.List;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -15,48 +13,50 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import com.skilldistillery.babychanger.entities.Users;
+import com.skilldistillery.babychanger.entities.Address;
 
-class UsersDAOTest {
+class AddressDAOTest {
 	
 	private static EntityManagerFactory emf;
 	private EntityManager em;
+	private Address address;
 	
-	UsersDAOImpl usersDAO = new UsersDAOImpl();
-	
-	
+	private AddressDAOImpl addressDAO = new AddressDAOImpl();
+
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		emf = Persistence.createEntityManagerFactory("babychangerdb");
 	}
-	
+
 	@AfterAll
-	static void tearDownAll() throws Exception {
+	static void tearDownAfterClass() throws Exception {
 		emf.close();
-		
 	}
-
-
 
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
+		address = new Address();
+		address.setStreet("1234 Test Street");
+		address.setStreet2("1234 Test Street2");
+		address.setCity("Test City");
+		address.setState("TEST");
+		address.setZipCode("1234");
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
-		usersDAO = null;
-		
+		address = null;
+		em.close();
 	}
 
 	@Test
-	@DisplayName("Tests all users can be listed")
-	void test() {
-		
-		List<Users> allUsers = usersDAO.listAllUsers();
-		
-		assertEquals(3,allUsers.size());
-		
+	@DisplayName("Test get address by id")
+	void test_getAddressById() {
+//		assertEquals(1, em.find(Address.class, 1).getId());
+		Address addressById = addressDAO.getAddressById(1);
+		System.out.println(addressById);
+		assertEquals("Greenwood Village", addressById.getCity());
 	}
 
 }

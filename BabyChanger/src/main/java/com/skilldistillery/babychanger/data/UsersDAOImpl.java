@@ -1,6 +1,10 @@
 package com.skilldistillery.babychanger.data;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
@@ -11,6 +15,9 @@ import com.skilldistillery.babychanger.entities.Users;
 @Transactional
 @Repository
 public class UsersDAOImpl implements UsersDAO {
+	
+	private static EntityManagerFactory emf = 
+			Persistence.createEntityManagerFactory("babychangerdb");
 
 	@PersistenceContext
 	private EntityManager em;
@@ -18,6 +25,7 @@ public class UsersDAOImpl implements UsersDAO {
 // Creates a new user
 	@Override
 	public Users createUsers(Users users) {
+		em = emf.createEntityManager();
 		em.persist(users);
 		em.flush();
 		if (users.getId() == 0) {
@@ -31,6 +39,7 @@ public class UsersDAOImpl implements UsersDAO {
 	// Updates current user
 	@Override
 	public Users updateUsers(int id, Users users) {
+		em = emf.createEntityManager();
 		Users updateUser = em.find(Users.class, id);
 
 		if (updateUser != null) {
@@ -45,6 +54,7 @@ public class UsersDAOImpl implements UsersDAO {
 //  Changes the user from active to inactive, does not delete from the database. 
 	@Override
 	public boolean disableUser(int id, Users users) {
+		em = emf.createEntityManager();
 		Users disableUser = em.find(Users.class, id);
 
 		if (disableUser != null) {
@@ -57,6 +67,7 @@ public class UsersDAOImpl implements UsersDAO {
 //	Permanently deletes user from the database
 	@Override
 	public boolean deleteUsers(int id, Users users) {
+		em = emf.createEntityManager();
 		Users deleteUser = em.find(Users.class, id);
 
 		em.remove(deleteUser);
@@ -69,5 +80,15 @@ public class UsersDAOImpl implements UsersDAO {
 
 		}
 
+	}
+
+	// List all the registered users
+	@Override
+	public List<Users> listAllUsers() {
+		em = emf.createEntityManager();
+		String query = "SELECT users FROM Users users";
+		
+		List<Users> allUsers = em.createQuery(query, Users.class).getResultList();
+		return allUsers;
 	}
 }
