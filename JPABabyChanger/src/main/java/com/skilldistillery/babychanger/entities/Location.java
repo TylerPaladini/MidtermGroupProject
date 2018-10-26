@@ -13,6 +13,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 public class Location {
@@ -41,6 +45,11 @@ public class Location {
 	
 	@OneToMany(mappedBy="location")
 	private List<Restroom> restrooms;
+	
+	@Column(name="date_created")
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
+	private Date dateCreated;
 	
 	
 	/*
@@ -112,6 +121,14 @@ public class Location {
 		this.closeTime = closeTime;
 	}
 	
+	public Date getDateCreated() {
+		return dateCreated;
+	}
+
+	public void setDateCreated(Date dateCreated) {
+		this.dateCreated = dateCreated;
+	}
+
 	public void addRestroom(Restroom restroom) {
 		if(restrooms == null) restrooms = new ArrayList<>();
 		
@@ -164,7 +181,7 @@ public class Location {
 	public String toString() {
 		return "Location [id=" + id + ", name=" + name + ", address=" + address + ", accessLimits=" + accessLimits
 				+ ", purchaseRequired=" + purchaseRequired + ", phone=" + phone + ", openTime=" + openTime
-				+ ", closeTime=" + closeTime + "]";
+				+ ", closeTime=" + closeTime + ", restrooms=" + restrooms + ", dateCreated=" + dateCreated + "]";
 	}
 	
 	public Location() {
@@ -172,7 +189,7 @@ public class Location {
 	}
 
 	public Location(int id, String name, Address address, String accessLimits, boolean purchaseRequired, String phone,
-			Time openTime, Time closeTime) {
+			Time openTime, Time closeTime, List<Restroom> restrooms, Date dateCreated) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -182,6 +199,8 @@ public class Location {
 		this.phone = phone;
 		this.openTime = openTime;
 		this.closeTime = closeTime;
+		this.restrooms = restrooms;
+		this.dateCreated = dateCreated;
 	}
-	
+
 }

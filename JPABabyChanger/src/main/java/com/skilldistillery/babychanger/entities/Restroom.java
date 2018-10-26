@@ -1,6 +1,7 @@
 package com.skilldistillery.babychanger.entities;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -14,50 +15,63 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
-@Table(name="restroom")
+@Table(name = "restroom")
 public class Restroom {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id; 
-	
-	private String picture; 
-	
-	private Boolean flagged; 
-	
-	@Column(name="flagged_reason")
-	private String flaggedReason; 
-	
-	@Column(name="flagged_date")
-	private Date flaggedDate; 
-	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+
+	private String picture;
+
+	private Boolean flagged;
+
+	@Column(name = "flagged_reason")
+	private String flaggedReason;
+
+	@Column(name = "flagged_date")
+	private Date flaggedDate;
+
 	@Enumerated(EnumType.STRING)
-	private Gender gender; 
-	
-	private String directions; 
-	
-	@Column(name="public")
-	private boolean pAccess; 
-	
-	@Column(name="user_id")
-	private int userId; 
-	
-	@Column(name="date_created")
-	private Date dateCreated; 
-	
-	private String description; 
-	
-	@Column(name="changing_table")
-	private boolean changingTable;
-	
+	private Gender gender;
+
+	private String directions;
+
+	@Column(name = "public")
+	private boolean pAccess;
+
+	@Column(name = "user_id")
+	private int userId;
+
+	@Column(name = "date_created")
+//	@Temporal(TemporalType.TIMESTAMP)
+//	@CreationTimestamp
+	private Date dateCreated;
+
+	private String description;
+
+	@Column(name = "changing_table")
+	private Boolean changingTable;
+
+	public Boolean getChangingTable() {
+		return changingTable;
+	}
+
+	public void setChangingTable(Boolean changingTable) {
+		this.changingTable = changingTable;
+	}
+
 	@ManyToOne
-	@JoinColumn(name="location_id")
-	private Location location; 
-	
-	@OneToMany(mappedBy="restroom")
+	@JoinColumn(name = "location_id")
+	private Location location;
+
+	@OneToMany(mappedBy = "restroom")
 	private List<Comment> comments;
 
 	public int getId() {
@@ -100,7 +114,13 @@ public class Restroom {
 		this.flaggedDate = flaggedDate;
 	}
 
+	public Boolean getFlagged() {
+		return flagged;
+	}
 
+	public void setFlagged(Boolean flagged) {
+		this.flagged = flagged;
+	}
 
 	public Gender getGender() {
 		return gender;
@@ -178,12 +198,12 @@ public class Restroom {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (changingTable ? 1231 : 1237);
+		result = prime * result + ((changingTable == null) ? 0 : changingTable.hashCode());
 		result = prime * result + ((comments == null) ? 0 : comments.hashCode());
 		result = prime * result + ((dateCreated == null) ? 0 : dateCreated.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((directions == null) ? 0 : directions.hashCode());
-		result = prime * result + (flagged ? 1231 : 1237);
+		result = prime * result + ((flagged == null) ? 0 : flagged.hashCode());
 		result = prime * result + ((flaggedDate == null) ? 0 : flaggedDate.hashCode());
 		result = prime * result + ((flaggedReason == null) ? 0 : flaggedReason.hashCode());
 		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
@@ -195,6 +215,26 @@ public class Restroom {
 		return result;
 	}
 
+	public Restroom(int id, String picture, Boolean flagged, String flaggedReason, Date flaggedDate, Gender gender,
+			String directions, boolean pAccess, int userId, Date dateCreated, String description, Boolean changingTable,
+			Location location, List<Comment> comments) {
+		super();
+		this.id = id;
+		this.picture = picture;
+		this.flagged = flagged;
+		this.flaggedReason = flaggedReason;
+		this.flaggedDate = flaggedDate;
+		this.gender = gender;
+		this.directions = directions;
+		this.pAccess = pAccess;
+		this.userId = userId;
+		this.dateCreated = dateCreated;
+		this.description = description;
+		this.changingTable = changingTable;
+		this.location = location;
+		this.comments = comments;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -204,7 +244,10 @@ public class Restroom {
 		if (getClass() != obj.getClass())
 			return false;
 		Restroom other = (Restroom) obj;
-		if (changingTable != other.changingTable)
+		if (changingTable == null) {
+			if (other.changingTable != null)
+				return false;
+		} else if (!changingTable.equals(other.changingTable))
 			return false;
 		if (comments == null) {
 			if (other.comments != null)
@@ -226,7 +269,10 @@ public class Restroom {
 				return false;
 		} else if (!directions.equals(other.directions))
 			return false;
-		if (flagged != other.flagged)
+		if (flagged == null) {
+			if (other.flagged != null)
+				return false;
+		} else if (!flagged.equals(other.flagged))
 			return false;
 		if (flaggedDate == null) {
 			if (other.flaggedDate != null)
@@ -238,10 +284,7 @@ public class Restroom {
 				return false;
 		} else if (!flaggedReason.equals(other.flaggedReason))
 			return false;
-		if (gender == null) {
-			if (other.gender != null)
-				return false;
-		} else if (!gender.equals(other.gender))
+		if (gender != other.gender)
 			return false;
 		if (id != other.id)
 			return false;
@@ -293,10 +336,25 @@ public class Restroom {
 		this.location = location;
 		this.comments = comments;
 	}
-
-
-
+	
+	public void addComment(Comment comment) {
+		if(comments == null) comments = new ArrayList<>();
+		
+		if(!comments.contains(comment)) {
+			comments.add(comment);
+			if(comment.getRestroom() != null) {
+				comment.getRestroom().getComments().remove(comment);
+			}
+			comment.setRestroom(this);
+		}
+	}
+	public void removeComment(Comment comment) {
+		comment.setRestroom(null);
+		if(comments != null) {
+			comments.remove(comment);
+		}
+	}
 	
 	
-			
+
 }
