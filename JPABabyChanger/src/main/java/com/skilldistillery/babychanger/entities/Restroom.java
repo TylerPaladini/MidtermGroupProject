@@ -1,7 +1,6 @@
 package com.skilldistillery.babychanger.entities;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -27,7 +26,7 @@ public class Restroom {
 	
 	private String picture; 
 	
-	private boolean flagged; 
+	private Boolean flagged; 
 	
 	@Column(name="flagged_reason")
 	private String flaggedReason; 
@@ -36,7 +35,7 @@ public class Restroom {
 	private Date flaggedDate; 
 	
 	@Enumerated(EnumType.STRING)
-	private Enum gender; 
+	private Gender gender; 
 	
 	private String directions; 
 	
@@ -101,11 +100,13 @@ public class Restroom {
 		this.flaggedDate = flaggedDate;
 	}
 
-	public Enum getGender() {
+
+
+	public Gender getGender() {
 		return gender;
 	}
 
-	public void setGender(Enum gender) {
+	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
 
@@ -274,11 +275,10 @@ public class Restroom {
 		super();
 	}
 
-	public Restroom(int id, String picture, boolean flagged, String flaggedReason, Date flaggedDate, Enum gender,
+	public Restroom(String picture, boolean flagged, String flaggedReason, Date flaggedDate, Gender gender,
 			String directions, boolean pAccess, int userId, Date dateCreated, String description, boolean changingTable,
 			Location location, List<Comment> comments) {
 		super();
-		this.id = id;
 		this.picture = picture;
 		this.flagged = flagged;
 		this.flaggedReason = flaggedReason;
@@ -293,6 +293,8 @@ public class Restroom {
 		this.location = location;
 		this.comments = comments;
 	}
+
+
 
 	
 	

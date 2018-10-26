@@ -1,5 +1,6 @@
 package com.skilldistillery.babychanger.entities;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -12,10 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 public class Location {
@@ -37,14 +34,10 @@ public class Location {
 	private String phone;
 	
 	@Column(name = "open_time")
-	@Temporal(TemporalType.TIMESTAMP)
-    @CreationTimestamp
-	private Date openTime;
+	private Time openTime;
 	
 	@Column(name = "closed_time")
-	@Temporal(TemporalType.TIMESTAMP)
-    @CreationTimestamp
-	private Date closeTime;
+	private Time closeTime;
 	
 	@OneToMany(mappedBy="location")
 	private List<Restroom> restrooms;
@@ -107,7 +100,7 @@ public class Location {
 		return openTime;
 	}
 
-	public void setOpenTime(Date openTime) {
+	public void setOpenTime(Time openTime) {
 		this.openTime = openTime;
 	}
 
@@ -115,7 +108,7 @@ public class Location {
 		return closeTime;
 	}
 
-	public void setCloseTime(Date closeTime) {
+	public void setCloseTime(Time closeTime) {
 		this.closeTime = closeTime;
 	}
 	
@@ -179,7 +172,7 @@ public class Location {
 	}
 
 	public Location(int id, String name, Address address, String accessLimits, boolean purchaseRequired, String phone,
-			Date openTime, Date closeTime) {
+			Time openTime, Time closeTime) {
 		super();
 		this.id = id;
 		this.name = name;
