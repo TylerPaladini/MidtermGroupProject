@@ -164,6 +164,11 @@ INSERT INTO `address` (`id`, `street`, `street2`, `city`, `state`, `zip`) VALUES
 INSERT INTO `address` (`id`, `street`, `street2`, `city`, `state`, `zip`) VALUES (2, '7701 E Orchard Rd', NULL, 'Greenwood Village', 'CO', '80111');
 INSERT INTO `address` (`id`, `street`, `street2`, `city`, `state`, `zip`) VALUES (3, 'Lake Loop Picnic Access', NULL, 'Englewood', 'CO', '80111');
 INSERT INTO `address` (`id`, `street`, `street2`, `city`, `state`, `zip`) VALUES (4, '15700 E Briarwood Cir', NULL, 'Aurora', 'CO', '80016');
+INSERT INTO `address` (`id`, `street`, `street2`, `city`, `state`, `zip`) VALUES (5, '8505 Park Meadows Center Dr', NULL, 'Lone Tree', 'CO', '80124');
+INSERT INTO `address` (`id`, `street`, `street2`, `city`, `state`, `zip`) VALUES (6, '6492 S Parker Rd ', NULL, 'Aurora', 'CO', '80016');
+INSERT INTO `address` (`id`, `street`, `street2`, `city`, `state`, `zip`) VALUES (7, '6982 S Quentin St', NULL, 'Englewood', 'CO', '80112');
+INSERT INTO `address` (`id`, `street`, `street2`, `city`, `state`, `zip`) VALUES (8, '8467 S Yosemite St ', NULL, 'Lone Tree', 'CO', '80124');
+INSERT INTO `address` (`id`, `street`, `street2`, `city`, `state`, `zip`) VALUES (9, '6818 S Yosemite St', NULL, 'Centennial', 'CO', '80122');
 
 COMMIT;
 
@@ -190,6 +195,12 @@ INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `pho
 INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (2, 'Shell on E Orchard', 'must get key from attendant', true, '3037702637', NULL, NULL, 2, DEFAULT);
 INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (3, 'Lake Loop Picnic Area', 'none, public access', false, NULL, NULL, NULL, 3, DEFAULT);
 INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (4, 'Target on Briarwood', 'none ', false, '7202146000', '08:00', '22:00', 4, DEFAULT);
+INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (5, 'Land of Nod', 'closes 9 PM', true, '3036499922', '10:00', '21:00', 5, DEFAULT);
+INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (6, 'buybuy Baby', 'closes at 9 ', false, '3033051130', '0900', '2100', 6, DEFAULT);
+INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (7, 'Koala Kare Products', 'kloses at 4:30', false, '3035398300', '07:00', '16:30', 7, DEFAULT);
+INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (8, 'Bed Bath & Beyond', 'none', false, '3037081577', '09:00', '21:00', 8, DEFAULT);
+INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (9, 'Park Meadows Mall', 'closes at 9 PM, loud', false, '3037922533', '10:00', '21:00', 5, DEFAULT);
+INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (10, 'Southgate Shopping Center', 'closes at 6 PM', false, NULL, '00:00', '18:00', 9, DEFAULT);
 
 COMMIT;
 
@@ -204,6 +215,16 @@ INSERT INTO `restroom` (`id`, `location_id`, `picture`, `flagged`, `flagged_reas
 INSERT INTO `restroom` (`id`, `location_id`, `picture`, `flagged`, `flagged_reason`, `flagged_date`, `gender`, `directions`, `public`, `user_id`, `date_created`, `description`, `changing_table`) VALUES (3, 2, NULL, NULL, NULL, NULL, 'M', 'inside on right', true, 4, NULL, 'its not gold plated but functional', false);
 INSERT INTO `restroom` (`id`, `location_id`, `picture`, `flagged`, `flagged_reason`, `flagged_date`, `gender`, `directions`, `public`, `user_id`, `date_created`, `description`, `changing_table`) VALUES (4, 3, NULL, NULL, NULL, NULL, 'M', 'next to lake', true, 4, NULL, 'it\'s a public bathroom ', false);
 INSERT INTO `restroom` (`id`, `location_id`, `picture`, `flagged`, `flagged_reason`, `flagged_date`, `gender`, `directions`, `public`, `user_id`, `date_created`, `description`, `changing_table`) VALUES (5, 4, NULL, NULL, NULL, NULL, 'M', 'inside, right or left depending on door you enter, it\'s in the middle ', true, 4, NULL, 'decently clean', true);
+INSERT INTO `restroom` (`id`, `location_id`, `picture`, `flagged`, `flagged_reason`, `flagged_date`, `gender`, `directions`, `public`, `user_id`, `date_created`, `description`, `changing_table`) VALUES (6, 5, NULL, NULL, NULL, NULL, 'M', 'in the mall', true, 4, NULL, 'very clean', true);
+INSERT INTO `restroom` (`id`, `location_id`, `picture`, `flagged`, `flagged_reason`, `flagged_date`, `gender`, `directions`, `public`, `user_id`, `date_created`, `description`, `changing_table`) VALUES (7, 6, NULL, NULL, NULL, NULL, 'M', 'in the store in the back', true, 4, NULL, 'very clean', true);
+INSERT INTO `restroom` (`id`, `location_id`, `picture`, `flagged`, `flagged_reason`, `flagged_date`, `gender`, `directions`, `public`, `user_id`, `date_created`, `description`, `changing_table`) VALUES (8, 7, NULL, NULL, NULL, NULL, 'M', 'back of the store, BYOW', true, 4, NULL, 'bring your own wipes', true);
+INSERT INTO `restroom` (`id`, `location_id`, `picture`, `flagged`, `flagged_reason`, `flagged_date`, `gender`, `directions`, `public`, `user_id`, `date_created`, `description`, `changing_table`) VALUES (9, 8, NULL, NULL, NULL, NULL, 'M', 'straight back ', true, 4, NULL, 'no TP', false);
+INSERT INTO `restroom` (`id`, `location_id`, `picture`, `flagged`, `flagged_reason`, `flagged_date`, `gender`, `directions`, `public`, `user_id`, `date_created`, `description`, `changing_table`) VALUES (10, 9, NULL, NULL, NULL, NULL, 'M', 'next to apple store downstairs', true, 4, NULL, 'don\'t bring your iPad into the stall', true);
+INSERT INTO `restroom` (`id`, `location_id`, `picture`, `flagged`, `flagged_reason`, `flagged_date`, `gender`, `directions`, `public`, `user_id`, `date_created`, `description`, `changing_table`) VALUES (11, 9, NULL, NULL, NULL, NULL, 'M', 'next to foodcourt upstairs', true, 4, NULL, 'it\'s a bathroom', true);
+INSERT INTO `restroom` (`id`, `location_id`, `picture`, `flagged`, `flagged_reason`, `flagged_date`, `gender`, `directions`, `public`, `user_id`, `date_created`, `description`, `changing_table`) VALUES (12, 9, NULL, NULL, NULL, NULL, 'F', 'next to foodcourt upstairs ', true, 4, NULL, 'has sign for table on the door', true);
+INSERT INTO `restroom` (`id`, `location_id`, `picture`, `flagged`, `flagged_reason`, `flagged_date`, `gender`, `directions`, `public`, `user_id`, `date_created`, `description`, `changing_table`) VALUES (13, 4, NULL, NULL, NULL, NULL, 'F', 'in the target ', true, 4, NULL, 'wife said there\'s a table in there', true);
+INSERT INTO `restroom` (`id`, `location_id`, `picture`, `flagged`, `flagged_reason`, `flagged_date`, `gender`, `directions`, `public`, `user_id`, `date_created`, `description`, `changing_table`) VALUES (14, 9, NULL, NULL, NULL, NULL, 'M', 'next to macy\'s ', true, 4, NULL, 'no table', false);
+INSERT INTO `restroom` (`id`, `location_id`, `picture`, `flagged`, `flagged_reason`, `flagged_date`, `gender`, `directions`, `public`, `user_id`, `date_created`, `description`, `changing_table`) VALUES (15, 10, NULL, NULL, NULL, NULL, 'M', 'next to the Chinese food place', true, 4, NULL, 'no table', false);
 
 COMMIT;
 
@@ -215,6 +236,7 @@ START TRANSACTION;
 USE `babychangerdb`;
 INSERT INTO `comment` (`id`, `user_id`, `comment`, `restroom_id`, `flag_comment`, `rating`, `active`, `date_created`) VALUES (1, 1, 'test comment', 1, NULL, '1', true, DEFAULT);
 INSERT INTO `comment` (`id`, `user_id`, `comment`, `restroom_id`, `flag_comment`, `rating`, `active`, `date_created`) VALUES (2, 1, 'test another comment', 1, NULL, '5', true, DEFAULT);
+INSERT INTO `comment` (`id`, `user_id`, `comment`, `restroom_id`, `flag_comment`, `rating`, `active`, `date_created`) VALUES (3, 4, 'very very clean', 13, NULL, '5', true, DEFAULT);
 
 COMMIT;
 
