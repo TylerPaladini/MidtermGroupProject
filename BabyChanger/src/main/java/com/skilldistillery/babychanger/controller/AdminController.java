@@ -1,5 +1,7 @@
 package com.skilldistillery.babychanger.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -99,7 +101,7 @@ public class AdminController {
 		ModelAndView mv = new ModelAndView();
 		boolean deleteSuccess = usersDAO.deleteUsers(userId);
 		redir.addFlashAttribute("deleteSuccess", deleteSuccess);
-		mv.setViewName("redirect:deleteComplete.do");
+		mv.setViewName("redirect:deleteCompleteAdmin.do");
 		return mv;
 	}
 
@@ -111,5 +113,16 @@ public class AdminController {
 		mv.setViewName("confirmation");
 		return mv;
 	}
+	@RequestMapping(path = "getAllUsersAdmin.do", method = RequestMethod.GET)
+	public ModelAndView getAllUsersAdmin() {
+		ModelAndView mv = new ModelAndView();
+		List<Users> allUsers = usersDAO.listAllUsers();
+		mv.addObject("allUsers", allUsers);
+		mv.setViewName("results");
+		return mv;
+	}
+
+	
+	
 
 }

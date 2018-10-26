@@ -64,7 +64,7 @@ First Name:
 
 
 
-<form action="disableUserAdmin.do" method="POST">
+<form action="confirmDeleteAdmin.do" method="POST">
   <input type="number" name="userId"/><br>
   <input type="Submit" value="Delete"/>
 </form>
