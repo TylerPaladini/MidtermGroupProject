@@ -13,8 +13,18 @@
 		<c:forEach items="${allUsers }" var="user">
 			${user.id }
 			${user.firstName }
+			<br>
 		</c:forEach>
 	</c:if>
+	
+	<c:if test="${not empty allCities }">
+		<c:forEach items="${allCities }" var="city">
+			${city.id }
+			${city.name }
+			<br>
+		</c:forEach>
+	</c:if>
+	
 
 </body>
 </html>

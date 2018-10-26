@@ -63,7 +63,7 @@ public class SearchController {
 		List<Location> location = locationDAO.getLocationsByCity(keyword);    
 		System.out.println("&&&&&&&&&&&&&&&&&&&&&");
 		System.out.println(location);
-		mv.addObject("location", location);
+		mv.addObject("allCities", location);
 		mv.setViewName("results");
 		return mv;
 	}
