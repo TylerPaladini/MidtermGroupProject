@@ -29,6 +29,7 @@ public class UsersDAOImpl implements UsersDAO {
 			em.getTransaction().rollback();
 			return null;
 		} else {
+			users.setActive(true);
 			return em.find(Users.class, users.getId());
 		}
 	}
@@ -51,7 +52,7 @@ public class UsersDAOImpl implements UsersDAO {
 	}
 //  Changes the user from active to inactive, does not delete from the database. 
 	@Override
-	public boolean disableUser(int id, Users users) {
+	public boolean disableUser(int id) {
 		Users disableUser = em.find(Users.class, id);
 
 		if (disableUser != null) {

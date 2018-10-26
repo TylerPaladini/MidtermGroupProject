@@ -44,7 +44,8 @@ First Name:
 
 	<h5>Update User</h5>
 <form action="updateUser.do" method="POST">
-
+ID#
+<input type="number" name="id"/><br>
 User Name:
 <input type="text" name="userName"/><br>
 First Name:
@@ -56,15 +57,16 @@ First Name:
   Password:
   <input type="password" name="password"/><br>
   
-  <input type="Submit" value="Create User"/>
+  <input type="Submit" value="update"/>
 </form>
 
 
 
 
 
-<form action="confirmDelete.do" method="POST">
-  <input type="text" name="firstName"/><br>
+<form action="disableUser.do" method="POST">
+  <input type="number" name="userId"/><br>
+  <input type="Submit" value="Delete"/>
 </form>
 
 

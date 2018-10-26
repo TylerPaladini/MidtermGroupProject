@@ -10,7 +10,7 @@ public interface UsersDAO {
 	
 	public Users updateUsers(int id, Users users);
 	
-	public boolean disableUser(int id, Users users);
+	public boolean disableUser(int id);
 	
 	public boolean deleteUsers(int id);
 	
