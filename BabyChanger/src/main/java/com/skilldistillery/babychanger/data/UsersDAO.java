@@ -1,5 +1,7 @@
 package com.skilldistillery.babychanger.data;
 
+import java.util.List;
+
 import com.skilldistillery.babychanger.entities.Users;
 
 public interface UsersDAO {
@@ -11,6 +13,8 @@ public interface UsersDAO {
 	public boolean disableUser(int id, Users users);
 	
 	public boolean deleteUsers(int id, Users users);
+	
+	public List<Users> listAllUsers ();
 	
 	
 	
