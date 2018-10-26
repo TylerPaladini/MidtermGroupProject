@@ -23,8 +23,11 @@ public interface CommentDAO {
 	List<Comment> findCommentsByRating(int rating);
 	List<Comment> findCommentsByActive(Boolean active);
 	List<Comment> findCommentsByDateCreated(Date date);
-	boolean addComment(Comment comment);
-	boolean editComment(int id, Comment comment);
+	Comment addComment(Comment comment);
+	Comment editComment(int id, Comment comment);
+	boolean disableComment(int id);
+	boolean enableComment(int id);
 	boolean deleteComment(int id);
+	boolean updateFlag(int id, boolean isFlag);
 	
 }
