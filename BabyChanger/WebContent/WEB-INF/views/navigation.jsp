@@ -7,7 +7,7 @@
 
 		<div class="row">
 			<div class="col">
-				<form action="search.do">
+				<form action="getLocationsByKeyword.do">
 
 					<table>
 						<tr>
@@ -17,7 +17,7 @@
 							<th style="color: green; font-size: 20px">N</th>
 							<th style="color: blue; font-size: 20px">T</th>
 							<th style="color: orange; font-size: 20px">Y</th>
-							<th><input type="search" name="searchText" size="30" /> <input
+							<th><input type="search" name="keyword" size="30" /> <input
 								type="submit" name="search" value="Search" /></th>
 
 						</tr>
