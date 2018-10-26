@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `location` (
   `open_time` TIME NULL,
   `closed_time` TIME NULL,
   `address_id` INT(11) NOT NULL,
-  `date_created` DATETIME NULL DEFAULT current_timestamp,
+  `date_created` DATETIME NOT NULL DEFAULT current_timestamp,
   PRIMARY KEY (`id`),
   INDEX `fk_location_address1_idx` (`address_id` ASC),
   CONSTRAINT `fk_location_address1`
@@ -160,8 +160,10 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `babychangerdb`;
-INSERT INTO `address` (`id`, `street`, `street2`, `city`, `state`, `zip`) VALUES (1, '1210 Toledo St', NULL, 'Henderson', 'NV', '80918');
-INSERT INTO `address` (`id`, `street`, `street2`, `city`, `state`, `zip`) VALUES (2, '317 Columbine Rd', NULL, 'Palmer Lake', 'CO', '80133');
+INSERT INTO `address` (`id`, `street`, `street2`, `city`, `state`, `zip`) VALUES (1, '7400 E Orchard Rd #1450N', NULL, 'Greenwood Village', 'CO', '80111');
+INSERT INTO `address` (`id`, `street`, `street2`, `city`, `state`, `zip`) VALUES (2, '7701 E Orchard Rd', NULL, 'Greenwood Village', 'CO', '80111');
+INSERT INTO `address` (`id`, `street`, `street2`, `city`, `state`, `zip`) VALUES (3, 'Lake Loop Picnic Access', NULL, 'Englewood', 'CO', '80111');
+INSERT INTO `address` (`id`, `street`, `street2`, `city`, `state`, `zip`) VALUES (4, '15700 E Briarwood Cir', NULL, 'Aurora', 'CO', '80016');
 
 COMMIT;
 
@@ -172,8 +174,9 @@ COMMIT;
 START TRANSACTION;
 USE `babychangerdb`;
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `active`, `admin`, `date_created`) VALUES (1, 'Jane', 'Doe', 'janedoe', 'janedoe@gmail.com', 'janedoe', true, false, NULL);
-INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `active`, `admin`, `date_created`) VALUES (2, 'John', 'Doe', 'johndoe', 'johndoe@hotmail.com', 'johndoe', true, true, NULL);
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `active`, `admin`, `date_created`) VALUES (2, 'John', 'Doe', 'johndoe', 'johndoe@hotmail.com', 'johndoe', true, false, NULL);
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `active`, `admin`, `date_created`) VALUES (3, 'Mike', 'Myers', 'mikem', 'mikeym@aol.com', 'mikeym', true, false, NULL);
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `active`, `admin`, `date_created`) VALUES (4, 'Rob', 'Thompson', 'robthompson', 'rob@10thHuman.com', 'robthompson', true, true, NULL);
 
 COMMIT;
 
@@ -183,8 +186,10 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `babychangerdb`;
-INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (1, 'Solarium', 'have to be a student', false, '7194406626', '08:00', '18:00', 1, NULL);
-INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (2, 'Gas Station E Orchard', 'must get key from attendant', true, '7203154567', NULL, NULL, 2, NULL);
+INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (1, 'Solarium', 'have to be a student', false, '3033025234', '08:00', '18:00', 1, DEFAULT);
+INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (2, 'Shell on E Orchard', 'must get key from attendant', true, '3037702637', NULL, NULL, 2, DEFAULT);
+INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (3, 'Lake Loop Picnic Area', 'none, public access', false, NULL, NULL, NULL, 3, DEFAULT);
+INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (4, 'Target on Briarwood', 'none ', false, '7202146000', '08:00', '22:00', 4, DEFAULT);
 
 COMMIT;
 
@@ -195,7 +200,10 @@ COMMIT;
 START TRANSACTION;
 USE `babychangerdb`;
 INSERT INTO `restroom` (`id`, `location_id`, `picture`, `flagged`, `flagged_reason`, `flagged_date`, `gender`, `directions`, `public`, `user_id`, `date_created`, `description`, `changing_table`) VALUES (1, 1, NULL, NULL, NULL, NULL, 'M', 'gound floor north tower east end down hallway', true, 2, NULL, 'changing room w/showers', false);
-INSERT INTO `restroom` (`id`, `location_id`, `picture`, `flagged`, `flagged_reason`, `flagged_date`, `gender`, `directions`, `public`, `user_id`, `date_created`, `description`, `changing_table`) VALUES (2, 1, NULL, NULL, NULL, NULL, 'F', 'ground floor n tower ', true, 1, NULL, 'nice tp', true);
+INSERT INTO `restroom` (`id`, `location_id`, `picture`, `flagged`, `flagged_reason`, `flagged_date`, `gender`, `directions`, `public`, `user_id`, `date_created`, `description`, `changing_table`) VALUES (2, 1, NULL, NULL, NULL, NULL, 'F', 'ground floor n tower ', true, 1, NULL, 'nice tp', false);
+INSERT INTO `restroom` (`id`, `location_id`, `picture`, `flagged`, `flagged_reason`, `flagged_date`, `gender`, `directions`, `public`, `user_id`, `date_created`, `description`, `changing_table`) VALUES (3, 2, NULL, NULL, NULL, NULL, 'M', 'inside on right', true, 4, NULL, 'its not gold plated but functional', false);
+INSERT INTO `restroom` (`id`, `location_id`, `picture`, `flagged`, `flagged_reason`, `flagged_date`, `gender`, `directions`, `public`, `user_id`, `date_created`, `description`, `changing_table`) VALUES (4, 3, NULL, NULL, NULL, NULL, 'M', 'next to lake', true, 4, NULL, 'it\'s a public bathroom ', false);
+INSERT INTO `restroom` (`id`, `location_id`, `picture`, `flagged`, `flagged_reason`, `flagged_date`, `gender`, `directions`, `public`, `user_id`, `date_created`, `description`, `changing_table`) VALUES (5, 4, NULL, NULL, NULL, NULL, 'M', 'inside, right or left depending on door you enter, it\'s in the middle ', true, 4, NULL, 'decently clean', true);
 
 COMMIT;
 
