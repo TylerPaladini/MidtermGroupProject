@@ -69,6 +69,10 @@ First Name:
   <input type="Submit" value="Delete"/>
 </form>
 
+<form action="getAllUsersAdmin.do">
+  <input type="Submit" value="all users"/>
+
+</form>
 
 
 
