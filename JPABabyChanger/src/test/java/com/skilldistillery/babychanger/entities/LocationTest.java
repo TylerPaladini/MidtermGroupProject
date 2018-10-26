@@ -44,12 +44,13 @@ class LocationTest {
 	@DisplayName("Test mappings for location entity")
 	void test_location_mappings() {
 		assertEquals("Solarium", location.getName());
-		assertEquals("Henderson", location.getAddress().getCity());
+		assertEquals("Greenwood Village", location.getAddress().getCity());
 		assertEquals("have to be a student", location.getAccessLimits());
 		assertEquals(false, location.isPurchaseRequired());
-		assertEquals("7194406626", location.getPhone());
+		assertEquals("3033025234", location.getPhone());
 		assertEquals("08:00:00", location.getOpenTime().toString());
 		assertEquals("18:00:00", location.getCloseTime().toString());
+		assertEquals("2018-10-26 10:55:15.0", location.getDateCreated().toString());
 	}
 	
 	@Test

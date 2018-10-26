@@ -46,11 +46,11 @@ class AddressTest {
 	@DisplayName("Test Address mappings")
 	void test_address_mappings() {
 		address = em.find(Address.class, 1);
-		assertEquals("1210 Toledo St", address.getStreet());
+		assertEquals("7400 E Orchard Rd #1450N", address.getStreet());
 		assertNull(address.getStreet2());
-		assertEquals("Henderson", address.getCity());
-		assertEquals("NV", address.getState());
-		assertEquals("80918", address.getZipCode());
+		assertEquals("Greenwood Village", address.getCity());
+		assertEquals("CO", address.getState());
+		assertEquals("80111", address.getZipCode());
 	}
 	
 }
