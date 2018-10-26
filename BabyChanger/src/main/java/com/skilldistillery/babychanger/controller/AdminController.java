@@ -32,7 +32,7 @@ public class AdminController {
 	// comes here when admin has confirmed they are deleting
 	// a profile completely from the Database and redirects
 	// preventing refresh errors
-	@RequestMapping(path = "confirmDelete.do", method = RequestMethod.POST)
+	@RequestMapping(path = "confirmDeleteAdmin.do", method = RequestMethod.POST)
 	public ModelAndView tryDeletingProfileFromDB(int userId, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
 		boolean deleteSuccess = usersDAO.deleteUsers(userId);
@@ -43,7 +43,7 @@ public class AdminController {
 	
 	// comes here when redirected from confirmDelete and confirms
 	// to admin if delete was successful or not
-	@RequestMapping(path = "deleteComplete.do", method = RequestMethod.GET)
+	@RequestMapping(path = "deleteCompleteAdmin.do", method = RequestMethod.GET)
 	public ModelAndView deleteProfileFromDBComplete() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("confirmation");
