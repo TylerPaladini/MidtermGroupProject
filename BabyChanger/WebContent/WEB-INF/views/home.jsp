@@ -8,5 +8,12 @@
 </head>
 <body>
 	<h1>POOP</h1>
+	
+	
+<form action="createUser.do" method="GET">
+  <input type="text" name="firstName"/>
+  <input type="Submit" value="FirstName"/>
+</form>
+	
 </body>
 </html>
