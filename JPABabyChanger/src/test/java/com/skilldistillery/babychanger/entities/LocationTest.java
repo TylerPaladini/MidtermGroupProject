@@ -2,9 +2,6 @@ package com.skilldistillery.babychanger.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -13,6 +10,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LocationTest {
@@ -43,18 +41,32 @@ class LocationTest {
 	}
 
 	@Test
-	void test() {
+	@DisplayName("Test mappings for location entity")
+	void test_location_mappings() {
 		assertEquals("Solarium", location.getName());
+		assertEquals("Henderson", location.getAddress().getCity());
 		assertEquals("have to be a student", location.getAccessLimits());
 		assertEquals(false, location.isPurchaseRequired());
 		assertEquals("7194406626", location.getPhone());
-//		LocalDate date = location.getOpenTime();
-//		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ISO_LOCAL_TIME");
-//		String text = Integer.toString(location.getOpenTime().getHours());
-//		String text = date.format(formatter);
-		
-		
-		assertEquals("08:00:00", location.getOpenTime());
+		assertEquals("08:00:00", location.getOpenTime().toString());
+		assertEquals("18:00:00", location.getCloseTime().toString());
+	}
+	
+	/*
+	 * unable to set location to em.find(Location.class, 1)
+	 */
+	@Test
+	@DisplayName("Confirm list restroom")
+	void test_add_remove_restroom_list() {
+		assertEquals(2, location.getRestrooms().size());
+		Restroom restroom = new Restroom();
+		restroom.setChangingTable(true);
+		restroom.setLocation(em.find(Location.class, 2));
+		restroom.setUserId(1);
+		location.addRestroom(restroom);
+		assertEquals(3, location.getRestrooms().size());
+		location.removeRestroom(restroom);
+		assertEquals(2, location.getRestrooms().size());
 	}
 
 }
