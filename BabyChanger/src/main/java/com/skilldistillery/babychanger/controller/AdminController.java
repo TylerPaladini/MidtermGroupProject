@@ -33,9 +33,9 @@ public class AdminController {
 	// a profile completely from the Database and redirects
 	// preventing refresh errors
 	@RequestMapping(path = "confirmDelete.do", method = RequestMethod.POST)
-	public ModelAndView tryDeletingProfileFromDB(Users deletedUser, RedirectAttributes redir) {
+	public ModelAndView tryDeletingProfileFromDB(int userId, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
-		boolean deleteSuccess = usersDAO.deleteUsers(deletedUser.getId(), deletedUser);
+		boolean deleteSuccess = usersDAO.deleteUsers(userId);
 		redir.addFlashAttribute("deleteSuccess", deleteSuccess);
 		mv.setViewName("redirect:deleteComplete.do");
 		return mv;

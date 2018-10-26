@@ -22,17 +22,54 @@
 <form action="getBathrooms.do" method="GET">
   <input type="text" name="id"/>
   <input type="Submit" value="Get Bathroom"/>
-</form>
+</form><br>
 	
-	
-<form action="createUser.do" method="GET">
-  <input type="text" name="firstName"/>
-  <input type="text" name="lastName"/>
-  <input type="text" name="firstName"/>
-  <input type="text" name="firstName"/>
+	<h5>Create User</h5>
+<form action="createUser.do" method="POST">
+
+User Name:
+<input type="text" name="userName"/><br>
+First Name:
+  <input type="text" name="firstName"/><br>
+  LastName:
+  <input type="text" name="lastName"/><br>
+  Email:
+  <input type="text" name="email"/><br>
+  Password:
+  <input type="password" name="password"/><br>
   
   <input type="Submit" value="Create User"/>
 </form>
+
+
+	<h5>Update User</h5>
+<form action="updateUser.do" method="POST">
+
+User Name:
+<input type="text" name="userName"/><br>
+First Name:
+  <input type="text" name="firstName"/><br>
+  LastName:
+  <input type="text" name="lastName"/><br>
+  Email:
+  <input type="text" name="email"/><br>
+  Password:
+  <input type="password" name="password"/><br>
+  
+  <input type="Submit" value="Create User"/>
+</form>
+
+
+
+
+
+<form action="confirmDelete.do" method="POST">
+  <input type="text" name="firstName"/><br>
+</form>
+
+
+
+
 	
 	
 	<script
