@@ -35,7 +35,6 @@ class AddressTest {
 	@BeforeEach
 	public void setUp() throws Exception {
 		em = emf.createEntityManager();
-		address = em.find(Address.class, 1);
 	}
 
 	@AfterEach
@@ -46,11 +45,12 @@ class AddressTest {
 	@Test
 	@DisplayName("Test Address mappings")
 	void test_address_mappings() {
+		address = em.find(Address.class, 1);
 		assertEquals("1210 Toledo St", address.getStreet());
 		assertNull(address.getStreet2());
 		assertEquals("Henderson", address.getCity());
 		assertEquals("NV", address.getState());
 		assertEquals("80918", address.getZipCode());
 	}
-
+	
 }
