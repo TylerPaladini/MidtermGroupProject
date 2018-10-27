@@ -345,7 +345,12 @@ public class AdminController {
 		
 	}
 		
-		
+	@RequestMapping(path="profileAdmin.do", method = RequestMethod.GET)
+	public ModelAndView goToAdminProfile() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("adminProfile");
+		return mv;
+	}
 		
 
 }

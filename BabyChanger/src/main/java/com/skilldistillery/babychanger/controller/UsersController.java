@@ -116,9 +116,7 @@ public class UsersController {
 	}
 	@RequestMapping(path="userAddsLocation.do", method = RequestMethod.POST)
 	public ModelAndView userAddsLocation(Location location, HttpSession session) {
-		System.out.println("1");
 		session.setAttribute("newLocation", location);
-		System.out.println(location);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("addRestroomNext", true);
 		mv.setViewName("add");
@@ -151,39 +149,12 @@ public class UsersController {
 		return mv;
 	}
 	
-	// Logs in the user
-	@RequestMapping(path = "login.do", method = RequestMethod.POST)
-	public ModelAndView userLogin(Users user, HttpSession session) {
+	@RequestMapping(path="profileUser.do", method = RequestMethod.GET)
+	public ModelAndView goToUserProfile() {
 		ModelAndView mv = new ModelAndView();
-		String userName = user.getUserName();
-		String password = user.getPassword();
-		
-		Users loginUser = usersDAO.getUserByUsernameAndPassword(userName, password);
-		
-		if(loginUser != null ) {
-			session.setAttribute("loggedIn", loginUser);
-			mv.addObject("loggedIn", loginUser);
-			mv.setViewName("home");
-		}
-		else {
-			mv.setViewName("login");
-		}
+		mv.setViewName("profile");
 		return mv;
-		
 	}
-	
-	@RequestMapping ( path = "loginPage.do", method = RequestMethod.GET)
-	public String loginPage() {
-		return "login";
-	}
-	
-	
-		
-	
-		
-		
-		
-		
 	
 
 }
