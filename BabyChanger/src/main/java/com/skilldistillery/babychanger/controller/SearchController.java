@@ -134,20 +134,20 @@ public class SearchController {
 	public ModelAndView getLocationByOpen() {
 		ModelAndView mv = new ModelAndView();
 		
-//		List<Location> location = locationDAO.getLocationsByOpen(LocalTime.now());    
+//		List<Location> location = locationDAO.getLocationsByOpen(LocalTime.now());
 		
 //		mv.addObject("location", location);
 		mv.setViewName("results");
 		return mv;
 	}
 	
-	@RequestMapping(path="searchOpenLocations.do")
+	@RequestMapping(path="searchOpenLocations.do", method = RequestMethod.GET)
 	public ModelAndView addAddressLocationRestroom() {
 		ModelAndView mv = new ModelAndView();
 		List<Location> openLocations = locationDAO.getLocationsByOpen();
 		System.out.println("Back in controller" + openLocations);
 		mv.addObject("open", openLocations);
-		mv.setViewName("result");
+		mv.setViewName("results");
 		return mv;
 	}
 }
