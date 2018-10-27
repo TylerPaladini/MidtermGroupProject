@@ -12,10 +12,16 @@
 <body>
 
 	<c:if test="${deleteSuccess}">
-		delete success
+		delete successful
 	</c:if>
 	<c:if test="${!deleteSuccess}">
 		delete failed
+	</c:if>
+	<c:if test="${addSuccess}">
+		add successful
+	</c:if>
+	<c:if test="${!addSuccess}">
+		add successful
 	</c:if>
 
 </body>
