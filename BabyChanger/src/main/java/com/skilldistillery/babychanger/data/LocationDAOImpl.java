@@ -67,8 +67,8 @@ public class LocationDAOImpl implements LocationDAO {
 			updateLocation.setAccessLimits(location.getAccessLimits());
 			updateLocation.setPurchaseRequired(location.isPurchaseRequired());
 			updateLocation.setPhone(location.getPhone());
-			updateLocation.setOpenTime(location.getOpenTime());
-			updateLocation.setCloseTime(location.getCloseTime());
+			updateLocation.setOpenTime(location.getOpenTime().toString().substring(0, 5));
+			updateLocation.setCloseTime(location.getCloseTime().toString().substring(0, 5));
 			updateLocation.setAddress(location.getAddress());
 			updateLocation.setDateCreated(location.getDateCreated());
 		}
