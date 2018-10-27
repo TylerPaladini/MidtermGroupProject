@@ -26,9 +26,5 @@ public class BabyChangerController {
 	@Autowired
 	private UsersDAO usersDAO;
 	
-	@RequestMapping(path = "home.do", method = RequestMethod.GET)
-	public String index(Model model) {
-		model.addAttribute("atHome", true);
-		return "home";
-	}
+
 }

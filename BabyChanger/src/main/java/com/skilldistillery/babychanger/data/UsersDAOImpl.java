@@ -105,9 +105,8 @@ public class UsersDAOImpl implements UsersDAO {
 		for (Users checkUser : allUsers) {
 			if(checkUser.getUserName().equals(userName) && checkUser.getPassword().equals(password)) {
 				user = checkUser;
+				break;
 			}
-			
-			
 		}		
 		return user;
 	}
