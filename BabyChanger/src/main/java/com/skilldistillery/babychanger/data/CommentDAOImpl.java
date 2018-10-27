@@ -30,10 +30,7 @@ public class CommentDAOImpl implements CommentDAO {
 	@PersistenceContext
 	private EntityManager em;
 
-	@Override
-	public List<Comment> findAll() {
-		return em.createQuery(FIND_ALL, Comment.class).getResultList();
-	}
+
 
 	@Override
 	public Comment findCommentById(int id) {
@@ -45,28 +42,16 @@ public class CommentDAOImpl implements CommentDAO {
 		return em.createQuery(FIND_BY_USER_ID, Comment.class).setParameter("id", id).getResultList();
 	}
 
-	@Override
-	public List<Comment> findCommentsByUser(Users user) {
-		int id = user.getId();
-		return findCommentsByUserId(id);
-	}
+	
 
 	@Override
 	public List<Comment> findCommentsByRestroomId(int id) {
 		return em.createQuery(FIND_BY_RESTROOM_ID, Comment.class).setParameter("id", id).getResultList();
 	}
 
-	@Override
-	public List<Comment> findCommentsByRestroom(Restroom restroom) {
-		int id = restroom.getId();
-		return findCommentsByRestroomId(id);
-	}
 
-	@Override
-	public List<Comment> findCommentsByKeywords(String keywords) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
+
 
 	@Override
 	public List<Comment> findCommentsByComment(String comment) {
@@ -78,11 +63,7 @@ public class CommentDAOImpl implements CommentDAO {
 		return em.createQuery(FIND_BY_FLAG, Comment.class).setParameter("flag", flag).getResultList();
 	}
 
-	@Override
-	public List<Comment> findCommentsByRating(Rating rating) {
-		int score = rating.getValue();
-		return em.createQuery(FIND_BY_RATING, Comment.class).setParameter("rating", score).getResultList();
-	}
+
 
 	@Override
 	public List<Comment> findCommentsByRating(int rating) {
@@ -90,7 +71,7 @@ public class CommentDAOImpl implements CommentDAO {
 	}
 
 	@Override
-	public List<Comment> findCommentsByActive(Boolean active) {
+	public List<Comment> findCommentsByActiveByRestroom( int id, Boolean active) {
 		return em.createQuery(FIND_BY_ACTIVE, Comment.class).setParameter("active", active).getResultList();
 	}
 

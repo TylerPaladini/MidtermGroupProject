@@ -11,17 +11,12 @@ import com.skilldistillery.babychanger.entities.Users;
 public interface CommentDAO {
 
 	Comment findCommentById(int id);
-	List<Comment> findAll();
-	List<Comment> findCommentsByUser(Users user);
 	List<Comment> findCommentsByUserId(int id);
-	List<Comment> findCommentsByRestroom(Restroom restroom);
 	List<Comment> findCommentsByRestroomId(int id);
-	List<Comment> findCommentsByKeywords(String keywords);
 	List<Comment> findCommentsByComment(String comment);
 	List<Comment> findCommentsByFlagComment(Boolean flag);
-	List<Comment> findCommentsByRating(Rating rating);
 	List<Comment> findCommentsByRating(int rating);
-	List<Comment> findCommentsByActive(Boolean active);
+	List<Comment> findCommentsByActiveByRestroom(int id, Boolean active);
 	List<Comment> findCommentsByDateCreated(Date date);
 	Comment addComment(Comment comment);
 	Comment editComment(int id, Comment comment);

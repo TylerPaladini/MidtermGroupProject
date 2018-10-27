@@ -31,7 +31,9 @@
 			${open.openTime }<br />
 			${open.closeTime }<br />
 		</c:forEach>
-	</c:if>
+	</c:if> 
+	
+	
 	
 
 </body>

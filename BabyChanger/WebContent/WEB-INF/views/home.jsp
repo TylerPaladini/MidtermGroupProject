@@ -64,6 +64,15 @@ First Name:
 
 
 
+
+
+
+
+
+
+
+
+
 <form action="confirmDeleteAdmin.do" method="POST">
   <input type="number" name="userId"/><br>
   <input type="Submit" value="Delete"/>
@@ -80,7 +89,8 @@ First Name:
 <form action="searchOpenLocations.do">
   <input type="Submit" value="Open Locations"/>
 </form>
-	
+
+
 	
 	<script
         src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
