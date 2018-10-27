@@ -1,11 +1,13 @@
 package com.skilldistillery.babychanger.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -239,5 +241,111 @@ public class AdminController {
 		
 		return mv;
 	}
+	
+	// Finds a comment with the comment ID
+	@RequestMapping(path = "findComment.do", method = RequestMethod.GET)
+	public ModelAndView findCommitById(int id) {
+		ModelAndView mv = new ModelAndView();
+		
+		Comment comment = commentDAO.findCommentById(id);
+		mv.addObject("comment", comment);
+		mv.setViewName("results");
+		
+		return mv;
+		
+	}
+	// Finds a comment using the User ID
+	@RequestMapping(path = "findCommentsByUserIdComment.do", method = RequestMethod.GET)
+	public ModelAndView findCommentByUserId(int id) {
+		ModelAndView mv = new ModelAndView();
+		
+		List<Comment> comments = commentDAO.findCommentsByUserId(id);
+		
+		mv.addObject("comments", comments);
+		mv.setViewName("results");
+		
+		return mv;
+	}
+	
+	//Finds a comment by Restroom iD
+	@RequestMapping(path = "findCommentsByRestroomIdComment.do", method = RequestMethod.GET)
+	public ModelAndView findCommentsByRestroomId(int id) {
+		ModelAndView mv = new ModelAndView();
+		
+		List<Comment> comments = commentDAO.findCommentsByRestroomId(id);
+		
+		mv.addObject("comments", comments);
+		mv.setViewName("results");
+		
+		return mv;
+	}
+	
+	//Finds comment by a comment (string)
+	@RequestMapping(path = "findCommentsByComments.do", method = RequestMethod.GET)
+	public ModelAndView findCommentsByComment(String comment) {
+		ModelAndView mv = new ModelAndView();
+		
+		List<Comment> comments = commentDAO.findCommentsByComment(comment);
+		
+		mv.addObject("comments", comments);
+		mv.setViewName("results");
+		
+		return mv;
+	}
+	
+	//Finds comments by Flagged comments
+	@RequestMapping( path = "findCommnetsByFlaggedComment.do", method = RequestMethod.GET)
+	public ModelAndView findCommentsByFlaggedComment(Boolean flag) {
+		ModelAndView mv = new ModelAndView();
+		
+		List<Comment> comments = commentDAO.findCommentsByFlagComment(flag);
+		
+		mv.addObject("comments", comments);
+		mv.setViewName("results");
+		
+		return mv;
+	}
+	
+	// Finds comments by their rating
+	@RequestMapping(path = "findCommentsByRatingComment.do", method = RequestMethod.GET)
+	public ModelAndView findCommentsByRating(int rating) {
+		ModelAndView mv = new ModelAndView();
+		
+		List<Comment> comments = commentDAO.findCommentsByRating(rating);
+		
+		mv.addObject("comments", comments);
+		mv.setViewName("results");
+		
+		return mv;
+	}
+	
+	// Finds active comments through restroom id
+	@RequestMapping(path = "findActiveCommentsByRestroomIdComment.do", method = RequestMethod.GET)
+	public ModelAndView findActiveCommentsByRestroomId(int id, Boolean active) {
+		ModelAndView mv = new ModelAndView();
+		
+		List<Comment> comments = commentDAO.findCommentsByActiveByRestroom(id, active);
+		
+		mv.addObject("comments", comments);
+		mv.setViewName("results");
+		
+		return mv;
+	}
+	
+	// Find comments by date they were created
+	@RequestMapping(path = "findCommentsByCreatedDateComment.do", method = RequestMethod.GET)
+	public ModelAndView findCommentsByCreatedDate(Date date) {
+		ModelAndView mv = new ModelAndView();
+		
+		List<Comment> comments = commentDAO.findCommentsByDateCreated(date);
+		
+		mv.addObject("comments", comments);
+		mv.setViewName("results");
+		return mv;
+		
+	}
+		
+		
+		
 
 }

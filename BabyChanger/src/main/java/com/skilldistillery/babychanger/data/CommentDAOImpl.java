@@ -30,10 +30,7 @@ public class CommentDAOImpl implements CommentDAO {
 	@PersistenceContext
 	private EntityManager em;
 
-	@Override
-	public List<Comment> findAll() {
-		return em.createQuery(FIND_ALL, Comment.class).getResultList();
-	}
+
 
 	@Override
 	public Comment findCommentById(int id) {

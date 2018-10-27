@@ -11,7 +11,6 @@ import com.skilldistillery.babychanger.entities.Users;
 public interface CommentDAO {
 
 	Comment findCommentById(int id);
-	List<Comment> findAll();
 	List<Comment> findCommentsByUserId(int id);
 	List<Comment> findCommentsByRestroomId(int id);
 	List<Comment> findCommentsByComment(String comment);
