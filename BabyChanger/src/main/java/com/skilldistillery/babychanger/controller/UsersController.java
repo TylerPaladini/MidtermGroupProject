@@ -1,5 +1,7 @@
 package com.skilldistillery.babychanger.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -104,41 +106,41 @@ public class UsersController {
 	}
 	
 	@RequestMapping(path="userAddsAddress.do", method = RequestMethod.POST)
-	public ModelAndView userAddsAddress(Address address) {
-		Address newAddress = addressDAO.createAddress(address);
-		boolean addLocationNext = newAddress != null;
+	public ModelAndView userAddsAddress(Address address, HttpSession session) {
 		
+		session.setAttribute("newAddress", address);
 		ModelAndView mv = new ModelAndView();
-		
-		mv.addObject("addLocationNext", addLocationNext);
-		mv.addObject("newAddress", newAddress);
+		mv.addObject("addLocationNext", true);
 		mv.setViewName("add");
 		return mv;
 	}
 	@RequestMapping(path="userAddsLocation.do", method = RequestMethod.POST)
-	public ModelAndView userAddsLocation( Location location) {
-		Address previousAddressAdded = addressDAO.getAddressById(1);
-		location.setAddress(previousAddressAdded);
-		
-		Location newLocation = locationDAO.createLocation(location);
-		boolean addRestroomNext = newLocation != null;
-		
+	public ModelAndView userAddsLocation(Location location, HttpSession session) {
+		session.setAttribute("newLocation", location);
 		ModelAndView mv = new ModelAndView();
-		
-		mv.addObject("addRestroomNext", addRestroomNext);
-		mv.addObject("newLocation", newLocation);
+		mv.addObject("addRestroomNext", true);
 		mv.setViewName("add");
 		return mv;
 	}
 	@RequestMapping(path="userAddsRestroom.do", method = RequestMethod.POST)
-	public ModelAndView userAddsRestroom(int locationId, Restroom restroom) {
-		Location newLocation = locationDAO.getLocationById(locationId);
-		newLocation.addRestroom(restroom);
-		locationDAO.updateLocation(locationId, newLocation);
-	
-		Restroom newRestroom = restroomDAO.createRestroom(restroom);
+	public ModelAndView userAddsRestroom(HttpSession session, Restroom restroom) {
 		
-		boolean addSuccess = newRestroom != null;
+		Address newAddress = (Address) session.getAttribute("newAddress");
+		Location newLocation = (Location) session.getAttribute("newLocation");
+		
+		Address addedAddress = addressDAO.createAddress(newAddress);
+		
+		newLocation.setAddress(addedAddress);
+		Location addedLocation = locationDAO.createLocation(newLocation);
+		
+		
+		
+		addedLocation.addRestroom(restroom);
+		restroom.setUserId(1);
+		
+		Restroom addedRestroom = restroomDAO.createRestroom(restroom);
+		
+		boolean addSuccess = addedRestroom != null && addedLocation != null && addedAddress != null  ;
 		
 		
 		ModelAndView mv = new ModelAndView();

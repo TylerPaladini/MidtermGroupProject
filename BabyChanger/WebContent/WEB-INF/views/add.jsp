@@ -47,7 +47,7 @@
 
 	<c:if test="${ addLocationNext}">
 		<form action="userAddsLocation.do" method="POST">
-			<input type="hidden" name="addressId" value="${newAddress.id }">
+			<input type="hidden" name="newAddress" value="${newAddress }">
 			<h5>Location</h5>
 			<label>Name Of Location</label> 
 			<input type="text" name="name" /> 
@@ -56,12 +56,12 @@
 			<input type="text" name="accessLimits" /> 
 			<br> 
 			<label>*Purchased Required?</label> 
-			<!-- Yes<input type="radio" name="purchaseRequired" value="true" />
-			No<input type="radio" name="purchaseRequired" value="false" checked /> -->
+			Yes<input type="radio" name="purchaseRequired" value="true" />
+			No<input type="radio" name="purchaseRequired" value="false" checked /> 
 			<br>
 			<label>Phone Number(format like 555-555-5555)</label> 
 			<input type="tel" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" /> 
-		<!-- 	<br> <label>Open Time</label> 
+			<!-- <br> <label>Open Time</label> 
 			<input type="time" name="openTime" /> 
 			<br> 
 			<label>Close Time</label>
@@ -73,19 +73,30 @@
 	</c:if>
 	<c:if test="${ addRestroomNext}">
 		<form action="userAddsRestroom.do" method="POST">
-			<input type="hidden" name="locationId" value="${newLocation.id }">
+			<input type="hidden" name="newLocation" value="${newLocation }">
+			<input type="hidden" name="newAddress" value="${newAddress }">
 			<h5>Restroom Information</h5>
 
-			<label>*Changing Table Available?</label> Yes <input type="radio"
-				name="changingTable" value="true" checked /> No <input type="radio"
-				name="changingTable" value="false" /> <br> <label>*Public?</label>
-			Yes <input type="radio" name="pAccess" value="true" checked /> No <input
-				type="radio" name="pAccess" value="false" /> <br> <label>*Gender?</label>
-			Male <input type="radio" name="gender" value="M" checked /> Female <input
-				type="radio" name="gender" value="F" /> Unisex/Family <input
-				type="radio" name="gender" value="U" /> <br> <label>Description
-				Of Restroom</label> <input type="text" name="description" /> <br> <label>Directions
-				To Restroom</label> <input type="text" name="directions" /> <br> <br>
+			<label>*Changing Table Available?</label> 
+			Yes <input type="radio" name="changingTable" value="true" checked /> 
+			No <input type="radio"name="changingTable" value="false" /> 
+			<br> 
+			<label>*Public?</label>
+			Yes <input type="radio" name="pAccess" value="true" checked /> 
+			No <input type="radio" name="pAccess" value="false" /> 
+			<br> 
+			<label>*Gender?</label>
+			Male <input type="radio" name="gender" value="M" checked /> 
+			Female <input type="radio" name="gender" value="F" /> 
+			Unisex/Family <input type="radio" name="gender" value="U" /> 
+			<br> 
+			<label>Description Of Restroom</label> 
+			<input type="text" name="description" /> 
+			<br> 
+			<label>Directions To Restroom</label> 
+			<input type="text" name="directions" /> 
+			<br> 
+			<br>
 			<input type="submit" value="Submit Entry" />
 
 

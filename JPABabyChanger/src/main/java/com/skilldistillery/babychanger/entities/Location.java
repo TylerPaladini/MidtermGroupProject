@@ -184,7 +184,7 @@ public class Location {
 	public String toString() {
 		return "Location [id=" + id + ", name=" + name + ", address=" + address + ", accessLimits=" + accessLimits
 				+ ", purchaseRequired=" + purchaseRequired + ", phone=" + phone + ", openTime=" + openTime
-				+ ", closeTime=" + closeTime + ", restrooms=" + restrooms.size() + ", dateCreated=" + dateCreated + "]";
+				+ ", closeTime=" + closeTime + ", restrooms=" + restrooms == null ? "none" : restrooms.size() + ", dateCreated=" + dateCreated + "]";
 	}
 	
 	public Location() {
