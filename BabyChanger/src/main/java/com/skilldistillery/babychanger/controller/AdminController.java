@@ -182,7 +182,7 @@ public class AdminController {
 		
 		return mv;
 	}
-	// Marks comment with flag (true/false) ************ check if correct
+	// Marks comment with flag (true/false) 
 	@RequestMapping(path = "updateFlagComment.do", method = RequestMethod.POST)
 	public ModelAndView updateFlag(int id, boolean isFlag) {
 		ModelAndView mv = new ModelAndView();
@@ -220,7 +220,7 @@ public class AdminController {
 		return mv;
 		
 	}
-	// Edits a previous comment *****************check if this is correct
+	// Edits a previous comment 
 	@RequestMapping(path = "editComment.do", method = RequestMethod.POST)
 	public ModelAndView editComment(int id, Comment comment, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
