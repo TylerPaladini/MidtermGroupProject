@@ -25,8 +25,8 @@ public class BabyChangerController {
 	@Autowired
 	private UsersDAO usersDAO;
 	
-	@RequestMapping(path = "home.do", method = RequestMethod.GET)
-	public String index() {
-		return "home";
-	}
+//	@RequestMapping(path = "home.do", method = RequestMethod.GET)
+//	public String index() {
+//		return "home";
+//	}
 }
