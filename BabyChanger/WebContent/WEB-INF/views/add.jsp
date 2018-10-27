@@ -61,11 +61,11 @@
 			<br>
 			<label>Phone Number(format like 555-555-5555)</label> 
 			<input type="tel" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" /> 
-			<br> <label>Open Time</label> 
-			<!-- <input type="time" name="openTime" /> 
+			<br> <label>Open Time(24 hour format e.g. 15:30)</label> 
+			<input type="text" name="openTime" pattern="(^([01]\d|2[0-3]):([0-5]\d)$"/> 
 			<br> 
-			<label>Close Time</label>
-			<input type="time" name="closeTime" /> --> 
+			<label>Close Time(24 hour format e.g. 23:30)</label>
+			<input type="text" name="closeTime" pattern="^([01]\d|2[0-3]):([0-5]\d)$"> 
 			<br> 
 			<br> 
 			<input type="submit" value="Next" />
@@ -90,11 +90,23 @@
 			Female <input type="radio" name="gender" value="F" /> 
 			Unisex/Family <input type="radio" name="gender" value="U" /> 
 			<br> 
-			<label>Description Of Restroom</label> 
-			<input type="text" name="description" /> 
-			<br> 
-			<label>Directions To Restroom</label> 
-			<input type="text" name="directions" /> 
+			
+			<div class="container">
+				<div class="row">
+					<div class="col-5">
+				        <label for="comment">Description:</label>
+				        <textarea class="form-control" rows="4" name="description"></textarea>
+					</div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col-5">
+					    <label for="comment">Directions:</label>
+					    <textarea class="form-control" rows="4" name="directions"></textarea>
+					</div>
+				</div>
+			
+			</div>
 			<br> 
 			<br>
 			<input type="submit" value="Submit Entry" />

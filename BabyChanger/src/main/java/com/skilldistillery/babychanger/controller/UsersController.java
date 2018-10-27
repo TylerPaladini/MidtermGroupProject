@@ -116,7 +116,9 @@ public class UsersController {
 	}
 	@RequestMapping(path="userAddsLocation.do", method = RequestMethod.POST)
 	public ModelAndView userAddsLocation(Location location, HttpSession session) {
+		System.out.println("1");
 		session.setAttribute("newLocation", location);
+		System.out.println(location);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("addRestroomNext", true);
 		mv.setViewName("add");
