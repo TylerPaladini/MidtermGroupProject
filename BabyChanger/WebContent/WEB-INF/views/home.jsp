@@ -62,8 +62,9 @@ First Name:
 
 
 
-
-
+<form action="loginPage.do" >
+<input type="Submit" value="Login"/>
+</form>
 
 
 

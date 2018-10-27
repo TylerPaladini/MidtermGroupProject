@@ -16,6 +16,8 @@ public interface UsersDAO {
 	
 	public List<Users> listAllUsers ();
 	
+	public Users getUserByUsernameAndPassword(String userName, String password);
+	
 	
 	
 
