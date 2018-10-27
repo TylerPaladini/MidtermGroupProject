@@ -61,11 +61,11 @@
 			<br>
 			<label>Phone Number(format like 555-555-5555)</label> 
 			<input type="tel" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" /> 
-			<br> <label>Open Time(24 hour format e.g. 15:30)</label> 
-			<input type="text" name="openTime" pattern="(^([01]\d|2[0-3]):([0-5]\d)$"/> 
+			<br> <label>*Open Time(24 hour format e.g. 15:30)</label> 
+			<input type="text" name="openTime" required pattern="(^([01]\d|2[0-3]):([0-5]\d)$"/> 
 			<br> 
-			<label>Close Time(24 hour format e.g. 23:30)</label>
-			<input type="text" name="closeTime" pattern="^([01]\d|2[0-3]):([0-5]\d)$"> 
+			<label>*Close Time(24 hour format e.g. 23:30)</label>
+			<input type="text" name="closeTime" required pattern="^([01]\d|2[0-3]):([0-5]\d)$"> 
 			<br> 
 			<br> 
 			<input type="submit" value="Next" />
