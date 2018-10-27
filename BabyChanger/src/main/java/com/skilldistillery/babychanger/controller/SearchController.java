@@ -30,7 +30,7 @@ public class SearchController {
 	}
 
 	@RequestMapping(path = "getBathrooms.do", method = RequestMethod.GET)
-	  public ModelAndView get(@RequestParam("id") int id) {
+	  public ModelAndView getLocationById(@RequestParam("id") int id) {
 	    ModelAndView mv = new ModelAndView();
 
 	    Location location = locationDAO.getLocationById(id);    
@@ -66,7 +66,8 @@ public class SearchController {
 	public ModelAndView getLocationsByKeyword(@RequestParam("keyword") String keyword) {
 		ModelAndView mv = new ModelAndView();
 		Set<Location> location = locationDAO.getLocationsByKeyword(keyword);    
-		mv.addObject("allCities", location);
+		
+		mv.addObject("allKeywords", location);
 		mv.setViewName("results");
 		return mv;
 	}
@@ -154,6 +155,15 @@ public class SearchController {
 		List<Location> openLocations = locationDAO.getLocationsByOpen();
 		mv.addObject("open", openLocations);
 		mv.setViewName("results");
+		return mv;
+	}
+	
+	@RequestMapping(path="detailedResults.do", method = RequestMethod.GET)
+	public ModelAndView detailsResultsPage(@RequestParam("locationId")int id) {
+		ModelAndView mv = new ModelAndView();
+		Location location = locationDAO.getLocationById(id);
+		mv.addObject("location", location);
+		mv.setViewName("detailedResults");
 		return mv;
 	}
 }

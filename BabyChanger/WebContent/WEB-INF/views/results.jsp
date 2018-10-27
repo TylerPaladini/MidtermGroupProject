@@ -24,6 +24,22 @@
 		</c:forEach>
 	</c:if>
 	
+	<c:if test="${not empty allKeywords }">
+		<c:forEach items="${allKeywords }" var="keywordSearch">
+			<a href="detailedResults.do?locationId=${keywordSearch.id }">${keywordSearch.name }</a><br />
+			${keywordSearch.address.street }
+			<c:if test="${not empty keywordSearch.address.street2 }">
+				${keywordSearch.address.street2 }
+			</c:if><br />
+			${keywordSearch.address.city }
+			${keywordSearch.address.state }
+			${keywordSearch.address.zipCode }<br />
+			<c:if test="${not empty keywordSearch.openTime and not empty keywordSearch.closeTime }">
+			${keywordSearch.openTime } - ${keywordSearch.closeTime }
+			</c:if><br /><br />
+		</c:forEach>
+	</c:if>
+	
 	<c:if test="${not empty open }">
 		<c:forEach items="${open }" var="open">
 			${open.id }<br />
