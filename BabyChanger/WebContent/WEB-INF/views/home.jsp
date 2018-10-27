@@ -16,11 +16,7 @@
 </head>
 <body>
 	<%@ include file="navigation.jsp"%>
-	<h1>POOP</h1>
-	<c:if test="${loginSuccess}">
-		<h2>Login Successful</h2>
-
-	</c:if>
+	<h1>Baby Changer</h1>
 
 
 	<form action="getLocationsByKeywordSearch.do" method="GET">

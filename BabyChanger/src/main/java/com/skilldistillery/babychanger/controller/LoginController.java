@@ -29,6 +29,7 @@ public class LoginController {
 	private RestroomDAO restroomDAO;
 	@Autowired
 	private UsersDAO usersDAO;
+
 	
 	// Logs in the user
 		@RequestMapping(path = "login.do", method = RequestMethod.POST)
@@ -40,28 +41,21 @@ public class LoginController {
 			Users loginUser = usersDAO.getUserByUsernameAndPassword(userName, password);
 			
 			if(loginUser != null ) {
-				if(loginUser.isAdmin()) {
-					session.setAttribute("adminLoggedIn", loginUser);
-					mv.addObject("adminLoggedIn", loginUser);
-					
-				}
-				else {
-					session.setAttribute("loggedIn", loginUser);
-					mv.addObject("loggedIn", loginUser);
-				}
-				
-				mv.addObject("loginSuccess", true);
-				mv.addObject("atHome", true);
+				session.setAttribute("loggedIn", loginUser);
 				mv.setViewName("home");
 			}
 			else {
-				mv.addObject("loginFailed", true);
 				mv.setViewName("login");
 			}
 			return mv;
 			
 		}
 		
+		@RequestMapping ( path = "logout.do", method = RequestMethod.GET)
+		public String logout( HttpSession session) {
+			session.removeAttribute("loggedIn");
+			return "home";
+		}
 		@RequestMapping ( path = "loginPage.do", method = RequestMethod.GET)
 		public String loginPage() {
 			return "login";
@@ -70,5 +64,6 @@ public class LoginController {
 		public String registerPage() {
 			return "register";
 		}
+		
 
 }
