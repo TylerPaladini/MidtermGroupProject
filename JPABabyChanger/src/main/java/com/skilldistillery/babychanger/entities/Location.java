@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,6 +17,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Location {
@@ -26,7 +26,7 @@ public class Location {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	
+	@NotEmpty
 	private String name;
 	
 	@OneToOne
@@ -41,9 +41,11 @@ public class Location {
 	
 	private String phone;
 	
+	@NotEmpty
 	@Column(name = "open_time")
 	private Time openTime;
 	
+	@NotEmpty
 	@Column(name = "closed_time")
 	private Time closeTime;
 	
@@ -55,11 +57,9 @@ public class Location {
     @CreationTimestamp
 	private Date dateCreated;
 	
-	
 	/*
 	 * getters / setters
 	 */
-	
 	
 	public int getId() {
 		return id;
@@ -117,10 +117,6 @@ public class Location {
 		this.openTime = Time.valueOf( openTime + ":00");
 		
 	}
-//	public void setOpenTime(Time openTime) {
-//		this.openTime = openTime;
-//		
-//	}
 
 	public Time getCloseTime() {
 		return closeTime;
@@ -130,9 +126,6 @@ public class Location {
 		
 		this.closeTime = Time.valueOf(closeTime + ":00");
 	}
-//	public void setCloseTime(Time closeTime) {
-//		this.closeTime = closeTime;
-//	}
 	
 	public Date getDateCreated() {
 		return dateCreated;
@@ -142,6 +135,14 @@ public class Location {
 		this.dateCreated = dateCreated;
 	}
 
+	public List<Restroom> getRestrooms() {
+		return restrooms;
+	}
+	
+	public void setRestrooms(List<Restroom> restrooms) {
+		this.restrooms = restrooms;
+	}
+	
 	public void addRestroom(Restroom restroom) {
 		if(restrooms == null) restrooms = new ArrayList<>();
 		
@@ -160,14 +161,10 @@ public class Location {
 		}
 	}
 
-	public List<Restroom> getRestrooms() {
-		return restrooms;
-	}
-
-	public void setRestrooms(List<Restroom> restrooms) {
-		this.restrooms = restrooms;
-	}
-
+	/*
+	 * hashCode and equals
+	 */
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -190,7 +187,9 @@ public class Location {
 		return true;
 	}
 	
-	
+	/*
+	 * toString
+	 */
 	
 	@Override
 	public String toString() {
@@ -219,6 +218,10 @@ public class Location {
 		return builder.toString();
 	}
 
+	/*
+	 * constructors
+	 */
+	
 	public Location() {
 		super();
 	}

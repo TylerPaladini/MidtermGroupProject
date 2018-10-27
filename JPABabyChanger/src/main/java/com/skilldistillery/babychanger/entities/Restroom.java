@@ -19,6 +19,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "restroom")
@@ -38,6 +39,7 @@ public class Restroom {
 	@Column(name = "flagged_date")
 	private Date flaggedDate;
 
+	@NotEmpty
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
 
@@ -50,15 +52,31 @@ public class Restroom {
 	private int userId;
 
 	@Column(name = "date_created")
-//	@Temporal(TemporalType.TIMESTAMP)
-//	@CreationTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
+	@CreationTimestamp
 	private Date dateCreated;
 
 	private String description;
 
+	@NotEmpty
 	@Column(name = "changing_table")
 	private Boolean changingTable;
 
+	@ManyToOne
+	@JoinColumn(name = "location_id")
+	private Location location;
+	
+	@OneToMany(mappedBy = "restroom")
+	private List<Comment> comments;
+	
+	/*
+	 * getters / setters
+	 */
+	
+	public int getId() {
+		return id;
+	}
+	
 	public Boolean getChangingTable() {
 		return changingTable;
 	}
@@ -67,15 +85,6 @@ public class Restroom {
 		this.changingTable = changingTable;
 	}
 
-	@ManyToOne
-	@JoinColumn(name = "location_id")
-	private Location location;
-
-	@OneToMany(mappedBy = "restroom")
-	private List<Comment> comments;
-
-	
-	
 	public String getPicture() {
 		return picture;
 	}
@@ -172,10 +181,78 @@ public class Restroom {
 		this.comments = comments;
 	}
 
-	public int getId() {
-		return id;
+	public void addComment(Comment comment) {
+		if(comments == null) comments = new ArrayList<>();
+		
+		if(!comments.contains(comment)) {
+			comments.add(comment);
+			if(comment.getRestroom() != null) {
+				comment.getRestroom().getComments().remove(comment);
+			}
+			comment.setRestroom(this);
+		}
+	}
+	public void removeComment(Comment comment) {
+		comment.setRestroom(null);
+		if(comments != null) {
+			comments.remove(comment);
+		}
+	}
+	
+	/*
+	 * hashCode and equals
+	 */
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Restroom other = (Restroom) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+
+	/*
+	 * toString
+	 */
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Restroom [id=").append(id)
+				.append(", picture=").append(picture)
+				.append(", flagged=").append(flagged)
+				.append(", flaggedReason=").append(flaggedReason)
+				.append(", flaggedDate=").append(flaggedDate)
+				.append(", gender=").append(gender)
+				.append(", directions=").append(directions)
+				.append(", pAccess=").append(pAccess)
+				.append(", userId=").append(userId)
+				.append(", dateCreated=").append(dateCreated)
+				.append(", description=").append(description)
+				.append(", changingTable=").append(changingTable)
+				.append(", location=").append(location)
+				.append(", comments=").append(comments.size())
+				.append("]");
+		return builder.toString();
+	}
+
+	/*
+	 * constructors
+	 */
 	
 	public Restroom () {
 		
@@ -200,129 +277,5 @@ public class Restroom {
 		this.location = location;
 		this.comments = comments;
 	}
-
 	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((changingTable == null) ? 0 : changingTable.hashCode());
-		result = prime * result + ((comments == null) ? 0 : comments.hashCode());
-		result = prime * result + ((dateCreated == null) ? 0 : dateCreated.hashCode());
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + ((directions == null) ? 0 : directions.hashCode());
-		result = prime * result + ((flagged == null) ? 0 : flagged.hashCode());
-		result = prime * result + ((flaggedDate == null) ? 0 : flaggedDate.hashCode());
-		result = prime * result + ((flaggedReason == null) ? 0 : flaggedReason.hashCode());
-		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
-		result = prime * result + id;
-		result = prime * result + ((location == null) ? 0 : location.hashCode());
-		result = prime * result + ((pAccess == null) ? 0 : pAccess.hashCode());
-		result = prime * result + ((picture == null) ? 0 : picture.hashCode());
-		result = prime * result + userId;
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Restroom other = (Restroom) obj;
-		if (changingTable == null) {
-			if (other.changingTable != null)
-				return false;
-		} else if (!changingTable.equals(other.changingTable))
-			return false;
-		if (comments == null) {
-			if (other.comments != null)
-				return false;
-		} else if (!comments.equals(other.comments))
-			return false;
-		if (dateCreated == null) {
-			if (other.dateCreated != null)
-				return false;
-		} else if (!dateCreated.equals(other.dateCreated))
-			return false;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
-		if (directions == null) {
-			if (other.directions != null)
-				return false;
-		} else if (!directions.equals(other.directions))
-			return false;
-		if (flagged == null) {
-			if (other.flagged != null)
-				return false;
-		} else if (!flagged.equals(other.flagged))
-			return false;
-		if (flaggedDate == null) {
-			if (other.flaggedDate != null)
-				return false;
-		} else if (!flaggedDate.equals(other.flaggedDate))
-			return false;
-		if (flaggedReason == null) {
-			if (other.flaggedReason != null)
-				return false;
-		} else if (!flaggedReason.equals(other.flaggedReason))
-			return false;
-		if (gender != other.gender)
-			return false;
-		if (id != other.id)
-			return false;
-		if (location == null) {
-			if (other.location != null)
-				return false;
-		} else if (!location.equals(other.location))
-			return false;
-		if (pAccess == null) {
-			if (other.pAccess != null)
-				return false;
-		} else if (!pAccess.equals(other.pAccess))
-			return false;
-		if (picture == null) {
-			if (other.picture != null)
-				return false;
-		} else if (!picture.equals(other.picture))
-			return false;
-		if (userId != other.userId)
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Restroom [id=" + id + ", picture=" + picture + ", flagged=" + flagged + ", flaggedReason="
-				+ flaggedReason + ", flaggedDate=" + flaggedDate + ", gender=" + gender + ", directions=" + directions
-				+ ", pAccess=" + pAccess + ", userId=" + userId + ", dateCreated=" + dateCreated + ", description="
-				+ description + ", changingTable=" + changingTable + ", location=" + location + ", comments=" + comments
-				+ "]";
-	}
-
-	public void addComment(Comment comment) {
-		if(comments == null) comments = new ArrayList<>();
-		
-		if(!comments.contains(comment)) {
-			comments.add(comment);
-			if(comment.getRestroom() != null) {
-				comment.getRestroom().getComments().remove(comment);
-			}
-			comment.setRestroom(this);
-		}
-	}
-	public void removeComment(Comment comment) {
-		comment.setRestroom(null);
-		if(comments != null) {
-			comments.remove(comment);
-		}
-	}
-	
-	
-
 }
