@@ -145,7 +145,6 @@ public class SearchController {
 	public ModelAndView addAddressLocationRestroom() {
 		ModelAndView mv = new ModelAndView();
 		List<Location> openLocations = locationDAO.getLocationsByOpen();
-		System.out.println("Back in controller" + openLocations);
 		mv.addObject("open", openLocations);
 		mv.setViewName("results");
 		return mv;
