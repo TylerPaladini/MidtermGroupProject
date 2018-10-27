@@ -70,7 +70,7 @@ public class CommentDAOImpl implements CommentDAO {
 
 	@Override
 	public List<Comment> findCommentsByComment(String comment) {
-		return em.createQuery(FIND_BY_COMMENT, Comment.class).setParameter("comment", comment).getResultList();
+		return em.createQuery(FIND_BY_COMMENT, Comment.class).setParameter("comment","%" + comment + "%").getResultList();
 	}
 
 	@Override
