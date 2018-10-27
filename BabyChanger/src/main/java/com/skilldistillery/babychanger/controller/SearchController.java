@@ -20,6 +20,7 @@ import com.skilldistillery.babychanger.entities.Rating;
 
 @Controller
 public class SearchController {
+	
 	@Autowired
 	private LocationDAO locationDAO; 
 	
