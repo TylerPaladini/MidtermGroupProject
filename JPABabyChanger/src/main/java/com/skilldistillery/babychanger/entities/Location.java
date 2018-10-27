@@ -180,13 +180,35 @@ public class Location {
 		return true;
 	}
 	
+	
+	
 	@Override
 	public String toString() {
-		return "Location [id=" + id + ", name=" + name + ", address=" + address + ", accessLimits=" + accessLimits
-				+ ", purchaseRequired=" + purchaseRequired + ", phone=" + phone + ", openTime=" + openTime
-				+ ", closeTime=" + closeTime + ", restrooms=" + restrooms.size() + ", dateCreated=" + dateCreated + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Location [id=");
+		builder.append(id);
+		builder.append(", name=");
+		builder.append(name);
+		builder.append(", address=");
+		builder.append(address);
+		builder.append(", accessLimits=");
+		builder.append(accessLimits);
+		builder.append(", purchaseRequired=");
+		builder.append(purchaseRequired);
+		builder.append(", phone=");
+		builder.append(phone);
+		builder.append(", openTime=");
+		builder.append(openTime == null ? "NA" : openTime);
+		builder.append(", closeTime=");
+		builder.append(closeTime == null ? "NA" : closeTime);
+		builder.append(", restrooms=");
+		builder.append(restrooms == null ? "NA" : restrooms.size());
+		builder.append(", dateCreated=");
+		builder.append(dateCreated == null ? "NA" : dateCreated);
+		builder.append("]");
+		return builder.toString();
 	}
-	
+
 	public Location() {
 		super();
 	}
