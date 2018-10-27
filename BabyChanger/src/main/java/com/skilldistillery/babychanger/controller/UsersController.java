@@ -150,57 +150,5 @@ public class UsersController {
 		mv.setViewName("confirmation");
 		return mv;
 	}
-	
-	// Logs in the user
-	@RequestMapping(path = "login.do", method = RequestMethod.POST)
-	public ModelAndView userLogin(Users user, HttpSession session) {
-		ModelAndView mv = new ModelAndView();
-		String userName = user.getUserName();
-		String password = user.getPassword();
-		
-		Users loginUser = usersDAO.getUserByUsernameAndPassword(userName, password);
-		
-		if(loginUser != null ) {
-			if(loginUser.isAdmin()) {
-				session.setAttribute("adminLoggedIn", loginUser);
-				mv.addObject("adminLoggedIn", loginUser);
-				
-			}
-			else {
-				session.setAttribute("loggedIn", loginUser);
-				mv.addObject("loggedIn", loginUser);
-			}
-			
-			mv.addObject("loginSuccess", true);
-			mv.addObject("atHome", true);
-			mv.setViewName("home");
-		}
-		else {
-			mv.addObject("loginFailed", true);
-			mv.setViewName("login");
-		}
-		return mv;
-		
-	}
-	
-	@RequestMapping ( path = "loginPage.do", method = RequestMethod.GET)
-	public String loginPage() {
-		return "login";
-	}
-	@RequestMapping ( path = "registerPage.do", method = RequestMethod.GET)
-	public String registerPage() {
-		return "register";
-	}
-	
-	
-	
-	
-		
-	
-		
-		
-		
-		
-	
 
 }
