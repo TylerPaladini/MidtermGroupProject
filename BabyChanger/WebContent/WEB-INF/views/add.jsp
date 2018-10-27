@@ -18,7 +18,15 @@
 	<h2>Add A New Entry</h2>
 	<h6>* Required</h6>
 	<c:if test="${newEntry }">
-		<form action="userAddsAddress.do" method="POST">
+	
+		<c:if test="${loggedIn.admin }">
+			<form action="adminAddsAddress.do" method="POST">
+			
+		</c:if>
+		<c:if test="${!loggedIn.admin }">
+			<form action="userAddsAddress.do" method="POST">
+			
+		</c:if>
 
 			<h5>Address</h5>
 			<label>*Street</label> 
@@ -46,7 +54,12 @@
 	</c:if>
 
 	<c:if test="${ addLocationNext}">
-		<form action="userAddsLocation.do" method="POST">
+		<c:if test="${loggedIn.admin }">
+			<form action="adminAddsLocation.do" method="POST">
+		</c:if>
+		<c:if test="${!loggedIn.admin }">
+			<form action="userAddsLocation.do" method="POST">
+		</c:if>
 			<input type="hidden" name="newAddress" value="${newAddress }">
 			<h5>Location</h5>
 			<label>Name Of Location</label> 
@@ -72,7 +85,12 @@
 		</form>
 	</c:if>
 	<c:if test="${ addRestroomNext}">
-		<form action="userAddsRestroom.do" method="POST">
+		<c:if test="${loggedIn.admin }">
+			<form action="adminAddsRestroom.do" method="POST">
+		</c:if>
+		<c:if test="${!loggedIn.admin }">
+			<form action="userAddsRestroom.do" method="POST">
+		</c:if>
 			<input type="hidden" name="newLocation" value="${newLocation }">
 			<input type="hidden" name="newAddress" value="${newAddress }">
 			<h5>Restroom Information</h5>
@@ -110,7 +128,7 @@
 			<br> 
 			<br>
 			<input type="submit" value="Submit Entry" />
-
+			<input type="hidden" name="userId" value="${loggedIn.id }">
 
 		</form>
 	</c:if>

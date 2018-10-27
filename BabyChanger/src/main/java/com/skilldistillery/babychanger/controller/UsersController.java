@@ -108,7 +108,7 @@ public class UsersController {
 		
 	}
 		
-	@RequestMapping(path="addAddressLocationRestroom.do")
+	@RequestMapping(path="userAddsAddressLocationRestroom.do")
 	public ModelAndView addAddressLocationRestroom() {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("newEntry", true);
@@ -134,7 +134,7 @@ public class UsersController {
 		return mv;
 	}
 	@RequestMapping(path="userAddsRestroom.do", method = RequestMethod.POST)
-	public ModelAndView userAddsRestroom(HttpSession session, Restroom restroom) {
+	public ModelAndView userAddsRestroom(HttpSession session, int userId, Restroom restroom) {
 		
 		Address newAddress = (Address) session.getAttribute("newAddress");
 		Location newLocation = (Location) session.getAttribute("newLocation");
@@ -147,7 +147,7 @@ public class UsersController {
 		
 		
 		addedLocation.addRestroom(restroom);
-		restroom.setUserId(1);
+		restroom.setUserId(userId);
 		
 		Restroom addedRestroom = restroomDAO.createRestroom(restroom);
 		
