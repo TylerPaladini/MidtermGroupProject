@@ -19,9 +19,17 @@
 	
 	<c:if test="${not empty open }">
 		<c:forEach items="${open }" var="open">
-			${open.id }
-			${open.name }
-			<br>
+			${open.id }<br />
+			${open.name }<br />
+			${open.address.street }<br />
+			${open.address.city }<br />
+			${open.address.state }<br />
+			${open.address.zipCode }<br />
+			${open.accessLimits }<br />
+			${open.purchaseRequired }<br />
+			${open.phone }<br />
+			${open.openTime }<br />
+			${open.closeTime }<br />
 		</c:forEach>
 	</c:if>
 	
