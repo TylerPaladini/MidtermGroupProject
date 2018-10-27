@@ -116,8 +116,10 @@ public class UsersController {
 		return mv;
 	}
 	@RequestMapping(path="userAddsLocation.do", method = RequestMethod.POST)
-	public ModelAndView userAddsLocation(int addressId, Location location) {
-		location.setAddress(addressDAO.getAddressById(addressId));
+	public ModelAndView userAddsLocation( Location location) {
+		Address previousAddressAdded = addressDAO.getAddressById(1);
+		location.setAddress(previousAddressAdded);
+		
 		Location newLocation = locationDAO.createLocation(location);
 		boolean addRestroomNext = newLocation != null;
 		

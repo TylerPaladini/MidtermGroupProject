@@ -21,13 +21,26 @@
 		<form action="userAddsAddress.do" method="POST">
 
 			<h5>Address</h5>
-			<label>*Street</label> <input type="text" name="street" required
-				pattern=".{3,}" /> <br> <label>Street2</label> <input
-				type="text" name="street2" pattern=".{3,}" /> <br> <label>*City</label>
-			<input type="text" name="city" required pattern=".{3,}" /> <br>
-			<label>*State</label> <input type="text" name="state" required
-				pattern=".{2,}" /> <br> <label>*Zip Code</label> <input
-				type="number" name="state" required pattern=".{5,}" /> <br> <br>
+			<label>*Street</label> 
+			<input type="text" name="street" required
+				pattern=".{3,}" /> 
+			<br> 
+			<label>Street2</label> 
+			<input
+				type="text" name="street2" pattern=".{3,}" /> 
+			<br> 
+			<label>*City</label>
+			<input type="text" name="city" required pattern=".{3,}" /> 
+			<br>
+			<label>*State</label> 
+			<input type="text" name="state" required
+				pattern=".{2,}" /> 
+			<br> 
+			<label>*Zip Code</label> 
+			<input
+				type="text" name="zipCode" required pattern=".{5,}" /> 
+			<br> 
+			<br>
 			<input type="submit" value="Next" />
 		</form>
 	</c:if>
@@ -36,17 +49,26 @@
 		<form action="userAddsLocation.do" method="POST">
 			<input type="hidden" name="addressId" value="${newAddress.id }">
 			<h5>Location</h5>
-			<label>Name Of Location</label> <input type="text" name="name" /> <br>
-			<label>Access Limits (e.g. Club membership required)</label> <input
-				type="text" name="accessLimits" /> <br> <label>*Purchased
-				Required?</label> Yes<input type="radio" name="purchasedRequired"
-				value="true" /> No<input type="radio" name="purchasedRequired"
-				value="false" checked /> <br> <label>Phone Number
-				(format as 555-555-5555)</label> <input type="tel" name="phone"
-				pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" /> <br> <label>Open
-				Time</label> <input type="time" name="openTime" /> <br> <label>Close
-				Time</label> <input type="time" name="closeTime" /> <br> <br> <input
-				type="submit" value="Next" />
+			<label>Name Of Location</label> 
+			<input type="text" name="name" /> 
+			<br>
+			<label>Access Limits (e.g. Club membership required)</label>
+			<input type="text" name="accessLimits" /> 
+			<br> 
+			<label>*Purchased Required?</label> 
+			<!-- Yes<input type="radio" name="purchaseRequired" value="true" />
+			No<input type="radio" name="purchaseRequired" value="false" checked /> -->
+			<br>
+			<label>Phone Number(format like 555-555-5555)</label> 
+			<input type="tel" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" /> 
+		<!-- 	<br> <label>Open Time</label> 
+			<input type="time" name="openTime" /> 
+			<br> 
+			<label>Close Time</label>
+			<input type="time" name="closeTime" />  -->
+			<br> 
+			<br> 
+			<input type="submit" value="Next" />
 		</form>
 	</c:if>
 	<c:if test="${ addRestroomNext}">
