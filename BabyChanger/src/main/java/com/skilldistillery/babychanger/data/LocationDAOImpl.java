@@ -165,7 +165,7 @@ public class LocationDAOImpl implements LocationDAO{
 
 	@Override
 	public List<Location> getLocationsByOpen() {
-		String query = "SELECT location FROM Location location WHERE location.openTime < :time AND location.closeTime > :time";
+		String query = "SELECT location FROM Location location WHERE location.openTime < :open AND location.closeTime > :close";
 		List<Location> locationOpen = em.createQuery(query, Location.class)
 										.setParameter("open", LocalTime.now())
 										.setParameter("close", LocalTime.now())
