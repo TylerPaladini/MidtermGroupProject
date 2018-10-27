@@ -2,6 +2,8 @@ package com.skilldistillery.babychanger.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +16,7 @@ import com.skilldistillery.babychanger.data.CommentDAO;
 import com.skilldistillery.babychanger.data.LocationDAO;
 import com.skilldistillery.babychanger.data.RestroomDAO;
 import com.skilldistillery.babychanger.data.UsersDAO;
+import com.skilldistillery.babychanger.entities.Comment;
 import com.skilldistillery.babychanger.entities.Users;
 
 @Controller
@@ -121,8 +124,120 @@ public class AdminController {
 		mv.setViewName("results");
 		return mv;
 	}
-
 	
+	// Disables comments made by a user
+	@RequestMapping( path = "disableComment.do", method = RequestMethod.POST)
+	public ModelAndView disableComment(int id) {
+		ModelAndView mv = new ModelAndView();
+		
+		commentDAO.disableComment(id);
+		mv.setViewName("redirect:disabledComment");
+		
+		return mv;
+	}
+	@RequestMapping(path = "disabledComment.do", method = RequestMethod.GET)
+	public ModelAndView disabledComment() {
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("confirmation");
+		
+		return mv;
+		
+	}
+	// Enables comments by a user
+	@RequestMapping(path = "enableComment.do", method = RequestMethod.POST)
+	public ModelAndView enableComment(int id) {
+		ModelAndView mv = new ModelAndView();
+		
+		commentDAO.enableComment(id);
+		mv.setViewName("redirect:enabledComment");
+		
+		return mv;
+		
+	}
 	
+	@RequestMapping(path = "enabledComment.do", method = RequestMethod.GET)
+	public ModelAndView enabledComment() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("confirmation");
+		
+		return mv;
+		
+	}
+	// Permanently deletes comment by a user from the database
+	@RequestMapping(path = "deleteComment.do", method = RequestMethod.POST)
+	public ModelAndView deleteComment(int id) {
+		ModelAndView mv = new ModelAndView();
+		
+		commentDAO.deleteComment(id);
+		mv.setViewName("redirect:deletedComment");
+		
+		return mv;
+		
+	}
+	@RequestMapping(path = "deletedComment.do", method = RequestMethod.GET)
+	public ModelAndView deletedComment() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("confirmation");
+		
+		return mv;
+	}
+	// Marks comment with flag (true/false) ************ check if correct
+	@RequestMapping(path = "updateFlagComment.do", method = RequestMethod.POST)
+	public ModelAndView updateFlag(int id, boolean isFlag) {
+		ModelAndView mv = new ModelAndView();
+		
+		commentDAO.updateFlag(id, isFlag);
+		mv.setViewName("redirect:updatedFlagComment");
+		
+		return mv;
+	}
+	@RequestMapping(path = "updatedFlagComment.do", method = RequestMethod.GET)
+	public ModelAndView updatedFlag() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("confirmation");
+		
+		return mv;
+	}
+	
+	// Adds comment
+	@RequestMapping(path = "addComment.do", method = RequestMethod.POST)
+	public ModelAndView addComment(Comment comment, RedirectAttributes redir) {
+		ModelAndView mv = new ModelAndView();
+		
+		Comment addcomment = commentDAO.addComment(comment);
+		redir.addFlashAttribute("addComment", addcomment);
+		mv.setViewName("redirect:addedComment");
+		
+		return mv;
+		
+	}
+	@RequestMapping(path = "addedComment.do", method = RequestMethod.GET)
+	public ModelAndView addedComment() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("confirmation");
+		
+		return mv;
+		
+	}
+	// Edits a previous comment *****************check if this is correct
+	@RequestMapping(path = "editComment.do", method = RequestMethod.POST)
+	public ModelAndView editComment(int id, Comment comment, RedirectAttributes redir) {
+		ModelAndView mv = new ModelAndView();
+		
+		Comment editComment = commentDAO.editComment(id, comment);
+		redir.addFlashAttribute("editComment", editComment);
+		mv.setViewName("redirect:editedComment");
+		
+		return mv;
+	}
+	
+	@RequestMapping(path = "editedComment.do", method = RequestMethod.GET)
+	public ModelAndView editedComment() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("confirmtion");
+		
+		return mv;
+	}
 
 }
