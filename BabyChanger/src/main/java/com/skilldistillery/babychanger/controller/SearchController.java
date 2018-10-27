@@ -1,5 +1,6 @@
 package com.skilldistillery.babychanger.controller;
 
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -57,12 +58,7 @@ public class SearchController {
 	@RequestMapping(path = "getLocationsByKeywordSearch.do", method = RequestMethod.GET)
 	public ModelAndView getLocationsByKeyword(@RequestParam("keyword") String keyword) {
 		ModelAndView mv = new ModelAndView();
-		System.out.println("***************************");
-		System.out.println(keyword);
-//		Set<Location> location = locationDAO.getLocationsByKeyword(keyword);    
-		List<Location> location = locationDAO.getLocationsByCity(keyword);    
-		System.out.println("&&&&&&&&&&&&&&&&&&&&&");
-		System.out.println(location);
+		Set<Location> location = locationDAO.getLocationsByKeyword(keyword);    
 		mv.addObject("allCities", location);
 		mv.setViewName("results");
 		return mv;
@@ -135,14 +131,22 @@ public class SearchController {
 	}
 	
 	@RequestMapping(path = "getLocationByOpen.do", method = RequestMethod.GET)
-	public ModelAndView getLocationByOpen(Date open, Date close) {
+	public ModelAndView getLocationByOpen() {
 		ModelAndView mv = new ModelAndView();
 		
-		List<Location> location = locationDAO.getLocationsByOpen(open, close);    
+//		List<Location> location = locationDAO.getLocationsByOpen(LocalTime.now());    
 		
-		mv.addObject("location", location);
+//		mv.addObject("location", location);
 		mv.setViewName("results");
 		return mv;
 	}
 	
+	@RequestMapping(path="searchOpenLocations.do")
+	public ModelAndView addAddressLocationRestroom() {
+		ModelAndView mv = new ModelAndView();
+		List<Location> openLocation = locationDAO.getLocationsByOpen();
+		mv.addObject("open", openLocation);
+		mv.setViewName("result");
+		return mv;
+	}
 }

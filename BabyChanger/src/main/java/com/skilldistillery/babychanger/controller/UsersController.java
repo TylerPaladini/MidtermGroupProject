@@ -80,7 +80,12 @@ public class UsersController {
 		
 	}
 		
-		
+	@RequestMapping(path="addAddressLocationRestroom.do")
+	public ModelAndView addAddressLocationRestroom() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("add");
+		return mv;
+	}
 		
 		
 	

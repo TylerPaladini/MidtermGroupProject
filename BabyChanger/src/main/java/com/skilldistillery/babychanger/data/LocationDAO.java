@@ -1,6 +1,6 @@
 package com.skilldistillery.babychanger.data;
 
-import java.util.Date;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Set;
 
@@ -38,5 +38,5 @@ public interface LocationDAO {
 	
 	public List<Location> getLocationsByFlag(Boolean flag);
 	
-	public List<Location> getLocationsByOpen(Date open, Date close);
+	public List<Location> getLocationsByOpen();
 }
