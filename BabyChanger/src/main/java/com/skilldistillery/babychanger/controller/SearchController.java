@@ -21,6 +21,11 @@ import com.skilldistillery.babychanger.entities.Rating;
 public class SearchController {
 	@Autowired
 	private LocationDAO locationDAO; 
+	
+	@RequestMapping(path = "home.do", method = RequestMethod.GET)
+	public String index() {
+		return "home";
+	}
 
 	@RequestMapping(path = "getBathrooms.do", method = RequestMethod.GET)
 	  public ModelAndView get(@RequestParam("id") int id) {
