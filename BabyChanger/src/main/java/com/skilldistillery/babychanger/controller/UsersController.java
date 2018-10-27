@@ -56,15 +56,26 @@ public class UsersController {
 	
 	// Update user profile
 	
+	
+	@RequestMapping( path = "updateProfilePageUser.do", method = RequestMethod.GET)
+	public String updateUserPage() {
+		return "update";
+	}
+	
 	@RequestMapping( path = "updateUser.do", method = RequestMethod.POST)
-	public ModelAndView updateUser(Users updatedUser, int id, RedirectAttributes redir) {
+	public ModelAndView updateUser(Users updatedUser, int id, RedirectAttributes redir, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		
 		
 		Users userUpdated = usersDAO.updateUsers(id, updatedUser);
-		redir.addFlashAttribute("user", userUpdated);
-		mv.setViewName("redirect:updatedUser.do");
-		
+		if(userUpdated != null) {
+			session.setAttribute("loggedIn", userUpdated);
+			redir.addFlashAttribute("user", userUpdated);
+			mv.setViewName("redirect:updatedUser.do");
+		}
+		else {
+			mv.setViewName("confirmation"); 
+		}
 		
 		return mv;
 	}

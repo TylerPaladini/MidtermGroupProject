@@ -7,26 +7,24 @@
 
 		<div class="row">
 
-			<div class="col-5">
+			<div class="col-4">
 				<form action="getLocationsByKeywordSearch.do" method="GET">
 
-
-					
-						<div style="color: orange; font-size: 20px; padding: 0px">B</div>
+					<!-- 		<div style="color: blue; font-size: 20px; padding: 0px">B</div>
 						<div style="color: orange; font-size: 20px; padding: 0px">Y</div>
 						<div style="color: red; font-size: 20px; padding: 0px">O</div>
-						<div style="color: green; font-size: 20px; padding: 0px">W</div>
-					<input type="search" name="keyword" size="30" /> 
-					<input type="submit" name="search" value="Search" />
+						<div style="color: green; font-size: 20px; padding: 0px">W</div> -->
+					<input type="search" name="keyword" size="30" /> <input
+						type="submit" name="search" value="Search" />
 
 				</form>
 			</div>
-			<div class="col-7"></div>
-		</div>
-
-		<div class="row">
-			<div class="col-10"></div>
+			<div class="col-6"></div>
 			<div class="col-2">
+			
+				<form action="home.do">
+					<input type="submit" value="Home">
+				</form>
 
 				<c:if test="${empty loggedIn }">
 
@@ -58,10 +56,7 @@
 				</c:if>
 
 			</div>
+
 		</div>
-
 	</div>
-
-
-
 </nav>

@@ -26,15 +26,7 @@
 	<br>
 
 
-	<h5>Update User</h5>
-	<form action="updateUserAdmin.do" method="POST">
-		ID# <input type="number" name="id" /><br> User Name: <input
-			type="text" name="userName" /><br> First Name: <input
-			type="text" name="firstName" /><br> LastName: <input type="text"
-			name="lastName" /><br> Email: <input type="text" name="email" /><br>
-		Password: <input type="password" name="password" /><br> <input
-			type="Submit" value="update" />
-	</form>
+	
 
 	<form action="confirmDeleteAdmin.do" method="POST">
 		<input type="number" name="userId" /><br> <input type="Submit"
