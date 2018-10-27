@@ -1,6 +1,8 @@
 package com.skilldistillery.babychanger.data;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -15,10 +17,16 @@ import com.skilldistillery.babychanger.entities.Users;
 @Transactional
 @Repository
 public class UsersDAOImpl implements UsersDAO {
-//	
+	
+	
+	
 
 	@PersistenceContext
 	private EntityManager em;
+	
+	
+	// Login the user
+	
 
 // Creates a new user
 	@Override
@@ -88,5 +96,19 @@ public class UsersDAOImpl implements UsersDAO {
 		
 		List<Users> allUsers = em.createQuery(query, Users.class).getResultList();
 		return allUsers;
+	}
+
+	@Override
+	public Users getUserByUsernameAndPassword(String userName, String password) {
+		Users user = null;
+		List<Users> allUsers = listAllUsers();
+		for (Users checkUser : allUsers) {
+			if(checkUser.getUserName().equals(userName) && checkUser.getPassword().equals(password)) {
+				user = checkUser;
+			}
+			
+			
+		}		
+		return user;
 	}
 }

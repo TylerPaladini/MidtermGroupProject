@@ -149,6 +149,32 @@ public class UsersController {
 		return mv;
 	}
 	
+	// Logs in the user
+	@RequestMapping(path = "login.do", method = RequestMethod.POST)
+	public ModelAndView userLogin(Users user, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		String userName = user.getUserName();
+		String password = user.getPassword();
+		
+		Users loginUser = usersDAO.getUserByUsernameAndPassword(userName, password);
+		
+		if(loginUser != null ) {
+			session.setAttribute("loggedIn", loginUser);
+			mv.addObject("loggedIn", loginUser);
+			mv.setViewName("home");
+		}
+		else {
+			mv.setViewName("login");
+		}
+		return mv;
+		
+	}
+	
+	@RequestMapping ( path = "loginPage.do", method = RequestMethod.GET)
+	public String loginPage() {
+		return "login";
+	}
+	
 	
 		
 	
