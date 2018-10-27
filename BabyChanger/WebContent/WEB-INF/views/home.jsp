@@ -71,11 +71,15 @@ First Name:
 
 <form action="getAllUsersAdmin.do">
   <input type="Submit" value="all users"/>
-
 </form>
 
+<form action="addAddressLocationRestroom.do">
+  <input type="Submit" value="Add Location"/>
+</form>
 
-
+<form action="searchOpenLocations.do">
+  <input type="Submit" value="Open Locations"/>
+</form>
 	
 	
 	<script

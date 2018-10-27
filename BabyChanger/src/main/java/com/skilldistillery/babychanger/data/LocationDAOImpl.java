@@ -1,6 +1,6 @@
 package com.skilldistillery.babychanger.data;
 
-import java.util.Date;
+import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -164,9 +164,13 @@ public class LocationDAOImpl implements LocationDAO{
 	}
 
 	@Override
-	public List<Location> getLocationsByOpen(Date open, Date close) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Location> getLocationsByOpen() {
+		String query = "SELECT location FROM Location location WHERE location.openTime < :time AND location.closeTime > :time";
+		List<Location> locationOpen = em.createQuery(query, Location.class)
+										.setParameter("open", LocalTime.now())
+										.setParameter("close", LocalTime.now())
+										.getResultList();
+		return locationOpen;
 	}
 	
 	

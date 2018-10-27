@@ -17,10 +17,10 @@
 		</c:forEach>
 	</c:if>
 	
-	<c:if test="${not empty allCities }">
-		<c:forEach items="${allCities }" var="city">
-			${city.id }
-			${city.name }
+	<c:if test="${not empty open }">
+		<c:forEach items="${open }" var="open">
+			${open.id }
+			${open.name }
 			<br>
 		</c:forEach>
 	</c:if>
