@@ -61,11 +61,11 @@
 			<br>
 			<label>Phone Number(format like 555-555-5555)</label> 
 			<input type="tel" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" /> 
-			<!-- <br> <label>Open Time</label> 
-			<input type="time" name="openTime" /> 
+			<br> <label>Open Time</label> 
+			<!-- <input type="time" name="openTime" /> 
 			<br> 
 			<label>Close Time</label>
-			<input type="time" name="closeTime" />  -->
+			<input type="time" name="closeTime" /> --> 
 			<br> 
 			<br> 
 			<input type="submit" value="Next" />
