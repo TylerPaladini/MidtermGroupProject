@@ -11,9 +11,26 @@
     rel="stylesheet"
     integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
     crossorigin="anonymous">
-<title>Insert title here</title>
+<title>Register</title>
 </head>
 <body>
-		<%@ include file="navigation.jsp"%>
+<%@ include file="navigation.jsp"%>
+	<h5>Create User</h5>
+<form action="createUserAdmin.do" method="POST">
+
+User Name:
+<input type="text" name="userName"/><br>
+First Name:
+  <input type="text" name="firstName"/><br>
+  LastName:
+  <input type="text" name="lastName"/><br>
+  Email:
+  <input type="text" name="email"/><br>
+  Password:
+  <input type="password" name="password"/><br>
+  
+  <input type="Submit" value="Create User"/>
+</form>
+
 </body>
 </html>

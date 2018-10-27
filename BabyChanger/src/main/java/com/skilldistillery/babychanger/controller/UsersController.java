@@ -161,11 +161,22 @@ public class UsersController {
 		Users loginUser = usersDAO.getUserByUsernameAndPassword(userName, password);
 		
 		if(loginUser != null ) {
-			session.setAttribute("loggedIn", loginUser);
-			mv.addObject("loggedIn", loginUser);
+			if(loginUser.isAdmin()) {
+				session.setAttribute("adminLoggedIn", loginUser);
+				mv.addObject("adminLoggedIn", loginUser);
+				
+			}
+			else {
+				session.setAttribute("loggedIn", loginUser);
+				mv.addObject("loggedIn", loginUser);
+			}
+			
+			mv.addObject("loginSuccess", true);
+			mv.addObject("atHome", true);
 			mv.setViewName("home");
 		}
 		else {
+			mv.addObject("loginFailed", true);
 			mv.setViewName("login");
 		}
 		return mv;
@@ -176,6 +187,12 @@ public class UsersController {
 	public String loginPage() {
 		return "login";
 	}
+	@RequestMapping ( path = "registerPage.do", method = RequestMethod.GET)
+	public String registerPage() {
+		return "register";
+	}
+	
+	
 	
 	
 		
