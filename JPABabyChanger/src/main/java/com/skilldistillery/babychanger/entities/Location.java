@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -112,17 +113,26 @@ public class Location {
 		return openTime;
 	}
 
-	public void setOpenTime(Time openTime) {
-		this.openTime = openTime;
+	public void setOpenTime(String openTime) {
+		this.openTime = Time.valueOf( openTime + ":00");
+		
 	}
+//	public void setOpenTime(Time openTime) {
+//		this.openTime = openTime;
+//		
+//	}
 
 	public Time getCloseTime() {
 		return closeTime;
 	}
 
-	public void setCloseTime(Time closeTime) {
-		this.closeTime = closeTime;
+	public void setCloseTime(String closeTime) {
+		
+		this.closeTime = Time.valueOf(closeTime + ":00");
 	}
+//	public void setCloseTime(Time closeTime) {
+//		this.closeTime = closeTime;
+//	}
 	
 	public Date getDateCreated() {
 		return dateCreated;

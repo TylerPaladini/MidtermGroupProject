@@ -1,7 +1,6 @@
 package com.skilldistillery.babychanger.data;
 
-import java.time.LocalTime;
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -68,8 +67,8 @@ public class LocationDAOImpl implements LocationDAO {
 			updateLocation.setAccessLimits(location.getAccessLimits());
 			updateLocation.setPurchaseRequired(location.isPurchaseRequired());
 			updateLocation.setPhone(location.getPhone());
-			updateLocation.setOpenTime(location.getOpenTime());
-			updateLocation.setCloseTime(location.getCloseTime());
+			updateLocation.setOpenTime(location.getOpenTime().toString().substring(0, 5));
+			updateLocation.setCloseTime(location.getCloseTime().toString().substring(0, 5));
 			updateLocation.setAddress(location.getAddress());
 			updateLocation.setDateCreated(location.getDateCreated());
 		}
@@ -158,31 +157,30 @@ public class LocationDAOImpl implements LocationDAO {
 
 	@Override
 	public List<Location> getLocationsByOpen() {
-		List<Location> locationOpenList = null;
-//		String query = "SELECT location FROM Location location WHERE location.openTime < :open AND location.closeTime > :close";
-		String query = "SELECT location FROM Location location";
-		List<Location> locationList = em.createQuery(query, Location.class)
-//										.setParameter("open", LocalTime.now())
-//										.setParameter("close", LocalTime.now())
-				.getResultList();
-		System.out.println("Before the loop: " + locationList);
-		for (Location locationCheck : locationList) {
-			System.out.println("Inside the loop: " + locationCheck);
-			if ((locationCheck.getOpenTime() != null && locationCheck.getCloseTime() != null)) {
-				System.out.println("Inisde time not null");
-				if (locationCheck.getOpenTime().toLocalTime().isBefore(LocalTime.of(18, 00))
-						&& locationCheck.getCloseTime().toLocalTime().isAfter(LocalTime.of(18, 00))) {
-					System.out.println("Inside time check");
-					if (locationOpenList == null) {
-						locationOpenList = new ArrayList<>();
-						System.out.println("create arrayList");
-					}
-					locationOpenList.add(locationCheck);
-				}
-			}
-		}
-		System.out.println(locationOpenList);
-		return locationOpenList;
+		String query = "SELECT location FROM Location location WHERE location.openTime < CURRENT_TIME() AND location.closeTime > CURRENT_TIME()";
+		List<Location> locationList = em.createQuery(query, Location.class).getResultList();
+		return locationList;
 	}
+
+//	********* We went form this code to the code above *********
+//	@Override
+//	public List<Location> getLocationsByOpen() {
+//		List<Location> locationOpenList = null;
+//		String query = "SELECT DISTINCT location FROM Location location JOIN FETCH location.restrooms";
+//										.setParameter("open", LocalDateTime.now())
+//										.setParameter("close", LocalDateTime.now())
+//		for (Location locationCheck : locationList) {
+//			if ((locationCheck.getOpenTime() != null && locationCheck.getCloseTime() != null)) {
+//				if (locationCheck.getOpenTime().toLocalTime().isBefore(LocalTime.now())
+//						&& locationCheck.getCloseTime().toLocalTime().isAfter(LocalTime.now())) {
+//					if (locationOpenList == null) {
+//						locationOpenList = new ArrayList<>();
+//					}
+//					locationOpenList.add(locationCheck);
+//				}
+//			}
+//		}
+//		return locationOpenList;
+//	}
 
 }
