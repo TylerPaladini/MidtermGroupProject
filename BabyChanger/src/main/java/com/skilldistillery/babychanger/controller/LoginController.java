@@ -33,7 +33,7 @@ public class LoginController {
 	
 	// Logs in the user
 		@RequestMapping(path = "login.do", method = RequestMethod.POST)
-		public ModelAndView userLogin(@Valid Users user, HttpSession session) {
+		public ModelAndView userLogin(Users user, HttpSession session) {
 			ModelAndView mv = new ModelAndView();
 			String userName = user.getUserName();
 			String password = user.getPassword();
