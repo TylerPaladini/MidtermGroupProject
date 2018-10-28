@@ -12,179 +12,158 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Users {
-	
+
 	@Id
-	@GeneratedValue( strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	@Column(name="username")
+
+	@NotEmpty
+	@Size(min = 6, max = 35)
+	@Column(name = "username")
 	private String userName;
-	
+
+	@NotEmpty
+	@Email
 	private String email;
-	
+
+	@NotEmpty
+	@Size(min = 6, max = 35)
 	private String password;
-	
-	@Column(name="first_name")
+
+	@Column(name = "first_name")
 	private String firstName;
-	
-	@Column(name="last_name")
+
+	@Column(name = "last_name")
 	private String lastName;
-	
-	
-	@Column(name="date_created")
+
+	@Column(name = "date_created")
 	@Temporal(TemporalType.TIMESTAMP)
-    @CreationTimestamp
+	@CreationTimestamp
 	private Date dateCreated;
-	
+
 	private boolean active;
-	
+
 	private boolean admin;
-	
-	@OneToMany(mappedBy="user")
+
+	@OneToMany(mappedBy = "user")
 	private List<Comment> comments;
-			
-	public Users() {
-		
-	}
-	
-	
-	public void addComment(Comment comment) {
-		if(comments == null) comments = new ArrayList<>();
-		
-		if(!comments.contains(comment)) {
-			comments.add(comment);
-			if(comment.getUser() != null) {
-				comment.getUser().getComments().remove(comment);
-			}
-			comment.setUser(this);
-		}
-	}
-	public void removeComment(Comment comment) {
-		comment.setUser(null);
-		if(comments != null) {
-			comments.remove(comment);
-		}
-	}
 
-
-
-	public List<Comment> getComments() {
-		return comments;
-	}
-
-
-	public void setComments(List<Comment> comments) {
-		this.comments = comments;
-	}
-
-
-	public String getUserName() {
-		return userName;
-	}
-
-
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-
-
-	public String getEmail() {
-		return email;
-	}
-
-
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-
-
-	public String getPassword() {
-		return password;
-	}
-
-
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-
-
-	public String getLastName() {
-		return lastName;
-	}
-
-
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-
-
-	public Date getDateCreated() {
-		return dateCreated;
-	}
-
-
-
-	public void setDateCreated(Date dateCreated) {
-		this.dateCreated = dateCreated;
-	}
-
-
-
-	public boolean isActive() {
-		return active;
-	}
-
-
-
-	public void setActive(boolean active) {
-		this.active = active;
-	}
-
-
-
-	public boolean isAdmin() {
-		return admin;
-	}
-
-
-
-	public void setAdmin(boolean admin) {
-		this.admin = admin;
-	}
-
-
+	/*
+	 * getters / setters
+	 */
 
 	public int getId() {
 		return id;
 	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
 
+	public String getUserName() {
+		return userName;
+	}
 
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public Date getDateCreated() {
+		return dateCreated;
+	}
+
+	public void setDateCreated(Date dateCreated) {
+		this.dateCreated = dateCreated;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public boolean isAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
+	public void addComment(Comment comment) {
+		if (comments == null)
+			comments = new ArrayList<>();
+
+		if (!comments.contains(comment)) {
+			comments.add(comment);
+			if (comment.getUser() != null) {
+				comment.getUser().getComments().remove(comment);
+			}
+			comment.setUser(this);
+		}
+	}
+
+	public void removeComment(Comment comment) {
+		comment.setUser(null);
+		if (comments != null) {
+			comments.remove(comment);
+		}
+	}
+	
+	/*
+	 * hashCode and equals
+	 */
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -192,8 +171,6 @@ public class Users {
 		result = prime * result + id;
 		return result;
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -209,24 +186,10 @@ public class Users {
 		return true;
 	}
 
-
-
-	public Users(int id, String userName, String email, String password, String firstName, String lastName,
-			Date dateCreated, boolean active, boolean admin) {
-		super();
-		this.id = id;
-		this.userName = userName;
-		this.email = email;
-		this.password = password;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.dateCreated = dateCreated;
-		this.active = active;
-		this.admin = admin;
-	}
-
-
-
+	/*
+	 * toString
+	 */
+	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -251,7 +214,27 @@ public class Users {
 		builder.append("]");
 		return builder.toString();
 	}
+
+	/*
+	 * constructors
+	 */
 	
+	public Users() {
+
+	}
 	
+	public Users(int id, String userName, String email, String password, String firstName, String lastName,
+			Date dateCreated, boolean active, boolean admin) {
+		super();
+		this.id = id;
+		this.userName = userName;
+		this.email = email;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.dateCreated = dateCreated;
+		this.active = active;
+		this.admin = admin;
+	}
 
 }

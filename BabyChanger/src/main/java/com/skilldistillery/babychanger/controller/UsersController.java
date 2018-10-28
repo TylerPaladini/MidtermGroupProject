@@ -1,9 +1,11 @@
 package com.skilldistillery.babychanger.controller;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -35,13 +37,21 @@ public class UsersController {
 	// create new user
 	
 	@RequestMapping(path = "createUser.do", method = RequestMethod.POST)
-	public ModelAndView createUser( Users newUser, RedirectAttributes redir) {
+//	public ModelAndView createUser(@Valid Users user, Errors errors, RedirectAttributes redir) {
+	public ModelAndView createUser(Users user, Errors errors, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
 		
-		Users userCreated = usersDAO.createUsers(newUser);
-		redir.addFlashAttribute("user", userCreated);
-		mv.setViewName("redirect:createdUser.do");
-		
+		// Determine if there are any errors.
+	    if (errors.getErrorCount() != 0) {
+	      // If there are any errors, return the login form.
+	      mv.setViewName("register");
+	    }
+	    // If no errors, send the user forward to the profile view.
+	    else {
+	    	Users userCreated = usersDAO.createUsers(user);
+			redir.addFlashAttribute("user", userCreated);
+			mv.setViewName("redirect:createdUser.do");
+	    }
 		return mv;
 	}
 	
@@ -49,22 +59,31 @@ public class UsersController {
 	public ModelAndView createdUser() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("profile");
-		
 		return mv;
-		
 	}
 	
 	// Update user profile
 	
+	
+	@RequestMapping( path = "updateProfilePageUser.do", method = RequestMethod.GET)
+	public String updateUserPage() {
+		return "update";
+	}
+	
 	@RequestMapping( path = "updateUser.do", method = RequestMethod.POST)
-	public ModelAndView updateUser(Users updatedUser, int id, RedirectAttributes redir) {
+	public ModelAndView updateUser( Users updatedUser, int id, RedirectAttributes redir, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		
 		
 		Users userUpdated = usersDAO.updateUsers(id, updatedUser);
-		redir.addFlashAttribute("user", userUpdated);
-		mv.setViewName("redirect:updatedUser.do");
-		
+		if(userUpdated != null) {
+			session.setAttribute("loggedIn", userUpdated);
+			redir.addFlashAttribute("user", userUpdated);
+			mv.setViewName("redirect:updatedUser.do");
+		}
+		else {
+			mv.setViewName("confirmation"); 
+		}
 		
 		return mv;
 	}
@@ -97,7 +116,7 @@ public class UsersController {
 		
 	}
 		
-	@RequestMapping(path="addAddressLocationRestroom.do")
+	@RequestMapping(path="userAddsAddressLocationRestroom.do")
 	public ModelAndView addAddressLocationRestroom() {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("newEntry", true);
@@ -106,7 +125,7 @@ public class UsersController {
 	}
 	
 	@RequestMapping(path="userAddsAddress.do", method = RequestMethod.POST)
-	public ModelAndView userAddsAddress(Address address, HttpSession session) {
+	public ModelAndView userAddsAddress( Address address, HttpSession session) {
 		
 		session.setAttribute("newAddress", address);
 		ModelAndView mv = new ModelAndView();
@@ -115,17 +134,17 @@ public class UsersController {
 		return mv;
 	}
 	@RequestMapping(path="userAddsLocation.do", method = RequestMethod.POST)
-	public ModelAndView userAddsLocation(Location location, HttpSession session) {
-		System.out.println("1");
+	public ModelAndView userAddsLocation( Location location, HttpSession session) {
 		session.setAttribute("newLocation", location);
-		System.out.println(location);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("addRestroomNext", true);
 		mv.setViewName("add");
 		return mv;
 	}
 	@RequestMapping(path="userAddsRestroom.do", method = RequestMethod.POST)
-	public ModelAndView userAddsRestroom(HttpSession session, Restroom restroom) {
+
+	public ModelAndView userAddsRestroom(HttpSession session, int userId, Restroom restroom) {
+
 		
 		Address newAddress = (Address) session.getAttribute("newAddress");
 		Location newLocation = (Location) session.getAttribute("newLocation");
@@ -138,7 +157,7 @@ public class UsersController {
 		
 		
 		addedLocation.addRestroom(restroom);
-		restroom.setUserId(1);
+		restroom.setUserId(userId);
 		
 		Restroom addedRestroom = restroomDAO.createRestroom(restroom);
 		
@@ -150,5 +169,13 @@ public class UsersController {
 		mv.setViewName("confirmation");
 		return mv;
 	}
+	
+	@RequestMapping(path="profileUser.do", method = RequestMethod.GET)
+	public ModelAndView goToUserProfile() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("profile");
+		return mv;
+	}
+	
 
 }

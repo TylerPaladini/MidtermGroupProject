@@ -48,7 +48,8 @@ buildscript {
 
 // define project specific dependencies
 dependencies {
-compile group: 'org.springframework', name: 'spring-context', version:"$springVersion"
+  compile group: 'org.springframework', name: 'spring-context', version:"$springVersion"
+  compile group: 'org.hibernate', name: 'hibernate-validator', version:'5.2.1.Final'
   compile "mysql:mysql-connector-java:5.1.47"
   compile "log4j:log4j:1.2.17"
   compile "org.hibernate:hibernate-core:$hibernateVersion"

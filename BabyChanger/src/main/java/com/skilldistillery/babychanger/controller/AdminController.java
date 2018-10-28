@@ -4,10 +4,10 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,7 +18,10 @@ import com.skilldistillery.babychanger.data.CommentDAO;
 import com.skilldistillery.babychanger.data.LocationDAO;
 import com.skilldistillery.babychanger.data.RestroomDAO;
 import com.skilldistillery.babychanger.data.UsersDAO;
+import com.skilldistillery.babychanger.entities.Address;
 import com.skilldistillery.babychanger.entities.Comment;
+import com.skilldistillery.babychanger.entities.Location;
+import com.skilldistillery.babychanger.entities.Restroom;
 import com.skilldistillery.babychanger.entities.Users;
 
 @Controller
@@ -38,7 +41,7 @@ public class AdminController {
 	// create new user
 
 	@RequestMapping(path = "createUserAdmin.do", method = RequestMethod.POST)
-	public ModelAndView createUserAdmin(Users newUser, RedirectAttributes redir) {
+	public ModelAndView createUserAdmin( Users newUser, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
 
 		Users userCreated = usersDAO.createUsers(newUser);
@@ -58,16 +61,28 @@ public class AdminController {
 	}
 
 	// Update user profile
+	
+	@RequestMapping( path = "updateProfilePageAdmin.do", method = RequestMethod.GET)
+	public String updateAdminPage() {
+		return "update";
+	}
 
 	@RequestMapping(path = "updateUserAdmin.do", method = RequestMethod.POST)
-	public ModelAndView updateUserAdmin(Users updatedUser, int id, RedirectAttributes redir) {
+	public ModelAndView updateUserAdmin( Users updatedUser, int id, RedirectAttributes redir, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 
 		Users userUpdated = usersDAO.updateUsers(id, updatedUser);
-		redir.addFlashAttribute("user", userUpdated);
-		mv.setViewName("redirect:updatedUserAdmin.do");
-
+		if(userUpdated != null) {
+			session.setAttribute("loggedIn", userUpdated);
+			redir.addFlashAttribute("user", userUpdated);
+			mv.setViewName("redirect:updatedUserAdmin.do");
+		}
+		else {
+			mv.setViewName("confirmation"); 
+		}
+		
 		return mv;
+
 	}
 
 	@RequestMapping(path = "updatedUserAdmin.do", method = RequestMethod.GET)
@@ -344,8 +359,65 @@ public class AdminController {
 		return mv;
 		
 	}
+	
+	@RequestMapping(path="adminAddsAddressLocationRestroom.do")
+	public ModelAndView addAddressLocationRestroom() {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("newEntry", true);
+		mv.setViewName("add");
+		return mv;
+	}
+	
+	@RequestMapping(path="adminAddsAddress.do", method = RequestMethod.POST)
+	public ModelAndView userAddsAddress(Address address, HttpSession session) {
+		
+		session.setAttribute("newAddress", address);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("addLocationNext", true);
+		mv.setViewName("add");
+		return mv;
+	}
+	@RequestMapping(path="adminAddsLocation.do", method = RequestMethod.POST)
+	public ModelAndView userAddsLocation(Location location, HttpSession session) {
+		session.setAttribute("newLocation", location);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("addRestroomNext", true);
+		mv.setViewName("add");
+		return mv;
+	}
+	@RequestMapping(path="adminAddsRestroom.do", method = RequestMethod.POST)
+	public ModelAndView userAddsRestroom(HttpSession session,int userId, Restroom restroom) {
+		
+		Address newAddress = (Address) session.getAttribute("newAddress");
+		Location newLocation = (Location) session.getAttribute("newLocation");
+		
+		Address addedAddress = addressDAO.createAddress(newAddress);
+		
+		newLocation.setAddress(addedAddress);
+		Location addedLocation = locationDAO.createLocation(newLocation);
 		
 		
+		
+		addedLocation.addRestroom(restroom);
+		restroom.setUserId(userId);
+		
+		Restroom addedRestroom = restroomDAO.createRestroom(restroom);
+		
+		boolean addSuccess = addedRestroom != null && addedLocation != null && addedAddress != null  ;
+		
+		
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("addSuccess", addSuccess);
+		mv.setViewName("confirmation");
+		return mv;
+	}
+		
+	@RequestMapping(path="profileAdmin.do", method = RequestMethod.GET)
+	public ModelAndView goToAdminProfile() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("adminProfile");
+		return mv;
+	}
 		
 
 }

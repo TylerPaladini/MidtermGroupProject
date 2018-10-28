@@ -11,23 +11,25 @@
     rel="stylesheet"
     integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
     crossorigin="anonymous">
-<title>Login</title>
+<title>Admin Profile</title>
 </head>
 <body>
 <%@ include file="navigation.jsp"%>
 
+<h1>Admin Profile</h1>
 
-<form action="login.do" method="POST">
-	<input type="text" name="userName">
-	<input type="password" name="password">
-	<input type="Submit" value="Login">
-	
+${loggedIn.id}
+${loggedIn.firstName}
+${loggedIn.lastName}
 
-</form>
+	<form action="updateProfilePageAdmin.do">
+		<input type="submit" value="Edit Profile">
+	</form>
+	<form action="adminAddsAddressLocationRestroom.do">
+		<input type="Submit" value="Add Location" />
+	</form>
 
-
-
-	<script
+<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
 		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
 		crossorigin="anonymous"></script>

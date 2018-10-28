@@ -1,12 +1,13 @@
 package com.skilldistillery.babychanger.controller;
 
-import java.time.LocalTime;
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +20,7 @@ import com.skilldistillery.babychanger.entities.Rating;
 
 @Controller
 public class SearchController {
+	
 	@Autowired
 	private LocationDAO locationDAO; 
 	
@@ -28,7 +30,7 @@ public class SearchController {
 	}
 
 	@RequestMapping(path = "getBathrooms.do", method = RequestMethod.GET)
-	  public ModelAndView get(@RequestParam("id") int id) {
+	  public ModelAndView getLocationById(@RequestParam("id") int id) {
 	    ModelAndView mv = new ModelAndView();
 
 	    Location location = locationDAO.getLocationById(id);    
@@ -64,7 +66,8 @@ public class SearchController {
 	public ModelAndView getLocationsByKeyword(@RequestParam("keyword") String keyword) {
 		ModelAndView mv = new ModelAndView();
 		Set<Location> location = locationDAO.getLocationsByKeyword(keyword);    
-		mv.addObject("allCities", location);
+		
+		mv.addObject("allKeywords", location);
 		mv.setViewName("results");
 		return mv;
 	}
@@ -135,23 +138,21 @@ public class SearchController {
 		return mv;
 	}
 	
-	@RequestMapping(path = "getLocationByOpen.do", method = RequestMethod.GET)
-	public ModelAndView getLocationByOpen() {
-		ModelAndView mv = new ModelAndView();
-		
-//		List<Location> location = locationDAO.getLocationsByOpen(LocalTime.now());
-		
-//		mv.addObject("location", location);
-		mv.setViewName("results");
-		return mv;
-	}
-	
 	@RequestMapping(path="searchOpenLocations.do", method = RequestMethod.GET)
 	public ModelAndView addAddressLocationRestroom() {
 		ModelAndView mv = new ModelAndView();
 		List<Location> openLocations = locationDAO.getLocationsByOpen();
 		mv.addObject("open", openLocations);
 		mv.setViewName("results");
+		return mv;
+	}
+	
+	@RequestMapping(path="detailedResults.do", method = RequestMethod.GET)
+	public ModelAndView detailsResultsPage(@RequestParam("locationId")int id) {
+		ModelAndView mv = new ModelAndView();
+		Location location = locationDAO.getLocationById(id);
+		mv.addObject("location", location);
+		mv.setViewName("detailedResults");
 		return mv;
 	}
 }

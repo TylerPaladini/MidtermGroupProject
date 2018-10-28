@@ -46,44 +46,10 @@ public class Comment {
     @CreationTimestamp
 	private Date dateCreated;
 
-	public Comment() {
-	}
-
-	public Comment(int id, Users user, Restroom restroom, String comment, Boolean flagComment, Rating rating,
-			Boolean active, Date dateCreated) {
-		super();
-		this.id = id;
-		this.user = user;
-		this.restroom = restroom;
-		this.comment = comment;
-		this.flagComment = flagComment;
-		this.rating = rating;
-		this.active = active;
-		this.dateCreated = dateCreated;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + id;
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Comment other = (Comment) obj;
-		if (id != other.id)
-			return false;
-		return true;
-	}
-
+	/*
+	 * getters / setters
+	 */
+	
 	public Users getUser() {
 		return user;
 	}
@@ -143,7 +109,37 @@ public class Comment {
 	public int getId() {
 		return id;
 	}
+	
+	/*
+	 * hashCode and equals
+	 */
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Comment other = (Comment) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+
+	/*
+	 * toString
+	 */
+	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -165,6 +161,26 @@ public class Comment {
 		builder.append(dateCreated);
 		builder.append("]");
 		return builder.toString();
+	}
+	
+	/*
+	 * constructors
+	 */
+	
+	public Comment() {
+	}
+
+	public Comment(int id, Users user, Restroom restroom, String comment, Boolean flagComment, Rating rating,
+			Boolean active, Date dateCreated) {
+		super();
+		this.id = id;
+		this.user = user;
+		this.restroom = restroom;
+		this.comment = comment;
+		this.flagComment = flagComment;
+		this.rating = rating;
+		this.active = active;
+		this.dateCreated = dateCreated;
 	}
 
 }

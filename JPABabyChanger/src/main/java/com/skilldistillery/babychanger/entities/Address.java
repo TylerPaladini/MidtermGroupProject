@@ -6,28 +6,35 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name="address")
 public class Address {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id; 
 	
+	@NotEmpty
 	private String street; 
 	
 	private String street2; 
 	
+	@NotEmpty
 	private String city; 
 	
+	@NotEmpty
 	private String state; 
 	
+	@Pattern(regexp="\\d{5}(-\\d{4})?")
 	@Column(name = "zip")
 	private String zipCode;
 
-	
-	//getters and setters
-	
+	/*
+	 * getters and setters
+	 */
 	
 	public String getStreet() {
 		return street;
@@ -73,15 +80,49 @@ public class Address {
 		return id;
 	}
 
-	// to string 
+	/*
+	 * hashcodes and equals
+	 */
+	
 	@Override
-	public String toString() {
-		return "Address [id=" + id + ", street=" + street + ", street2=" + street2 + ", city=" + city + ", state="
-				+ state + ", zipCode=" + zipCode + "]";
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
 	}
 
-	//constructors 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Address other = (Address) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	} 
 
+	/*
+	 * toString
+	 */
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Address [id=").append(id).append(", street=").append(street).append(", street2=")
+		.append(street2).append(", city=").append(city).append(", state=").append(state).append(", zipCode=")
+		.append(zipCode).append("]");
+		return builder.toString();
+	}
+	
+	/*
+	 * constructors 
+	 */
+	
 	public Address () {
 		
 	}
@@ -95,60 +136,4 @@ public class Address {
 		this.state = state;
 		this.zipCode = zipCode;
 	}
-
-	
-	//hashcodes and equals 
-	
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((city == null) ? 0 : city.hashCode());
-		result = prime * result + id;
-		result = prime * result + ((state == null) ? 0 : state.hashCode());
-		result = prime * result + ((street == null) ? 0 : street.hashCode());
-		result = prime * result + ((street2 == null) ? 0 : street2.hashCode());
-		result = prime * result + ((zipCode == null) ? 0 : zipCode.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Address other = (Address) obj;
-		if (city == null) {
-			if (other.city != null)
-				return false;
-		} else if (!city.equals(other.city))
-			return false;
-		if (id != other.id)
-			return false;
-		if (state == null) {
-			if (other.state != null)
-				return false;
-		} else if (!state.equals(other.state))
-			return false;
-		if (street == null) {
-			if (other.street != null)
-				return false;
-		} else if (!street.equals(other.street))
-			return false;
-		if (street2 == null) {
-			if (other.street2 != null)
-				return false;
-		} else if (!street2.equals(other.street2))
-			return false;
-		if (zipCode == null) {
-			if (other.zipCode != null)
-				return false;
-		} else if (!zipCode.equals(other.zipCode))
-			return false;
-		return true;
-	} 
 }
