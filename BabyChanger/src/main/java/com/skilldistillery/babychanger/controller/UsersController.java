@@ -136,7 +136,7 @@ public class UsersController {
 	}
 	@RequestMapping(path="userAddsRestroom.do", method = RequestMethod.POST)
 
-	public ModelAndView userAddsRestroom(HttpSession session, int userId, Restroom restroom) {
+	public ModelAndView userAddsRestroom(HttpSession session, int userId, @Valid Restroom restroom) {
 
 		
 		Address newAddress = (Address) session.getAttribute("newAddress");
