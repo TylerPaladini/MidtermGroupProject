@@ -61,7 +61,11 @@ public class LoginController {
 		return "login";
 	}
 	@RequestMapping ( path = "registerPage.do", method = RequestMethod.GET)
-	public String registerPage() {
-		return "register";
+	public ModelAndView registerPage() {
+		ModelAndView mv = new ModelAndView();
+		Users user = new Users();
+		mv.setViewName("register");
+		mv.addObject("user", user);
+		return mv;
 	}
 }

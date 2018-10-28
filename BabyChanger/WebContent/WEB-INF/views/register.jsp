@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,10 +17,15 @@
 <body>
 <%@ include file="navigation.jsp"%>
 	<h5>Create User</h5>
-	<form action="createUserAdmin.do" method="POST">
+	<%-- <form:form action="createUser.do" method="POST" modelAttribute="user">
 	
-		User Name:
-		<input type="text" name="userName"/><br>
+		<form:label path="userName">User Name:</form:label>
+		<form:input path="userName" type="text" name="userName"/>
+		<form:errors path="userName" /><br> --%>
+	<form action="createUser.do" method="POST" modelAttribute="user">
+	
+		<form path="userName">User Name:</form>
+		<input type="text" name="userName"/>
 		First Name:
 		<input type="text" name="firstName"/><br>
 		LastName:
@@ -31,6 +37,7 @@
 		  
 		<input type="Submit" value="Create User"/>
 	</form>
+	<%-- </form:form> --%>
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
 		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
