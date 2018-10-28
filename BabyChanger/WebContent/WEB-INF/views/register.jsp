@@ -16,21 +16,21 @@
 <body>
 <%@ include file="navigation.jsp"%>
 	<h5>Create User</h5>
-<form action="createUserAdmin.do" method="POST">
-
-User Name:
-<input type="text" name="userName"/><br>
-First Name:
-  <input type="text" name="firstName"/><br>
-  LastName:
-  <input type="text" name="lastName"/><br>
-  Email:
-  <input type="text" name="email"/><br>
-  Password:
-  <input type="password" name="password"/><br>
-  
-  <input type="Submit" value="Create User"/>
-</form>
+	<form action="createUserAdmin.do" method="POST">
+	
+		User Name:
+		<input type="text" name="userName"/><br>
+		First Name:
+		<input type="text" name="firstName"/><br>
+		LastName:
+		<input type="text" name="lastName"/><br>
+		Email:
+		<input type="text" name="email"/><br>
+		Password:
+		<input type="password" name="password"/><br>
+		  
+		<input type="Submit" value="Create User"/>
+	</form>
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
 		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
