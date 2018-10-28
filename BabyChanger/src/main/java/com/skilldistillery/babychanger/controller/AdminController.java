@@ -4,10 +4,10 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -38,7 +38,7 @@ public class AdminController {
 	// create new user
 
 	@RequestMapping(path = "createUserAdmin.do", method = RequestMethod.POST)
-	public ModelAndView createUserAdmin(Users newUser, RedirectAttributes redir) {
+	public ModelAndView createUserAdmin(@Valid Users newUser, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
 
 		Users userCreated = usersDAO.createUsers(newUser);
@@ -65,7 +65,7 @@ public class AdminController {
 	}
 
 	@RequestMapping(path = "updateUserAdmin.do", method = RequestMethod.POST)
-	public ModelAndView updateUserAdmin(Users updatedUser, int id, RedirectAttributes redir, HttpSession session) {
+	public ModelAndView updateUserAdmin(@Valid Users updatedUser, int id, RedirectAttributes redir, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 
 		Users userUpdated = usersDAO.updateUsers(id, updatedUser);

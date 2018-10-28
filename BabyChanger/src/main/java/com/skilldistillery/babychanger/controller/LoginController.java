@@ -1,10 +1,10 @@
 package com.skilldistillery.babychanger.controller;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -33,7 +33,7 @@ public class LoginController {
 	
 	// Logs in the user
 		@RequestMapping(path = "login.do", method = RequestMethod.POST)
-		public ModelAndView userLogin(Users user, HttpSession session) {
+		public ModelAndView userLogin(@Valid Users user, HttpSession session) {
 			ModelAndView mv = new ModelAndView();
 			String userName = user.getUserName();
 			String password = user.getPassword();

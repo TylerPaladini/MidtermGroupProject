@@ -1,6 +1,7 @@
 package com.skilldistillery.babychanger.controller;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,7 +36,7 @@ public class UsersController {
 	// create new user
 	
 	@RequestMapping(path = "createUser.do", method = RequestMethod.POST)
-	public ModelAndView createUser( Users newUser, RedirectAttributes redir) {
+	public ModelAndView createUser(@Valid Users newUser, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
 		
 		Users userCreated = usersDAO.createUsers(newUser);
@@ -63,7 +64,7 @@ public class UsersController {
 	}
 	
 	@RequestMapping( path = "updateUser.do", method = RequestMethod.POST)
-	public ModelAndView updateUser(Users updatedUser, int id, RedirectAttributes redir, HttpSession session) {
+	public ModelAndView updateUser(@Valid Users updatedUser, int id, RedirectAttributes redir, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		
 		
@@ -117,7 +118,7 @@ public class UsersController {
 	}
 	
 	@RequestMapping(path="userAddsAddress.do", method = RequestMethod.POST)
-	public ModelAndView userAddsAddress(Address address, HttpSession session) {
+	public ModelAndView userAddsAddress(@Valid Address address, HttpSession session) {
 		
 		session.setAttribute("newAddress", address);
 		ModelAndView mv = new ModelAndView();
@@ -126,7 +127,7 @@ public class UsersController {
 		return mv;
 	}
 	@RequestMapping(path="userAddsLocation.do", method = RequestMethod.POST)
-	public ModelAndView userAddsLocation(Location location, HttpSession session) {
+	public ModelAndView userAddsLocation(@Valid Location location, HttpSession session) {
 		session.setAttribute("newLocation", location);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("addRestroomNext", true);
@@ -134,7 +135,7 @@ public class UsersController {
 		return mv;
 	}
 	@RequestMapping(path="userAddsRestroom.do", method = RequestMethod.POST)
-	public ModelAndView userAddsRestroom(HttpSession session, Restroom restroom) {
+	public ModelAndView userAddsRestroom(HttpSession session, @Valid Restroom restroom) {
 		
 		Address newAddress = (Address) session.getAttribute("newAddress");
 		Location newLocation = (Location) session.getAttribute("newLocation");

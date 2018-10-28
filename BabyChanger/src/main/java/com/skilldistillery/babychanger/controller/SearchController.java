@@ -138,17 +138,6 @@ public class SearchController {
 		return mv;
 	}
 	
-	@RequestMapping(path = "getLocationByOpen.do", method = RequestMethod.GET)
-	public ModelAndView getLocationByOpen() {
-		ModelAndView mv = new ModelAndView();
-		
-//		List<Location> location = locationDAO.getLocationsByOpen(LocalTime.now());
-		
-//		mv.addObject("location", location);
-		mv.setViewName("results");
-		return mv;
-	}
-	
 	@RequestMapping(path="searchOpenLocations.do", method = RequestMethod.GET)
 	public ModelAndView addAddressLocationRestroom() {
 		ModelAndView mv = new ModelAndView();
