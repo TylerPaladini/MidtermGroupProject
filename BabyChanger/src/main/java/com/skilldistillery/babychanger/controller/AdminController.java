@@ -18,7 +18,10 @@ import com.skilldistillery.babychanger.data.CommentDAO;
 import com.skilldistillery.babychanger.data.LocationDAO;
 import com.skilldistillery.babychanger.data.RestroomDAO;
 import com.skilldistillery.babychanger.data.UsersDAO;
+import com.skilldistillery.babychanger.entities.Address;
 import com.skilldistillery.babychanger.entities.Comment;
+import com.skilldistillery.babychanger.entities.Location;
+import com.skilldistillery.babychanger.entities.Restroom;
 import com.skilldistillery.babychanger.entities.Users;
 
 @Controller
@@ -355,6 +358,58 @@ public class AdminController {
 		mv.setViewName("results");
 		return mv;
 		
+	}
+	
+	@RequestMapping(path="adminAddsAddressLocationRestroom.do")
+	public ModelAndView addAddressLocationRestroom() {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("newEntry", true);
+		mv.setViewName("add");
+		return mv;
+	}
+	
+	@RequestMapping(path="adminAddsAddress.do", method = RequestMethod.POST)
+	public ModelAndView userAddsAddress(Address address, HttpSession session) {
+		
+		session.setAttribute("newAddress", address);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("addLocationNext", true);
+		mv.setViewName("add");
+		return mv;
+	}
+	@RequestMapping(path="adminAddsLocation.do", method = RequestMethod.POST)
+	public ModelAndView userAddsLocation(Location location, HttpSession session) {
+		session.setAttribute("newLocation", location);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("addRestroomNext", true);
+		mv.setViewName("add");
+		return mv;
+	}
+	@RequestMapping(path="adminAddsRestroom.do", method = RequestMethod.POST)
+	public ModelAndView userAddsRestroom(HttpSession session,int userId, Restroom restroom) {
+		
+		Address newAddress = (Address) session.getAttribute("newAddress");
+		Location newLocation = (Location) session.getAttribute("newLocation");
+		
+		Address addedAddress = addressDAO.createAddress(newAddress);
+		
+		newLocation.setAddress(addedAddress);
+		Location addedLocation = locationDAO.createLocation(newLocation);
+		
+		
+		
+		addedLocation.addRestroom(restroom);
+		restroom.setUserId(userId);
+		
+		Restroom addedRestroom = restroomDAO.createRestroom(restroom);
+		
+		boolean addSuccess = addedRestroom != null && addedLocation != null && addedAddress != null  ;
+		
+		
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("addSuccess", addSuccess);
+		mv.setViewName("confirmation");
+		return mv;
 	}
 		
 	@RequestMapping(path="profileAdmin.do", method = RequestMethod.GET)

@@ -41,18 +41,18 @@
 	</c:if>
 	
 	<c:if test="${not empty open }">
-		<c:forEach items="${open }" var="open">
-			${open.id }<br />
-			${open.name }<br />
-			${open.address.street }<br />
-			${open.address.city }<br />
-			${open.address.state }<br />
-			${open.address.zipCode }<br />
-			${open.accessLimits }<br />
-			${open.purchaseRequired }<br />
-			${open.phone }<br />
-			${open.openTime }<br />
-			${open.closeTime }<br />
+		<c:forEach items="${open }" var="openRestroom">
+			<a href="detailedResults.do?locationId=${openRestroom.id }">${openRestroom.name }</a><br />
+			${openRestroom.address.street }
+			<c:if test="${not empty openRestroom.address.street2 }">
+				${openRestroom.address.street2 }
+			</c:if><br />
+			${openRestroom.address.city }
+			${openRestroom.address.state }
+			${openRestroom.address.zipCode }<br />
+			<c:if test="${not empty openRestroom.openTime and not empty openRestroom.closeTime }">
+			${openRestroom.openTime } - ${openRestroom.closeTime }
+			</c:if><br /><br />
 		</c:forEach>
 	</c:if> 
 	
