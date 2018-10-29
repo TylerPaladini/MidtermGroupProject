@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,6 +28,7 @@
 		
 	</c:if>
 		<input type="hidden" name="id" value="${loggedIn.id }"/>
+		
 		User Name: <input type="text" name="userName" value="${loggedIn.userName }" />
 		<br> 
 		First Name: <input type="text" name="firstName" value="${loggedIn.firstName }"/>
@@ -41,7 +43,28 @@
 	</form>
 	
 	<h5>Update Location</h5>
-	<c:if test="${loggedIn.admin }">
+	
+	
+	 
+	 <form:form method="POST" action="adminUpdateLocationAdmin.do" modelAttribute="updateLocation">
+	 <form:label path="name" >Location Name</form:label>
+	 <form:input path="name"/>
+	 <form:label path="address.street" >Street</form:label>
+	 <form:input path="address.street"/>
+	 <form:label path="phone" >Phone</form:label>
+	 <form:input path="phone"/>
+	 
+	 
+	 
+	 
+	 <input type="hidden" name="locationId" value="${updateLocation.id }" />
+	 <input type="submit" value="Update"/>
+	 
+	 
+	 </form:form>
+	
+	
+	<%-- <%-- <c:if test="${loggedIn.admin }">
 		<form action="adminUpdateLocationAdmin.do" method="POST">
 		
 	</c:if>
@@ -50,6 +73,10 @@
 		
 	</c:if>
 		<input type="hidden" name="locationId" value="${updateLocation.id }"/>
+		<p>${updateLocation.id }</p>
+		<p>${updateLocation.address.street }</p>
+		<p>${updateLocation.address.city }</p>
+		
 		Location Name: <input type="text" name="name" value="${updateLocation.name }" />
 		<br> 
 		Street Address: <input type="text" name="address.street" value="${updateLocation.address.street}"/>
@@ -79,14 +106,14 @@
 		<br>
 		Phone: <input type="text" name="phone" value="${updateLocation.phone}"/>
 		<br>
-		<%-- Open Time: <input type="text" name="openTime" value="${updateLocation.openTime}"/>
+		Open Time: <input type="text" name="openTime" value="${updateLocation.openTime}"/>
 		<br>
 		Close Time: <input type="text" name="closeTime" value="${updateLocation.closeTime}"/>
-		<br> --%>
+		<br>
 		<input type="hidden" name="dateCreated" value="${updateLocation.dateCreated}"/>
 		<input type="Submit" value="update" />
 	</form>
-	
+	 --%> --%>
 	
 	
 	
