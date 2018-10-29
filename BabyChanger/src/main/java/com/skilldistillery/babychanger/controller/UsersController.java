@@ -180,16 +180,20 @@ public class UsersController {
 	
 	// Maps user to update.jsp to update a location
 	@RequestMapping(path="userUpdateLocation.do", method = RequestMethod.GET)
-	public ModelAndView goToUpdatePage() {
+	public ModelAndView goToUpdatePage(int id) {
+		Location updateLocation = locationDAO.getLocationById(id);
+		
 		ModelAndView mv = new ModelAndView();
+		mv.addObject("updateLocation", updateLocation);
 		mv.setViewName("update");
 		return mv;
 	}
 	
 	//User updates previous location
 	@RequestMapping(path= "userUpdateLocationUser.do", method = RequestMethod.POST)
-	public ModelAndView userUpdateLocation(int id, Location location, RedirectAttributes redir, HttpSession session) {
+	public ModelAndView userUpdateLocation(int id, Address address, Location location, RedirectAttributes redir, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
+		
 		
 		Location newUpdatedLocation = locationDAO.updateLocation(id, location);
 		if(newUpdatedLocation != null) {
