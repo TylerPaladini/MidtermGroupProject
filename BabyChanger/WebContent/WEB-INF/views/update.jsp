@@ -52,7 +52,7 @@
 		<input type="hidden" name="id" value="${updateLocation.id }"/>
 		Location Name: <input type="text" name="name" value="${updateLocation.name }" />
 		<br> 
-		<%-- Street Address: <input type="text" name="street" value="${updateLocation.address.street}"/>
+		Street Address: <input type="text" name="street" value="${updateLocation.address.street}"/>
 		<br> 
 		Street Address2 <input type="text" name="street2" value="${updateLocation.address.street2 }"/>
 		<br> 
@@ -61,7 +61,7 @@
 		State: <input type="text" name="state" value="${updateLocation.address.state }"/>
 		<br> 
 		Zipcode: <input type="text" name="zipCode" value="${updateLocation.address.zipCode}"/>
-		<br> --%>
+		<br>
 		Access Limits: <input type="text" name="accessLimits" value="${updateLocation.accessLimits}"/>
 		<br>
 		Is Purchase Required:
