@@ -1,5 +1,6 @@
 package com.skilldistillery.babychanger.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -22,6 +23,7 @@ import com.skilldistillery.babychanger.data.RestroomDAO;
 import com.skilldistillery.babychanger.data.UsersDAO;
 import com.skilldistillery.babychanger.data.UsersDAOImpl;
 import com.skilldistillery.babychanger.entities.Address;
+import com.skilldistillery.babychanger.entities.Comment;
 import com.skilldistillery.babychanger.entities.Location;
 import com.skilldistillery.babychanger.entities.Restroom;
 import com.skilldistillery.babychanger.entities.Users;
@@ -215,6 +217,76 @@ public class UsersController {
 		mv.setViewName("update");
 
 		return mv;
+	}
+	
+	// Adds comment
+	@RequestMapping(path = "addedCommentPageUser.do", method = RequestMethod.GET)
+	public ModelAndView goToAddCommentPage(int restroomId, HttpSession session) {
+		Restroom commentedRestroom = restroomDAO.getRestroom(restroomId);
+		session.setAttribute("commentedRestroom", commentedRestroom);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("addingComment", true);
+		mv.setViewName("add");	
+		return mv;
+		
+	}
+	
+	@RequestMapping(path = "addCommentUser.do", method = RequestMethod.POST)
+	public ModelAndView addComment(Comment comment, RedirectAttributes redir, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		comment.setUser((Users) session.getAttribute("loggedIn"));
+		comment.setRestroom((Restroom) session.getAttribute("commentedRestroom"));
+		comment.setDateCreated(new Date());
+		Comment addcomment = commentDAO.addComment(comment);
+		redir.addFlashAttribute("addComment", addcomment);
+		mv.setViewName("redirect:addedCommentAdmin.do");
+		
+		return mv;
+		
+	}
+	@RequestMapping(path = "addedCommentUser.do", method = RequestMethod.GET)
+	public ModelAndView addedComment() {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("commentAdded", true);
+		mv.setViewName("confirmation");
+		
+		return mv;
+		
+	}
+	
+	// user updates comment
+	@RequestMapping(path = "updateCommentPageUser.do", method = RequestMethod.GET)
+	public ModelAndView goToUpdateCommentPage(int commentId, HttpSession session) {
+		Comment updatedComment = commentDAO.findCommentById(commentId);
+		session.setAttribute("updatedComment", updatedComment);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("updatingComment", true);
+		mv.setViewName("update");	
+		return mv;
+		
+	}
+	
+	@RequestMapping(path = "updateCommentUser.do", method = RequestMethod.POST)
+	public ModelAndView updateComment(Comment comment, RedirectAttributes redir, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+//		comment.setUser((Users) session.getAttribute("loggedIn"));
+//		comment.setRestroom((Restroom) session.getAttribute("commentedRestroom"));
+//		comment.setDateCreated(new Date());
+//		Comment addcomment = commentDAO.addComment(comment);
+//		redir.addFlashAttribute("addComment", addcomment);
+//		mv.setViewName("redirect:addedCommentAdmin.do");
+		
+		return mv;
+		
+	}
+	@RequestMapping(path = "addedCommentUser.do", method = RequestMethod.GET)
+	public ModelAndView updatedComment() {
+		ModelAndView mv = new ModelAndView();
+//		mv.addObject("commentAdded", true);
+//		mv.setViewName("confirmation");
+		
+		return mv;
+		
 	}
 
 }

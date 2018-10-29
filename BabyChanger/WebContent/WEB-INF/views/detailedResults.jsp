@@ -72,7 +72,7 @@
 						
 					</c:if>
 					<c:if test="${!loggedIn.admin }">
-						<form action="">
+						<form action="addedCommentPageUser.do">
 						
 					</c:if>
 						<input type="hidden" name="restroomId" value="${restroom.id }">
@@ -93,6 +93,19 @@
 						${comment.rating }
 						<br>
 						<p>${comment.comment }</p>
+						<c:if test="${comment.user.id == loggedIn.id }">
+							
+							<c:if test="${loggedIn.admin }">
+								<form action="">
+							</c:if>
+							<c:if test="${!loggedIn.admin }">
+								<form action="updateCommentPageUser.do">
+							</c:if>
+							
+								<input type="hidden" name="commentId" value="${comment.id }">
+								<input type="submit" value="update Comment">
+							</form>
+						</c:if>
 						<hr>
 	
 					</c:forEach>
