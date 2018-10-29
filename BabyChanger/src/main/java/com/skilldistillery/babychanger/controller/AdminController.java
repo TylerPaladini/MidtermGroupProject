@@ -37,6 +37,7 @@ public class AdminController {
 	private RestroomDAO restroomDAO;
 	@Autowired
 	private UsersDAO usersDAO;
+	
 
 	// create new user
 
@@ -218,20 +219,34 @@ public class AdminController {
 	}
 	
 	// Adds comment
-	@RequestMapping(path = "addComment.do", method = RequestMethod.POST)
-	public ModelAndView addComment(Comment comment, RedirectAttributes redir) {
+	@RequestMapping(path = "addedCommentPageAdmin.do", method = RequestMethod.GET)
+	public ModelAndView goToAddCommentPage(int restroomId, HttpSession session) {
+		Restroom commentedRestroom = restroomDAO.getRestroom(1);
+		session.setAttribute("commentedRestroom", commentedRestroom);
 		ModelAndView mv = new ModelAndView();
+		mv.addObject("addingComment", true);
+		mv.setViewName("add");	
+		return mv;
 		
+	}
+	
+	@RequestMapping(path = "addCommentAdmin.do", method = RequestMethod.POST)
+	public ModelAndView addComment(int id, Comment comment, RedirectAttributes redir, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		comment.setUser((Users) session.getAttribute("loggedIn"));
+		comment.setRestroom((Restroom) session.getAttribute("commentedRestroom"));
+		comment.setDateCreated(new Date());
 		Comment addcomment = commentDAO.addComment(comment);
 		redir.addFlashAttribute("addComment", addcomment);
-		mv.setViewName("redirect:addedComment");
+		mv.setViewName("redirect:addedCommentAdmin.do");
 		
 		return mv;
 		
 	}
-	@RequestMapping(path = "addedComment.do", method = RequestMethod.GET)
+	@RequestMapping(path = "addedCommentAdmin.do", method = RequestMethod.GET)
 	public ModelAndView addedComment() {
 		ModelAndView mv = new ModelAndView();
+		mv.addObject("commentAdded", true);
 		mv.setViewName("confirmation");
 		
 		return mv;
