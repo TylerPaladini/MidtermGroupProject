@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 
@@ -17,14 +18,17 @@ public class Address {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id; 
 	
+//	@Pattern(regexp="\\S")
 	@NotEmpty
 	private String street; 
 	
 	private String street2; 
 	
+	@Pattern(regexp="[a-zA-Z0-9]{3,}")
 	@NotEmpty
 	private String city; 
-	
+
+	@Pattern(regexp="^(?:(A[KLRZ]|C[AOT]|D[CE]|FL|GA|HI|I[ADLN]|K[SY]|LA|M[ADEINOST]|N[CDEHJMVY]|O[HKR]|P[AR]|RI|S[CD]|T[NX]|UT|V[AIT]|W[AIVY]))$")
 	@NotEmpty
 	private String state; 
 	

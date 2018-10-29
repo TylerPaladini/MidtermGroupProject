@@ -25,18 +25,6 @@
 	</form>
 	<br>
 
-
-	
-
-	<form action="confirmDeleteAdmin.do" method="POST">
-		<input type="number" name="userId" /><br> <input type="Submit"
-			value="Delete" />
-	</form>
-
-	<form action="getAllUsersAdmin.do">
-		<input type="Submit" value="all users" />
-	</form>
-
 	<form action="searchOpenLocations.do">
 		<input type="Submit" value="Open Locations" />
 	</form>

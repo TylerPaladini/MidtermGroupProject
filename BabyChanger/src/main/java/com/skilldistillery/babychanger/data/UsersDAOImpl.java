@@ -18,9 +18,6 @@ import com.skilldistillery.babychanger.entities.Users;
 @Repository
 public class UsersDAOImpl implements UsersDAO {
 	
-	
-	
-
 	@PersistenceContext
 	private EntityManager em;
 	
@@ -109,5 +106,16 @@ public class UsersDAOImpl implements UsersDAO {
 			}
 		}		
 		return user;
+	}
+	
+	@Override
+	public boolean userDoesExist(String userName) {
+		boolean userExist;
+		String query = "SELECT COUNT(x.userName) FROM Users x WHERE x.userName = :userName";
+		Long userCount = em.createQuery(query, Long.class)
+								.setParameter("userName", userName)
+								.getSingleResult();
+		userExist = userCount == 0 ? false : true;
+		return userExist;
 	}
 }
