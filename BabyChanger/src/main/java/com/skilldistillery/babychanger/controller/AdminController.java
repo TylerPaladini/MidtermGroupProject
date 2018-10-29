@@ -439,10 +439,10 @@ public class AdminController {
 		if(newUpdatedLocation != null) {
 			session.setAttribute("updatedLocation", newUpdatedLocation);
 			redir.addFlashAttribute("updatedLocation", newUpdatedLocation);
-			mv.setViewName("adminUpdatedLocationAdmin.do");
+			mv.setViewName("update");
 		}
 		else {
-			mv.setViewName("update");
+			mv.setViewName("adminUpdatedLocationAdmin.do");
 		}
 		
 		return mv;
