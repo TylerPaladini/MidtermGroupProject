@@ -16,6 +16,23 @@
 </head>
 <body>
 	<%@ include file="navigation.jsp"%>
+	
+	<c:if test="${updatingComment }">
+	
+		<c:if test="${loggedIn.admin }">
+			<form action="updateCommentAdmin.do" method="post">
+		</c:if>
+		<c:if test="${!loggedIn.admin }">
+			<form action="updateCommentUser.do" method="post">
+		</c:if>
+		Rating
+		<input type="number" min=1 max=5 name="rating" value="${updatedComment.rating.value }">
+		
+		Comment
+		<textarea rows="3" cols="6" name="comment" value="${updatedComment.comment }"></textarea>
+		<input type="submit" value="submit">
+		</form>
+	</c:if>
 
 	<h5>Update Profile</h5>
 	
@@ -44,7 +61,6 @@
 	
 	<h5>Update Location</h5>
 	
-<<<<<<< HEAD
 	
 	 
 	 <form:form method="POST" action="adminUpdateLocationAdmin.do" modelAttribute="updateLocation">
@@ -62,7 +78,7 @@
 	 <input type="submit" value="Update"/>
 	 
 	 
-	 </form:form>
+	 </form:form> 
 	
 	
 	<%-- <%-- <c:if test="${loggedIn.admin }">
@@ -126,16 +142,7 @@
 		<input type="Submit" value="update" />
 	</form>
 	 --%>
-	<c:if test="${updatingComment }">
-		<form action="updateCommentAdmin.do">
-		Rating
-		<input type="number" min=1 max=5 name="rating" value="${updatedComment.rating.value }">
-		
-		Comment
-		<textarea rows="3" cols="6" name="comment" value="${updatedComment.comment }"></textarea>
-		<input type="submit" value="submit">
-		</form>
-	</c:if>
+	
 	
 	
 	<script
