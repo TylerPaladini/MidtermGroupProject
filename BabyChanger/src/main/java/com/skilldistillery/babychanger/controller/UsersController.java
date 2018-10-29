@@ -127,13 +127,15 @@ public class UsersController {
 	@RequestMapping(path = "userAddsAddressLocationRestroom.do")
 	public ModelAndView addAddressLocationRestroom() {
 		ModelAndView mv = new ModelAndView();
+		
+		
 		mv.addObject("newEntry", true);
 		mv.setViewName("add");
 		return mv;
 	}
 
 	@RequestMapping(path = "userAddsAddress.do", method = RequestMethod.POST)
-	public ModelAndView userAddsAddress(Address address, HttpSession session) {
+	public ModelAndView userAddsAddress(@Valid Address address, Errors errors, HttpSession session) {
 
 		session.setAttribute("newAddress", address);
 		ModelAndView mv = new ModelAndView();
@@ -143,7 +145,7 @@ public class UsersController {
 	}
 
 	@RequestMapping(path = "userAddsLocation.do", method = RequestMethod.POST)
-	public ModelAndView userAddsLocation(Location location, HttpSession session) {
+	public ModelAndView userAddsLocation(@Valid Location location, Errors errors, HttpSession session) {
 		session.setAttribute("newLocation", location);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("addRestroomNext", true);
@@ -153,7 +155,7 @@ public class UsersController {
 
 	@RequestMapping(path = "userAddsRestroom.do", method = RequestMethod.POST)
 
-	public ModelAndView userAddsRestroom(HttpSession session, int userId, Restroom restroom) {
+	public ModelAndView userAddsRestroom(@Valid Restroom restroom, Errors errors, HttpSession session, int userId) {
 
 		Address newAddress = (Address) session.getAttribute("newAddress");
 		Location newLocation = (Location) session.getAttribute("newLocation");
@@ -279,7 +281,7 @@ public class UsersController {
 		return mv;
 		
 	}
-	@RequestMapping(path = "addedCommentUser.do", method = RequestMethod.GET)
+	@RequestMapping(path = "updatedCommentUser.do", method = RequestMethod.GET)
 	public ModelAndView updatedComment() {
 		ModelAndView mv = new ModelAndView();
 //		mv.addObject("commentAdded", true);
