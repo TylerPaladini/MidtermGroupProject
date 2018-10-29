@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `location` (
   `open_time` TIME NULL,
   `closed_time` TIME NULL,
   `address_id` INT(11) NOT NULL,
-  `date_created` DATETIME NOT NULL DEFAULT current_timestamp,
+  `date_created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   INDEX `fk_location_address1_idx` (`address_id` ASC),
   CONSTRAINT `fk_location_address1`
@@ -192,15 +192,15 @@ COMMIT;
 START TRANSACTION;
 USE `babychangerdb`;
 INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (1, 'Solarium', 'have to be a student', false, '3033025234', '08:00', '18:00', 1, DEFAULT);
-INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (2, 'Shell on E Orchard', 'must get key from attendant', true, '3037702637', NULL, NULL, 2, DEFAULT);
-INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (3, 'Lake Loop Picnic Area', 'none, public access', false, NULL, NULL, NULL, 3, DEFAULT);
+INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (2, 'Shell on E Orchard', 'must get key from attendant', true, '3037702637', '06:00', '23:59', 2, DEFAULT);
+INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (3, 'Lake Loop Picnic Area', 'none, public access', false, NULL, '06:00', '23:59', 3, DEFAULT);
 INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (4, 'Target on Briarwood', 'none ', false, '7202146000', '08:00', '22:00', 4, DEFAULT);
 INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (5, 'Land of Nod', 'closes 9 PM', true, '3036499922', '10:00', '21:00', 5, DEFAULT);
-INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (6, 'buybuy Baby', 'closes at 9 ', false, '3033051130', '0900', '2100', 6, DEFAULT);
-INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (7, 'Koala Kare Products', 'kloses at 4:30', false, '3035398300', '07:00', '16:30', 7, DEFAULT);
+INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (6, 'buybuy Baby', 'closes at 9 ', false, '3033051130', '0900', '21:00', 6, DEFAULT);
+INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (7, 'Koala Kare Products', 'kloses at 4:30', false, '3035398300', '07:00', '21:30', 6, DEFAULT);
 INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (8, 'Bed Bath & Beyond', 'none', false, '3037081577', '09:00', '21:00', 8, DEFAULT);
 INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (9, 'Park Meadows Mall', 'closes at 9 PM, loud', false, '3037922533', '10:00', '21:00', 5, DEFAULT);
-INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (10, 'Southgate Shopping Center', 'closes at 6 PM', false, NULL, '00:00', '18:00', 9, DEFAULT);
+INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (10, 'Southgate Shopping Center', 'closes at 6 PM', false, NULL, '00:01', '18:00', 9, DEFAULT);
 
 COMMIT;
 
