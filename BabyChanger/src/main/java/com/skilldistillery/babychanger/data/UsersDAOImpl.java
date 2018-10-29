@@ -30,15 +30,15 @@ public class UsersDAOImpl implements UsersDAO {
 
 // Creates a new user
 	@Override
-	public Users createUsers(Users users) {
-		em.persist(users);
+	public Users createUsers(Users registerUserModel) {
+		em.persist(registerUserModel);
 		em.flush();
-		if (users.getId() == 0) {
+		if (registerUserModel.getId() == 0) {
 			em.getTransaction().rollback();
 			return null;
 		} else {
-			users.setActive(true);
-			return em.find(Users.class, users.getId());
+			registerUserModel.setActive(true);
+			return em.find(Users.class, registerUserModel.getId());
 		}
 	}
 
