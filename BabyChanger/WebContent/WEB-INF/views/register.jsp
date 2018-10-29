@@ -17,19 +17,22 @@
 <body>
 <%@ include file="navigation.jsp"%>
 	<h5>Create User</h5>
-	<form:form action="createUser.do" method="POST" modelAttribute="users">
+	<form:form action="createUser.do" method="POST" modelAttribute="registerUserModel">
 	
 		<form:label path="userName">User Name:</form:label>
 		<form:input path="userName" />
-		<form:errors path="userName" /><br>
+		<form:errors path="userName" /><br />
 		First Name:
-		<input type="text" name="firstName"/><br>
-		LastName:
-		<input type="text" name="lastName"/><br>
-		Email:
-		<input type="text" name="email"/><br>
-		Password:
-		<input type="password" name="password"/><br>
+		<input type="text" name="firstName"/><br />
+		Last Name:
+		<input type="text" name="lastName"/><br />
+		
+		<form:label path="email">Email:</form:label>
+		<form:input path="email"/>
+		<form:errors path="email" /><br />
+		<form:label path="password">Password:</form:label>
+		<form:input path="password" />
+		<form:errors path="password"/><br />
 		  
 		<input type="Submit" value="Create User"/>
 	</form:form>

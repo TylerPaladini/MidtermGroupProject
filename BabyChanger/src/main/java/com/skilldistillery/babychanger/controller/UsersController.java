@@ -6,6 +6,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -37,18 +38,18 @@ public class UsersController {
 	// create new user
 	
 	@RequestMapping(path = "createUser.do", method = RequestMethod.POST)
-	public ModelAndView createUser(@Valid Users users, Errors errors, RedirectAttributes redir) {
-//	public ModelAndView createUser(Users user, Errors errors, RedirectAttributes redir) {
+	public ModelAndView createUser(@Valid @ModelAttribute("registerUserModel") Users user, Errors errors, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
 		
 		// Determine if there are any errors.
 	    if (errors.getErrorCount() != 0) {
+	    	System.out.println("DeBuG: " + errors.toString());
 	      // If there are any errors, return the login form.
 	      mv.setViewName("register");
 	    }
 	    // If no errors, send the user forward to the profile view.
 	    else {
-	    	Users userCreated = usersDAO.createUsers(users);
+	    	Users userCreated = usersDAO.createUsers(user);
 			redir.addFlashAttribute("userCreated", userCreated);
 			mv.setViewName("redirect:createdUser.do");
 	    }

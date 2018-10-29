@@ -1,10 +1,10 @@
 package com.skilldistillery.babychanger.controller;
 
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -61,11 +61,8 @@ public class LoginController {
 		return "login";
 	}
 	@RequestMapping ( path = "registerPage.do", method = RequestMethod.GET)
-	public ModelAndView registerPage() {
-		ModelAndView mv = new ModelAndView();
-		Users users = new Users();
-		mv.setViewName("register");
-		mv.addObject("users", users);
-		return mv;
+	public String registerPage(Model model) {
+		model.addAttribute("registerUserModel", new Users());
+		return "register";
 	}
 }
