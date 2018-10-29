@@ -100,7 +100,7 @@ public class CommentDAOImpl implements CommentDAO {
 		if (managed != null) {
 //			managed.setUser(comment.getUser());
 			managed.setComment(comment.getComment());
-			managed.setRating(comment.getRating());
+			managed.setRating(comment.getRating().getValue());
 		}
 		return managed;
 	}

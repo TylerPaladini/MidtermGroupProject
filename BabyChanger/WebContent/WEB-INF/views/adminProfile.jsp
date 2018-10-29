@@ -34,7 +34,7 @@ ${loggedIn.lastName}
 	<input type="Submit" value="Delete Location"/>
 	</form>
 	
-	<form action="adminUpdateLocation.do">
+	<form action="listAllLocations.do">
 	<input type="Submit" value="Update Location"/>
 	</form>
 
