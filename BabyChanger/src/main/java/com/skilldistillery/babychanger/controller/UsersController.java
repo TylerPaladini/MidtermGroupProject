@@ -37,8 +37,8 @@ public class UsersController {
 	// create new user
 	
 	@RequestMapping(path = "createUser.do", method = RequestMethod.POST)
-//	public ModelAndView createUser(@Valid Users user, Errors errors, RedirectAttributes redir) {
-	public ModelAndView createUser(Users user, Errors errors, RedirectAttributes redir) {
+	public ModelAndView createUser(@Valid Users users, Errors errors, RedirectAttributes redir) {
+//	public ModelAndView createUser(Users user, Errors errors, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
 		
 		// Determine if there are any errors.
@@ -48,8 +48,8 @@ public class UsersController {
 	    }
 	    // If no errors, send the user forward to the profile view.
 	    else {
-	    	Users userCreated = usersDAO.createUsers(user);
-			redir.addFlashAttribute("user", userCreated);
+	    	Users userCreated = usersDAO.createUsers(users);
+			redir.addFlashAttribute("userCreated", userCreated);
 			mv.setViewName("redirect:createdUser.do");
 	    }
 		return mv;

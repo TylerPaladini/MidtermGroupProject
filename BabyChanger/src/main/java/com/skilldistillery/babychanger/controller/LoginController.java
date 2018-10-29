@@ -63,9 +63,9 @@ public class LoginController {
 	@RequestMapping ( path = "registerPage.do", method = RequestMethod.GET)
 	public ModelAndView registerPage() {
 		ModelAndView mv = new ModelAndView();
-		Users user = new Users();
+		Users users = new Users();
 		mv.setViewName("register");
-		mv.addObject("user", user);
+		mv.addObject("users", users);
 		return mv;
 	}
 }
