@@ -28,8 +28,8 @@
 				value="com.mysql.jdbc.Driver" />
 
 			<!-- turn value to true to see the sql in the console -->
-			<property name="hibernate.show_sql" value="true" />
-			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.format_sql" value="false" />
 
 			<!-- keeps the connection alive (like a heart beat to keep it awake when 
 				it is deployed to the website) -->
