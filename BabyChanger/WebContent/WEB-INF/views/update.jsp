@@ -44,6 +44,7 @@
 	
 	<h5>Update Location</h5>
 	
+<<<<<<< HEAD
 	
 	 
 	 <form:form method="POST" action="adminUpdateLocationAdmin.do" modelAttribute="updateLocation">
@@ -65,6 +66,9 @@
 	
 	
 	<%-- <%-- <c:if test="${loggedIn.admin }">
+=======
+	<c:if test="${loggedIn.admin }">
+>>>>>>> 8be2f789276291106576b4521c5953a2109c93db
 		<form action="adminUpdateLocationAdmin.do" method="POST">
 		
 	</c:if>
@@ -79,7 +83,11 @@
 		
 		Location Name: <input type="text" name="name" value="${updateLocation.name }" />
 		<br> 
+<<<<<<< HEAD
+		Street Address: <input type="text" name="street" value="${updateLocation.address.street}"/>
+=======
 		Street Address: <input type="text" name="address.street" value="${updateLocation.address.street}"/>
+>>>>>>> 69bce625f31bcc695f249cd5522dbc6222975ca8
 		<br> 
 		Street Address2 <input type="text" name="address.street2" value="${updateLocation.address.street2 }"/>
 		<br> 
@@ -87,7 +95,11 @@
 		<br> 
 		State: <input type="text" name="address.state" value="${updateLocation.address.state }"/>
 		<br> 
+<<<<<<< HEAD
+		Zipcode: <input type="text" name="zipCode" value="${updateLocation.address.zipCode}"/>
+=======
 		Zipcode: <input type="text" name="address.zipCode" value="${updateLocation.address.zipCode}"/>
+>>>>>>> 69bce625f31bcc695f249cd5522dbc6222975ca8
 		<br>
 		Access Limits: <input type="text" name="accessLimits" value="${updateLocation.accessLimits}"/>
 		<br>
@@ -126,11 +138,6 @@
 	</c:if>
 	
 	
-	
-	
-	
-	
-
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
 		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"

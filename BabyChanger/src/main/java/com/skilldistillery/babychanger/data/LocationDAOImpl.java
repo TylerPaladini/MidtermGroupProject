@@ -63,6 +63,7 @@ public class LocationDAOImpl implements LocationDAO {
 	public Location updateLocation(int id, Location location) {
 		Location updateLocation = em.find(Location.class, id);
 		System.out.println("before update " + updateLocation);
+		System.out.println(id);
 		if (updateLocation != null) {
 			updateLocation.setName(location.getName());
 			updateLocation.setAccessLimits(location.getAccessLimits());
