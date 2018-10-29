@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -446,15 +447,16 @@ public class AdminController {
 	
 	// Admin Updates previous location
 	@RequestMapping(path="adminUpdateLocationAdmin.do", method = RequestMethod.POST)
-	public ModelAndView adminUpdateLocation(int id, Address address, Location location, RedirectAttributes redir) {
+	public ModelAndView adminUpdateLocation(@RequestParam("locationId") int locationId, Location location, RedirectAttributes redir) {
+		
 		ModelAndView mv = new ModelAndView();
 		
-		System.out.println("id= " + id);
-		System.out.println("Address= " + address);
+		System.out.println("id= " + locationId);
+//		System.out.println("Address= " + address);
 		System.out.println("Location= " +location);
 		
-		location.setAddress(address);
-		Location newUpdatedLocation = locationDAO.updateLocation(id, location);
+//		location.setAddress(address);
+		Location newUpdatedLocation = locationDAO.updateLocation(locationId, location);
 		if(newUpdatedLocation != null) {
 			redir.addFlashAttribute("updatedLocation", newUpdatedLocation);
 			mv.setViewName("adminUpdatedLocationAdmin.do");
