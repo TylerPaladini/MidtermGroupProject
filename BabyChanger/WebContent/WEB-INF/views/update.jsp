@@ -49,18 +49,18 @@
 		<form action="userUpdateLocationUser.do" method="POST">
 		
 	</c:if>
-		<input type="hidden" name="id" value="${updateLocation.id }"/>
+		<input type="hidden" name="locationId" value="${updateLocation.id }"/>
 		Location Name: <input type="text" name="name" value="${updateLocation.name }" />
 		<br> 
-		Street Address: <input type="text" name="street" value="${updateLocation.address.street}"/>
+		Street Address: <input type="text" name="address.street" value="${updateLocation.address.street}"/>
 		<br> 
-		Street Address2 <input type="text" name="street2" value="${updateLocation.address.street2 }"/>
+		Street Address2 <input type="text" name="address.street2" value="${updateLocation.address.street2 }"/>
 		<br> 
-		City: <input type="text" name="city" value="${updateLocation.address.city }"/>
+		City: <input type="text" name="address.city" value="${updateLocation.address.city }"/>
 		<br> 
-		State: <input type="text" name="state" value="${updateLocation.address.state }"/>
+		State: <input type="text" name="address.state" value="${updateLocation.address.state }"/>
 		<br> 
-		Zipcode: <input type="text" name="zipCode" value="${updateLocation.address.zipCode}"/>
+		Zipcode: <input type="text" name="address.zipCode" value="${updateLocation.address.zipCode}"/>
 		<br>
 		Access Limits: <input type="text" name="accessLimits" value="${updateLocation.accessLimits}"/>
 		<br>
