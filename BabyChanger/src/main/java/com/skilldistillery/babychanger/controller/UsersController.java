@@ -163,7 +163,7 @@ public class UsersController {
 		if (errors.getErrorCount() != 0) {
 			// If there are any errors, return the login form.
 			mv.setViewName("add");
-			mv.addObject("newEntry", true);
+			mv.addObject("addLocationNext", true);
 		}
 		// If no errors, send the user forward to the profile view.
 		else {
@@ -180,27 +180,34 @@ public class UsersController {
 
 	public ModelAndView userAddsRestroom(@Valid @ModelAttribute("createRestroomModel") Restroom restroom, Errors errors,
 			HttpSession session, int userId) {
-
-		
-		
-		Address newAddress = (Address) session.getAttribute("newAddress");
-		Location newLocation = (Location) session.getAttribute("newLocation");
-
-		Address addedAddress = addressDAO.createAddress(newAddress);
-
-		newLocation.setAddress(addedAddress);
-		Location addedLocation = locationDAO.createLocation(newLocation);
-
-		addedLocation.addRestroom(restroom);
-		restroom.setUserId(userId);
-
-		Restroom addedRestroom = restroomDAO.createRestroom(restroom);
-
-		boolean addSuccess = addedRestroom != null && addedLocation != null && addedAddress != null;
-
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("addSuccess", addSuccess);
-		mv.setViewName("confirmation");
+		
+		// Determine if there are any errors.
+		if (errors.getErrorCount() != 0) {
+			// If there are any errors, return the login form.
+			mv.setViewName("add");
+			mv.addObject("addRestroomNext", true);
+		}
+		// If no errors, send the user forward to the profile view.
+		else {
+			Address newAddress = (Address) session.getAttribute("newAddress");
+			Location newLocation = (Location) session.getAttribute("newLocation");
+
+			Address addedAddress = addressDAO.createAddress(newAddress);
+
+			newLocation.setAddress(addedAddress);
+			Location addedLocation = locationDAO.createLocation(newLocation);
+
+			addedLocation.addRestroom(restroom);
+			restroom.setUserId(userId);
+
+			Restroom addedRestroom = restroomDAO.createRestroom(restroom);
+
+			boolean addSuccess = addedRestroom != null && addedLocation != null && addedAddress != null;
+
+			mv.addObject("addSuccess", addSuccess);
+			mv.setViewName("confirmation");
+		}
 		return mv;
 	}
 

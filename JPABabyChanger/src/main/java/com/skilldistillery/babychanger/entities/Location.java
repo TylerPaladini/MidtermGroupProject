@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -45,13 +46,11 @@ public class Location {
 	@Pattern(regexp="[0-9]{3}-[0-9]{3}-[0-9]{4}")
 	private String phone;
 	
-	@Pattern(regexp="(^([01]\\d|2[0-3]):([0-5]\\d)$")
-	@NotEmpty
+//	@Pattern(regexp="(^([01]\\d|2[0-3]):([0-5]\\d)$")
 	@Column(name = "open_time")
 	private Time openTime;
 	
-	@Pattern(regexp="(^([01]\\d|2[0-3]):([0-5]\\d)$")
-	@NotEmpty
+//	@Pattern(regexp="(^([01]\\d|2[0-3]):([0-5]\\d)$")
 	@Column(name = "closed_time")
 	private Time closeTime;
 	

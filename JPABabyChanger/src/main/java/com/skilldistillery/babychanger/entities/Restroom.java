@@ -1,7 +1,7 @@
 package com.skilldistillery.babychanger.entities;
 
-import java.util.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -19,6 +19,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -41,7 +42,7 @@ public class Restroom {
 	@Column(name = "flagged_date")
 	private Date flaggedDate;
 
-	@NotEmpty
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
 
@@ -60,7 +61,7 @@ public class Restroom {
 
 	private String description;
 
-	@NotEmpty
+	@NotNull
 	@Column(name = "changing_table")
 	private Boolean changingTable;
 
