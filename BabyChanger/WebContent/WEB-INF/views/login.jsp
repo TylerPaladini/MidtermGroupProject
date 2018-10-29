@@ -18,7 +18,9 @@
 
 
 <form action="login.do" method="POST">
+Username:
 	<input type="text" name="userName">
+	Password:
 	<input type="password" name="password">
 	<input type="Submit" value="Login">
 	
