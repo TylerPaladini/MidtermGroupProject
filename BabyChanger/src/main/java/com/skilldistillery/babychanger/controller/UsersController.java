@@ -184,12 +184,14 @@ public class UsersController {
 		
 		// Determine if there are any errors.
 		if (errors.getErrorCount() != 0) {
+			System.out.println("Errors in restroom");
 			// If there are any errors, return the login form.
 			mv.setViewName("add");
 			mv.addObject("addRestroomNext", true);
 		}
 		// If no errors, send the user forward to the profile view.
 		else {
+			System.out.println("inside create new restroom");
 			Address newAddress = (Address) session.getAttribute("newAddress");
 			Location newLocation = (Location) session.getAttribute("newLocation");
 
