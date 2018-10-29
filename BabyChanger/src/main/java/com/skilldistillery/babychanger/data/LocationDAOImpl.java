@@ -71,9 +71,15 @@ public class LocationDAOImpl implements LocationDAO {
 			updateLocation.setPhone(location.getPhone());
 //			updateLocation.setOpenTime(location.getOpenTime().toString().substring(0, 5));
 //			updateLocation.setCloseTime(location.getCloseTime().toString().substring(0, 5));
+			updateLocation.setOpenTime(location.getOpenTime());
+			updateLocation.setCloseTime(location.getCloseTime());
+			System.out.println("THIS IS THE ADDRESS INSIDE OF THE IMPL");
+			System.out.println(updateLocation.getAddress().toString());
 			updateLocation.setAddress(location.getAddress());
 			updateLocation.setDateCreated(location.getDateCreated());
+			em.persist(updateLocation);
 		}
+		em.flush();
 //		em.persist(updateLocation);
 //		em.flush();
 		System.out.println("after update " + updateLocation);
