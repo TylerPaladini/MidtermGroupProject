@@ -86,9 +86,9 @@ public class Comment {
 		return rating;
 	}
 
-	public void setRating(Rating rating) {
-		this.rating = rating;
-	}
+//	public void setRating(Rating rating) {
+//		this.rating = rating;
+//	}
 	public void setRating(int rating) {
 		if(rating == 1) {
 			this.rating = Rating.ONE;

@@ -220,7 +220,7 @@ public class AdminController {
 	// Adds comment
 	@RequestMapping(path = "addedCommentPageAdmin.do", method = RequestMethod.GET)
 	public ModelAndView goToAddCommentPage(int restroomId, HttpSession session) {
-		Restroom commentedRestroom = restroomDAO.getRestroom(1);
+		Restroom commentedRestroom = restroomDAO.getRestroom(restroomId);
 		session.setAttribute("commentedRestroom", commentedRestroom);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("addingComment", true);
@@ -230,7 +230,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping(path = "addCommentAdmin.do", method = RequestMethod.POST)
-	public ModelAndView addComment(int id, Comment comment, RedirectAttributes redir, HttpSession session) {
+	public ModelAndView addComment(Comment comment, RedirectAttributes redir, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		comment.setUser((Users) session.getAttribute("loggedIn"));
 		comment.setRestroom((Restroom) session.getAttribute("commentedRestroom"));

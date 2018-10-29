@@ -20,7 +20,7 @@ public class RestroomDAOImpl implements RestroomDAO {
 		
 		Restroom restroom = null; 
 		
-		String jpql = "Select r from Restroom where id= :id"; 
+		String jpql = "Select r from Restroom r where id = :id"; 
 		
 		restroom = em.createQuery(jpql, Restroom.class).setParameter("id", id).getSingleResult();
 		

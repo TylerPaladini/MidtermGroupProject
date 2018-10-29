@@ -131,7 +131,7 @@
 	</c:if>
 	<c:if test="${addingComment}">
 		<c:if test="${loggedIn.admin }">
-			<form action="addCommentAdmin.do">
+			<form action="addCommentAdmin.do" method="post">
 		</c:if>
 		<c:if test="${!loggedIn.admin }">
 			<form action="">
@@ -141,7 +141,7 @@
 		<input type="number" min=1 max=5 name="rating" value=1>
 		
 		Comment
-		<textarea rows="3" cols="3" name="comment"></textarea>
+		<textarea rows="3" cols="6" name="comment"></textarea>
 		<input type="submit" value="submit">
 		</form>
 		
