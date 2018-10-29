@@ -37,6 +37,7 @@ public class AdminController {
 	private RestroomDAO restroomDAO;
 	@Autowired
 	private UsersDAO usersDAO;
+	
 
 	// create new user
 
@@ -218,20 +219,34 @@ public class AdminController {
 	}
 	
 	// Adds comment
-	@RequestMapping(path = "addComment.do", method = RequestMethod.POST)
-	public ModelAndView addComment(Comment comment, RedirectAttributes redir) {
+	@RequestMapping(path = "addedCommentPageAdmin.do", method = RequestMethod.GET)
+	public ModelAndView goToAddCommentPage(int restroomId, HttpSession session) {
+		Restroom commentedRestroom = restroomDAO.getRestroom(1);
+		session.setAttribute("commentedRestroom", commentedRestroom);
 		ModelAndView mv = new ModelAndView();
+		mv.addObject("addingComment", true);
+		mv.setViewName("add");	
+		return mv;
 		
+	}
+	
+	@RequestMapping(path = "addCommentAdmin.do", method = RequestMethod.POST)
+	public ModelAndView addComment(int id, Comment comment, RedirectAttributes redir, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		comment.setUser((Users) session.getAttribute("loggedIn"));
+		comment.setRestroom((Restroom) session.getAttribute("commentedRestroom"));
+		comment.setDateCreated(new Date());
 		Comment addcomment = commentDAO.addComment(comment);
 		redir.addFlashAttribute("addComment", addcomment);
-		mv.setViewName("redirect:addedComment");
+		mv.setViewName("redirect:addedCommentAdmin.do");
 		
 		return mv;
 		
 	}
-	@RequestMapping(path = "addedComment.do", method = RequestMethod.GET)
+	@RequestMapping(path = "addedCommentAdmin.do", method = RequestMethod.GET)
 	public ModelAndView addedComment() {
 		ModelAndView mv = new ModelAndView();
+		mv.addObject("commentAdded", true);
 		mv.setViewName("confirmation");
 		
 		return mv;
@@ -421,20 +436,21 @@ public class AdminController {
 	
 	// Maps update location button in admin profile to be able to update a location through controller
 	@RequestMapping(path="adminUpdateLocation.do", method = RequestMethod.GET)
-	public ModelAndView goToUpdatePage() {
+	public ModelAndView goToUpdatePage(int id) {
 		ModelAndView mv = new ModelAndView();
+		Location updateLocation = locationDAO.getLocationById(id);
+		mv.addObject("updateLocation", updateLocation);
 		mv.setViewName("update");
 		return mv;
 	}
 	
 	// Admin Updates previous location
 	@RequestMapping(path="adminUpdateLocationAdmin.do", method = RequestMethod.POST)
-	public ModelAndView adminUpdateLocation(int id, Location location, RedirectAttributes redir, HttpSession session) {
+	public ModelAndView adminUpdateLocation(int id, Location location, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
 		
 		Location newUpdatedLocation = locationDAO.updateLocation(id, location);
 		if(newUpdatedLocation != null) {
-			session.setAttribute("updatedLocation", newUpdatedLocation);
 			redir.addFlashAttribute("updatedLocation", newUpdatedLocation);
 			mv.setViewName("adminUpdatedLocationAdmin.do");
 		}

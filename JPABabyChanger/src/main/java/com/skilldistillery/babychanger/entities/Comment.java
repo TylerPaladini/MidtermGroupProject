@@ -89,6 +89,23 @@ public class Comment {
 	public void setRating(Rating rating) {
 		this.rating = rating;
 	}
+	public void setRating(int rating) {
+		if(rating == 1) {
+			this.rating = Rating.ONE;
+		}
+		else if(rating == 2) {
+			this.rating = Rating.TWO;
+		}
+		else if(rating == 3) {
+			this.rating = Rating.THREE;
+		}
+		else if(rating == 4) {
+			this.rating = Rating.FOUR;
+		}
+		else if(rating == 5) {
+			this.rating = Rating.FIVE;
+		}
+	}
 
 	public Boolean isActive() {
 		return active;

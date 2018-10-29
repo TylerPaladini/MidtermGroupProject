@@ -49,30 +49,41 @@
 		<form action="userUpdateLocationUser.do" method="POST">
 		
 	</c:if>
-		<input type="hidden" name="id" value="${location.id }"/>
-		Location Name: <input type="text" name="name" value="${location.name }" />
+		<input type="hidden" name="id" value="${updateLocation.id }"/>
+		Location Name: <input type="text" name="name" value="${updateLocation.name }" />
 		<br> 
-		Street Address: <input type="text" name="street" value="${location.address.street}"/>
+		<%-- Street Address: <input type="text" name="street" value="${updateLocation.address.street}"/>
 		<br> 
-		Street Address2 <input type="text" name="street2" value="${location.address.street2 }"/>
+		Street Address2 <input type="text" name="street2" value="${updateLocation.address.street2 }"/>
 		<br> 
-		City: <input type="text" name="city" value="${location.address.city }"/>
+		City: <input type="text" name="city" value="${updateLocation.address.city }"/>
 		<br> 
-		State: <input type="text" name="state" value="${location.address.state }"/>
+		State: <input type="text" name="state" value="${updateLocation.address.state }"/>
 		<br> 
-		Zipcode: <input type="text" name="zipCode" value="${location.address.zipCode}"/>
+		Zipcode: <input type="text" name="zipCode" value="${updateLocation.address.zipCode}"/>
+		<br> --%>
+		Access Limits: <input type="text" name="accessLimits" value="${updateLocation.accessLimits}"/>
 		<br>
-		Access Limits: <input type="text" name="accessLimits" value="${location.accessLimits}"/>
+		Is Purchase Required:
+		
+		<c:if test="${updateLocation.purchaseRequired }">
+		 	Yes<input type="radio" name="purchaseRequired" value="true" checked/>
+			No<input type="radio" name="purchaseRequired" value="false"/>
+		
+		</c:if>
+		<c:if test="${!updateLocation.purchaseRequired }">
+			 Yes<input type="radio" name="purchaseRequired" value="true"/>
+			 No<input type="radio" name="purchaseRequired" value="false" checked/>
+		
+		</c:if>
 		<br>
-		Is Purchase Required: <input type="text" name="purchaseRequired" value="${location.purchaseRequired}"/>
+		Phone: <input type="text" name="phone" value="${updateLocation.phone}"/>
 		<br>
-		Phone: <input type="text" name="phone" value="${location.phone}"/>
+		<%-- Open Time: <input type="text" name="openTime" value="${updateLocation.openTime}"/>
 		<br>
-		Open Time: <input type="text" name="openTime" value="${location.openTime}"/>
-		<br>
-		Close Time: <input type="text" name="closeTime" value="${location.closeTime}"/>
-		<br>
-		<input type="hidden" name="dateCreated" value="${location.dateCreated}"/>
+		Close Time: <input type="text" name="closeTime" value="${updateLocation.closeTime}"/>
+		<br> --%>
+		<input type="hidden" name="dateCreated" value="${updateLocation.dateCreated}"/>
 		<input type="Submit" value="update" />
 	</form>
 	

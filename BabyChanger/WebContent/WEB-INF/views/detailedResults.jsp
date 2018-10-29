@@ -66,10 +66,20 @@
 				<h5>Directions:</h5>
 				${restroom.directions }
 				<br>
-				<form action="">
+				<c:if test="${ not empty loggedIn }">
+					<c:if test="${loggedIn.admin }">
+						<form action="addedCommentPageAdmin.do">
+						
+					</c:if>
+					<c:if test="${!loggedIn.admin }">
+						<form action="">
+						
+					</c:if>
+						<input type="hidden" name="restroomId" value="${restroom.id }">
+						<input type="submit" value="Add Comment">
+					</form>
 				
-					<input type="submit" value="Add Comment">
-				</form>
+				</c:if>
 				<c:if test="${empty restroom.comments }">
 					<h3>No comments posted for this restroom</h3>
 				</c:if>
