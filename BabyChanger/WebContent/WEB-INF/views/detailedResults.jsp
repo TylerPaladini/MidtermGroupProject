@@ -6,20 +6,12 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link>
-<<<<<<< HEAD
-    href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
     rel="stylesheet"
     integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
     crossorigin="anonymous">
 <title>Detailed Results View</title>
-=======
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-	crossorigin="anonymous">
-<title>Insert title here</title>
->>>>>>> 82fb18805b3730706c9cf315504f0517aa41e0c3
+
 </head>
 <body>
 	<%@ include file="navigation.jsp"%>
@@ -27,53 +19,69 @@
 	<c:if test="${not empty location }">
 		<h1>Location Info</h1>
 		<h2>${location.name }</h2>
-		<h6>Date Created: <em>${location.dateCreated }</em></h6>
+		<h6>Date Created: </h6>
+		<em>${location.dateCreated }</em>
 		<br>
-		Phone Number:<h4>${location.phone }</h4>
+		<h4>Phone Number:</h4>
+		${location.phone }
 		<br>
-		Hours of Operation: <h4>${location.openTime }-
-			${location.closeTime }</h4>
+		<h4>Hours of Operation: </h4>
+		${location.openTime } - ${location.closeTime }
 		<br>
-		Address:<h4>${location.address.street }</h4>
-		<h4>${location.address.street2 }</h4>
-		<h4>${location.address.city }</h4>
-		<h4>${location.address.state }</h4>
-		<h4>${location.address.zipCode }</h4>
+		<h4>Address:</h4>
+		<p>
+			${location.address.street }
+			${location.address.street2 }
+			${location.address.city }
+			${location.address.state }
+			${location.address.zipCode }
+		</p>
 		<br>
-		Access Limits<h4>${location.accessLimits }</h4>
+		<h4>Access Limits</h4>
+		${location.accessLimits }
 		<br>
-		Purchase Required <h4>${location.purchaseRequired }</h4>
+		<h4>Purchase Required</h4>
+		${location.purchaseRequired }
 		<br>
 
-		<%-- <c:if test="${not empty location.restrooms }">
+		<c:if test="${not empty location.restrooms }">
 
-			<h1>Restroom Info</h1>
 			<c:forEach items="${location.restrooms }" var="restroom">
-				Changing Table? <h5>${restroom.changingTable }</h5>
+				<h1>Restroom Info</h1>
+				<h5>Changing Table?</h5>
+				${restroom.changingTable }
 				<br>
-				Gender:<h5>${restroom.gender }</h5>
+				<h5>Gender:</h5>
+				${restroom.gender }
 				<br>
-				Public Restroom? <h5>${restroom.pAccess }</h5>
+				<h5>Public Restroom?</h5>
+				${restroom.pAccess }
 				<br>
-				Description:<h5>${restroom.description }</h5>
+				<h5>Description:</h5>
+				${restroom.description }
 				<br>
-				Directions:<h5>${restroom.directions }</h5>
+				<h5>Directions:</h5>
+				${restroom.directions }
 				<br>
-				<c:if test="${not empty location.restrooms.comments }">
 
-					<h1>Comments</h1>
-					<c:forEach items="${location.restrooms.comments }" var="comment">
-						<h5>${comment.dateCreated }</h5>
-						<h5>${comment.rating }</h5>
+				<c:if test="${not empty restroom.comments }">
+					<h3>Comments</h3>
+					<c:forEach items="${restroom.comments }" var="comment">
+						<h5>Date Created</h5>
+						${comment.dateCreated }
+						<h5>Rating</h5>
+						${comment.rating }
+						<br>
 						<p>${comment.comment }</p>
-
+						<hr>
+	
 					</c:forEach>
-
 				</c:if>
 
+			<hr>
 			</c:forEach>
 
-		</c:if> --%>
+		</c:if>
 
 
 	</c:if>
