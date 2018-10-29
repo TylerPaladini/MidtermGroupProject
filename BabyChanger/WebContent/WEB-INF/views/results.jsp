@@ -69,7 +69,8 @@
 			${location.openTime } - ${location.closeTime }
 			</c:if>
 			<br>
-			<form action="">
+			<form action="adminUpdateLocation.do">
+				<input type="hidden" name="id" value="${location.id }" >
 				<input type="submit" value="update Location">
 			</form>
 		</c:forEach>

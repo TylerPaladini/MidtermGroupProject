@@ -421,17 +421,20 @@ public class AdminController {
 	
 	// Maps update location button in admin profile to be able to update a location through controller
 	@RequestMapping(path="adminUpdateLocation.do", method = RequestMethod.GET)
-	public ModelAndView goToUpdatePage() {
+	public ModelAndView goToUpdatePage(int id) {
 		ModelAndView mv = new ModelAndView();
+		Location updateLocation = locationDAO.getLocationById(id);
+		mv.addObject("updateLocation", updateLocation);
 		mv.setViewName("update");
 		return mv;
 	}
 	
 	// Admin Updates previous location
 	@RequestMapping(path="adminUpdateLocationAdmin.do", method = RequestMethod.POST)
-	public ModelAndView adminUpdateLocation(int id, Location location, RedirectAttributes redir, HttpSession session) {
+	public ModelAndView adminUpdateLocation(int id, Address address, Location location, RedirectAttributes redir, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		
+		location.setAddress(address);
 		Location newUpdatedLocation = locationDAO.updateLocation(id, location);
 		if(newUpdatedLocation != null) {
 			session.setAttribute("updatedLocation", newUpdatedLocation);
