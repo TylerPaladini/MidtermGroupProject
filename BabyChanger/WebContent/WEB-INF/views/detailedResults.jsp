@@ -17,6 +17,7 @@
 	<%@ include file="navigation.jsp"%>
 
 	<c:if test="${not empty location }">
+		<div style="background-color:lightyellow">
 		<h1>Location Info</h1>
 		<h2>${location.name }</h2>
 		<h6>Date Created: </h6>
@@ -42,6 +43,7 @@
 		<br>
 		<h4>Purchase Required</h4>
 		${location.purchaseRequired }
+		</div>
 		<br>
 		<br>
 		<br>
@@ -50,6 +52,7 @@
 		<c:if test="${not empty location.restrooms }">
 
 			<c:forEach items="${location.restrooms }" var="restroom">
+				<div style="background-color:lightgreen">
 				<h1>Restroom Info</h1>
 				<h5>Changing Table?</h5>
 				${restroom.changingTable }
@@ -66,6 +69,7 @@
 				<h5>Directions:</h5>
 				${restroom.directions }
 				<br>
+				</div>
 				<c:if test="${ not empty loggedIn }">
 					<c:if test="${loggedIn.admin }">
 						<form action="addedCommentPageAdmin.do">
@@ -86,7 +90,9 @@
 				
 				<c:if test="${not empty restroom.comments }">
 					<h3>Comments</h3>
+					<hr>
 					<c:forEach items="${restroom.comments }" var="comment">
+						<div style="background-color:lightblue">
 						<h5>Date Created</h5>
 						${comment.dateCreated }
 						<h5>Rating</h5>
@@ -107,7 +113,7 @@
 							</form>
 						</c:if>
 						<hr>
-	
+					</div>
 					</c:forEach>
 				</c:if>
 			<br>

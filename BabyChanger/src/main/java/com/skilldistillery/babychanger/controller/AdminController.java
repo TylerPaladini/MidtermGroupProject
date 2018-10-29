@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -447,6 +448,10 @@ public class AdminController {
 	@RequestMapping(path="adminUpdateLocationAdmin.do", method = RequestMethod.POST)
 	public ModelAndView adminUpdateLocation(int id, Address address, Location location, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
+		
+		System.out.println("id= " + id);
+		System.out.println("Address= " + address);
+		System.out.println("Location= " +location);
 		
 		location.setAddress(address);
 		Location newUpdatedLocation = locationDAO.updateLocation(id, location);
