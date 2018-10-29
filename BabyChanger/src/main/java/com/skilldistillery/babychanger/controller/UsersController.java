@@ -128,6 +128,13 @@ public class UsersController {
 	public ModelAndView addAddressLocationRestroom() {
 		ModelAndView mv = new ModelAndView();
 		
+		Address address = new Address();
+		Location location = new Location();
+		Restroom restroom = new Restroom ();
+		
+		mv.addObject("createAddressModel", new Address());
+		mv.addObject("createLocationModel", new Location());
+		mv.addObject("createRestroomModel", new Restroom());
 		
 		mv.addObject("newEntry", true);
 		mv.setViewName("add");
@@ -135,7 +142,7 @@ public class UsersController {
 	}
 
 	@RequestMapping(path = "userAddsAddress.do", method = RequestMethod.POST)
-	public ModelAndView userAddsAddress(@Valid Address address, Errors errors, HttpSession session) {
+	public ModelAndView userAddsAddress(@Valid @ModelAttribute("createAddressModel") Address address, Errors errors, HttpSession session) {
 
 		session.setAttribute("newAddress", address);
 		ModelAndView mv = new ModelAndView();
@@ -145,7 +152,7 @@ public class UsersController {
 	}
 
 	@RequestMapping(path = "userAddsLocation.do", method = RequestMethod.POST)
-	public ModelAndView userAddsLocation(@Valid Location location, Errors errors, HttpSession session) {
+	public ModelAndView userAddsLocation(@Valid @ModelAttribute("createLocationModel") Location location, Errors errors, HttpSession session) {
 		session.setAttribute("newLocation", location);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("addRestroomNext", true);
@@ -155,7 +162,7 @@ public class UsersController {
 
 	@RequestMapping(path = "userAddsRestroom.do", method = RequestMethod.POST)
 
-	public ModelAndView userAddsRestroom(@Valid Restroom restroom, Errors errors, HttpSession session, int userId) {
+	public ModelAndView userAddsRestroom(@Valid @ModelAttribute("createRestroomModel") Restroom restroom, Errors errors, HttpSession session, int userId) {
 
 		Address newAddress = (Address) session.getAttribute("newAddress");
 		Location newLocation = (Location) session.getAttribute("newLocation");
