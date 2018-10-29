@@ -18,16 +18,18 @@ public class Address {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id; 
 	
+	@Pattern(regexp="[a-zA-Z0-9]{3,}")
 	@NotEmpty
 	private String street; 
 	
+	@Pattern(regexp="[a-zA-Z0-9]{3,}")
 	private String street2; 
 	
+	@Pattern(regexp="[a-zA-Z0-9]{3,}")
 	@NotEmpty
 	private String city; 
-	
 
-
+	@Pattern(regexp="^(?:(A[KLRZ]|C[AOT]|D[CE]|FL|GA|HI|I[ADLN]|K[SY]|LA|M[ADEINOST]|N[CDEHJMVY]|O[HKR]|P[AR]|RI|S[CD]|T[NX]|UT|V[AIT]|W[AIVY]))$")
 	@NotEmpty
 	private String state; 
 	

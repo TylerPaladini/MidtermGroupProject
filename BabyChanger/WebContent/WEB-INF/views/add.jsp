@@ -22,41 +22,92 @@
 	<c:if test="${newEntry }">
 	
 		<c:if test="${loggedIn.admin }">
-			<form action="adminAddsAddress.do" method="POST">
-		</c:if>
-		<c:if test="${!loggedIn.admin }">
-			<form action="userAddsAddress.do" method="POST">
-		</c:if>
-		
+			<form:form action="adminAddsAddress.do" method="POST" modelAttribute="createAddressModel">
 				<h5>Address</h5>
-				<label>*Street</label> 
-				<input type="text" name="street" required pattern=".{3,}" /> 
+				<form:label path="street">*Street</form:label> 
+				<form:input path="street" /> 
+				<form:errors path="street" />
 				<br> 
-				<label>Street2</label> 
-				<input type="text" name="street2" pattern=".{3,}" /> 
+				<form:label path="street2">Street2</form:label> 
+				<form:input path="street2" /> 
+				<form:errors path="street2"/>
 				<br> 
-				<label>*City</label>
-				<input type="text" name="city" required pattern=".{3,}" /> 
+				<form:label path="city">*City</form:label>
+				<form:input path="city" /> 
+				<form:errors path="city" />
 				<br>
-				<label>*State</label> 
-				<input type="text" name="state" required pattern=".{2,}" /> 
+				<form:label path="state">*State</form:label> 
+				<form:input path="state" />
+				<form:errors path="state" />
 				<br> 
-				<label>*Zip Code</label> 
-				<input type="text" name="zipCode" required pattern=".{5,}" /> 
+				<form:label path="zipCode">*Zip Code</form:label> 
+				<form:input path="zipCode" /> 
+				<form:errors path="zipCode" />
 				<br> 
 				<br>
 				<input type="submit" value="Next" />
-			</form>
-
+			</form:form>
+		</c:if>
+		<c:if test="${!loggedIn.admin }">
+			<form:form action="userAddsAddress.do" method="POST" modelAttribute="createAddressModel">
+				<h5>Address</h5>
+				<form:label path="street">*Street</form:label> 
+				<form:input path="street" /> 
+				<form:errors path="street" />
+				<br> 
+				<form:label path="street2">Street2</form:label> 
+				<form:input path="street2" /> 
+				<form:errors path="street2"/>
+				<br> 
+				<form:label path="city">*City</form:label>
+				<form:input path="city" /> 
+				<form:errors path="city" />
+				<br>
+				<form:label path="state">*State</form:label> 
+				<form:input path="state" />
+				<form:errors path="state" />
+				<br> 
+				<form:label path="zipCode">*Zip Code</form:label> 
+				<form:input path="zipCode" /> 
+				<form:errors path="zipCode" />
+				<br> 
+				<br>
+				<input type="submit" value="Next" />
+			</form:form>
+		</c:if>
 	</c:if>
 
 	<c:if test="${ addLocationNext}">
 		<c:if test="${loggedIn.admin }">
-			<form action="adminAddsLocation.do" method="POST">
+			<form:form action="adminAddsLocation.do" method="POST" modelAttribure="createLocationModel">
+				<input type="hidden" name="newAddress" value="${newAddress }">
+				<h5>Location</h5>
+				<form:label path="name">Name Of Location</form:label> 
+				<form:input path="name" />
+				<form:errors path="name" />
+				<br>
+				<label>Access Limits (e.g. Club membership required)</label>
+				<input type="text" name="accessLimits" /> 
+				<br> 
+				<label>*Purchased Required?</label> 
+				Yes<input type="radio" name="purchaseRequired" value="true" />
+				No<input type="radio" name="purchaseRequired" value="false" checked /> 
+				<br>
+				<label>Phone Number(format like 555-555-5555)</label> 
+				<input type="tel" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" /> 
+				<br> <label>*Open Time(24 hour format e.g. 15:30)</label> 
+				<input type="text" name="openTime" required pattern="(^([01]\d|2[0-3]):([0-5]\d)$"/> 
+				<br> 
+				<label>*Close Time(24 hour format e.g. 23:30)</label>
+				<input type="text" name="closeTime" required pattern="^([01]\d|2[0-3]):([0-5]\d)$"> 
+				<br> 
+				<br> 
+				<input type="submit" value="Next" />
+			</form:form>
 		</c:if>
 		<c:if test="${!loggedIn.admin }">
-			<form action="userAddsLocation.do" method="POST">
-		</c:if>
+			<form:form action="userAddsLocation.do" method="POST">
+		
 				<input type="hidden" name="newAddress" value="${newAddress }">
 				<h5>Location</h5>
 				<label>Name Of Location</label> 
@@ -79,7 +130,8 @@
 				<br> 
 				<br> 
 				<input type="submit" value="Next" />
-			</form>
+			</form:form>
+		</c:if>
 	</c:if>
 	<c:if test="${ addRestroomNext}">
 		<c:if test="${loggedIn.admin }">
