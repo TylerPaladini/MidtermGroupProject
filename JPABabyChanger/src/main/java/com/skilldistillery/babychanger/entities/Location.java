@@ -33,7 +33,7 @@ public class Location {
 	@NotEmpty
 	private String name;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "address_id")
 	private Address address;
 	
@@ -118,20 +118,29 @@ public class Location {
 		return openTime;
 	}
 
-	public void setOpenTime(String openTime) {
-		this.openTime = Time.valueOf( openTime + ":00");
-		
-	}
+//	public void setOpenTime(String openTime) {
+//		this.openTime = Time.valueOf( openTime + ":00");
+//		
+//	}
+	
 
 	public Time getCloseTime() {
 		return closeTime;
 	}
 
-	public void setCloseTime(String closeTime) {
-		
-		this.closeTime = Time.valueOf(closeTime + ":00");
-	}
+//	public void setCloseTime(String closeTime) {
+//		
+//		this.closeTime = Time.valueOf(closeTime + ":00");
+//	}
 	
+	public void setOpenTime(Time openTime) {
+		this.openTime = openTime;
+	}
+
+	public void setCloseTime(Time closeTime) {
+		this.closeTime = closeTime;
+	}
+
 	public Date getDateCreated() {
 		return dateCreated;
 	}

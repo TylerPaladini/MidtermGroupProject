@@ -453,7 +453,8 @@ public class AdminController {
 		
 		ModelAndView mv = new ModelAndView();
 		Location locationToUpdate = locationDAO.getLocationById(locationId);
-		
+		int addressIdAttachedToThisLocation = locationToUpdate.getAddress().getId();
+		System.out.println(addressIdAttachedToThisLocation);
 
 		System.out.println("id= " + locationId);
 //		System.out.println("Address= " + address);
@@ -462,7 +463,8 @@ public class AdminController {
 		
 		
 		
-		locationToUpdate.setName(location.getName());
+		location.setOpenTime(locationToUpdate.getOpenTime());
+		location.setCloseTime(locationToUpdate.getCloseTime());
 		
 //		location.setAddress(address);
 		Location newUpdatedLocation = locationDAO.updateLocation(locationId, location);
