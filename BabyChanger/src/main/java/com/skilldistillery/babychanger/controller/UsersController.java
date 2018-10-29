@@ -177,5 +177,41 @@ public class UsersController {
 		return mv;
 	}
 	
+	// Maps user to update.jsp to update a location
+	@RequestMapping(path="userUpdateLocation.do", method = RequestMethod.GET)
+	public ModelAndView goToUpdatePage() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("update");
+		return mv;
+	}
+	
+	//User updates previous location
+	@RequestMapping(path= "userUpdateLocationUser.do", method = RequestMethod.POST)
+	public ModelAndView userUpdateLocation(int id, Location location, RedirectAttributes redir, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		
+		Location newUpdatedLocation = locationDAO.updateLocation(id, location);
+		if(newUpdatedLocation != null) {
+			session.setAttribute("updatedLocation", newUpdatedLocation);
+			redir.addFlashAttribute("updatedLocation", newUpdatedLocation);
+			mv.setViewName("userUpdatedLocationUser.do");
+		}
+		else {
+			mv.setViewName("update");
+		}
+		return mv;
+	}
+	@RequestMapping(path="userUpdatedLocationUser.do", method= RequestMethod.GET)
+	public ModelAndView updatedLocation() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("update");
+		
+		return mv;
+	}
+	
+	
+	
+
+	
 
 }
