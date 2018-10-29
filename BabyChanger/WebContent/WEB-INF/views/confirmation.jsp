@@ -31,6 +31,7 @@
 		add successful
 	</c:if>
 	<c:if test="${commentAdded }">
+		comment added
 	</c:if>
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
