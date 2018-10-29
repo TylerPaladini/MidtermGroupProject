@@ -451,6 +451,19 @@ public class AdminController {
 			
 			return mv;
 	}
+	
+	// Lists all locations
+	@RequestMapping(path = "listAllLocations.do", method = RequestMethod.GET)
+	public ModelAndView getAllLocations() {
+		ModelAndView mv = new ModelAndView();
+		
+		List<Location> allLocations = locationDAO.getAllLocations();
+		mv.addObject("allLocations", allLocations);
+		mv.setViewName("results");
+		
+		return mv;
+		
+	}
 		
 		
 		
