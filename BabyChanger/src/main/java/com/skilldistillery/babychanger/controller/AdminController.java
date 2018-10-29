@@ -449,6 +449,7 @@ public class AdminController {
 		ModelAndView mv = new ModelAndView();
 		
 		Location newUpdatedLocation = locationDAO.updateLocation(id, location);
+		
 		if(newUpdatedLocation != null) {
 			redir.addFlashAttribute("updatedLocation", newUpdatedLocation);
 			mv.setViewName("adminUpdatedLocationAdmin.do");

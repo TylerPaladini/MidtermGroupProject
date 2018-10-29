@@ -62,6 +62,7 @@ public class LocationDAOImpl implements LocationDAO {
 	@Override
 	public Location updateLocation(int id, Location location) {
 		Location updateLocation = em.find(Location.class, id);
+		System.out.println(id);
 		if (updateLocation != null) {
 			updateLocation.setName(location.getName());
 			updateLocation.setAccessLimits(location.getAccessLimits());
