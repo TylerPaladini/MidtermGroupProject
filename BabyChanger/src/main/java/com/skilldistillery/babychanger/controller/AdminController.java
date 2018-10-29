@@ -446,9 +446,10 @@ public class AdminController {
 	
 	// Admin Updates previous location
 	@RequestMapping(path="adminUpdateLocationAdmin.do", method = RequestMethod.POST)
-	public ModelAndView adminUpdateLocation(int id, Location location, RedirectAttributes redir) {
+	public ModelAndView adminUpdateLocation(int id, Address address, Location location, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
 		
+		location.setAddress(address);
 		Location newUpdatedLocation = locationDAO.updateLocation(id, location);
 		if(newUpdatedLocation != null) {
 			redir.addFlashAttribute("updatedLocation", newUpdatedLocation);
