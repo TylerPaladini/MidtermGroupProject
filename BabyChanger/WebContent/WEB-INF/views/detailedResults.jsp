@@ -102,7 +102,7 @@
 						<c:if test="${comment.user.id == loggedIn.id }">
 							
 							<c:if test="${loggedIn.admin }">
-								<form action="">
+								<form action="updateCommentPageAdmin.do">
 							</c:if>
 							<c:if test="${!loggedIn.admin }">
 								<form action="updateCommentPageUser.do">

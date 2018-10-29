@@ -86,7 +86,16 @@
 		<input type="hidden" name="dateCreated" value="${updateLocation.dateCreated}"/>
 		<input type="Submit" value="update" />
 	</form>
-	
+	<c:if test="${updatingComment }">
+		<form action="updateCommentAdmin.do">
+		Rating
+		<input type="number" min=1 max=5 name="rating" value="${updatedComment.rating.value }">
+		
+		Comment
+		<textarea rows="3" cols="6" name="comment" value="${updatedComment.comment }"></textarea>
+		<input type="submit" value="submit">
+		</form>
+	</c:if>
 	
 	
 	
