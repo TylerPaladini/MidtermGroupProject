@@ -28,9 +28,8 @@
 				<form:input path="street" /> 
 				<form:errors path="street" />
 				<br> 
-				<form:label path="street2">Street2</form:label> 
-				<form:input path="street2" /> 
-				<form:errors path="street2"/>
+				<label>Street2</label> 
+				<input type="text" name="street2" /> 
 				<br> 
 				<form:label path="city">*City</form:label>
 				<form:input path="city" /> 
@@ -79,7 +78,7 @@
 
 	<c:if test="${ addLocationNext}">
 		<c:if test="${loggedIn.admin }">
-			<form:form action="adminAddsLocation.do" method="POST" modelAttribure="createLocationModel">
+			<form:form action="adminAddsLocation.do" method="POST" modelAttribute="createLocationModel">
 				<input type="hidden" name="newAddress" value="${newAddress }">
 				<h5>Location</h5>
 				<form:label path="name">Name Of Location</form:label> 
@@ -93,25 +92,30 @@
 				Yes<input type="radio" name="purchaseRequired" value="true" />
 				No<input type="radio" name="purchaseRequired" value="false" checked /> 
 				<br>
-				<label>Phone Number(format like 555-555-5555)</label> 
-				<input type="tel" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" /> 
-				<br> <label>*Open Time(24 hour format e.g. 15:30)</label> 
-				<input type="text" name="openTime" required pattern="(^([01]\d|2[0-3]):([0-5]\d)$"/> 
+				<form:label path="phone">Phone Number(format like 555-555-5555)</form:label> 
+				<form:input type="tel" path="phone" />
+				<form:errors path="phone" />
+				<br>
+				<form:label path="openTime">*Open Time(24 hour format e.g. 15:30)</form:label> 
+				<form:input path="openTime" />
+				<form:errors path="openTime" />
 				<br> 
-				<label>*Close Time(24 hour format e.g. 23:30)</label>
-				<input type="text" name="closeTime" required pattern="^([01]\d|2[0-3]):([0-5]\d)$"> 
+				<form:label path="closeTime">*Close Time(24 hour format e.g. 23:30)</form:label>
+				<form:input path="closeTime" /> 
+				<form:errors path="closeTime" />
 				<br> 
 				<br> 
 				<input type="submit" value="Next" />
 			</form:form>
 		</c:if>
 		<c:if test="${!loggedIn.admin }">
-			<form:form action="userAddsLocation.do" method="POST">
+			<form:form action="userAddsLocation.do" method="POST" modelAttribute="createLocationModel">
 		
 				<input type="hidden" name="newAddress" value="${newAddress }">
 				<h5>Location</h5>
-				<label>Name Of Location</label> 
-				<input type="text" name="name" /> 
+				<form:label path="name">Name Of Location</form:label> 
+				<form:input path="name" />
+				<form:errors path="name" />
 				<br>
 				<label>Access Limits (e.g. Club membership required)</label>
 				<input type="text" name="accessLimits" /> 
@@ -120,13 +124,17 @@
 				Yes<input type="radio" name="purchaseRequired" value="true" />
 				No<input type="radio" name="purchaseRequired" value="false" checked /> 
 				<br>
-				<label>Phone Number(format like 555-555-5555)</label> 
-				<input type="tel" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" /> 
-				<br> <label>*Open Time(24 hour format e.g. 15:30)</label> 
-				<input type="text" name="openTime" required pattern="(^([01]\d|2[0-3]):([0-5]\d)$"/> 
+				<form:label path="phone">Phone Number(format like 555-555-5555)</form:label> 
+				<form:input type="tel" path="phone" />
+				<form:errors path="phone" />
+				<br>
+				<form:label path="openTime">*Open Time(24 hour format e.g. 15:30)</form:label> 
+				<form:input path="openTime" />
+				<form:errors path="openTime" />
 				<br> 
-				<label>*Close Time(24 hour format e.g. 23:30)</label>
-				<input type="text" name="closeTime" required pattern="^([01]\d|2[0-3]):([0-5]\d)$"> 
+				<form:label path="closeTime">*Close Time(24 hour format e.g. 23:30)</form:label>
+				<form:input path="closeTime" /> 
+				<form:errors path="closeTime" /> 
 				<br> 
 				<br> 
 				<input type="submit" value="Next" />
@@ -135,27 +143,25 @@
 	</c:if>
 	<c:if test="${ addRestroomNext}">
 		<c:if test="${loggedIn.admin }">
-			<form action="adminAddsRestroom.do" method="POST">
-		</c:if>
-		<c:if test="${!loggedIn.admin }">
-			<form action="userAddsRestroom.do" method="POST">
-		</c:if>
-					<input type="hidden" name="newLocation" value="${newLocation }">
+			<form:form action="adminAddsRestroom.do" method="POST" modelAttribute="createRestroomModel">
+				<input type="hidden" name="newLocation" value="${newLocation }">
 				<input type="hidden" name="newAddress" value="${newAddress }">
 				<h5>Restroom Information</h5>
 	
-				<label>*Changing Table Available?</label> 
-				Yes <input type="radio" name="changingTable" value="true" checked /> 
-				No <input type="radio"name="changingTable" value="false" /> 
+				<form:label path="changingTable">*Changing Table Available?</form:label> 
+				Yes <form:radiobutton path="changingTable" /> 
+				No <form:radiobutton path="changingTable" /> 
+				<form:errors path="changingTable" />
 				<br> 
 				<label>*Public?</label>
 				Yes <input type="radio" name="pAccess" value="true" checked /> 
 				No <input type="radio" name="pAccess" value="false" /> 
 				<br> 
-				<label>*Gender?</label>
-				Male <input type="radio" name="gender" value="M" checked /> 
-				Female <input type="radio" name="gender" value="F" /> 
-				Unisex/Family <input type="radio" name="gender" value="U" /> 
+				<form:label path="gender">*Gender?</form:label>
+				Male <form:radiobutton path="gender" value="M" /> 
+				Female <form:radiobutton path="gender" value="F" /> 
+				Unisex/Family <form:radiobutton path="gender" value="U" /> 
+				<form:errors path="gender" />
 				<br> 
 				
 				<div class="container">
@@ -178,8 +184,53 @@
 				<br>
 				<input type="submit" value="Submit Entry" />
 				<input type="hidden" name="userId" value="${loggedIn.id }">
-			</form>
+			</form:form>
+		</c:if>
+		<c:if test="${!loggedIn.admin }">
+			<form:form action="userAddsRestroom.do" method="POST" modelAttribute="createRestroomModel">
+		
+				<input type="hidden" name="newLocation" value="${newLocation }">
+				<input type="hidden" name="newAddress" value="${newAddress }">
+				<h5>Restroom Information</h5>
+	
+				<form:label path="changingTable">*Changing Table Available?</form:label> 
+				Yes <form:radiobutton path="changingTable" /> 
+				No <form:radiobutton path="changingTable" /> 
+				<form:errors path="changingTable" />
+				<br> 
+				<label>*Public?</label>
+				Yes <input type="radio" name="pAccess" value="true" checked /> 
+				No <input type="radio" name="pAccess" value="false" /> 
+				<br> 
+				<form:label path="gender">*Gender?</form:label>
+				Male <form:radiobutton path="gender" value="M" /> 
+				Female <form:radiobutton path="gender" value="F" /> 
+				Unisex/Family <form:radiobutton path="gender" value="U" /> 
+				<form:errors path="gender" />
+				<br> 
 				
+				<div class="container">
+					<div class="row">
+						<div class="col-5">
+					        <label for="comment">Description:</label>
+					        <textarea class="form-control" rows="4" name="description"></textarea>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-5">
+						    <label for="comment">Directions:</label>
+						    <textarea class="form-control" rows="4" name="directions"></textarea>
+						</div>
+					</div>
+				
+				</div>
+				<br> 
+				<br>
+				<input type="submit" value="Submit Entry" />
+				<input type="hidden" name="userId" value="${loggedIn.id }">
+			</form:form>
+		</c:if>	
 	</c:if>
 	<c:if test="${addingComment}">
 		<c:if test="${loggedIn.admin }">
@@ -189,12 +240,12 @@
 			<form action="">
 		</c:if>
 		
-		Rating
-		<input type="number" min=1 max=5 name="rating" value=1>
-		
-		Comment
-		<textarea rows="3" cols="6" name="comment"></textarea>
-		<input type="submit" value="submit">
+			Rating
+			<input type="number" min=1 max=5 name="rating" value=1>
+			
+			Comment
+			<textarea rows="3" cols="6" name="comment"></textarea>
+			<input type="submit" value="submit">
 		</form>
 		
 	

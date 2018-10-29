@@ -47,14 +47,13 @@ public class UsersController {
 	public ModelAndView createUser(@Valid @ModelAttribute("registerUserModel") Users user, Errors errors,
 			RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
-		
+
 		// Determine if there are any errors.
 		if (errors.getErrorCount() != 0) {
 			// If there are any errors, return the login form.
 			mv.setViewName("register");
 		} else if (usersDAO.userDoesExist(user.getUserName())) {
-			errors.rejectValue("userName", "error.userName",
-		  		    "This user name is unavailable");
+			errors.rejectValue("userName", "error.userName", "This user name is unavailable");
 			mv.setViewName("register");
 		}
 		// If no errors, send the user forward to the profile view.
@@ -127,61 +126,88 @@ public class UsersController {
 	@RequestMapping(path = "userAddsAddressLocationRestroom.do")
 	public ModelAndView addAddressLocationRestroom() {
 		ModelAndView mv = new ModelAndView();
-		
-		Address address = new Address();
-		Location location = new Location();
-		Restroom restroom = new Restroom ();
-		
+
 		mv.addObject("createAddressModel", new Address());
-		mv.addObject("createLocationModel", new Location());
-		mv.addObject("createRestroomModel", new Restroom());
-		
 		mv.addObject("newEntry", true);
 		mv.setViewName("add");
 		return mv;
 	}
 
 	@RequestMapping(path = "userAddsAddress.do", method = RequestMethod.POST)
-	public ModelAndView userAddsAddress(@Valid @ModelAttribute("createAddressModel") Address address, Errors errors, HttpSession session) {
+	public ModelAndView userAddsAddress(@Valid @ModelAttribute("createAddressModel") Address address, Errors errors,
+			HttpSession session) {
 
-		session.setAttribute("newAddress", address);
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("addLocationNext", true);
-		mv.setViewName("add");
+		// Determine if there are any errors.
+		if (errors.getErrorCount() != 0) {
+			// If there are any errors, return the login form.
+			mv.setViewName("add");
+			mv.addObject("newEntry", true);
+		}
+		// If no errors, send the user forward to the profile view.
+		else {
+			session.setAttribute("newAddress", address);
+			mv.addObject("addLocationNext", true);
+			mv.addObject("createLocationModel", new Location());
+			mv.setViewName("add");
+		}
 		return mv;
 	}
 
 	@RequestMapping(path = "userAddsLocation.do", method = RequestMethod.POST)
-	public ModelAndView userAddsLocation(@Valid @ModelAttribute("createLocationModel") Location location, Errors errors, HttpSession session) {
-		session.setAttribute("newLocation", location);
+	public ModelAndView userAddsLocation(@Valid @ModelAttribute("createLocationModel") Location location, Errors errors,
+			HttpSession session) {
+
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("addRestroomNext", true);
-		mv.setViewName("add");
+		// Determine if there are any errors.
+		if (errors.getErrorCount() != 0) {
+			// If there are any errors, return the login form.
+			mv.setViewName("add");
+			mv.addObject("addLocationNext", true);
+		}
+		// If no errors, send the user forward to the profile view.
+		else {
+			session.setAttribute("newLocation", location);
+			mv.addObject("addRestroomNext", true);
+			mv.addObject("createRestroomModel", new Restroom());
+			mv.setViewName("add");
+		}
+
 		return mv;
 	}
 
 	@RequestMapping(path = "userAddsRestroom.do", method = RequestMethod.POST)
 
-	public ModelAndView userAddsRestroom(@Valid @ModelAttribute("createRestroomModel") Restroom restroom, Errors errors, HttpSession session, int userId) {
-
-		Address newAddress = (Address) session.getAttribute("newAddress");
-		Location newLocation = (Location) session.getAttribute("newLocation");
-
-		Address addedAddress = addressDAO.createAddress(newAddress);
-
-		newLocation.setAddress(addedAddress);
-		Location addedLocation = locationDAO.createLocation(newLocation);
-
-		addedLocation.addRestroom(restroom);
-		restroom.setUserId(userId);
-
-		Restroom addedRestroom = restroomDAO.createRestroom(restroom);
-
-		boolean addSuccess = addedRestroom != null && addedLocation != null && addedAddress != null;
-
+	public ModelAndView userAddsRestroom(@Valid @ModelAttribute("createRestroomModel") Restroom restroom, Errors errors,
+			HttpSession session, int userId) {
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("addSuccess", addSuccess);
-		mv.setViewName("confirmation");
+		
+		// Determine if there are any errors.
+		if (errors.getErrorCount() != 0) {
+			// If there are any errors, return the login form.
+			mv.setViewName("add");
+			mv.addObject("addRestroomNext", true);
+		}
+		// If no errors, send the user forward to the profile view.
+		else {
+			Address newAddress = (Address) session.getAttribute("newAddress");
+			Location newLocation = (Location) session.getAttribute("newLocation");
+
+			Address addedAddress = addressDAO.createAddress(newAddress);
+
+			newLocation.setAddress(addedAddress);
+			Location addedLocation = locationDAO.createLocation(newLocation);
+
+			addedLocation.addRestroom(restroom);
+			restroom.setUserId(userId);
+
+			Restroom addedRestroom = restroomDAO.createRestroom(restroom);
+
+			boolean addSuccess = addedRestroom != null && addedLocation != null && addedAddress != null;
+
+			mv.addObject("addSuccess", addSuccess);
+			mv.setViewName("confirmation");
+		}
 		return mv;
 	}
 
@@ -193,22 +219,22 @@ public class UsersController {
 	}
 
 	// Maps user to update.jsp to update a location
-	@RequestMapping(path="userUpdateLocation.do", method = RequestMethod.GET)
+	@RequestMapping(path = "userUpdateLocation.do", method = RequestMethod.GET)
 	public ModelAndView goToUpdatePage(int id) {
 		Location updateLocation = locationDAO.getLocationById(id);
-		
+
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("updateLocation", updateLocation);
 		mv.setViewName("update");
 		return mv;
 	}
 
-	//User updates previous location
-	@RequestMapping(path= "userUpdateLocationUser.do", method = RequestMethod.POST)
-	public ModelAndView userUpdateLocation(int id, Address address, Location location, RedirectAttributes redir, HttpSession session) {
+	// User updates previous location
+	@RequestMapping(path = "userUpdateLocationUser.do", method = RequestMethod.POST)
+	public ModelAndView userUpdateLocation(int id, Address address, Location location, RedirectAttributes redir,
+			HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		
-		
+
 		Location newUpdatedLocation = locationDAO.updateLocation(id, location);
 		if (newUpdatedLocation != null) {
 			session.setAttribute("updatedLocation", newUpdatedLocation);
@@ -227,7 +253,7 @@ public class UsersController {
 
 		return mv;
 	}
-	
+
 	// Adds comment
 	@RequestMapping(path = "addedCommentPageUser.do", method = RequestMethod.GET)
 	public ModelAndView goToAddCommentPage(int restroomId, HttpSession session) {
@@ -235,11 +261,11 @@ public class UsersController {
 		session.setAttribute("commentedRestroom", commentedRestroom);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("addingComment", true);
-		mv.setViewName("add");	
+		mv.setViewName("add");
 		return mv;
-		
+
 	}
-	
+
 	@RequestMapping(path = "addCommentUser.do", method = RequestMethod.POST)
 	public ModelAndView addComment(Comment comment, RedirectAttributes redir, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
@@ -249,20 +275,21 @@ public class UsersController {
 		Comment addcomment = commentDAO.addComment(comment);
 		redir.addFlashAttribute("addComment", addcomment);
 		mv.setViewName("redirect:addedCommentAdmin.do");
-		
+
 		return mv;
-		
+
 	}
+
 	@RequestMapping(path = "addedCommentUser.do", method = RequestMethod.GET)
 	public ModelAndView addedComment() {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("commentAdded", true);
 		mv.setViewName("confirmation");
-		
+
 		return mv;
-		
+
 	}
-	
+
 	// user updates comment
 	@RequestMapping(path = "updateCommentPageUser.do", method = RequestMethod.GET)
 	public ModelAndView goToUpdateCommentPage(int commentId, HttpSession session) {
@@ -270,11 +297,11 @@ public class UsersController {
 		session.setAttribute("updatedComment", updatedComment);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("updatingComment", true);
-		mv.setViewName("update");	
+		mv.setViewName("update");
 		return mv;
-		
+
 	}
-	
+
 	@RequestMapping(path = "updateCommentUser.do", method = RequestMethod.POST)
 	public ModelAndView updateComment(Comment comment, RedirectAttributes redir, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
@@ -284,18 +311,19 @@ public class UsersController {
 //		Comment addcomment = commentDAO.addComment(comment);
 //		redir.addFlashAttribute("addComment", addcomment);
 //		mv.setViewName("redirect:addedCommentAdmin.do");
-		
+
 		return mv;
-		
+
 	}
+
 	@RequestMapping(path = "updatedCommentUser.do", method = RequestMethod.GET)
 	public ModelAndView updatedComment() {
 		ModelAndView mv = new ModelAndView();
 //		mv.addObject("commentAdded", true);
 //		mv.setViewName("confirmation");
-		
+
 		return mv;
-		
+
 	}
 
 }

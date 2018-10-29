@@ -18,11 +18,10 @@ public class Address {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id; 
 	
-	@Pattern(regexp="[a-zA-Z0-9]{3,}")
+//	@Pattern(regexp="\\S")
 	@NotEmpty
 	private String street; 
 	
-	@Pattern(regexp="[a-zA-Z0-9]{3,}")
 	private String street2; 
 	
 	@Pattern(regexp="[a-zA-Z0-9]{3,}")
