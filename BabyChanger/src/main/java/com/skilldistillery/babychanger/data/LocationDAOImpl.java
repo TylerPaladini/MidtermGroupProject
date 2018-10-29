@@ -159,6 +159,13 @@ public class LocationDAOImpl implements LocationDAO {
 	public List<Location> getLocationsByOpen() {
 		String query = "SELECT location FROM Location location Join fetch location.restrooms WHERE location.openTime < CURRENT_TIME() AND location.closeTime > CURRENT_TIME()";
 		List<Location> locationList = em.createQuery(query, Location.class).getResultList();
+		
+		//nasty way to ensure no duplicates. needs refactoring
+		Set<Location> locationSet = new HashSet<>();
+		locationSet.addAll(locationList);
+		locationList.clear();
+		locationList.addAll(locationSet);
+		
 		return locationList;
 	}
 

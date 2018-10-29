@@ -43,6 +43,9 @@
 		<h4>Purchase Required</h4>
 		${location.purchaseRequired }
 		<br>
+		<br>
+		<br>
+		<br>
 
 		<c:if test="${not empty location.restrooms }">
 
@@ -63,7 +66,14 @@
 				<h5>Directions:</h5>
 				${restroom.directions }
 				<br>
-
+				<form action="">
+				
+					<input type="submit" value="Add Comment">
+				</form>
+				<c:if test="${empty restroom.comments }">
+					<h3>No comments posted for this restroom</h3>
+				</c:if>
+				
 				<c:if test="${not empty restroom.comments }">
 					<h3>Comments</h3>
 					<c:forEach items="${restroom.comments }" var="comment">
@@ -77,7 +87,10 @@
 	
 					</c:forEach>
 				</c:if>
-
+			<br>
+			<br>
+			<br>
+			<br>
 			<hr>
 			</c:forEach>
 
