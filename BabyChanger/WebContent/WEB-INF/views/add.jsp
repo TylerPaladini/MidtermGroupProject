@@ -78,7 +78,7 @@
 
 	<c:if test="${ addLocationNext}">
 		<c:if test="${loggedIn.admin }">
-			<form:form action="adminAddsLocation.do" method="POST" modelAttribure="createLocationModel">
+			<form:form action="adminAddsLocation.do" method="POST" modelAttribute="createLocationModel">
 				<input type="hidden" name="newAddress" value="${newAddress }">
 				<h5>Location</h5>
 				<form:label path="name">Name Of Location</form:label> 
@@ -109,7 +109,7 @@
 			</form:form>
 		</c:if>
 		<c:if test="${!loggedIn.admin }">
-			<form:form action="userAddsLocation.do" method="POST" modelAttribure="createLocationModel">
+			<form:form action="userAddsLocation.do" method="POST" modelAttribute="createLocationModel">
 		
 				<input type="hidden" name="newAddress" value="${newAddress }">
 				<h5>Location</h5>

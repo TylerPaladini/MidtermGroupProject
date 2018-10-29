@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -447,13 +448,21 @@ public class AdminController {
 	
 	// Admin Updates previous location
 	@RequestMapping(path="adminUpdateLocationAdmin.do", method = RequestMethod.POST)
-	public ModelAndView adminUpdateLocation(@RequestParam("locationId") int locationId, Location location, RedirectAttributes redir) {
+	public ModelAndView adminUpdateLocation(@ModelAttribute("location")Location location, 
+			@RequestParam("locationId") int locationId, RedirectAttributes redir) {
 		
 		ModelAndView mv = new ModelAndView();
+		Location locationToUpdate = locationDAO.getLocationById(locationId);
 		
+
 		System.out.println("id= " + locationId);
 //		System.out.println("Address= " + address);
 		System.out.println("Location= " +location);
+		System.out.println("Location to update= " +locationToUpdate);
+		
+		
+		
+		locationToUpdate.setName(location.getName());
 		
 //		location.setAddress(address);
 		Location newUpdatedLocation = locationDAO.updateLocation(locationId, location);

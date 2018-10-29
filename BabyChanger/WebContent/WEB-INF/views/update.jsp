@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,6 +28,7 @@
 		
 	</c:if>
 		<input type="hidden" name="id" value="${loggedIn.id }"/>
+		
 		User Name: <input type="text" name="userName" value="${loggedIn.userName }" />
 		<br> 
 		First Name: <input type="text" name="firstName" value="${loggedIn.firstName }"/>
@@ -41,7 +43,32 @@
 	</form>
 	
 	<h5>Update Location</h5>
+	
+<<<<<<< HEAD
+	
+	 
+	 <form:form method="POST" action="adminUpdateLocationAdmin.do" modelAttribute="updateLocation">
+	 <form:label path="name" >Location Name</form:label>
+	 <form:input path="name"/>
+	 <form:label path="address.street" >Street</form:label>
+	 <form:input path="address.street"/>
+	 <form:label path="phone" >Phone</form:label>
+	 <form:input path="phone"/>
+	 
+	 
+	 
+	 
+	 <input type="hidden" name="locationId" value="${updateLocation.id }" />
+	 <input type="submit" value="Update"/>
+	 
+	 
+	 </form:form>
+	
+	
+	<%-- <%-- <c:if test="${loggedIn.admin }">
+=======
 	<c:if test="${loggedIn.admin }">
+>>>>>>> 8be2f789276291106576b4521c5953a2109c93db
 		<form action="adminUpdateLocationAdmin.do" method="POST">
 		
 	</c:if>
@@ -50,9 +77,17 @@
 		
 	</c:if>
 		<input type="hidden" name="locationId" value="${updateLocation.id }"/>
+		<p>${updateLocation.id }</p>
+		<p>${updateLocation.address.street }</p>
+		<p>${updateLocation.address.city }</p>
+		
 		Location Name: <input type="text" name="name" value="${updateLocation.name }" />
 		<br> 
+<<<<<<< HEAD
+		Street Address: <input type="text" name="street" value="${updateLocation.address.street}"/>
+=======
 		Street Address: <input type="text" name="address.street" value="${updateLocation.address.street}"/>
+>>>>>>> 69bce625f31bcc695f249cd5522dbc6222975ca8
 		<br> 
 		Street Address2 <input type="text" name="address.street2" value="${updateLocation.address.street2 }"/>
 		<br> 
@@ -60,7 +95,11 @@
 		<br> 
 		State: <input type="text" name="address.state" value="${updateLocation.address.state }"/>
 		<br> 
+<<<<<<< HEAD
+		Zipcode: <input type="text" name="zipCode" value="${updateLocation.address.zipCode}"/>
+=======
 		Zipcode: <input type="text" name="address.zipCode" value="${updateLocation.address.zipCode}"/>
+>>>>>>> 69bce625f31bcc695f249cd5522dbc6222975ca8
 		<br>
 		Access Limits: <input type="text" name="accessLimits" value="${updateLocation.accessLimits}"/>
 		<br>
@@ -79,13 +118,14 @@
 		<br>
 		Phone: <input type="text" name="phone" value="${updateLocation.phone}"/>
 		<br>
-		<%-- Open Time: <input type="text" name="openTime" value="${updateLocation.openTime}"/>
+		Open Time: <input type="text" name="openTime" value="${updateLocation.openTime}"/>
 		<br>
 		Close Time: <input type="text" name="closeTime" value="${updateLocation.closeTime}"/>
-		<br> --%>
+		<br>
 		<input type="hidden" name="dateCreated" value="${updateLocation.dateCreated}"/>
 		<input type="Submit" value="update" />
 	</form>
+	 --%>
 	<c:if test="${updatingComment }">
 		<form action="updateCommentAdmin.do">
 		Rating
@@ -98,11 +138,6 @@
 	</c:if>
 	
 	
-	
-	
-	
-	
-
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
 		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
