@@ -25,8 +25,17 @@ ${loggedIn.lastName}
 	<form action="updateProfilePageAdmin.do">
 		<input type="submit" value="Edit Profile">
 	</form>
+	
 	<form action="adminAddsAddressLocationRestroom.do">
 		<input type="Submit" value="Add Location" />
+	</form>
+	
+	<form action="confirmDeleteAdmin.do">
+	<input type="Submit" value="Delete Location"/>
+	</form>
+	
+	<form action="adminUpdateLocation.do">
+	<input type="Submit" value="Update Location"/>
 	</form>
 
 <script

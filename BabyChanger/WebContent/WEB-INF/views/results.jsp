@@ -55,6 +55,27 @@
 			</c:if><br /><br />
 		</c:forEach>
 	</c:if> 
+	<c:if test="${not empty allLocations }">
+		<c:forEach items="${allLocations }" var="location">
+			<a href="detailedResults.do?locationId=${location.id }">${location.name }</a><br />
+			${location.address.street }
+			<c:if test="${not empty location.address.street2 }">
+				${location.address.street2 }
+			</c:if><br />
+			${location.address.city }
+			${location.address.state }
+			${location.address.zipCode }<br />
+			<c:if test="${not empty location.openTime and not empty location.closeTime }">
+			${location.openTime } - ${location.closeTime }
+			</c:if>
+			<br>
+			<form action="">
+				<input type="submit" value="update Location">
+			</form>
+		</c:forEach>
+	</c:if> 
+	
+	
 	
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
