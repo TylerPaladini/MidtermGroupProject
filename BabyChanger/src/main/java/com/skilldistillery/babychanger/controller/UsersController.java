@@ -307,12 +307,11 @@ public class UsersController {
 	@RequestMapping(path = "updateCommentUser.do", method = RequestMethod.POST)
 	public ModelAndView updateComment(Comment comment, RedirectAttributes redir, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-//		comment.setUser((Users) session.getAttribute("loggedIn"));
-//		comment.setRestroom((Restroom) session.getAttribute("commentedRestroom"));
-//		comment.setDateCreated(new Date());
-//		Comment addcomment = commentDAO.addComment(comment);
-//		redir.addFlashAttribute("addComment", addcomment);
-//		mv.setViewName("redirect:addedCommentAdmin.do");
+		
+		int commentId = ((Comment) session.getAttribute("updatedComment")).getId();
+		comment.setDateCreated(new Date());
+		Comment newUpdatedComment = commentDAO.editComment(commentId, comment);
+		mv.setViewName("redirect:addedCommentAdmin.do");
 
 		return mv;
 
@@ -321,8 +320,7 @@ public class UsersController {
 	@RequestMapping(path = "updatedCommentUser.do", method = RequestMethod.GET)
 	public ModelAndView updatedComment() {
 		ModelAndView mv = new ModelAndView();
-//		mv.addObject("commentAdded", true);
-//		mv.setViewName("confirmation");
+		mv.setViewName("confirmation");
 
 		return mv;
 

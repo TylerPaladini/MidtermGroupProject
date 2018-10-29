@@ -237,7 +237,7 @@
 			<form action="addCommentAdmin.do" method="post">
 		</c:if>
 		<c:if test="${!loggedIn.admin }">
-			<form action="">
+			<form action="addCommentUser.do" method="post">
 		</c:if>
 		
 			Rating

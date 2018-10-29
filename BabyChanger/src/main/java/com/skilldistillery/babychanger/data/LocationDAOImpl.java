@@ -62,16 +62,27 @@ public class LocationDAOImpl implements LocationDAO {
 	@Override
 	public Location updateLocation(int id, Location location) {
 		Location updateLocation = em.find(Location.class, id);
+		System.out.println("before update " + updateLocation);
+		System.out.println(id);
 		if (updateLocation != null) {
 			updateLocation.setName(location.getName());
 			updateLocation.setAccessLimits(location.getAccessLimits());
 			updateLocation.setPurchaseRequired(location.isPurchaseRequired());
 			updateLocation.setPhone(location.getPhone());
-			updateLocation.setOpenTime(location.getOpenTime().toString().substring(0, 5));
-			updateLocation.setCloseTime(location.getCloseTime().toString().substring(0, 5));
+//			updateLocation.setOpenTime(location.getOpenTime().toString().substring(0, 5));
+//			updateLocation.setCloseTime(location.getCloseTime().toString().substring(0, 5));
+			updateLocation.setOpenTime(location.getOpenTime());
+			updateLocation.setCloseTime(location.getCloseTime());
+			System.out.println("THIS IS THE ADDRESS INSIDE OF THE IMPL");
+			System.out.println(updateLocation.getAddress().toString());
 			updateLocation.setAddress(location.getAddress());
 			updateLocation.setDateCreated(location.getDateCreated());
+			em.persist(updateLocation);
 		}
+		em.flush();
+//		em.persist(updateLocation);
+//		em.flush();
+		System.out.println("after update " + updateLocation);
 		return updateLocation;
 	}
 
