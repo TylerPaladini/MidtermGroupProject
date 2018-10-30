@@ -88,12 +88,11 @@
 		${locationUpdate.address.state }
 		${locationUpdate.address.zipCode }<br />
 		<c:if test="${not empty locationUpdate.openTime and not empty locationUpdate.closeTime }">
-		${location.openTime } - ${location.closeTime }
+			${location.openTime } - ${location.closeTime }
 		</c:if>
-		${locationUpdate.accessLimits }
-		${locationUpdate.purchaseRequired }
-		${locationUpdate.phone }
-		${locationUpdate.name }
+		${locationUpdate.accessLimits }<br />
+		${locationUpdate.purchaseRequired }<br />
+		${locationUpdate.phone }<br />
 		<br>
 		
 	</c:if> 

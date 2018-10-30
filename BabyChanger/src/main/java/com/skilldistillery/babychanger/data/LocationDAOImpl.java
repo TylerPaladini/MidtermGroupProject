@@ -61,12 +61,8 @@ public class LocationDAOImpl implements LocationDAO {
 	}
 
 	@Override
-	public Location updateLocation(int locationId, Location location, int addressId, Address address) {
+	public Location updateLocation(int locationId, Location location, Address address) {
 		Location updateLocation = em.find(Location.class, locationId);
-		Address updateAddress = em.find(Address.class, addressId);
-		System.out.println("before update " + updateLocation);
-		System.out.println(locationId);
-		System.out.println("location address" + location.getAddress());
 		if (updateLocation != null) {
 			updateLocation.setName(location.getName());
 			updateLocation.setAccessLimits(location.getAccessLimits());
@@ -76,31 +72,13 @@ public class LocationDAOImpl implements LocationDAO {
 //			updateLocation.setCloseTime(location.getCloseTime().toString().substring(0, 5));
 			updateLocation.setOpenTime(location.getOpenTime());
 			updateLocation.setCloseTime(location.getCloseTime());
-			System.out.println("THIS IS THE ADDRESS INSIDE OF THE IMPL");
-			System.out.println(updateLocation.getAddress().toString());
+			updateLocation.getAddress().setStreet(address.getStreet());
+			updateLocation.getAddress().setStreet2(address.getStreet2());
 			updateLocation.getAddress().setCity(address.getCity());
-			
-			
-//			updateLocation.setAddress(location.getAddress());
-			System.out.println("!!!!!!!!!!!!!!!!!!! "+ location.getAddress().getId());
-//			updateLocation.setDateCreated(location.getDateCreated());
+			updateLocation.getAddress().setState(address.getState());
+			updateLocation.getAddress().setZipCode(address.getZipCode());
 		}
-		
-		System.out.println("after update " + updateLocation);
-		
-		
-		
-		
-		
-		
-//		updateAddress.setStreet(address.getStreet());
-//		updateAddress.setStreet2(address.getStreet2());
-//		updateAddress.setCity(address.getCity());
-//		updateAddress.setState(address.getState());
-//		updateAddress.setZipCode(address.getZipCode());
 		return updateLocation;
-		
-		
 	}
 
 	@Override
