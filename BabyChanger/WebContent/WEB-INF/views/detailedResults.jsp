@@ -101,6 +101,7 @@
 						<p>${comment.comment }</p>
 						<c:if test="${comment.user.id == loggedIn.id }">
 							
+							
 							<c:if test="${loggedIn.admin }">
 								<form action="updateCommentPageAdmin.do">
 							</c:if>
@@ -111,7 +112,40 @@
 								<input type="hidden" name="commentId" value="${comment.id }">
 								<input type="submit" value="update Comment">
 							</form>
+							
+							
+							
+							
+							<c:if test="${loggedIn.admin }">
+								<form action="disableComment.do" method="post">
+							</c:if>
+							<c:if test="${!loggedIn.admin }">
+								<form action="updateCommentPageUser.do">
+							</c:if>
+							
+								<input type="hidden" name="id" value="${comment.id }">
+								<input type="submit" value="delete Comment">
+							</form>
+							
+							
+							
 						</c:if>
+						<c:if test="${comment.user.id != loggedIn.id }">
+						
+							<c:if test="${loggedIn.admin }">
+								<form action="updateFlagComment.do" method="post">
+							</c:if>
+							<c:if test="${!loggedIn.admin }">
+								<form action="updateCommentPageUser.do">
+							</c:if>
+							
+								<input type="hidden" name="id" value="${comment.id }">
+								<input type="hidden" name="isFlag" value="true">
+								<input type="submit" value="Report Comment">
+							</form>
+							
+						
+						</c:if>	
 						<hr>
 					</div>
 					</c:forEach>
