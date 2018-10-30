@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,12 +40,11 @@ public class AdminController {
 	private RestroomDAO restroomDAO;
 	@Autowired
 	private UsersDAO usersDAO;
-	
 
 	// create new user
 
 	@RequestMapping(path = "createUserAdmin.do", method = RequestMethod.POST)
-	public ModelAndView createUserAdmin( Users newUser, RedirectAttributes redir) {
+	public ModelAndView createUserAdmin(Users newUser, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
 
 		Users userCreated = usersDAO.createUsers(newUser);
@@ -64,26 +64,25 @@ public class AdminController {
 	}
 
 	// Update user profile
-	
-	@RequestMapping( path = "updateProfilePageAdmin.do", method = RequestMethod.GET)
+
+	@RequestMapping(path = "updateProfilePageAdmin.do", method = RequestMethod.GET)
 	public String updateAdminPage() {
 		return "update";
 	}
 
 	@RequestMapping(path = "updateUserAdmin.do", method = RequestMethod.POST)
-	public ModelAndView updateUserAdmin( Users updatedUser, int id, RedirectAttributes redir, HttpSession session) {
+	public ModelAndView updateUserAdmin(Users updatedUser, int id, RedirectAttributes redir, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 
 		Users userUpdated = usersDAO.updateUsers(id, updatedUser);
-		if(userUpdated != null) {
+		if (userUpdated != null) {
 			session.setAttribute("loggedIn", userUpdated);
 			redir.addFlashAttribute("user", userUpdated);
 			mv.setViewName("redirect:updatedUserAdmin.do");
+		} else {
+			mv.setViewName("confirmation");
 		}
-		else {
-			mv.setViewName("confirmation"); 
-		}
-		
+
 		return mv;
 
 	}
@@ -136,6 +135,7 @@ public class AdminController {
 		mv.setViewName("confirmation");
 		return mv;
 	}
+
 	@RequestMapping(path = "getAllUsersAdmin.do", method = RequestMethod.GET)
 	public ModelAndView getAllUsersAdmin() {
 		ModelAndView mv = new ModelAndView();
@@ -144,82 +144,88 @@ public class AdminController {
 		mv.setViewName("results");
 		return mv;
 	}
-	
+
 	// Disables comments made by a user
-	@RequestMapping( path = "disableComment.do", method = RequestMethod.POST)
+	@RequestMapping(path = "disableComment.do", method = RequestMethod.POST)
 	public ModelAndView disableComment(int id) {
 		ModelAndView mv = new ModelAndView();
-		
+
 		commentDAO.disableComment(id);
 		mv.setViewName("redirect:disabledComment");
-		
+
 		return mv;
 	}
+
 	@RequestMapping(path = "disabledComment.do", method = RequestMethod.GET)
 	public ModelAndView disabledComment() {
-		
+
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("confirmation");
-		
+
 		return mv;
-		
+
 	}
+
 	// Enables comments by a user
 	@RequestMapping(path = "enableComment.do", method = RequestMethod.POST)
 	public ModelAndView enableComment(int id) {
 		ModelAndView mv = new ModelAndView();
-		
+
 		commentDAO.enableComment(id);
 		mv.setViewName("redirect:enabledComment");
-		
+
 		return mv;
-		
+
 	}
-	
+
 	@RequestMapping(path = "enabledComment.do", method = RequestMethod.GET)
 	public ModelAndView enabledComment() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("confirmation");
-		
+
 		return mv;
-		
+
 	}
+
 	// Permanently deletes comment by a user from the database
 	@RequestMapping(path = "deleteComment.do", method = RequestMethod.POST)
 	public ModelAndView deleteComment(int id) {
 		ModelAndView mv = new ModelAndView();
-		
+
 		commentDAO.deleteComment(id);
 		mv.setViewName("redirect:deletedComment");
-		
+
 		return mv;
-		
+
 	}
+
 	@RequestMapping(path = "deletedComment.do", method = RequestMethod.GET)
 	public ModelAndView deletedComment() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("confirmation");
-		
+
 		return mv;
 	}
-	// Marks comment with flag (true/false) 
+
+	// Marks comment with flag (true/false)
 	@RequestMapping(path = "updateFlagComment.do", method = RequestMethod.POST)
 	public ModelAndView updateFlag(int id, boolean isFlag) {
 		ModelAndView mv = new ModelAndView();
-		
+
 		commentDAO.updateFlag(id, isFlag);
 		mv.setViewName("redirect:updatedFlagComment");
-		
+
 		return mv;
 	}
+
 	@RequestMapping(path = "updatedFlagComment.do", method = RequestMethod.GET)
 	public ModelAndView updatedFlag() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("confirmation");
-		
+
 		return mv;
 	}
-	
+
 	// Adds comment
 	@RequestMapping(path = "addedCommentPageAdmin.do", method = RequestMethod.GET)
 	public ModelAndView goToAddCommentPage(int restroomId, HttpSession session) {
@@ -227,11 +233,11 @@ public class AdminController {
 		session.setAttribute("commentedRestroom", commentedRestroom);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("addingComment", true);
-		mv.setViewName("add");	
+		mv.setViewName("add");
 		return mv;
-		
+
 	}
-	
+
 	@RequestMapping(path = "addCommentAdmin.do", method = RequestMethod.POST)
 	public ModelAndView addComment(Comment comment, RedirectAttributes redir, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
@@ -241,203 +247,228 @@ public class AdminController {
 		Comment addcomment = commentDAO.addComment(comment);
 		redir.addFlashAttribute("addComment", addcomment);
 		mv.setViewName("redirect:addedCommentAdmin.do");
-		
+
 		return mv;
-		
+
 	}
+
 	@RequestMapping(path = "addedCommentAdmin.do", method = RequestMethod.GET)
 	public ModelAndView addedComment() {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("commentAdded", true);
 		mv.setViewName("confirmation");
-		
+
 		return mv;
-		
+
 	}
-	// Edits a previous comment 
+
+	// Edits a previous comment
 	@RequestMapping(path = "editComment.do", method = RequestMethod.POST)
 	public ModelAndView editComment(int id, Comment comment, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
-		
+
 		Comment editComment = commentDAO.editComment(id, comment);
 		redir.addFlashAttribute("editComment", editComment);
 		mv.setViewName("redirect:editedComment");
-		
+
 		return mv;
 	}
-	
+
 	@RequestMapping(path = "editedComment.do", method = RequestMethod.GET)
 	public ModelAndView editedComment() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("confirmtion");
-		
+
 		return mv;
 	}
-	
+
 	// Finds a comment with the comment ID
 	@RequestMapping(path = "findComment.do", method = RequestMethod.GET)
 	public ModelAndView findCommitById(int id) {
 		ModelAndView mv = new ModelAndView();
-		
+
 		Comment comment = commentDAO.findCommentById(id);
 		mv.addObject("comment", comment);
 		mv.setViewName("results");
-		
+
 		return mv;
-		
+
 	}
+
 	// Finds a comment using the User ID
 	@RequestMapping(path = "findCommentsByUserIdComment.do", method = RequestMethod.GET)
 	public ModelAndView findCommentByUserId(int id) {
 		ModelAndView mv = new ModelAndView();
-		
+
 		List<Comment> comments = commentDAO.findCommentsByUserId(id);
-		
+
 		mv.addObject("comments", comments);
 		mv.setViewName("results");
-		
+
 		return mv;
 	}
-	
-	//Finds a comment by Restroom iD
+
+	// Finds a comment by Restroom iD
 	@RequestMapping(path = "findCommentsByRestroomIdComment.do", method = RequestMethod.GET)
 	public ModelAndView findCommentsByRestroomId(int id) {
 		ModelAndView mv = new ModelAndView();
-		
+
 		List<Comment> comments = commentDAO.findCommentsByRestroomId(id);
-		
+
 		mv.addObject("comments", comments);
 		mv.setViewName("results");
-		
+
 		return mv;
 	}
-	
-	//Finds comment by a comment (string)
+
+	// Finds comment by a comment (string)
 	@RequestMapping(path = "findCommentsByComments.do", method = RequestMethod.GET)
 	public ModelAndView findCommentsByComment(String comment) {
 		ModelAndView mv = new ModelAndView();
-		
+
 		List<Comment> comments = commentDAO.findCommentsByComment(comment);
-		
+
 		mv.addObject("comments", comments);
 		mv.setViewName("results");
-		
+
 		return mv;
 	}
-	
-	//Finds comments by Flagged comments
-	@RequestMapping( path = "findCommnetsByFlaggedComment.do", method = RequestMethod.GET)
+
+	// Finds comments by Flagged comments
+	@RequestMapping(path = "findCommnetsByFlaggedComment.do", method = RequestMethod.GET)
 	public ModelAndView findCommentsByFlaggedComment(Boolean flag) {
 		ModelAndView mv = new ModelAndView();
-		
+
 		List<Comment> comments = commentDAO.findCommentsByFlagComment(flag);
-		
+
 		mv.addObject("comments", comments);
 		mv.setViewName("results");
-		
+
 		return mv;
 	}
-	
+
 	// Finds comments by their rating
 	@RequestMapping(path = "findCommentsByRatingComment.do", method = RequestMethod.GET)
 	public ModelAndView findCommentsByRating(int rating) {
 		ModelAndView mv = new ModelAndView();
-		
+
 		List<Comment> comments = commentDAO.findCommentsByRating(rating);
-		
+
 		mv.addObject("comments", comments);
 		mv.setViewName("results");
-		
+
 		return mv;
 	}
-	
+
 	// Finds active comments through restroom id
 	@RequestMapping(path = "findActiveCommentsByRestroomIdComment.do", method = RequestMethod.GET)
 	public ModelAndView findActiveCommentsByRestroomId(int id, Boolean active) {
 		ModelAndView mv = new ModelAndView();
-		
+
 		List<Comment> comments = commentDAO.findCommentsByActiveByRestroom(id, active);
-		
+
 		mv.addObject("comments", comments);
 		mv.setViewName("results");
-		
+
 		return mv;
 	}
-	
+
 	// Find comments by date they were created
 	@RequestMapping(path = "findCommentsByCreatedDateComment.do", method = RequestMethod.GET)
 	public ModelAndView findCommentsByCreatedDate(Date date) {
 		ModelAndView mv = new ModelAndView();
-		
+
 		List<Comment> comments = commentDAO.findCommentsByDateCreated(date);
-		
+
 		mv.addObject("comments", comments);
 		mv.setViewName("results");
 		return mv;
-		
+
 	}
-	
-	@RequestMapping(path="adminAddsAddressLocationRestroom.do")
+
+	@RequestMapping(path = "adminAddsAddressLocationRestroom.do")
 	public ModelAndView addAddressLocationRestroom() {
 		ModelAndView mv = new ModelAndView();
+
+		mv.addObject("createAddressModel", new Address());
 		mv.addObject("newEntry", true);
 		mv.setViewName("add");
 		return mv;
 	}
-	
-	@RequestMapping(path="adminAddsAddress.do", method = RequestMethod.POST)
-	public ModelAndView userAddsAddress(Address address, HttpSession session) {
-		
-		session.setAttribute("newAddress", address);
+
+	@RequestMapping(path = "adminAddsAddress.do", method = RequestMethod.POST)
+	public ModelAndView userAddsAddress(@Valid @ModelAttribute("createAddressModel") Address address, Errors errors,
+			HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("addLocationNext", true);
-		mv.setViewName("add");
+
+		if (errors.getErrorCount() != 0) {
+			mv.setViewName("add");
+			mv.addObject("newEntry", true);
+		} else {
+			session.setAttribute("newAddress", address);
+			mv.addObject("createLocationModel", new Location());
+			mv.addObject("addLocationNext", true);
+			mv.setViewName("add");
+		}
 		return mv;
 	}
-	@RequestMapping(path="adminAddsLocation.do", method = RequestMethod.POST)
-	public ModelAndView userAddsLocation(Location location, HttpSession session) {
-		session.setAttribute("newLocation", location);
+
+	@RequestMapping(path = "adminAddsLocation.do", method = RequestMethod.POST)
+	public ModelAndView userAddsLocation(@Valid @ModelAttribute("createLocationModel") Location location, Errors errors,
+			HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("addRestroomNext", true);
-		mv.setViewName("add");
+
+		if (errors.getErrorCount() != 0) {
+			mv.setViewName("add");
+			mv.addObject("addLocationNext", true);
+		} else {
+			session.setAttribute("newLocation", location);
+			mv.addObject("addRestroomNext", true);
+			mv.addObject("createRestroomModel", new Restroom());
+			mv.setViewName("add");
+		}
 		return mv;
 	}
-	@RequestMapping(path="adminAddsRestroom.do", method = RequestMethod.POST)
-	public ModelAndView userAddsRestroom(HttpSession session,int userId, Restroom restroom) {
-		
-		Address newAddress = (Address) session.getAttribute("newAddress");
-		Location newLocation = (Location) session.getAttribute("newLocation");
-		
-		Address addedAddress = addressDAO.createAddress(newAddress);
-		
-		newLocation.setAddress(addedAddress);
-		Location addedLocation = locationDAO.createLocation(newLocation);
-		
-		
-		
-		addedLocation.addRestroom(restroom);
-		restroom.setUserId(userId);
-		
-		Restroom addedRestroom = restroomDAO.createRestroom(restroom);
-		
-		boolean addSuccess = addedRestroom != null && addedLocation != null && addedAddress != null  ;
-		
-		
+
+	@RequestMapping(path = "adminAddsRestroom.do", method = RequestMethod.POST)
+	public ModelAndView userAddsRestroom(@Valid @ModelAttribute("createRestroomModel") Restroom restroom, Errors errors,
+			HttpSession session, int userId) {
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("addSuccess", addSuccess);
-		mv.setViewName("confirmation");
+
+		if (errors.getErrorCount() != 0) {
+			mv.setViewName("add");
+			mv.addObject("addRestroomNext", true);
+		} else {
+			Address newAddress = (Address) session.getAttribute("newAddress");
+			Location newLocation = (Location) session.getAttribute("newLocation");
+
+			newLocation.setAddress(newAddress);
+
+			Location addedLocation = locationDAO.createLocation(newLocation);
+			addedLocation.addRestroom(restroom);
+			
+			restroom.setUserId(userId);
+
+			Restroom addedRestroom = restroomDAO.createRestroom(restroom);
+
+			boolean addSuccess = addedRestroom != null && addedLocation != null && newAddress != null;
+
+			mv.addObject("addSuccess", addSuccess);
+			mv.setViewName("confirmation");
+		}
 		return mv;
 	}
-		
-	@RequestMapping(path="profileAdmin.do", method = RequestMethod.GET)
+
+	@RequestMapping(path = "profileAdmin.do", method = RequestMethod.GET)
 	public ModelAndView goToAdminProfile() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("adminProfile");
 		return mv;
 	}
-	
-	// Maps update location button in admin profile to be able to update a location through controller
-	@RequestMapping(path="adminUpdateLocation.do", method = RequestMethod.GET)
+
+	// Maps update location button in admin profile to be able to update a location
+	// through controller
+	@RequestMapping(path = "adminUpdateLocation.do", method = RequestMethod.GET)
 	public ModelAndView goToUpdatePage(int id) {
 		ModelAndView mv = new ModelAndView();
 		Location updateLocation = locationDAO.getLocationById(id);
@@ -445,12 +476,12 @@ public class AdminController {
 		mv.setViewName("update");
 		return mv;
 	}
-	
+
 	// Admin Updates previous location
-	@RequestMapping(path="adminUpdateLocationAdmin.do", method = RequestMethod.POST)
-	public ModelAndView adminUpdateLocation(@ModelAttribute("location")Location location, 
+	@RequestMapping(path = "adminUpdateLocationAdmin.do", method = RequestMethod.POST)
+	public ModelAndView adminUpdateLocation(@ModelAttribute("location") Location location,
 			@RequestParam("locationId") int locationId, RedirectAttributes redir) {
-		
+
 		ModelAndView mv = new ModelAndView();
 		Location locationToUpdate = locationDAO.getLocationById(locationId);
 		int addressIdAttachedToThisLocation = locationToUpdate.getAddress().getId();
@@ -458,50 +489,43 @@ public class AdminController {
 
 		System.out.println("id= " + locationId);
 //		System.out.println("Address= " + address);
-		System.out.println("Location= " +location);
-		System.out.println("Location to update= " +locationToUpdate);
-		
-		
-		
+		System.out.println("Location= " + location);
+		System.out.println("Location to update= " + locationToUpdate);
+
 		location.setOpenTime(locationToUpdate.getOpenTime());
 		location.setCloseTime(locationToUpdate.getCloseTime());
-		
+
 //		location.setAddress(address);
 		Location newUpdatedLocation = locationDAO.updateLocation(locationId, location);
-		if(newUpdatedLocation != null) {
+		if (newUpdatedLocation != null) {
 			redir.addFlashAttribute("updatedLocation", newUpdatedLocation);
 			mv.setViewName("adminUpdatedLocationAdmin.do");
-		}
-		else {
+		} else {
 			mv.setViewName("update");
 		}
-		
+
 		return mv;
 	}
-	@RequestMapping(path="adminUpdatedLocationAdmin.do", method = RequestMethod.GET)
+
+	@RequestMapping(path = "adminUpdatedLocationAdmin.do", method = RequestMethod.GET)
 	public ModelAndView updatedLocation() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("update");
-			
-			return mv;
+
+		return mv;
 	}
-	
+
 	// Lists all locations
 	@RequestMapping(path = "listAllLocations.do", method = RequestMethod.GET)
 	public ModelAndView getAllLocations() {
 		ModelAndView mv = new ModelAndView();
-		
+
 		List<Location> allLocations = locationDAO.getAllLocations();
 		mv.addObject("allLocations", allLocations);
 		mv.setViewName("results");
-		
+
 		return mv;
-		
+
 	}
-		
-		
-		
-		
-		
 
 }

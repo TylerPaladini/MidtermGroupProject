@@ -172,49 +172,31 @@ public class UsersController {
 			mv.addObject("createRestroomModel", new Restroom());
 			mv.setViewName("add");
 		}
-
 		return mv;
 	}
 
 	@RequestMapping(path = "userAddsRestroom.do", method = RequestMethod.POST)
-
 	public ModelAndView userAddsRestroom(@Valid @ModelAttribute("createRestroomModel") Restroom restroom, Errors errors,
 			HttpSession session, int userId) {
 		ModelAndView mv = new ModelAndView();
-		
-		// Determine if there are any errors.
+
 		if (errors.getErrorCount() != 0) {
-			System.out.println("Errors in restroom");
-			// If there are any errors, return the login form.
 			mv.setViewName("add");
 			mv.addObject("addRestroomNext", true);
-		}
-		// If no errors, send the user forward to the profile view.
-		else {
-			System.out.println("inside create new restroom ");
-			
+		} else {
 			Address newAddress = (Address) session.getAttribute("newAddress");
-			System.out.println("New address from session" + newAddress);
-			
 			Location newLocation = (Location) session.getAttribute("newLocation");
-			System.out.println("New location from session " + newLocation);
-			
-//			Address addedAddress = addressDAO.createAddress(newAddress);
-			Address addedAddress = newAddress;
-			System.out.println("Create address in the database " + addedAddress);
-			
-			newLocation.setAddress(addedAddress);
-			System.out.println("Location with address " + newLocation);
-			
+
+			newLocation.setAddress(newAddress);
+
 			Location addedLocation = locationDAO.createLocation(newLocation);
-			System.out.println("Creat location in the database " + addedLocation);
-			
 			addedLocation.addRestroom(restroom);
+
 			restroom.setUserId(userId);
 
 			Restroom addedRestroom = restroomDAO.createRestroom(restroom);
 
-			boolean addSuccess = addedRestroom != null && addedLocation != null && addedAddress != null;
+			boolean addSuccess = addedRestroom != null && addedLocation != null && newAddress != null;
 
 			mv.addObject("addSuccess", addSuccess);
 			mv.setViewName("confirmation");
@@ -316,7 +298,7 @@ public class UsersController {
 	@RequestMapping(path = "updateCommentUser.do", method = RequestMethod.POST)
 	public ModelAndView updateComment(Comment comment, RedirectAttributes redir, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		
+
 		int commentId = ((Comment) session.getAttribute("updatedComment")).getId();
 		comment.setDateCreated(new Date());
 		Comment newUpdatedComment = commentDAO.editComment(commentId, comment);
