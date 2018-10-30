@@ -35,7 +35,9 @@
 	</c:if>
 
 
-	<c:if test="${updatedUser }">
+
+	<!-- tests that what is being brought in is the updateuser, if not it will not display -->
+	<c:if test="${updatedUser }"> 
 	<h5>Update Profile</h5>
 	
 	<c:if test="${loggedIn.admin }">
