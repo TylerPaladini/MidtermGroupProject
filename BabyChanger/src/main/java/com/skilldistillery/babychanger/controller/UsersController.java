@@ -389,7 +389,7 @@ public class UsersController {
 		}
 
 		// Maps user to update.jsp to update a location
-		@RequestMapping(path = "userUpdateRestroom.do", method = RequestMethod.GET)
+		@RequestMapping(path = "updateRestroom.do", method = RequestMethod.GET)
 		public ModelAndView goToUpdateRestroom(int id) {
 			ModelAndView mv = new ModelAndView();
 			Location updateLocation = locationDAO.getLocationById(id);
