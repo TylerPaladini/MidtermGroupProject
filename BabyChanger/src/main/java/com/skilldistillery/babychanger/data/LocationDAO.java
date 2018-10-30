@@ -1,9 +1,9 @@
 package com.skilldistillery.babychanger.data;
 
-import java.time.LocalTime;
 import java.util.List;
 import java.util.Set;
 
+import com.skilldistillery.babychanger.entities.Address;
 import com.skilldistillery.babychanger.entities.Gender;
 import com.skilldistillery.babychanger.entities.Location;
 import com.skilldistillery.babychanger.entities.Rating;
@@ -18,7 +18,7 @@ public interface LocationDAO {
 	
 	public boolean deleteLocation(int id);
 	
-	public Location updateLocation(int id, Location location);
+	public Location updateLocation(int locationId, Location location, int addressId, Address address);
 	
 	public List<Location> getLocationsByCity(String city);
 	

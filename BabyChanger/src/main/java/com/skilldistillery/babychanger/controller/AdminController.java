@@ -472,7 +472,8 @@ public class AdminController {
 	public ModelAndView goToUpdatePage(int id) {
 		ModelAndView mv = new ModelAndView();
 		Location updateLocation = locationDAO.getLocationById(id);
-		System.out.println(updateLocation);
+		System.out.println("goToUpdatePage: "+updateLocation);
+		
 		mv.addObject("updateLocation", updateLocation);
 		mv.addObject("adminUpdateLocationModel", new Location());
 		mv.addObject("updatingLocation", true);
@@ -484,7 +485,7 @@ public class AdminController {
 	public ModelAndView adminUpdateLocation(@Valid @ModelAttribute("adminUpdateLocation") Location location,
 			Errors errors, @RequestParam("locationId") int locationId, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		
+
 		if (errors.getErrorCount() != 0) {
 			mv.setViewName("update");
 			mv.addObject("updatingLocation", true);
@@ -501,31 +502,35 @@ public class AdminController {
 		}
 		return mv;
 	}
-	
-	@RequestMapping(path="adminUpdateAddressAdmin.do", method = RequestMethod.POST)
+
+	@RequestMapping(path = "adminUpdateAddressAdmin.do", method = RequestMethod.POST)
 	public ModelAndView adminUpdateAddress(@Valid @ModelAttribute("adminUpdateAddressModel") Address address,
 			Errors errors, @RequestParam("addressId") int addressId, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
+		
 		
 		if (errors.getErrorCount() != 0) {
 			mv.setViewName("update");
 			mv.addObject("updateAddressNext", true);
 		} else {
 			System.out.println("updating location");
-			
+
 			Location updatedLocation = (Location) session.getAttribute("updatedLocation");
-			System.out.println("location to update: "+ updatedLocation);
-			System.out.println(address);
+			System.out.println("location to update: " + updatedLocation);
+			System.out.println("adminUpdateAddress: " + address);
+			
 			address.setId(addressId);
 			updatedLocation.setAddress(address);
-			System.out.println(address);
+			
+			System.out.println("adminUpdateAddress: " + address);
 //			addressDAO.updateAddress(updatedLocation.getAddress().getId(), address);
 			System.out.println(updatedLocation);
-			Location locationUpdate = locationDAO.updateLocation(updatedLocation.getId(), updatedLocation);
+			Location locationUpdate = locationDAO.updateLocation(updatedLocation.getId(), updatedLocation,
+					updatedLocation.getAddress().getId(), address);
 //			session.setAttribute("updatedLocation", location);
-			mv.addObject("location", locationUpdate);
-			mv.setViewName("result");
-			
+			mv.addObject("locationUpdate", locationUpdate);
+			mv.setViewName("results");
+
 //			Address newAddress = (Address) session.getAttribute("newAddress");
 //			Location newLocation = (Location) session.getAttribute("newLocation");
 //
@@ -543,7 +548,7 @@ public class AdminController {
 //			mv.addObject("addSuccess", addSuccess);
 //			mv.setViewName("confirmation");
 		}
-		
+
 		return mv;
 	}
 
