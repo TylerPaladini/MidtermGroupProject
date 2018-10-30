@@ -302,7 +302,7 @@ public class UsersController {
 		int commentId = ((Comment) session.getAttribute("updatedComment")).getId();
 		comment.setDateCreated(new Date());
 		Comment newUpdatedComment = commentDAO.editComment(commentId, comment);
-		mv.setViewName("redirect:addedCommentAdmin.do");
+		mv.setViewName("redirect:updatedCommentUser.do");
 
 		return mv;
 
@@ -316,5 +316,45 @@ public class UsersController {
 		return mv;
 
 	}
+	
+	// Disables comments made by a user
+		@RequestMapping(path = "disableCommentUser.do", method = RequestMethod.POST)
+		public ModelAndView disableComment(int id) {
+			ModelAndView mv = new ModelAndView();
+
+			commentDAO.disableComment(id);
+			mv.setViewName("redirect:disabledCommentUser.do");
+
+			return mv;
+		}
+
+		@RequestMapping(path = "disabledCommentUser.do", method = RequestMethod.GET)
+		public ModelAndView disabledComment() {
+
+			ModelAndView mv = new ModelAndView();
+			mv.setViewName("confirmation");
+
+			return mv;
+
+		}
+		
+		// Marks comment with flag (true/false)
+		@RequestMapping(path = "updateFlagCommentUser.do", method = RequestMethod.POST)
+		public ModelAndView updateFlag(int id, boolean isFlag) {
+			ModelAndView mv = new ModelAndView();
+
+			commentDAO.updateFlag(id, isFlag);
+			mv.setViewName("redirect:updatedFlagCommentUser.do");
+
+			return mv;
+		}
+
+		@RequestMapping(path = "updatedFlagCommentUser.do", method = RequestMethod.GET)
+		public ModelAndView updatedFlag() {
+			ModelAndView mv = new ModelAndView();
+			mv.setViewName("confirmation");
+
+			return mv;
+		}
 
 }

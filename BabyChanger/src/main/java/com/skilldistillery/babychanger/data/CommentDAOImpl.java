@@ -85,6 +85,7 @@ public class CommentDAOImpl implements CommentDAO {
 	public Comment addComment(Comment comment) {
 		Boolean active = true;
 		comment.setActive(active);
+		comment.setFlagComment(false);
 		em.persist(comment);
 		em.flush();
 		if (comment.getId() == 0) {
@@ -111,7 +112,7 @@ public class CommentDAOImpl implements CommentDAO {
 	public boolean disableComment(int id) {
 		Comment managed = em.find(Comment.class, id);
 
-		if (managed != null && managed.isActive()) {
+		if (managed != null && managed.getActive()) {
 			managed.setActive(false);
 			return true;
 		} else {
@@ -123,7 +124,7 @@ public class CommentDAOImpl implements CommentDAO {
 	public boolean enableComment(int id) {
 		Comment managed = em.find(Comment.class, id);
 
-		if (managed != null && !managed.isActive()) {
+		if (managed != null && !managed.getActive()) {
 			managed.setActive(true);
 			return true;
 		} else {
