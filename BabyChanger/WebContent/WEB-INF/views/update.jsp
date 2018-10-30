@@ -59,7 +59,7 @@
 		<input type="Submit" value="update" />
 	</form>
 	
-	<c:if test="${updatingLocation }">
+	<c:if test="${adminUpdatingLocation }">
 		<h5>Update Location</h5>
 		<form:form action="adminUpdateLocationAdmin.do" method = "POST" modelAttribute="adminUpdateLocationModel">
 			<form:label path="name" >Name: </form:label>
@@ -91,9 +91,67 @@
 		</form:form>
 	</c:if> 
 	
-	<c:if test="${updateAddressNext }">
+	<c:if test="${adminUpdateAddressNext }">
 		<h5>Update Address</h5>
 		<form:form action="adminUpdateAddressAdmin.do" method = "POST" modelAttribute="adminUpdateAddressModel">
+			<form:label path="street" >Street: </form:label>
+			<form:input path="street" value="${updateAddress.street }"/>
+			<form:errors path="street" />
+			<br> 
+			<label>Street2</label> 
+			<input type="text" name="street2" value="${updateAddress.street2 }" /> 
+			<br> 
+			<form:label path="city">*City</form:label>
+			<form:input path="city" value="${updateAddress.city }"/> 
+			<form:errors path="city" />
+			<br>
+			<form:label path="state">*State</form:label> 
+			<form:input path="state" value="${updateAddress.state }"/>
+			<form:errors path="state" />
+			<br> 
+			<form:label path="zipCode">*Zip Code</form:label> 
+			<form:input path="zipCode" value="${updateAddress.zipCode }"/> 
+			<form:errors path="zipCode" />
+			<input type="hidden" name="addressId" value="${updateAddress.id }" />
+			<input type="submit" value="Update" />
+		</form:form>
+	</c:if> 
+	
+	<c:if test="${userUpdatingLocation }">
+		<h5>Update Location</h5>
+		<form:form action="userUpdateLocationUser.do" method = "POST" modelAttribute="userUpdateLocationModel">
+			<form:label path="name" >Name: </form:label>
+			<form:input path="name" value="${updateLocation.name }"/>
+			<form:errors path="name" />
+			<br>
+			<label>Access Limits (e.g. Club membership required)</label>
+			<input type="text" name="accessLimits" value="${updateLocation.accessLimits }"/> 
+			<br> 
+			<label>*Purchased Required?</label> 
+			Yes<input type="radio" name="purchaseRequired" value="true" />
+			No<input type="radio" name="purchaseRequired" value="false" /> 
+			<br>
+			<form:label path="phone">Phone Number(format like 555-555-5555)</form:label> 
+			<form:input type="tel" path="phone" value="${updateLocation.phone }"/>
+			<form:errors path="phone" />
+			<br>
+			<form:label path="openTime">*Open Time(24 hour format e.g. 15:30)</form:label> 
+			<form:input path="openTime" value="${updateLocation.openTime }" />
+			<form:errors path="openTime" />
+			<br> 
+			<form:label path="closeTime">*Close Time(24 hour format e.g. 23:30)</form:label>
+			<form:input path="closeTime" value="${updateLocation.closeTime }"/> 
+			<form:errors path="closeTime" />
+			<br> 
+			<br>
+			<input type="hidden" name="locationId" value="${updateLocation.id }" />
+			<input type="submit" value="Next" />
+		</form:form>
+	</c:if> 
+	
+	<c:if test="${userUpdateAddressNext }">
+		<h5>Update Address</h5>
+		<form:form action="userUpdateAddressUser.do" method = "POST" modelAttribute="userUpdateAddressModel">
 			<form:label path="street" >Street: </form:label>
 			<form:input path="street" value="${updateAddress.street }"/>
 			<form:errors path="street" />

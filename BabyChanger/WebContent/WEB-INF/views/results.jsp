@@ -77,10 +77,15 @@
 		</c:forEach>
 	</c:if> 
 	
-	<c:if test="${restroomsFlagged }">
+	<c:if test="${not empty flaggedRestrooms }">
 	<h5>List all Flagged Restrooms</h5>
 	<c:forEach items="${flaggedRestrooms }"    var="allFlaggedRestrooms">
-	<a href="results.do?restroomId=${restroom.id }">${restroom.name }</a><br> 
+
+	
+	<a href="detailedResultsFlagged.do?restroomId=${allFlaggedRestrooms.id }">${allFlaggedRestrooms.location.name} Restroom ID: ${allFlaggedRestrooms.id }</a><br> 
+	<c:if test="${empty flaggedRestrooms }">
+	There are no flagged restrooms
+	</c:if>
 	
 	</c:forEach>
 	</c:if>
