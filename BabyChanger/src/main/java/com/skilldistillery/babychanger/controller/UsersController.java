@@ -191,15 +191,24 @@ public class UsersController {
 		}
 		// If no errors, send the user forward to the profile view.
 		else {
-			System.out.println("inside create new restroom");
+			System.out.println("inside create new restroom ");
+			
 			Address newAddress = (Address) session.getAttribute("newAddress");
+			System.out.println("New address from session" + newAddress);
+			
 			Location newLocation = (Location) session.getAttribute("newLocation");
-
-			Address addedAddress = addressDAO.createAddress(newAddress);
-
+			System.out.println("New location from session " + newLocation);
+			
+//			Address addedAddress = addressDAO.createAddress(newAddress);
+			Address addedAddress = newAddress;
+			System.out.println("Create address in the database " + addedAddress);
+			
 			newLocation.setAddress(addedAddress);
+			System.out.println("Location with address " + newLocation);
+			
 			Location addedLocation = locationDAO.createLocation(newLocation);
-
+			System.out.println("Creat location in the database " + addedLocation);
+			
 			addedLocation.addRestroom(restroom);
 			restroom.setUserId(userId);
 

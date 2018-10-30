@@ -149,8 +149,8 @@
 				<h5>Restroom Information</h5>
 	
 				<form:label path="changingTable">*Changing Table Available?</form:label> 
-				Yes <form:radiobutton path="changingTable" /> 
-				No <form:radiobutton path="changingTable" /> 
+				Yes <form:radiobutton path="changingTable" value="true"/> 
+				No <form:radiobutton path="changingTable" value="false"/> 
 				<form:errors path="changingTable" />
 				<br> 
 				<label>*Public?</label>
@@ -194,8 +194,8 @@
 				<h5>Restroom Information</h5>
 	
 				<form:label path="changingTable">*Changing Table Available?</form:label> 
-				Yes <form:radiobutton path="changingTable" /> 
-				No <form:radiobutton path="changingTable" /> 
+				Yes <form:radiobutton path="changingTable" value="true"/> 
+				No <form:radiobutton path="changingTable" value="false"/> 
 				<form:errors path="changingTable" />
 				<br> 
 				<label>*Public?</label>

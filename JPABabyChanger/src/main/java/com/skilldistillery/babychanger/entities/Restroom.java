@@ -42,7 +42,7 @@ public class Restroom {
 	@Column(name = "flagged_date")
 	private Date flaggedDate;
 
-	@NotNull
+//	@NotNull
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
 
@@ -61,7 +61,7 @@ public class Restroom {
 
 	private String description;
 
-	@NotNull
+//	@NotNull
 	@Column(name = "changing_table")
 	private Boolean changingTable;
 
