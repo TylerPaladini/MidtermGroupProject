@@ -77,6 +77,7 @@ public class UsersController {
 	public ModelAndView updateUserPage() {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("updatedUser", true);
+		mv.setViewName("update");
 		
 		
 		return mv;

@@ -34,12 +34,15 @@
 		</form>
 	</c:if>
 
+
+	<c:if test="${updatedUser }">
 	<h5>Update Profile</h5>
 	
 	<c:if test="${loggedIn.admin }">
 		<form action="updateUserAdmin.do" method="POST">
 		
 	</c:if>
+	
 	<c:if test="${!loggedIn.admin }">
 		<form action="updateUser.do" method="POST">
 		
@@ -58,6 +61,7 @@
 		<br> 
 		<input type="Submit" value="update" />
 	</form>
+	</c:if>
 	
 	<c:if test="${adminUpdatingLocation }">
 		<h5>Update Location</h5>
