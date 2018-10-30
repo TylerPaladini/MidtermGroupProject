@@ -71,17 +71,19 @@ public class UsersController {
 		return mv;
 	}
 
-	// Update user profile
-
+	// implements a test for the update.jsp to test if user update profile is being passed in
+	// if it is not true it will not show the update profile options.
 	@RequestMapping(path = "updateProfilePageUser.do", method = RequestMethod.GET)
 	public ModelAndView updateUserPage() {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("updatedUser", true);
+		mv.setViewName("update");
 		
 		
 		return mv;
 	}
 
+	// Update user profile
 	@RequestMapping(path = "updateUser.do", method = RequestMethod.POST)
 	public ModelAndView updateUser(Users updatedUser, int id, RedirectAttributes redir, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
