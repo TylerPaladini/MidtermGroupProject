@@ -74,7 +74,7 @@ public class Comment {
 		this.comment = comment;
 	}
 
-	public Boolean isFlagComment() {
+	public Boolean getFlagComment() {
 		return flagComment;
 	}
 
@@ -107,7 +107,7 @@ public class Comment {
 		}
 	}
 
-	public Boolean isActive() {
+	public Boolean getActive() {
 		return active;
 	}
 

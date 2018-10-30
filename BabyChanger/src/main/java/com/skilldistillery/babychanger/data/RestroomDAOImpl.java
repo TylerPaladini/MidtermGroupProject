@@ -6,6 +6,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
+import com.skilldistillery.babychanger.entities.Comment;
 import com.skilldistillery.babychanger.entities.Restroom;
 
 @Transactional
@@ -40,7 +41,7 @@ public class RestroomDAOImpl implements RestroomDAO {
 		
 		restroom.setLocation(updatedRR.getLocation());
 		restroom.setPicture(updatedRR.getPicture());
-		restroom.setFlagged(updatedRR.getFlagged());
+		restroom.setFlagRestroom(updatedRR.getFlagRestroom());
 		restroom.setFlaggedDate(updatedRR.getFlaggedDate());
 		restroom.setFlaggedReason(updatedRR.getFlaggedReason());
 		restroom.setGender(updatedRR.getGender());
@@ -66,10 +67,22 @@ public class RestroomDAOImpl implements RestroomDAO {
 		Restroom toDisable = em.find(Restroom.class, id);
 		boolean disabled = false;
 		if(toDisable != null) {
-			toDisable.setFlagged(true);
+			toDisable.setFlagRestroom(true);
 			disabled = true;
 		}
 		return disabled;
+	}
+	
+	@Override
+	public boolean updateFlag(int id, boolean isFlag) {
+		Restroom managed = em.find(Restroom.class, id);
+
+		if (managed != null) {
+			managed.setFlagRestroom(isFlag);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }

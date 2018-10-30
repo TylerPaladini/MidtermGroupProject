@@ -34,8 +34,6 @@ public class Restroom {
 
 	private String picture;
 
-	private Boolean flagged;
-
 	@Column(name = "flagged_reason")
 	private String flaggedReason;
 
@@ -71,6 +69,9 @@ public class Restroom {
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "restroom",  cascade=CascadeType.ALL)
 	private List<Comment> comments;
+
+	@Column(name = "flagged")
+	private Boolean flagRestroom;
 	
 	/*
 	 * getters / setters
@@ -96,13 +97,6 @@ public class Restroom {
 		this.picture = picture;
 	}
 
-	public Boolean getFlagged() {
-		return flagged;
-	}
-
-	public void setFlagged(Boolean flagged) {
-		this.flagged = flagged;
-	}
 
 	public String getFlaggedReason() {
 		return flaggedReason;
@@ -184,6 +178,15 @@ public class Restroom {
 		this.comments = comments;
 	}
 
+	public void setFlagRestroom(Boolean flagRestroom) {
+		this.flagRestroom = flagRestroom; 
+	}
+	
+
+	public Boolean getFlagRestroom() {
+		return flagRestroom;
+	}
+
 	public void addComment(Comment comment) {
 		if(comments == null) comments = new ArrayList<>();
 		
@@ -237,7 +240,7 @@ public class Restroom {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Restroom [id=").append(id)
 				.append(", picture=").append(picture)
-				.append(", flagged=").append(flagged)
+				.append(", flagged=").append(flagRestroom)
 				.append(", flaggedReason=").append(flaggedReason)
 				.append(", flaggedDate=").append(flaggedDate)
 				.append(", gender=").append(gender)
@@ -267,7 +270,7 @@ public class Restroom {
 		super();
 		this.id = id;
 		this.picture = picture;
-		this.flagged = flagged;
+		this.flagRestroom = flagged;
 		this.flaggedReason = flaggedReason;
 		this.flaggedDate = flaggedDate;
 		this.gender = gender;
@@ -280,5 +283,5 @@ public class Restroom {
 		this.location = location;
 		this.comments = comments;
 	}
-	
+
 }

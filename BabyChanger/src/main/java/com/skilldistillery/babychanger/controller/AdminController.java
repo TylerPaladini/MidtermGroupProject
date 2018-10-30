@@ -146,17 +146,17 @@ public class AdminController {
 	}
 
 	// Disables comments made by a user
-	@RequestMapping(path = "disableComment.do", method = RequestMethod.POST)
+	@RequestMapping(path = "disableCommentAdmin.do", method = RequestMethod.POST)
 	public ModelAndView disableComment(int id) {
 		ModelAndView mv = new ModelAndView();
 
 		commentDAO.disableComment(id);
-		mv.setViewName("redirect:disabledComment");
+		mv.setViewName("redirect:disabledCommentAdmin.do");
 
 		return mv;
 	}
 
-	@RequestMapping(path = "disabledComment.do", method = RequestMethod.GET)
+	@RequestMapping(path = "disabledCommentAdmin.do", method = RequestMethod.GET)
 	public ModelAndView disabledComment() {
 
 		ModelAndView mv = new ModelAndView();
@@ -208,17 +208,17 @@ public class AdminController {
 	}
 
 	// Marks comment with flag (true/false)
-	@RequestMapping(path = "updateFlagComment.do", method = RequestMethod.POST)
+	@RequestMapping(path = "updateFlagCommentAdmin.do", method = RequestMethod.POST)
 	public ModelAndView updateFlag(int id, boolean isFlag) {
 		ModelAndView mv = new ModelAndView();
 
 		commentDAO.updateFlag(id, isFlag);
-		mv.setViewName("redirect:updatedFlagComment");
+		mv.setViewName("redirect:updatedFlagCommentAdmin.do");
 
 		return mv;
 	}
 
-	@RequestMapping(path = "updatedFlagComment.do", method = RequestMethod.GET)
+	@RequestMapping(path = "updatedFlagCommentAdmin.do", method = RequestMethod.GET)
 	public ModelAndView updatedFlag() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("confirmation");
@@ -269,7 +269,7 @@ public class AdminController {
 
 		Comment editComment = commentDAO.editComment(id, comment);
 		redir.addFlashAttribute("editComment", editComment);
-		mv.setViewName("redirect:editedComment");
+		mv.setViewName("redirect:editedComment.do");
 
 		return mv;
 	}
@@ -584,5 +584,39 @@ public class AdminController {
 		return mv;
 
 	}
+	
+	// user updates comment
+		@RequestMapping(path = "updateCommentPageAdmin.do", method = RequestMethod.GET)
+		public ModelAndView goToUpdateCommentPage(int commentId, HttpSession session) {
+			Comment updatedComment = commentDAO.findCommentById(commentId);
+			session.setAttribute("updatedComment", updatedComment);
+			ModelAndView mv = new ModelAndView();
+			mv.addObject("updatingComment", true);
+			mv.setViewName("update");
+			return mv;
+
+		}
+
+		@RequestMapping(path = "updateCommentAdmin.do", method = RequestMethod.POST)
+		public ModelAndView updateComment(Comment comment, RedirectAttributes redir, HttpSession session) {
+			ModelAndView mv = new ModelAndView();
+
+			int commentId = ((Comment) session.getAttribute("updatedComment")).getId();
+			comment.setDateCreated(new Date());
+			Comment newUpdatedComment = commentDAO.editComment(commentId, comment);
+			mv.setViewName("redirect:updatedCommentAdmin.do");
+
+			return mv;
+
+		}
+
+		@RequestMapping(path = "updatedCommentAdmin.do", method = RequestMethod.GET)
+		public ModelAndView updatedComment() {
+			ModelAndView mv = new ModelAndView();
+			mv.setViewName("confirmation");
+
+			return mv;
+
+		}
 
 }
