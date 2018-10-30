@@ -56,7 +56,10 @@
 
 			<c:forEach items="${location.restrooms }" var="restroom">
 				<div style="background-color: lightgreen">
-					<h1>Restroom Info</h1>
+					<h1>Restroom Info: ${restroom.description }</h1>
+					<c:if test="${true restroom.flagged }">
+					</c:if>
+					<h1></h1>
 					<h5>Changing Table?</h5>
 					${restroom.changingTable } <br>
 					<h5>Gender:</h5>
