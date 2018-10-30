@@ -89,8 +89,8 @@ public class RestroomDAOImpl implements RestroomDAO {
 
 	@Override
 	public List<Restroom> getRestroomsByFlag(Boolean flag) {
-		String query = "SELECT restroom FROM Restroom restroom WHERE restroom.flagged = :flagged";
-		List<Restroom> flaggedRestrooms = em.createNamedQuery(query, Restroom.class)
+		String query = "SELECT restroom FROM Restroom restroom WHERE restroom.flagRestroom = :flagged";
+		List<Restroom> flaggedRestrooms = em.createQuery(query, Restroom.class)
 				.setParameter("flagged", flag).getResultList();
 		return flaggedRestrooms;
 	}

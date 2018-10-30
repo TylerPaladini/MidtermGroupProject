@@ -14,15 +14,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.skilldistillery.babychanger.data.LocationDAO;
+import com.skilldistillery.babychanger.data.RestroomDAO;
 import com.skilldistillery.babychanger.entities.Gender;
 import com.skilldistillery.babychanger.entities.Location;
 import com.skilldistillery.babychanger.entities.Rating;
+import com.skilldistillery.babychanger.entities.Restroom;
 
 @Controller
 public class SearchController {
 	
 	@Autowired
 	private LocationDAO locationDAO; 
+	
+	@Autowired
+	private RestroomDAO restroomDAO;
 	
 	@RequestMapping(path = "home.do", method = RequestMethod.GET)
 	public String index() {
@@ -152,6 +157,15 @@ public class SearchController {
 		ModelAndView mv = new ModelAndView();
 		Location location = locationDAO.getLocationById(id);
 		mv.addObject("location", location);
+		mv.setViewName("detailedResults");
+		return mv;
+	}
+	@RequestMapping(path="detailedResultsFlagged.do", method = RequestMethod.GET)
+	public ModelAndView detailsResultsPageByAdmin(@RequestParam("restroomId")int id) {
+		ModelAndView mv = new ModelAndView();
+		Restroom flaggedRestroom = restroomDAO.getRestroom(id);
+		Location relatedLocation = locationDAO.getLocationById(flaggedRestroom.getLocation().getId());
+		mv.addObject("location", relatedLocation);
 		mv.setViewName("detailedResults");
 		return mv;
 	}
