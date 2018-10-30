@@ -331,72 +331,89 @@ public class UsersController {
 	}
 	
 	// Disables comments made by a user
-		@RequestMapping(path = "disableCommentUser.do", method = RequestMethod.POST)
-		public ModelAndView disableComment(int id) {
-			ModelAndView mv = new ModelAndView();
+	@RequestMapping(path = "disableCommentUser.do", method = RequestMethod.POST)
+	public ModelAndView disableComment(int id) {
+		ModelAndView mv = new ModelAndView();
 
-			commentDAO.disableComment(id);
-			mv.setViewName("redirect:disabledCommentUser.do");
+		commentDAO.disableComment(id);
+		mv.setViewName("redirect:disabledCommentUser.do");
 
-			return mv;
-		}
+		return mv;
+	}
 
-		@RequestMapping(path = "disabledCommentUser.do", method = RequestMethod.GET)
-		public ModelAndView disabledComment() {
+	@RequestMapping(path = "disabledCommentUser.do", method = RequestMethod.GET)
+	public ModelAndView disabledComment() {
 
-			ModelAndView mv = new ModelAndView();
-			mv.setViewName("confirmation");
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("confirmation");
 
-			return mv;
+		return mv;
 
-		}
+	}
+	
+	// Marks comment with flag (true/false)
+	@RequestMapping(path = "updateFlagCommentUser.do", method = RequestMethod.POST)
+	public ModelAndView updateFlag(int id, boolean isFlag) {
+		ModelAndView mv = new ModelAndView();
+
+		commentDAO.updateFlag(id, isFlag);
+		mv.setViewName("redirect:updatedFlagCommentUser.do");
+
+		return mv;
+	}
+
+	@RequestMapping(path = "updatedFlagCommentUser.do", method = RequestMethod.GET)
+	public ModelAndView updatedFlag() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("confirmation");
+
+		return mv;
+	}
+	
+	@RequestMapping(path = "flagRestroom.do", method = RequestMethod.POST)
+	public ModelAndView updateFlagRestroom(int id, boolean isFlag) {
+		ModelAndView mv = new ModelAndView();
+		restroomDAO.updateFlag(id, isFlag); 
+		mv.setViewName("redirect:updatedFlagRestroom.do");
 		
-		// Marks comment with flag (true/false)
-		@RequestMapping(path = "updateFlagCommentUser.do", method = RequestMethod.POST)
-		public ModelAndView updateFlag(int id, boolean isFlag) {
-			ModelAndView mv = new ModelAndView();
+		return mv;
+	}
+	
+	@RequestMapping(path = "updatedFlagRestroom.do", method = RequestMethod.GET)
+	public ModelAndView updatedFlagRestroom() {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("restroomFlagged", true); 
+		mv.setViewName("confirmation");
 
-			commentDAO.updateFlag(id, isFlag);
-			mv.setViewName("redirect:updatedFlagCommentUser.do");
+		return mv;
+	}
 
-			return mv;
-		}
-
-		@RequestMapping(path = "updatedFlagCommentUser.do", method = RequestMethod.GET)
-		public ModelAndView updatedFlag() {
-			ModelAndView mv = new ModelAndView();
-			mv.setViewName("confirmation");
-
-			return mv;
-		}
+	// Maps user to update.jsp to update a location
+	@RequestMapping(path = "userUpdateRestroom.do", method = RequestMethod.GET)
+	public ModelAndView goToUpdateRestroom(int id) {
+		ModelAndView mv = new ModelAndView();
+		Restroom updateRestroom = restroomDAO.getRestroom(id);
+		mv.addObject("updateRestroom", updateRestroom);
+		mv.addObject("userUpdateRestroomModel", new Restroom());
+		mv.addObject("userUpdatingRestroom", true);
+		mv.setViewName("update");
+		return mv;
+	}
+	
+	@RequestMapping(path="userUpdateRestroomUser.do", method = RequestMethod.POST)
+	public ModelAndView userUpdateRestroom(@Valid @ModelAttribute("userUpdateRestroomModel") Restroom restroom,
+			Errors errors, @RequestParam("restroomId") int restroomId, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
 		
-		@RequestMapping(path = "flagRestroom.do", method = RequestMethod.POST)
-		public ModelAndView updateFlagRestroom(int id, boolean isFlag) {
-			ModelAndView mv = new ModelAndView();
-			restroomDAO.updateFlag(id, isFlag); 
-			mv.setViewName("redirect:updatedFlagRestroom.do");
-			
-			return mv;
-		}
-		
-		@RequestMapping(path = "updatedFlagRestroom.do", method = RequestMethod.GET)
-		public ModelAndView updatedFlagRestroom() {
-			ModelAndView mv = new ModelAndView();
-			mv.addObject("restroomFlagged", true); 
-			mv.setViewName("confirmation");
-
-			return mv;
-		}
-
-		// Maps user to update.jsp to update a location
-		@RequestMapping(path = "updateRestroom.do", method = RequestMethod.GET)
-		public ModelAndView goToUpdateRestroom(int id) {
-			ModelAndView mv = new ModelAndView();
-			Location updateLocation = locationDAO.getLocationById(id);
-			mv.addObject("updateRestroom", updateLocation);
-			mv.addObject("userUpdateLocationModel", new Location());
-			mv.addObject("userUpdatingLocation", true);
+		if (errors.getErrorCount() != 0) {
 			mv.setViewName("update");
-			return mv;
+			mv.addObject("updatingRestroom", true);
+		} else {
+			session.setAttribute("updatedRestroom", restroom);
+			Restroom updateRestroom = restroomDAO.updateRestroom(restroomId, restroom);
+			mv.addObject("updateRestroom", updateRestroom);
+			mv.setViewName("results");
 		}
+		return mv;
+	}
 }

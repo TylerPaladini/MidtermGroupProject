@@ -175,6 +175,45 @@
 		</form:form>
 	</c:if> 
 	
+	<c:if test="${userUpdatingRestroom }">
+		<h5>Update Restroom</h5>
+		<form:form action="userUpdateRestroomUser.do" method = "POST" modelAttribute="userUpdateRestroomModel">
+			<form:label path="changingTable">*Changing Table Available?</form:label> 
+			Yes <form:radiobutton path="changingTable" value="true"/> 
+			No <form:radiobutton path="changingTable" value="false"/> 
+			<form:errors path="changingTable" />
+			<br> 
+			<label>*Public?</label>
+			Yes <input type="radio" name="pAccess" value="true" checked /> 
+			No <input type="radio" name="pAccess" value="false" /> 
+			<br> 
+			<form:label path="gender">*Gender?</form:label>
+			Male <form:radiobutton path="gender" value="M" /> 
+			Female <form:radiobutton path="gender" value="F" /> 
+			Unisex/Family <form:radiobutton path="gender" value="U" /> 
+			<form:errors path="gender" />
+			<br> 
+			
+			<div class="container">
+				<div class="row">
+					<div class="col-5">
+				        <label for="comment">Description:</label>
+				        <textarea class="form-control" rows="4" name="description" >${updateRestroom.description }</textarea>
+					</div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col-5">
+					    <label for="comment">Directions:</label>
+					    <textarea class="form-control" rows="4" name="directions" >${updateRestroom.directions }</textarea>
+					</div>
+				</div>
+			
+			</div>
+			<br> 
+		</form:form>
+	</c:if>
+	
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
 		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
