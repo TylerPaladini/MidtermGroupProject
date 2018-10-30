@@ -81,6 +81,12 @@
 					</c:if>
 						<input type="hidden" name="restroomId" value="${restroom.id }">
 						<input type="submit" value="Add Comment">
+						
+						<form action="flagRestroom">
+						<input type="hidden" name="restroomId" value="${restroom.id }">
+						<input type="hidden" name="isFlag" value="true">
+						<input type="submit" value="Flag Restroom">
+						</form>
 					</form>
 				
 				</c:if>
