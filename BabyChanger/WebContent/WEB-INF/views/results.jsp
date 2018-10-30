@@ -55,6 +55,7 @@
 			</c:if><br /><br />
 		</c:forEach>
 	</c:if> 
+	
 	<c:if test="${not empty allLocations }">
 		<c:forEach items="${allLocations }" var="location">
 			<a href="detailedResults.do?locationId=${location.id }">${location.name }</a><br />
@@ -76,7 +77,26 @@
 		</c:forEach>
 	</c:if> 
 	
-	
+	<c:if test="${not empty locationUpdate }">
+		
+		${locationUpdate.name }<br />
+		${locationUpdate.address.street }
+		<c:if test="${not empty locationUpdate.address.street2 }">
+			${locationUpdate.address.street2 }
+		</c:if><br />
+		${locationUpdate.address.city }
+		${locationUpdate.address.state }
+		${locationUpdate.address.zipCode }<br />
+		<c:if test="${not empty locationUpdate.openTime and not empty locationUpdate.closeTime }">
+		${location.openTime } - ${location.closeTime }
+		</c:if>
+		${locationUpdate.accessLimits }
+		${locationUpdate.purchaseRequired }
+		${locationUpdate.phone }
+		${locationUpdate.name }
+		<br>
+		
+	</c:if> 
 	
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"

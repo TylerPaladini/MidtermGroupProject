@@ -81,7 +81,13 @@
 					</c:if>
 						<input type="hidden" name="restroomId" value="${restroom.id }">
 						<input type="submit" value="Add Comment">
+						
 					</form>
+						<form action="flagRestroom">
+						<input type="hidden" name="restroomId" value="${restroom.id }">
+						<input type="hidden" name="isFlag" value="true">
+						<input type="submit" value="Flag Restroom">
+						</form>
 				
 				</c:if>
 				<c:if test="${empty restroom.comments }">
@@ -92,28 +98,69 @@
 					<h3>Comments</h3>
 					<hr>
 					<c:forEach items="${restroom.comments }" var="comment">
-						<div style="background-color:lightblue">
-						<h5>Date Created</h5>
-						${comment.dateCreated }
-						<h5>Rating</h5>
-						${comment.rating }
-						<br>
-						<p>${comment.comment }</p>
-						<c:if test="${comment.user.id == loggedIn.id }">
-							
-							<c:if test="${loggedIn.admin }">
-								<form action="updateCommentPageAdmin.do">
+						
+						<c:if test="${comment.active }">
+							<div style="background-color:lightblue">
+							<c:if test="${comment.flagComment }">
+								<p style="font-color: red">Flagged</p>
 							</c:if>
-							<c:if test="${!loggedIn.admin }">
-								<form action="updateCommentPageUser.do">
+							<h5>Date Created</h5>
+							${comment.dateCreated }
+							<h5>Rating</h5>
+							${comment.rating }
+							<br>
+							<p>${comment.comment }</p>
+							<c:if test="${comment.user.id == loggedIn.id }">
+								
+								
+								<c:if test="${loggedIn.admin }">
+									<form action="updateCommentPageAdmin.do" >
+								</c:if>
+								<c:if test="${!loggedIn.admin }">
+									<form action="updateCommentPageUser.do">
+								</c:if>
+								
+									<input type="hidden" name="commentId" value="${comment.id }">
+									<input type="submit" value="update Comment">
+								</form>
+								
+								
+								
+								
+								<c:if test="${loggedIn.admin }">
+									<form action="disableCommentAdmin.do" method="post">
+								</c:if>
+								<c:if test="${!loggedIn.admin }">
+									<form action="disableCommentUser.do" method = "post">
+								</c:if>
+								
+									<input type="hidden" name="id" value="${comment.id }">
+									<input type="submit" value="delete Comment">
+								</form>
+								
+								
+								
 							</c:if>
+							<c:if test="${comment.user.id != loggedIn.id }">
 							
-								<input type="hidden" name="commentId" value="${comment.id }">
-								<input type="submit" value="update Comment">
-							</form>
+								<c:if test="${loggedIn.admin }">
+									<form action="updateFlagCommentAdmin.do" method="post">
+								</c:if>
+								<c:if test="${!loggedIn.admin }">
+									<form action="updateFlagCommentUser.do" method="post">
+								</c:if>
+								
+									<input type="hidden" name="id" value="${comment.id }">
+									<input type="hidden" name="isFlag" value="true">
+									<input type="submit" value="Report Comment">
+								</form>
+								
+							
+							</c:if>	
+							<hr>
+							</div>
 						</c:if>
-						<hr>
-					</div>
+						
 					</c:forEach>
 				</c:if>
 			<br>

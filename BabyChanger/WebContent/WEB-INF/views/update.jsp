@@ -88,6 +88,8 @@
 			<br> 
 			<br>
 			<input type="hidden" name="locationId" value="${updateLocation.id }" />
+			<input type="hidden" name="addressId" value="${updateLocation.address.id }" />
+			
 			<input type="submit" value="Next" />
 		</form:form>
 	</c:if> 
@@ -113,6 +115,7 @@
 			<form:label path="zipCode">*Zip Code</form:label> 
 			<form:input path="zipCode" value="${updateAddress.zipCode }"/> 
 			<form:errors path="zipCode" />
+			<input type="hidden" name="locationId" value="${updateLocation.id }" />
 			<input type="hidden" name="addressId" value="${updateAddress.id }" />
 			<input type="submit" value="Update" />
 		</form:form>

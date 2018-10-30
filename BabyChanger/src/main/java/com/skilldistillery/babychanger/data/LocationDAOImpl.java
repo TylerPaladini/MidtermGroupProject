@@ -11,6 +11,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
+import com.skilldistillery.babychanger.entities.Address;
 import com.skilldistillery.babychanger.entities.Gender;
 import com.skilldistillery.babychanger.entities.Location;
 import com.skilldistillery.babychanger.entities.Rating;
@@ -60,10 +61,11 @@ public class LocationDAOImpl implements LocationDAO {
 	}
 
 	@Override
-	public Location updateLocation(int id, Location location) {
-		Location updateLocation = em.find(Location.class, id);
+	public Location updateLocation(int locationId, Location location, int addressId, Address address) {
+		Location updateLocation = em.find(Location.class, locationId);
+		Address updateAddress = em.find(Address.class, addressId);
 		System.out.println("before update " + updateLocation);
-		System.out.println(id);
+		System.out.println(locationId);
 		System.out.println("location address" + location.getAddress());
 		if (updateLocation != null) {
 			updateLocation.setName(location.getName());
@@ -76,13 +78,29 @@ public class LocationDAOImpl implements LocationDAO {
 			updateLocation.setCloseTime(location.getCloseTime());
 			System.out.println("THIS IS THE ADDRESS INSIDE OF THE IMPL");
 			System.out.println(updateLocation.getAddress().toString());
-			updateLocation.setAddress(location.getAddress());
-			updateLocation.setDateCreated(location.getDateCreated());
+			updateLocation.getAddress().setCity(address.getCity());
+			
+			
+//			updateLocation.setAddress(location.getAddress());
+			System.out.println("!!!!!!!!!!!!!!!!!!! "+ location.getAddress().getId());
+//			updateLocation.setDateCreated(location.getDateCreated());
 		}
-//		em.persist(updateLocation);
-//		em.flush();
+		
 		System.out.println("after update " + updateLocation);
+		
+		
+		
+		
+		
+		
+//		updateAddress.setStreet(address.getStreet());
+//		updateAddress.setStreet2(address.getStreet2());
+//		updateAddress.setCity(address.getCity());
+//		updateAddress.setState(address.getState());
+//		updateAddress.setZipCode(address.getZipCode());
 		return updateLocation;
+		
+		
 	}
 
 	@Override
