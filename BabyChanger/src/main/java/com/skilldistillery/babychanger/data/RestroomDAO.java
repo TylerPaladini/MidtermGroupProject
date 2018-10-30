@@ -11,5 +11,5 @@ public interface RestroomDAO {
 	public boolean destroyRestroom(int id);
 	public boolean disableRestroom(int id, Restroom restroom);
 	public List<Restroom> getRestroomsByFlag(Boolean flag);
-	public boolean updateFlag(int id, boolean isFlag);
+	public boolean updateFlag(int id, boolean isFlag, String flaggedReason);
 }

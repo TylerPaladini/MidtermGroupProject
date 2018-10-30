@@ -56,7 +56,10 @@
 
 			<c:forEach items="${location.restrooms }" var="restroom">
 				<div style="background-color: lightgreen">
-					<h1>Restroom Info</h1>
+					<h1>Restroom Info: ${restroom.description }</h1>
+					<c:if test="${true restroom.flagged }">
+					</c:if>
+					<h1></h1>
 					<h5>Changing Table?</h5>
 					${restroom.changingTable } <br>
 					<h5>Gender:</h5>
@@ -83,6 +86,7 @@
 						<form action="flagRestroom.do" method="post">
 							<input type="hidden" name="id" value="${restroom.id }"> 
 							<input type="hidden" name="isFlag" value="true">
+							<input type="text" name="flaggedReason" value="Why you flag?"> 
 							<input type="submit" value="Flag Restroom">
 						</form>
 					</c:if>

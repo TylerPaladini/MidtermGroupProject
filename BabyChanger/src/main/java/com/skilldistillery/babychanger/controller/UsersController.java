@@ -376,9 +376,9 @@ public class UsersController {
 	}
 	
 	@RequestMapping(path = "flagRestroom.do", method = RequestMethod.POST)
-	public ModelAndView updateFlagRestroom(int id, boolean isFlag) {
+	public ModelAndView updateFlagRestroom(int id, boolean isFlag, String flaggedReason) {
 		ModelAndView mv = new ModelAndView();
-		restroomDAO.updateFlag(id, isFlag); 
+		restroomDAO.updateFlag(id, isFlag, flaggedReason); 
 		mv.setViewName("redirect:updatedFlagRestroom.do");
 		
 		return mv;
