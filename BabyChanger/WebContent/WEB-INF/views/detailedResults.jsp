@@ -14,6 +14,8 @@
 
 </head>
 <body>
+
+	<%@ include file="map.jsp"%>
 	<%@ include file="navigation.jsp"%>
 
 	<c:if test="${not empty location }">
