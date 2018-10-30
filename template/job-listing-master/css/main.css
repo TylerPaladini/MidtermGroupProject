@@ -4,13 +4,15 @@
 /* Mobile Layout: 320px */
 /* Wide Mobile Layout: 480px */
 /* =================================== */
-/*  Basic Style 
+/*  Basic Style
 /* =================================== */
 ::-moz-selection {
   /* Code for Firefox */
   background-color: #49e4fa;
   color: #fff;
 }
+
+
 
 ::selection {
   background-color: #49e4fa;
@@ -1892,6 +1894,7 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (max-width: 673px) {
   #logo {
+
     margin-left: 20px;
   }
 }
@@ -1916,14 +1919,17 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
 
+
 @media (max-width: 768px) {
   #header #logo h1 {
-    font-size: 28px;
+    font-size: 15px;
   }
   #header #logo img {
     max-height: 40px;
   }
 }
+
+
 
 .ticker-btn {
   background: #49e4fa;
@@ -2298,12 +2304,13 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .banner-area {
-  background: url(../img/header-bg.jpg) center;
-  background-size: cover;
+  background: url(https://media.giphy.com/media/tJ4oUTsMHbqAZyqsBo/giphy.gif) center;
+  background-size:cover;
+
 }
 
 .banner-area .overlay-bg {
-  opacity: .95;
+  opacity: .50;
 }
 
 .banner-content {
