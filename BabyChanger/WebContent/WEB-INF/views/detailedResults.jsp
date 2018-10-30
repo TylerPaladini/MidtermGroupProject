@@ -83,6 +83,7 @@
 						<form action="flagRestroom.do" method="post">
 							<input type="hidden" name="id" value="${restroom.id }"> 
 							<input type="hidden" name="isFlag" value="true">
+							<input type="text" name="flaggedReason" value="Why you flag?"> 
 							<input type="submit" value="Flag Restroom">
 						</form>
 					</c:if>

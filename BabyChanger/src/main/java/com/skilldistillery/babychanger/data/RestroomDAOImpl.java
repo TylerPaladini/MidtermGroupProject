@@ -72,11 +72,12 @@ public class RestroomDAOImpl implements RestroomDAO {
 	}
 	
 	@Override
-	public boolean updateFlag(int id, boolean isFlag) {
+	public boolean updateFlag(int id, boolean isFlag, String flaggedReason) {
 		Restroom managed = em.find(Restroom.class, id);
 
 		if (managed != null) {
 			managed.setFlagRestroom(isFlag);
+			managed.setFlaggedReason(flaggedReason);
 			return true;
 		} else {
 			return false;
