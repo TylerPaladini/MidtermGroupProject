@@ -39,4 +39,5 @@ public interface LocationDAO {
 	public List<Location> getLocationsByFlag(Boolean flag);
 	
 	public List<Location> getLocationsByOpen();
+	
 }

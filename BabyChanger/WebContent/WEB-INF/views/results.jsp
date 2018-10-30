@@ -91,11 +91,6 @@
 	There are no flagged restrooms
 	</c:if>
 	
-	
-	
-	
-	
-	
 	<c:if test="${not empty locationUpdate }">
 		
 		${locationUpdate.name }<br />
