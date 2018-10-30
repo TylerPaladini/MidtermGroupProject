@@ -472,8 +472,6 @@ public class AdminController {
 	public ModelAndView goToUpdatePage(int id) {
 		ModelAndView mv = new ModelAndView();
 		Location updateLocation = locationDAO.getLocationById(id);
-		System.out.println("goToUpdatePage: "+updateLocation);
-		
 		mv.addObject("updateLocation", updateLocation);
 		mv.addObject("adminUpdateLocationModel", new Location());
 		mv.addObject("updatingLocation", true);
@@ -490,11 +488,9 @@ public class AdminController {
 			mv.setViewName("update");
 			mv.addObject("updatingLocation", true);
 		} else {
-			System.out.println(location);
 			location.setId(locationId);
 			session.setAttribute("updatedLocation", location);
 			Address updateAddress = locationDAO.getLocationById(locationId).getAddress();
-			System.out.println(updateAddress);
 			mv.addObject("updateAddress", updateAddress);
 			mv.addObject("adminUpdateAddressModel", new Address());
 			mv.addObject("updateAddressNext", true);
@@ -507,71 +503,19 @@ public class AdminController {
 	public ModelAndView adminUpdateAddress(@Valid @ModelAttribute("adminUpdateAddressModel") Address address,
 			Errors errors, @RequestParam("addressId") int addressId, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		
-		
 		if (errors.getErrorCount() != 0) {
 			mv.setViewName("update");
 			mv.addObject("updateAddressNext", true);
 		} else {
-			System.out.println("updating location");
-
 			Location updatedLocation = (Location) session.getAttribute("updatedLocation");
-			System.out.println("location to update: " + updatedLocation);
-			System.out.println("adminUpdateAddress: " + address);
-			
 			address.setId(addressId);
 			updatedLocation.setAddress(address);
-			
-			System.out.println("adminUpdateAddress: " + address);
-//			addressDAO.updateAddress(updatedLocation.getAddress().getId(), address);
-			System.out.println(updatedLocation);
-			Location locationUpdate = locationDAO.updateLocation(updatedLocation.getId(), updatedLocation,
-					updatedLocation.getAddress().getId(), address);
-//			session.setAttribute("updatedLocation", location);
+			Location locationUpdate = locationDAO.updateLocation(updatedLocation.getId(), updatedLocation, address);
 			mv.addObject("locationUpdate", locationUpdate);
 			mv.setViewName("results");
-
 		}
 		return mv;
 	}
-
-	// Admin Updates previous location
-//	@RequestMapping(path = "adminUpdateLocationAdmin.do", method = RequestMethod.POST)
-//	public ModelAndView adminUpdateLocation(@Valid @ModelAttribute("location") Location location,
-//			@RequestParam("locationId") int locationId, RedirectAttributes redir) {
-//		System.out.println("**************inAdminUpdateLocationAmdin.do***************");
-//		ModelAndView mv = new ModelAndView();
-//		Location locationToUpdate = locationDAO.getLocationById(locationId);
-//		int addressIdAttachedToThisLocation = locationToUpdate.getAddress().getId();
-//		System.out.println(addressIdAttachedToThisLocation);
-//
-//		System.out.println("id= " + locationId);
-//		//System.out.println("Address= " + address);
-//		System.out.println("Location= " + location);
-//		System.out.println("Location to update= " + locationToUpdate);
-//
-//		location.setOpenTime(locationToUpdate.getOpenTime());
-//		location.setCloseTime(locationToUpdate.getCloseTime());
-//
-//		//location.setAddress(address);
-//		Location newUpdatedLocation = locationDAO.updateLocation(locationId, location);
-//		if (newUpdatedLocation != null) {
-//			redir.addFlashAttribute("updatedLocation", newUpdatedLocation);
-//			mv.setViewName("adminUpdatedLocationAdmin.do");
-//		} else {
-//			mv.setViewName("update");
-//		}
-//
-//		return mv;
-//	}
-
-//	@RequestMapping(path = "adminUpdatedLocationAdmin.do", method = RequestMethod.GET)
-//	public ModelAndView updatedLocation() {
-//		ModelAndView mv = new ModelAndView();
-//		mv.setViewName("update");
-//
-//		return mv;
-//	}
 
 	// Lists all locations
 	@RequestMapping(path = "listAllLocations.do", method = RequestMethod.GET)
@@ -584,39 +528,39 @@ public class AdminController {
 		return mv;
 
 	}
-	
+
 	// user updates comment
-		@RequestMapping(path = "updateCommentPageAdmin.do", method = RequestMethod.GET)
-		public ModelAndView goToUpdateCommentPage(int commentId, HttpSession session) {
-			Comment updatedComment = commentDAO.findCommentById(commentId);
-			session.setAttribute("updatedComment", updatedComment);
-			ModelAndView mv = new ModelAndView();
-			mv.addObject("updatingComment", true);
-			mv.setViewName("update");
-			return mv;
+	@RequestMapping(path = "updateCommentPageAdmin.do", method = RequestMethod.GET)
+	public ModelAndView goToUpdateCommentPage(int commentId, HttpSession session) {
+		Comment updatedComment = commentDAO.findCommentById(commentId);
+		session.setAttribute("updatedComment", updatedComment);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("updatingComment", true);
+		mv.setViewName("update");
+		return mv;
 
-		}
+	}
 
-		@RequestMapping(path = "updateCommentAdmin.do", method = RequestMethod.POST)
-		public ModelAndView updateComment(Comment comment, RedirectAttributes redir, HttpSession session) {
-			ModelAndView mv = new ModelAndView();
+	@RequestMapping(path = "updateCommentAdmin.do", method = RequestMethod.POST)
+	public ModelAndView updateComment(Comment comment, RedirectAttributes redir, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
 
-			int commentId = ((Comment) session.getAttribute("updatedComment")).getId();
-			comment.setDateCreated(new Date());
-			Comment newUpdatedComment = commentDAO.editComment(commentId, comment);
-			mv.setViewName("redirect:updatedCommentAdmin.do");
+		int commentId = ((Comment) session.getAttribute("updatedComment")).getId();
+		comment.setDateCreated(new Date());
+		Comment newUpdatedComment = commentDAO.editComment(commentId, comment);
+		mv.setViewName("redirect:updatedCommentAdmin.do");
 
-			return mv;
+		return mv;
 
-		}
+	}
 
-		@RequestMapping(path = "updatedCommentAdmin.do", method = RequestMethod.GET)
-		public ModelAndView updatedComment() {
-			ModelAndView mv = new ModelAndView();
-			mv.setViewName("confirmation");
+	@RequestMapping(path = "updatedCommentAdmin.do", method = RequestMethod.GET)
+	public ModelAndView updatedComment() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("confirmation");
 
-			return mv;
+		return mv;
 
-		}
+	}
 
 }
