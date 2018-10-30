@@ -81,19 +81,23 @@
 					</form>
 					<c:if test="${!loggedIn.admin }">
 						<form action="flagRestroom.do" method="post">
-							<input type="hidden" name="id" value="${restroom.id }"> <input
-								type="hidden" name="isFlag" value="true"> <input
-								type="submit" value="Flag Restroom">
+							<input type="hidden" name="id" value="${restroom.id }"> 
+							<input type="hidden" name="isFlag" value="true">
+							<input type="submit" value="Flag Restroom">
 						</form>
 					</c:if>
 
-					<!-- Gives the administrator the ability to update a flagged restroom -->
+					
 					<c:if test="${loggedIn.admin }">
-						<form action="updateRestroom.do" method="POST">
-							<input type="hidden" name="id" value="${restroom.id }"> <input
-								type="Submit" value="Update Restroom">
-						</form>
+						<form action="adminUpdateRestroom.do" >
 					</c:if>
+					<c:if test="${!loggedIn.admin }">
+						<form action="userUpdateRestroom.do" >
+					</c:if>
+							<input type="hidden" name="restroomId" value="${restroom.id }">
+							<input type="hidden" name="locationId" value="${location.id }">
+							<input type="Submit" value="Update Restroom">
+					</form>
 
 
 
@@ -188,7 +192,6 @@
 		<hr>
 
 	</c:if>
-
 
 
 	<script

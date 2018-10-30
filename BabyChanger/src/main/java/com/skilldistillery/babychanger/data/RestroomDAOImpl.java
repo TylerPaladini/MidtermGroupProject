@@ -38,21 +38,17 @@ public class RestroomDAOImpl implements RestroomDAO {
 	}
 
 	@Override
-	public Restroom updateRestroom(int id, Restroom updatedRR) {
-		Restroom restroom = em.find(Restroom.class, id); 
+	public Restroom updateRestroom(int id, Restroom restroom) {
+		Restroom updateRestroom = em.find(Restroom.class, id); 
 		
-		restroom.setLocation(updatedRR.getLocation());
-		restroom.setPicture(updatedRR.getPicture());
-		restroom.setFlagRestroom(updatedRR.getFlagRestroom());
-		restroom.setFlaggedDate(updatedRR.getFlaggedDate());
-		restroom.setFlaggedReason(updatedRR.getFlaggedReason());
-		restroom.setGender(updatedRR.getGender());
-		restroom.setDirections(updatedRR.getDirections());
-		restroom.setpAccess(updatedRR.getpAccess());
-		restroom.setUserId(updatedRR.getUserId());
-		restroom.setDateCreated(updatedRR.getDateCreated());
-		restroom.setDescription(updatedRR.getDescription());
-		restroom.setChangingTable(updatedRR.getChangingTable());
+		if (updateRestroom != null && restroom != null) {
+			updateRestroom.setPicture(restroom.getPicture());
+			updateRestroom.setGender(restroom.getGender());
+			updateRestroom.setDirections(restroom.getDirections());
+			updateRestroom.setpAccess(restroom.getpAccess());
+			updateRestroom.setDescription(restroom.getDescription());
+			updateRestroom.setChangingTable(restroom.getChangingTable());
+		}
 		
 		return restroom;
 	}

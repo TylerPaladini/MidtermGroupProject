@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -390,9 +391,11 @@ public class UsersController {
 
 	// Maps user to update.jsp to update a location
 	@RequestMapping(path = "userUpdateRestroom.do", method = RequestMethod.GET)
-	public ModelAndView goToUpdateRestroom(int id) {
+	public ModelAndView goToUpdateRestroom(@RequestParam("restroomId") int restroomId, 
+			@RequestParam("locationId") int locationId, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		Restroom updateRestroom = restroomDAO.getRestroom(id);
+		Restroom updateRestroom = restroomDAO.getRestroom(restroomId);
+		session.setAttribute("locationId", locationId);
 		mv.addObject("updateRestroom", updateRestroom);
 		mv.addObject("userUpdateRestroomModel", new Restroom());
 		mv.addObject("userUpdatingRestroom", true);
@@ -409,10 +412,11 @@ public class UsersController {
 			mv.setViewName("update");
 			mv.addObject("updatingRestroom", true);
 		} else {
-			session.setAttribute("updatedRestroom", restroom);
-			Restroom updateRestroom = restroomDAO.updateRestroom(restroomId, restroom);
-			mv.addObject("updateRestroom", updateRestroom);
-			mv.setViewName("results");
+			restroomDAO.updateRestroom(restroomId, restroom);
+			Integer updatedRestroomAtLocation = (Integer) session.getAttribute("locationId");
+			Location locationById = locationDAO.getLocationById(updatedRestroomAtLocation);
+			mv.addObject("location", locationById);
+			mv.setViewName("detailedResults");
 		}
 		return mv;
 	}
