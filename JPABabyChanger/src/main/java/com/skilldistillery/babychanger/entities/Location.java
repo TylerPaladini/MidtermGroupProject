@@ -33,7 +33,7 @@ public class Location {
 	@NotEmpty
 	private String name;
 	
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "address_id")
 	private Address address;
 	

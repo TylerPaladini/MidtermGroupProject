@@ -64,6 +64,7 @@ public class LocationDAOImpl implements LocationDAO {
 		Location updateLocation = em.find(Location.class, id);
 		System.out.println("before update " + updateLocation);
 		System.out.println(id);
+		System.out.println("location address" + location.getAddress());
 		if (updateLocation != null) {
 			updateLocation.setName(location.getName());
 			updateLocation.setAccessLimits(location.getAccessLimits());
@@ -77,9 +78,7 @@ public class LocationDAOImpl implements LocationDAO {
 			System.out.println(updateLocation.getAddress().toString());
 			updateLocation.setAddress(location.getAddress());
 			updateLocation.setDateCreated(location.getDateCreated());
-			em.persist(updateLocation);
 		}
-		em.flush();
 //		em.persist(updateLocation);
 //		em.flush();
 		System.out.println("after update " + updateLocation);

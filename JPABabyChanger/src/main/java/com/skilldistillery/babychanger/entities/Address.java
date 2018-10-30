@@ -19,7 +19,7 @@ public class Address {
 	private int id; 
 	
 //	@Pattern(regexp="\\S")
-	@NotEmpty
+//	@NotEmpty
 	private String street; 
 	
 	private String street2; 
@@ -88,6 +88,10 @@ public class Address {
 	 * hashcodes and equals
 	 */
 	
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

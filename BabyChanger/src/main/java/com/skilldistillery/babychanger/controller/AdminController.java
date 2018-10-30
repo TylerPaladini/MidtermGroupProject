@@ -446,7 +446,7 @@ public class AdminController {
 
 			Location addedLocation = locationDAO.createLocation(newLocation);
 			addedLocation.addRestroom(restroom);
-			
+
 			restroom.setUserId(userId);
 
 			Restroom addedRestroom = restroomDAO.createRestroom(restroom);
@@ -472,48 +472,118 @@ public class AdminController {
 	public ModelAndView goToUpdatePage(int id) {
 		ModelAndView mv = new ModelAndView();
 		Location updateLocation = locationDAO.getLocationById(id);
+		System.out.println(updateLocation);
 		mv.addObject("updateLocation", updateLocation);
+		mv.addObject("adminUpdateLocationModel", new Location());
+		mv.addObject("updatingLocation", true);
 		mv.setViewName("update");
+		return mv;
+	}
+
+	@RequestMapping(path = "adminUpdateLocationAdmin.do", method = RequestMethod.POST)
+	public ModelAndView adminUpdateLocation(@Valid @ModelAttribute("adminUpdateLocation") Location location,
+			Errors errors, @RequestParam("locationId") int locationId, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		
+		if (errors.getErrorCount() != 0) {
+			mv.setViewName("update");
+			mv.addObject("updatingLocation", true);
+		} else {
+			System.out.println(location);
+			location.setId(locationId);
+			session.setAttribute("updatedLocation", location);
+			Address updateAddress = locationDAO.getLocationById(locationId).getAddress();
+			System.out.println(updateAddress);
+			mv.addObject("updateAddress", updateAddress);
+			mv.addObject("adminUpdateAddressModel", new Address());
+			mv.addObject("updateAddressNext", true);
+			mv.setViewName("update");
+		}
+		return mv;
+	}
+	
+	@RequestMapping(path="adminUpdateAddressAdmin.do", method = RequestMethod.POST)
+	public ModelAndView adminUpdateAddress(@Valid @ModelAttribute("adminUpdateAddressModel") Address address,
+			Errors errors, @RequestParam("addressId") int addressId, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		
+		if (errors.getErrorCount() != 0) {
+			mv.setViewName("update");
+			mv.addObject("updateAddressNext", true);
+		} else {
+			System.out.println("updating location");
+			
+			Location updatedLocation = (Location) session.getAttribute("updatedLocation");
+			System.out.println("location to update: "+ updatedLocation);
+			System.out.println(address);
+			address.setId(addressId);
+			updatedLocation.setAddress(address);
+			System.out.println(address);
+//			addressDAO.updateAddress(updatedLocation.getAddress().getId(), address);
+			System.out.println(updatedLocation);
+			Location locationUpdate = locationDAO.updateLocation(updatedLocation.getId(), updatedLocation);
+//			session.setAttribute("updatedLocation", location);
+			mv.addObject("location", locationUpdate);
+			mv.setViewName("result");
+			
+//			Address newAddress = (Address) session.getAttribute("newAddress");
+//			Location newLocation = (Location) session.getAttribute("newLocation");
+//
+//			newLocation.setAddress(newAddress);
+//
+//			Location addedLocation = locationDAO.createLocation(newLocation);
+//			addedLocation.addRestroom(restroom);
+//
+//			restroom.setUserId(userId);
+//
+//			Restroom addedRestroom = restroomDAO.createRestroom(restroom);
+//
+//			boolean addSuccess = addedRestroom != null && addedLocation != null && newAddress != null;
+//
+//			mv.addObject("addSuccess", addSuccess);
+//			mv.setViewName("confirmation");
+		}
+		
 		return mv;
 	}
 
 	// Admin Updates previous location
-	@RequestMapping(path = "adminUpdateLocationAdmin.do", method = RequestMethod.POST)
-	public ModelAndView adminUpdateLocation(@ModelAttribute("location") Location location,
-			@RequestParam("locationId") int locationId, RedirectAttributes redir) {
+//	@RequestMapping(path = "adminUpdateLocationAdmin.do", method = RequestMethod.POST)
+//	public ModelAndView adminUpdateLocation(@Valid @ModelAttribute("location") Location location,
+//			@RequestParam("locationId") int locationId, RedirectAttributes redir) {
+//		System.out.println("**************inAdminUpdateLocationAmdin.do***************");
+//		ModelAndView mv = new ModelAndView();
+//		Location locationToUpdate = locationDAO.getLocationById(locationId);
+//		int addressIdAttachedToThisLocation = locationToUpdate.getAddress().getId();
+//		System.out.println(addressIdAttachedToThisLocation);
+//
+//		System.out.println("id= " + locationId);
+//		//System.out.println("Address= " + address);
+//		System.out.println("Location= " + location);
+//		System.out.println("Location to update= " + locationToUpdate);
+//
+//		location.setOpenTime(locationToUpdate.getOpenTime());
+//		location.setCloseTime(locationToUpdate.getCloseTime());
+//
+//		//location.setAddress(address);
+//		Location newUpdatedLocation = locationDAO.updateLocation(locationId, location);
+//		if (newUpdatedLocation != null) {
+//			redir.addFlashAttribute("updatedLocation", newUpdatedLocation);
+//			mv.setViewName("adminUpdatedLocationAdmin.do");
+//		} else {
+//			mv.setViewName("update");
+//		}
+//
+//		return mv;
+//	}
 
-		ModelAndView mv = new ModelAndView();
-		Location locationToUpdate = locationDAO.getLocationById(locationId);
-		int addressIdAttachedToThisLocation = locationToUpdate.getAddress().getId();
-		System.out.println(addressIdAttachedToThisLocation);
-
-		System.out.println("id= " + locationId);
-//		System.out.println("Address= " + address);
-		System.out.println("Location= " + location);
-		System.out.println("Location to update= " + locationToUpdate);
-
-		location.setOpenTime(locationToUpdate.getOpenTime());
-		location.setCloseTime(locationToUpdate.getCloseTime());
-
-//		location.setAddress(address);
-		Location newUpdatedLocation = locationDAO.updateLocation(locationId, location);
-		if (newUpdatedLocation != null) {
-			redir.addFlashAttribute("updatedLocation", newUpdatedLocation);
-			mv.setViewName("adminUpdatedLocationAdmin.do");
-		} else {
-			mv.setViewName("update");
-		}
-
-		return mv;
-	}
-
-	@RequestMapping(path = "adminUpdatedLocationAdmin.do", method = RequestMethod.GET)
-	public ModelAndView updatedLocation() {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("update");
-
-		return mv;
-	}
+//	@RequestMapping(path = "adminUpdatedLocationAdmin.do", method = RequestMethod.GET)
+//	public ModelAndView updatedLocation() {
+//		ModelAndView mv = new ModelAndView();
+//		mv.setViewName("update");
+//
+//		return mv;
+//	}
 
 	// Lists all locations
 	@RequestMapping(path = "listAllLocations.do", method = RequestMethod.GET)
@@ -523,7 +593,6 @@ public class AdminController {
 		List<Location> allLocations = locationDAO.getAllLocations();
 		mv.addObject("allLocations", allLocations);
 		mv.setViewName("results");
-
 		return mv;
 
 	}
