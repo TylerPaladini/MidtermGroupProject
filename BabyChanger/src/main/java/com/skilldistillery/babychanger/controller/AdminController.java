@@ -562,5 +562,19 @@ public class AdminController {
 		return mv;
 
 	}
+	
+	// Lists all restrooms that have been flaed
+	@RequestMapping(path= "listAllFlaggedRestrooms.do", method= RequestMethod.GET)
+	public ModelAndView getAllFlaggedRestrooms(Boolean flag) {
+		ModelAndView mv = new ModelAndView();
+		
+		List<Restroom> allFlaggedRestrooms = restroomDAO.getRestroomsByFlag(flag);
+		mv.addObject("flaggedRestrooms", allFlaggedRestrooms);
+		mv.addObject("restroomsFlagged", true);
+		mv.setViewName("results");
+		
+		
+		return mv;
+		}
 
 }
