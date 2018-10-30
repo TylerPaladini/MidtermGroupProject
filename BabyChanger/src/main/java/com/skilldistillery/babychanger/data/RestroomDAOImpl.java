@@ -92,6 +92,8 @@ public class RestroomDAOImpl implements RestroomDAO {
 		String query = "SELECT restroom FROM Restroom restroom WHERE restroom.flagRestroom = :flagged";
 		List<Restroom> flaggedRestrooms = em.createQuery(query, Restroom.class)
 				.setParameter("flagged", flag).getResultList();
+		
+		System.out.println(flaggedRestrooms);
 		return flaggedRestrooms;
 	}
 

@@ -88,7 +88,7 @@
 					</c:if>
 
 					<!-- Gives the administrator the ability to update a flagged restroom -->
-					<c:if test="${loggenIn.admin }">
+					<c:if test="${loggedIn.admin }">
 						<form action="updateRestroom.do" method="POST">
 							<input type="hidden" name="id" value="${restroom.id }"> <input
 								type="Submit" value="Update Restroom">

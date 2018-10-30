@@ -83,11 +83,12 @@
 
 	
 	<a href="detailedResultsFlagged.do?restroomId=${allFlaggedRestrooms.id }">${allFlaggedRestrooms.location.name} Restroom ID: ${allFlaggedRestrooms.id }</a><br> 
-	<c:if test="${empty flaggedRestrooms }">
-	There are no flagged restrooms
-	</c:if>
 	
 	</c:forEach>
+	</c:if>
+	
+	<c:if test="${empty flaggedRestrooms }">
+	There are no flagged restrooms
 	</c:if>
 	
 	
