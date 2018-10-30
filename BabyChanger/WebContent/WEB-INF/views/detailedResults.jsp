@@ -14,6 +14,8 @@
 
 </head>
 <body>
+
+	<%@ include file="map.jsp"%>
 	<%@ include file="navigation.jsp"%>
 
 	<c:if test="${not empty location }">
@@ -44,6 +46,11 @@
 		<h4>Purchase Required</h4>
 		${location.purchaseRequired }
 		</div>
+		<form action="userUpdateLocation.do">
+			<input type="hidden" name="id" value="${location.id }" />
+			<input type="submit" value="Update" />
+		</form>
+		
 		<br>
 		<br>
 		<br>

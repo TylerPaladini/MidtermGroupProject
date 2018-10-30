@@ -11,6 +11,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -211,36 +212,51 @@ public class UsersController {
 	// Maps user to update.jsp to update a location
 	@RequestMapping(path = "userUpdateLocation.do", method = RequestMethod.GET)
 	public ModelAndView goToUpdatePage(int id) {
-		Location updateLocation = locationDAO.getLocationById(id);
-
 		ModelAndView mv = new ModelAndView();
+		Location updateLocation = locationDAO.getLocationById(id);
 		mv.addObject("updateLocation", updateLocation);
+		mv.addObject("userUpdateLocationModel", new Location());
+		mv.addObject("userUpdatingLocation", true);
 		mv.setViewName("update");
 		return mv;
 	}
 
 	// User updates previous location
 	@RequestMapping(path = "userUpdateLocationUser.do", method = RequestMethod.POST)
-	public ModelAndView userUpdateLocation(int id, Address address, Location location, RedirectAttributes redir,
-			HttpSession session) {
+	public ModelAndView userUpdateLocation(@Valid @ModelAttribute("userUpdateLocation") Location location, 
+			Errors errors, @RequestParam("locationId") int locationId,  HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 
-		Location newUpdatedLocation = locationDAO.updateLocation(id, location);
-		if (newUpdatedLocation != null) {
-			session.setAttribute("updatedLocation", newUpdatedLocation);
-			redir.addFlashAttribute("updatedLocation", newUpdatedLocation);
-			mv.setViewName("userUpdatedLocationUser.do");
+		if (errors.getErrorCount() != 0) {
+			mv.setViewName("update");
+			mv.addObject("updatingLocation", true);
 		} else {
+			location.setId(locationId);
+			session.setAttribute("updatedLocation", location);
+			Address updateAddress = locationDAO.getLocationById(locationId).getAddress();
+			mv.addObject("updateAddress", updateAddress);
+			mv.addObject("userUpdateAddressModel", new Address());
+			mv.addObject("userUpdateAddressNext", true);
 			mv.setViewName("update");
 		}
 		return mv;
 	}
 
-	@RequestMapping(path = "userUpdatedLocationUser.do", method = RequestMethod.GET)
-	public ModelAndView updatedLocation() {
+	@RequestMapping(path = "userUpdateAddressUser.do", method = RequestMethod.POST)
+	public ModelAndView userUpdatedLocation(@Valid @ModelAttribute("userUpdateAddressModel") Address address,
+			Errors errors, @RequestParam("addressId") int addressId, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("update");
-
+		if (errors.getErrorCount() != 0) {
+			mv.setViewName("update");
+			mv.addObject("updateAddressNext", true);
+		} else {
+			Location updatedLocation = (Location) session.getAttribute("updatedLocation");
+			address.setId(addressId);
+			updatedLocation.setAddress(address);
+			Location locationUpdate = locationDAO.updateLocation(updatedLocation.getId(), updatedLocation, address);
+			mv.addObject("locationUpdate", locationUpdate);
+			mv.setViewName("results");
+		}
 		return mv;
 	}
 

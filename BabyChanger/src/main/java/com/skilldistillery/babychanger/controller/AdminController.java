@@ -397,7 +397,7 @@ public class AdminController {
 	}
 
 	@RequestMapping(path = "adminAddsAddress.do", method = RequestMethod.POST)
-	public ModelAndView userAddsAddress(@Valid @ModelAttribute("createAddressModel") Address address, Errors errors,
+	public ModelAndView adminAddsAddress(@Valid @ModelAttribute("createAddressModel") Address address, Errors errors,
 			HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 
@@ -414,7 +414,7 @@ public class AdminController {
 	}
 
 	@RequestMapping(path = "adminAddsLocation.do", method = RequestMethod.POST)
-	public ModelAndView userAddsLocation(@Valid @ModelAttribute("createLocationModel") Location location, Errors errors,
+	public ModelAndView adminAddsLocation(@Valid @ModelAttribute("createLocationModel") Location location, Errors errors,
 			HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 
@@ -431,7 +431,7 @@ public class AdminController {
 	}
 
 	@RequestMapping(path = "adminAddsRestroom.do", method = RequestMethod.POST)
-	public ModelAndView userAddsRestroom(@Valid @ModelAttribute("createRestroomModel") Restroom restroom, Errors errors,
+	public ModelAndView adminAddsRestroom(@Valid @ModelAttribute("createRestroomModel") Restroom restroom, Errors errors,
 			HttpSession session, int userId) {
 		ModelAndView mv = new ModelAndView();
 
@@ -474,7 +474,7 @@ public class AdminController {
 		Location updateLocation = locationDAO.getLocationById(id);
 		mv.addObject("updateLocation", updateLocation);
 		mv.addObject("adminUpdateLocationModel", new Location());
-		mv.addObject("updatingLocation", true);
+		mv.addObject("adminUpdatingLocation", true);
 		mv.setViewName("update");
 		return mv;
 	}
@@ -493,7 +493,7 @@ public class AdminController {
 			Address updateAddress = locationDAO.getLocationById(locationId).getAddress();
 			mv.addObject("updateAddress", updateAddress);
 			mv.addObject("adminUpdateAddressModel", new Address());
-			mv.addObject("updateAddressNext", true);
+			mv.addObject("adminUpdateAddressNext", true);
 			mv.setViewName("update");
 		}
 		return mv;
@@ -562,7 +562,7 @@ public class AdminController {
 		return mv;
 
 	}
-	
+
 	// Lists all restrooms that have been flaed
 	@RequestMapping(path= "listAllFlaggedRestrooms.do", method= RequestMethod.GET)
 	public ModelAndView getAllFlaggedRestrooms() {
@@ -571,12 +571,12 @@ public class AdminController {
 		List<Restroom> allFlaggedRestrooms = restroomDAO.getRestroomsByFlag(true);
 		System.out.println("***********************************************8");
 		System.out.println(allFlaggedRestrooms);
+
 		mv.addObject("flaggedRestrooms", allFlaggedRestrooms);
 //		mv.addObject("restroomsFlagged", true);
 		mv.setViewName("results");
-		
-		
+
 		return mv;
-		}
+	}
 
 }
