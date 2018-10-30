@@ -47,7 +47,8 @@ CREATE TABLE IF NOT EXISTS `users` (
   `active` TINYINT(1) NULL DEFAULT NULL,
   `admin` TINYINT(1) NULL DEFAULT NULL,
   `date_created` DATETIME NULL DEFAULT current_timestamp,
-  PRIMARY KEY (`id`))
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -183,6 +184,7 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `pass
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `active`, `admin`, `date_created`) VALUES (2, 'John', 'Doe', 'johndoe', 'johndoe@hotmail.com', 'johndoe', true, false, NULL);
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `active`, `admin`, `date_created`) VALUES (3, 'Mike', 'Myers', 'mikem', 'mikeym@aol.com', 'mikeym', true, false, NULL);
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `active`, `admin`, `date_created`) VALUES (4, 'Rob', 'Thompson', 'robthompson', 'rob@10thHuman.com', 'robthompson', true, true, NULL);
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `active`, `admin`, `date_created`) VALUES (5, 'admin', 'admin', 'admin', 'admin@admin.com', 'admin', NULL, NULL, NULL);
 
 COMMIT;
 
@@ -192,7 +194,6 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `babychangerdb`;
-INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (1, 'Solarium', 'have to be a student', false, '3033025234', '08:00', '18:00', 1, DEFAULT);
 INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (2, 'Shell on E Orchard', 'must get key from attendant', true, '3037702637', '06:00', '23:59', 2, DEFAULT);
 INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (3, 'Lake Loop Picnic Area', 'none, public access', false, NULL, '06:00', '23:59', 3, DEFAULT);
 INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (4, 'Target on Briarwood', 'none ', false, '7202146000', '08:00', '22:00', 4, DEFAULT);
@@ -203,6 +204,7 @@ INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `pho
 INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (9, 'Park Meadows Mall', 'closes at 9 PM, loud', false, '3037922533', '10:00', '21:00', 5, DEFAULT);
 INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (10, 'Southgate Shopping Center', 'closes at 6 PM', false, NULL, '00:01', '18:00', 9, DEFAULT);
 INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (11, 'DIA ', '24 hr', false, NULL, '00:00', '23:59', 10, DEFAULT);
+INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (1, 'Solarium', 'have to be a student', false, '3033025234', '08:00', '18:00', 1, '2018-10-01');
 
 COMMIT;
 
