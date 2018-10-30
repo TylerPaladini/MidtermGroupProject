@@ -531,24 +531,7 @@ public class AdminController {
 			mv.addObject("locationUpdate", locationUpdate);
 			mv.setViewName("results");
 
-//			Address newAddress = (Address) session.getAttribute("newAddress");
-//			Location newLocation = (Location) session.getAttribute("newLocation");
-//
-//			newLocation.setAddress(newAddress);
-//
-//			Location addedLocation = locationDAO.createLocation(newLocation);
-//			addedLocation.addRestroom(restroom);
-//
-//			restroom.setUserId(userId);
-//
-//			Restroom addedRestroom = restroomDAO.createRestroom(restroom);
-//
-//			boolean addSuccess = addedRestroom != null && addedLocation != null && newAddress != null;
-//
-//			mv.addObject("addSuccess", addSuccess);
-//			mv.setViewName("confirmation");
 		}
-
 		return mv;
 	}
 

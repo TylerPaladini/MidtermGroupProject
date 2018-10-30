@@ -79,24 +79,22 @@
 	
 	<c:if test="${not empty locationUpdate }">
 		
-		${location.name }<br />
-		${location.address.street }
-		<c:if test="${not empty location.address.street2 }">
-			${location.address.street2 }
+		${locationUpdate.name }<br />
+		${locationUpdate.address.street }
+		<c:if test="${not empty locationUpdate.address.street2 }">
+			${locationUpdate.address.street2 }
 		</c:if><br />
-		${location.address.city }
-		${location.address.state }
-		${location.address.zipCode }<br />
-		<c:if test="${not empty location.openTime and not empty location.closeTime }">
+		${locationUpdate.address.city }
+		${locationUpdate.address.state }
+		${locationUpdate.address.zipCode }<br />
+		<c:if test="${not empty locationUpdate.openTime and not empty locationUpdate.closeTime }">
 		${location.openTime } - ${location.closeTime }
 		</c:if>
-		${location.accessLimits }
-		
+		${locationUpdate.accessLimits }
+		${locationUpdate.purchaseRequired }
+		${locationUpdate.phone }
+		${locationUpdate.name }
 		<br>
-		<form action="adminUpdateLocation.do">
-			<input type="hidden" name="id" value="${location.id }" >
-			<input type="submit" value="update Location">
-		</form>
 		
 	</c:if> 
 	
