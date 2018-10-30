@@ -1,7 +1,6 @@
 package com.skilldistillery.babychanger.controller;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -9,7 +8,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,7 +19,6 @@ import com.skilldistillery.babychanger.data.CommentDAO;
 import com.skilldistillery.babychanger.data.LocationDAO;
 import com.skilldistillery.babychanger.data.RestroomDAO;
 import com.skilldistillery.babychanger.data.UsersDAO;
-import com.skilldistillery.babychanger.data.UsersDAOImpl;
 import com.skilldistillery.babychanger.entities.Address;
 import com.skilldistillery.babychanger.entities.Comment;
 import com.skilldistillery.babychanger.entities.Location;
@@ -354,6 +351,15 @@ public class UsersController {
 			ModelAndView mv = new ModelAndView();
 			mv.setViewName("confirmation");
 
+			return mv;
+		}
+		
+		@RequestMapping(path = "flagRestroom.do", method = RequestMethod.GET)
+		public ModelAndView updateFlagRestroom(int id, boolean isFlag) {
+			ModelAndView mv = new ModelAndView();
+			restroomDAO.updateFlag(id, isFlag); 
+			mv.setViewName("confirmation");
+			
 			return mv;
 		}
 

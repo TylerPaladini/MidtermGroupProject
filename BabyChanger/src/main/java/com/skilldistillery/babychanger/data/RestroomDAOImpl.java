@@ -1,5 +1,7 @@
 package com.skilldistillery.babychanger.data;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -83,6 +85,14 @@ public class RestroomDAOImpl implements RestroomDAO {
 		} else {
 			return false;
 		}
+	}
+
+	@Override
+	public List<Restroom> getRestroomsByFlag(Boolean flag) {
+		String query = "SELECT restroom FROM Restroom restroom WHERE restroom.flagged = :flagged";
+		List<Restroom> flaggedRestrooms = em.createNamedQuery(query, Restroom.class)
+				.setParameter("flagged", flag).getResultList();
+		return flaggedRestrooms;
 	}
 
 }
