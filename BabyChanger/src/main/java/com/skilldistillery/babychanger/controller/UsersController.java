@@ -74,8 +74,12 @@ public class UsersController {
 	// Update user profile
 
 	@RequestMapping(path = "updateProfilePageUser.do", method = RequestMethod.GET)
-	public String updateUserPage() {
-		return "update";
+	public ModelAndView updateUserPage() {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("updatedUser", true);
+		
+		
+		return mv;
 	}
 
 	@RequestMapping(path = "updateUser.do", method = RequestMethod.POST)
