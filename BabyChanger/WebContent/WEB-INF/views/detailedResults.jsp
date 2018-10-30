@@ -14,6 +14,8 @@
 
 </head>
 <body>
+
+	<%@ include file="map.jsp"%>
 	<%@ include file="navigation.jsp"%>
 
 	<c:if test="${not empty location }">
@@ -83,7 +85,7 @@
 						<input type="submit" value="Add Comment">
 						
 					</form>
-						<form action="flagRestroom">
+						<form action="flagRestroom.do">
 						<input type="hidden" name="restroomId" value="${restroom.id }">
 						<input type="hidden" name="isFlag" value="true">
 						<input type="submit" value="Flag Restroom">
