@@ -354,12 +354,21 @@ public class UsersController {
 			return mv;
 		}
 		
-		@RequestMapping(path = "flagRestroom.do", method = RequestMethod.GET)
+		@RequestMapping(path = "flagRestroom.do", method = RequestMethod.POST)
 		public ModelAndView updateFlagRestroom(int id, boolean isFlag) {
 			ModelAndView mv = new ModelAndView();
 			restroomDAO.updateFlag(id, isFlag); 
-			mv.setViewName("confirmation");
+			mv.setViewName("redirect:updatedFlagRestroom.do");
 			
+			return mv;
+		}
+		
+		@RequestMapping(path = "updatedFlagRestroom.do", method = RequestMethod.GET)
+		public ModelAndView updatedFlagRestroom() {
+			ModelAndView mv = new ModelAndView();
+			mv.addObject("restroomFlagged", true); 
+			mv.setViewName("confirmation");
+
 			return mv;
 		}
 
