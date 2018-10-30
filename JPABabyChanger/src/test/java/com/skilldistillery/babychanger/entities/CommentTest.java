@@ -58,11 +58,11 @@ class CommentTest {
 	
 	@Test
 	void test_comment_flagged_mapping() {
-		assertEquals(null, comment.isFlagComment());
+		assertEquals(null, comment.getFlagComment());
 	}
 	@Test
 	void test_comment_active_mapping() {
-		assertEquals(true, comment.isActive());
+		assertEquals(true, comment.getActive());
 	}
 	
 	@Test

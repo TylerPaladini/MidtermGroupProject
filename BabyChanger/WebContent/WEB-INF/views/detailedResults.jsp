@@ -15,8 +15,6 @@
 
 </head>
 <body>
-
-	<%@ include file="map.jsp"%>
 	<%@ include file="navigation.jsp"%>
 
 	<c:if test="${not empty location }">
@@ -48,8 +46,6 @@
 		<c:if test="${empty loggedIn }">
 			<h4>Register to update locations</h4>
 		</c:if>
-
-
 		<br>
 		<br>
 		<br>
