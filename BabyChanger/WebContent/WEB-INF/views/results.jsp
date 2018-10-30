@@ -77,6 +77,19 @@
 		</c:forEach>
 	</c:if> 
 	
+	<c:if test="${restroomsFlagged }">
+	<h5>List all Flagged Restrooms</h5>
+	<c:forEach items="${flaggedRestrooms }"    var="allFlaggedRestrooms">
+	<a href="results.do?restroomId=${restroom.id }">${restroom.name }</a><br> 
+	
+	</c:forEach>
+	</c:if>
+	
+	
+	
+	
+	
+	
 	<c:if test="${not empty locationUpdate }">
 		
 		${locationUpdate.name }<br />
