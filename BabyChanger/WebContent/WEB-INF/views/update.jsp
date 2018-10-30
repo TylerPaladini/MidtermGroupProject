@@ -29,7 +29,7 @@
 		<input type="number" min=1 max=5 name="rating" value="${updatedComment.rating.value }">
 		
 		Comment
-		<textarea rows="3" cols="6" name="comment" value="${updatedComment.comment }"></textarea>
+		<textarea rows="3" cols="10" name="comment" value="${updatedComment.comment }">${updatedComment.comment }</textarea>
 		<input type="submit" value="submit">
 		</form>
 	</c:if>
