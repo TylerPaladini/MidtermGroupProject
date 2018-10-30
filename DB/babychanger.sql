@@ -184,7 +184,7 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `pass
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `active`, `admin`, `date_created`) VALUES (2, 'John', 'Doe', 'johndoe', 'johndoe@hotmail.com', 'johndoe', true, false, NULL);
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `active`, `admin`, `date_created`) VALUES (3, 'Mike', 'Myers', 'mikem', 'mikeym@aol.com', 'mikeym', true, false, NULL);
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `active`, `admin`, `date_created`) VALUES (4, 'Rob', 'Thompson', 'robthompson', 'rob@10thHuman.com', 'robthompson', true, true, NULL);
-INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `active`, `admin`, `date_created`) VALUES (5, 'admin', 'admin', 'admin', 'admin@admin.com', 'admin', NULL, NULL, NULL);
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `active`, `admin`, `date_created`) VALUES (5, 'admin', 'admin', 'admin', 'admin@admin.com', 'admin', true, true, '2018-10-01');
 
 COMMIT;
 
