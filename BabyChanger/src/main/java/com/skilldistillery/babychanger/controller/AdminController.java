@@ -564,13 +564,16 @@ public class AdminController {
 	}
 
 	// Lists all restrooms that have been flaed
-	@RequestMapping(path = "listAllFlaggedRestrooms.do", method = RequestMethod.GET)
-	public ModelAndView getAllFlaggedRestrooms(Boolean flag) {
+	@RequestMapping(path= "listAllFlaggedRestrooms.do", method= RequestMethod.GET)
+	public ModelAndView getAllFlaggedRestrooms() {
 		ModelAndView mv = new ModelAndView();
+		
+		List<Restroom> allFlaggedRestrooms = restroomDAO.getRestroomsByFlag(true);
+		System.out.println("***********************************************8");
+		System.out.println(allFlaggedRestrooms);
 
-		List<Restroom> allFlaggedRestrooms = restroomDAO.getRestroomsByFlag(flag);
 		mv.addObject("flaggedRestrooms", allFlaggedRestrooms);
-		mv.addObject("restroomsFlagged", true);
+//		mv.addObject("restroomsFlagged", true);
 		mv.setViewName("results");
 
 		return mv;

@@ -90,11 +90,23 @@
 						<input type="submit" value="Add Comment">
 						
 					</form>
+					<c:if test="${!loggedIn.admin }">	
 						<form action="flagRestroom.do" method="post">
 						<input type="hidden" name="id" value="${restroom.id }">
 						<input type="hidden" name="isFlag" value="true">
 						<input type="submit" value="Flag Restroom">
 						</form>
+						</c:if>
+						
+						<!-- Gives the administrator the ability to update a flagged restroom -->
+						<c:if test="${loggenIn.admin }">
+						<form action="updateRestroom.do" method="POST">
+						<input type="hidden" name="id" value="${restroom.id }">
+						<input type="Submit" value="Update Restroom">
+						</form>
+						</c:if>
+						
+						
 				
 				</c:if>
 				<c:if test="${empty restroom.comments }">
