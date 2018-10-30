@@ -37,6 +37,11 @@ ${loggedIn.lastName}
 	<form action="listAllLocations.do">
 	<input type="Submit" value="Update Location"/>
 	</form>
+	
+	<form action="listAllFlaggedRestrooms.do">
+	<input type="Submit" value="Show Flagged Restrooms"/>
+	</form>
+	
 
 <script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"

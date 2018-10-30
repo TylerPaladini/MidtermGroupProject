@@ -18,7 +18,7 @@ public interface LocationDAO {
 	
 	public boolean deleteLocation(int id);
 	
-	public Location updateLocation(int locationId, Location location, int addressId, Address address);
+	public Location updateLocation(int locationId, Location location, Address address);
 	
 	public List<Location> getLocationsByCity(String city);
 	

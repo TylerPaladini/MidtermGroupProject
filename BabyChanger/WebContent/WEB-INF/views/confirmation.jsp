@@ -33,6 +33,9 @@
 	<c:if test="${commentAdded }">
 		comment added
 	</c:if>
+	<c:if test="${restroomFlagged }">
+		restroom flagged
+	</c:if>
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
 		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
