@@ -47,6 +47,16 @@
 		<input type="submit" value="Edit Profile">
 	</form>
 	
+	<c:if test="${!loggedIn.admin}">
+		<form action="disableUser.do">
+		<input type="hidden" name="userId" value="${loggedIn.id }">
+		<input type="Submit" value="Delete Account">
+		</form>
+	</c:if>
+		
+		
+	
+	
 	<!-- removed from here and placed in the home.jsp -->
 	<!-- <form action="userAddsAddressLocationRestroom.do">
 		<input type="Submit" value="Add Location" />
