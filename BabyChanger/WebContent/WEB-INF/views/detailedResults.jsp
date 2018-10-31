@@ -54,7 +54,18 @@
 
 		<c:if test="${not empty location.restrooms }">
 
+
+
+
+
+
 			<c:forEach items="${location.restrooms }" var="restroom">
+			
+			
+			
+			
+			
+			
 				<div style="background-color: lightgreen">
 					<h1>Restroom Info: ${restroom.description }</h1>
 					<c:if test="${restroom.flagRestroom }">
@@ -71,6 +82,12 @@
 					<h5>Directions:</h5>
 					${restroom.directions } <br>
 				</div>
+				
+				
+				
+				
+				
+				
 				<c:if test="${ not empty loggedIn }">
 					<c:if test="${loggedIn.admin }">
 						<form action="addedCommentPageAdmin.do">
@@ -106,13 +123,27 @@
 
 
 				</c:if>
+				
+				
+				
+				
+				
+				
+				
 				<c:if test="${empty loggedIn }">
 					<h4>Register to add, update and report restrooms</h4>
 				</c:if>
 
+
+
+
+
 				<c:if test="${empty restroom.comments }">
 					<h3>No comments posted for this restroom</h3>
 				</c:if>
+				
+				
+				
 				<c:if test="${not empty restroom.comments }">
 
 					<h3>Comments</h3>
@@ -129,6 +160,11 @@
 								<h5>Rating</h5>
 								${comment.rating } <br>
 								<p>${comment.comment }</p>
+								
+								
+								
+								
+								
 								<c:if test="${ not empty loggedIn }">
 									<c:if test="${comment.user.id == loggedIn.id }">
 
@@ -179,13 +215,29 @@
 									</c:if>
 									<hr>
 								</c:if>
+								
+								
+								
+								
+								
 								<c:if test="${empty loggedIn }">
 									<h4>Register to add, update and report comments</h4>
 								</c:if>
 							</div>
 						</c:if>
 					</c:forEach>
+					
+					
+					
+					
+					
 				</c:if>
+
+
+
+
+
+
 
 			</c:forEach>
 		</c:if>
