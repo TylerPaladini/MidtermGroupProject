@@ -31,16 +31,25 @@ ${loggedIn.lastName}
 	</form>
 	
 	<form action="listAllLocations.do">
-	<input type="Submit" value="Update Location"/>
+		<input type="Submit" value="Update Location"/>
 	</form>
 	
 	<form action="listAllFlaggedRestrooms.do">
-	<input type="Submit" value="Show Flagged Restrooms"/>
+		<input type="Submit" value="Show Flagged Restrooms"/>
 	</form>
 	
 	<form action="deleteConfirmation.do">
-	<input type="hidden" name="id" value="${location.id }">
-	<input type="Submit" value="Delete Location"/>
+		<input type="hidden" name="id" value="${location.id }">
+		<input type="Submit" value="Delete Location"/>
+	</form>
+	<form action="deleteConfirmation.do">
+		<input type="Submit" value="Delete User"/>
+	</form>
+	<form action="searchUserToDisable.do">
+		<input type="Submit" value="Disable User"/>
+	</form>
+	<form action="searchUserToDelete.do">
+		<input type="Submit" value="Delete User"/>
 	</form>
 
 <script
