@@ -132,7 +132,6 @@ public class UsersController {
 	@RequestMapping(path = "userAddsAddressLocationRestroom.do")
 	public ModelAndView addAddressLocationRestroom() {
 		ModelAndView mv = new ModelAndView();
-
 		mv.addObject("createAddressModel", new Address());
 		mv.addObject("newEntry", true);
 		mv.setViewName("add");
@@ -158,6 +157,7 @@ public class UsersController {
 	@RequestMapping(path = "userAddsLocation.do", method = RequestMethod.POST)
 	public ModelAndView userAddsLocation(@Valid @ModelAttribute("createLocationModel") Location location, Errors errors,
 			HttpSession session) {
+		System.out.println(location.toString());
 		ModelAndView mv = new ModelAndView();
 		if (errors.getErrorCount() != 0) {
 			mv.setViewName("add");
