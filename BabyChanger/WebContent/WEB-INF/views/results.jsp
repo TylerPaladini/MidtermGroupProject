@@ -78,7 +78,7 @@
 	</c:if> 
 	
 	<c:if test="${not empty flaggedRestrooms }">
-	<h5>List all Flagged Restrooms</h5>
+	<h5>All Flagged Restrooms</h5>
 	<c:forEach items="${flaggedRestrooms }"    var="allFlaggedRestrooms">
 
 	
@@ -89,6 +89,30 @@
 	
 	<c:if test="${noFlaggedRestrooms }">
 	There are no flagged restrooms
+	</c:if>
+	
+	
+	
+	<c:if test="${not empty flaggedComments }">
+		<h5>All Flagged Comments</h5>
+		<hr>
+	<c:forEach items="${flaggedComments }"    var="comment">
+		<h4>User: ${comment.user.userName }</h4>
+		<h4>User First Name: ${comment.user.firstName }</h4>
+		<h4>User Last Name: ${comment.user.lastName }</h4>
+		<p>Comment: ${comment.comment }</p>
+		<h4>Rating: ${comment.rating }</h4>
+		
+		<form action="unflagComment.do" method="post">
+			<input type="submit" value="unflag comment">
+			<input type="hidden" value="${comment.id }" name="commentId">
+		</form>
+		<hr>
+	</c:forEach>
+	</c:if>
+	
+	<c:if test="${noFlaggedCommetns }">
+		There are no flagged Comments
 	</c:if>
 	
 	

@@ -266,6 +266,35 @@ public class AdminController {
 
 		return mv;
 	}
+	
+	//unflag flagged restrooms
+	@RequestMapping(path = "unflagRestroom.do", method = RequestMethod.POST)
+	public ModelAndView updateFlag(int restroomId, String unflaggedReason) {
+		ModelAndView mv = new ModelAndView();
+		boolean unflagSuccess = restroomDAO.updateFlag(restroomId, false, unflaggedReason);
+		
+		int locationId = restroomDAO.getRestroom(restroomId).getLocation().getId();
+		Location location = locationDAO.getLocationById(locationId);
+		mv.addObject("location",location);
+		mv.addObject("unflagSuccess", unflagSuccess);
+		mv.setViewName("detailedResults");
+		
+		return mv;
+	}
+	//unflag flagged restrooms
+	@RequestMapping(path = "unflagComment.do", method = RequestMethod.POST)
+	public ModelAndView updateFlag(int commentId) {
+		ModelAndView mv = new ModelAndView();
+		boolean unflagCommentSuccess = commentDAO.updateFlag(commentId, false);
+		
+		int locationId = commentDAO.findCommentById(commentId).getRestroom().getLocation().getId();
+		Location location = locationDAO.getLocationById(locationId);
+		mv.addObject("location",location);
+		mv.addObject("unflagCommentSuccess", unflagCommentSuccess);
+		mv.setViewName("detailedResults");
+		
+		return mv;
+	}
 
 	// Adds comment
 	@RequestMapping(path = "addedCommentPageAdmin.do", method = RequestMethod.GET)
@@ -494,9 +523,9 @@ public class AdminController {
 			Restroom addedRestroom = restroomDAO.createRestroom(restroom);
 
 			boolean addSuccess = addedRestroom != null && addedLocation != null && newAddress != null;
-
+			mv.addObject("location", addedLocation);
 			mv.addObject("addLocationSuccess", addSuccess);
-			mv.setViewName("profile");
+			mv.setViewName("detailedResults");
 		}
 		return mv;
 	}
@@ -609,24 +638,40 @@ public class AdminController {
 
 	}
 
-	// Lists all restrooms that have been flaed
+	// Lists all restrooms that have been flagged
 	@RequestMapping(path= "listAllFlaggedRestrooms.do", method= RequestMethod.GET)
 	public ModelAndView getAllFlaggedRestrooms() {
 		ModelAndView mv = new ModelAndView();
 		
 		List<Restroom> allFlaggedRestrooms = restroomDAO.getRestroomsByFlag(true);
-		System.out.println("***********************************************8");
-		System.out.println(allFlaggedRestrooms);
-		if(allFlaggedRestrooms.size()!=0 ) {
+		if(allFlaggedRestrooms != null && allFlaggedRestrooms.size()!=0 ) {
 		mv.addObject("flaggedRestrooms", allFlaggedRestrooms);
-//		mv.addObject("restroomsFlagged", true);
 		mv.setViewName("results");
 		}
 		else {
 			mv.addObject("noFlaggedRestrooms", true);
+			mv.addObject("allLocations", locationDAO.getAllLocations());
 			mv.setViewName("results");
 		}
 
+		return mv;
+	}
+	// Lists all comments that have been flagged
+	@RequestMapping(path= "listAllFlaggedComments.do", method= RequestMethod.GET)
+	public ModelAndView getAllFlaggedComments() {
+		ModelAndView mv = new ModelAndView();
+		
+		List<Comment> allFlaggedComments = commentDAO.findCommentsByFlagComment(true);
+		if(allFlaggedComments != null && allFlaggedComments.size()!=0 ) {
+			mv.addObject("flaggedComments", allFlaggedComments);
+			mv.setViewName("results");
+		}
+		else {
+			mv.addObject("noFlaggedComments", true);
+			mv.addObject("allLocations", locationDAO.getAllLocations());
+			mv.setViewName("results");
+		}
+		
 		return mv;
 	}
 
@@ -677,8 +722,8 @@ public class AdminController {
 		ModelAndView mv = new ModelAndView();
 		boolean deletedLocation = locationDAO.deleteLocation(id);
 		if(deletedLocation) {
-			mv.addObject("locationDeleted", deletedLocation);
-			mv.setViewName("profile");
+			mv.addObject("locationDeletedSuccess", true);
+			mv.setViewName("adminProfile");
 		}
 		else {
 			Location locationAttemptedToDelete = locationDAO.getLocationById(id);
