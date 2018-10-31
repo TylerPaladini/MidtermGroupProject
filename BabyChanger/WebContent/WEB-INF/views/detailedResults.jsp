@@ -18,8 +18,11 @@
 	<%@ include file="map.jsp"%>
 	<%@ include file="navigation.jsp"%>
 
-	<c:if test="${not empty locationNotDeleted }">
+	<c:if test="${locationNotDeleted }">
 		<h1>Error deleting location</h1>
+	</c:if>
+	<c:if test="${locationDisabled }">
+		<h1>Location disabled</h1>
 	</c:if>
 	<c:if test="${not empty location }">
 		<div style="background-color: lightyellow">

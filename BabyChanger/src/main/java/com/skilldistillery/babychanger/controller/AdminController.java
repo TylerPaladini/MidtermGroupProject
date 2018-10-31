@@ -643,4 +643,17 @@ public class AdminController {
 		}
 		return mv;
 	}
+	
+	@RequestMapping(path="disableLocation.do")
+	public ModelAndView adminDisableLocation(int id) {
+		ModelAndView mv = new ModelAndView();
+		Location locationById = locationDAO.getLocationById(id);
+		locationById.setAccessLimits("This location no longer available");
+		mv.addObject("location", locationById);
+		mv.addObject("locationDisabled", true);
+		mv.setViewName("detailedResults");
+		return mv;
+	}
+	
+	
 }
