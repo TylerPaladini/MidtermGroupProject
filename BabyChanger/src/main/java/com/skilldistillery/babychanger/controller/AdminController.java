@@ -100,7 +100,16 @@ public class AdminController {
 
 		return mv;
 	}
-
+	
+	@RequestMapping(path = "searchUserToDisable.do", method = RequestMethod.GET)
+	public ModelAndView searchUserToDisablePage() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("searchUser");
+		mv.addObject("searchForDisable", true);
+		
+		return mv;
+	}
+	
 	// Disable user profile
 	@RequestMapping(path = "disableUserAdmin.do", method = RequestMethod.POST)
 	public ModelAndView disableUserAdmin(int userId) {
