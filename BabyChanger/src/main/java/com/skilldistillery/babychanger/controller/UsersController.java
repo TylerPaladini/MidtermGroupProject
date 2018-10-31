@@ -264,11 +264,12 @@ public class UsersController {
 	@RequestMapping(path = "addCommentUser.do", method = RequestMethod.POST)
 	public ModelAndView addComment(Comment comment, RedirectAttributes redir, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		comment.setUser((Users) session.getAttribute("loggedIn"));
-		comment.setRestroom((Restroom) session.getAttribute("commentedRestroom"));
-		comment.setDateCreated(new Date());
-		Comment addcomment = commentDAO.addComment(comment);
-		redir.addFlashAttribute("addComment", addcomment);
+		Comment addComment = commentDAO.addComment(comment);
+		addComment.setUser((Users) session.getAttribute("loggedIn"));
+		addComment.setRestroom((Restroom) session.getAttribute("commentedRestroom"));
+		addComment.setDateCreated(new Date());
+		redir.addFlashAttribute("addComment", addComment);
+		System.out.println("number of restrooms for that location " + addComment.getRestroom().getLocation().getRestrooms().size());
 		mv.setViewName("redirect:addedCommentAdmin.do");
 
 		return mv;
@@ -279,6 +280,7 @@ public class UsersController {
 	public ModelAndView addedComment() {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("commentAdded", true);
+		
 		mv.setViewName("confirmation");
 
 		return mv;
