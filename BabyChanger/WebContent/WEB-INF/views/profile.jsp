@@ -26,6 +26,10 @@
 		<h1>Adding Location Successful</h1>
 	</c:if>
 	
+	<c:if test="${not empty locationDeleted }">
+		<h1>Location has been deleted</h1>
+	</c:if>
+	
 	<h1>User Profile</h1>
 
 	${loggedIn.id}

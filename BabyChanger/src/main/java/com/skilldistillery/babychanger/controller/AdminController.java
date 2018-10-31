@@ -621,6 +621,8 @@ public class AdminController {
 	@RequestMapping(path="deleteConfirmation.do")
 	public ModelAndView adminDeleteLocationConfirm(int id) {
 		ModelAndView mv = new ModelAndView();
+		Location locationToDelete = locationDAO.getLocationById(id);
+		mv.addObject("locationToDelete", locationToDelete);
 		mv.setViewName("confirmation");
 		return mv;
 	}
@@ -628,7 +630,17 @@ public class AdminController {
 	@RequestMapping(path="deleteLocation.do")
 	public ModelAndView adminDeleteLocation (int id) {
 		ModelAndView mv = new ModelAndView();
-		
+		boolean deletedLocation = locationDAO.deleteLocation(id);
+		if(deletedLocation) {
+			mv.addObject("locationDeleted", deletedLocation);
+			mv.setViewName("profile");
+		}
+		else {
+			Location locationAttemptedToDelete = locationDAO.getLocationById(id);
+			mv.addObject("location", locationAttemptedToDelete);
+			mv.addObject("locationNotDeleted", deletedLocation);
+			mv.setViewName("detailedResults");
+		}
 		return mv;
 	}
 }
