@@ -66,24 +66,30 @@ public class AdminController {
 	// Update user profile
 
 	@RequestMapping(path = "updateProfilePageAdmin.do", method = RequestMethod.GET)
-	public String updateAdminPage() {
-		return "update";
+	public ModelAndView updateAdminPage() {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("updatedUser", true);
+		mv.setViewName("update");
+		
+		
+		return mv;
 	}
 
 	@RequestMapping(path = "updateUserAdmin.do", method = RequestMethod.POST)
 	public ModelAndView updateUserAdmin(Users updatedUser, int id, RedirectAttributes redir, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-
+		updatedUser.setAdmin(true);
 		Users userUpdated = usersDAO.updateUsers(id, updatedUser);
 		if (userUpdated != null) {
 			session.setAttribute("loggedIn", userUpdated);
-			redir.addFlashAttribute("user", userUpdated);
-			mv.setViewName("redirect:updatedUserAdmin.do");
+			redir.addFlashAttribute("updateUserSuccess", true);
 		} else {
-			mv.setViewName("confirmation");
+			redir.addFlashAttribute("updateUserFailed", true);
 		}
+		mv.setViewName("redirect:updatedUserAdmin.do");
 
 		return mv;
+
 
 	}
 
@@ -437,7 +443,8 @@ public class AdminController {
 
 		if (errors.getErrorCount() != 0) {
 			mv.setViewName("add");
-			mv.addObject("addRestroomNext", true);
+			mv.addObject("addLocationFailed", true);
+			mv.addObject("newEntry", true);
 		} else {
 			Address newAddress = (Address) session.getAttribute("newAddress");
 			Location newLocation = (Location) session.getAttribute("newLocation");
@@ -453,8 +460,8 @@ public class AdminController {
 
 			boolean addSuccess = addedRestroom != null && addedLocation != null && newAddress != null;
 
-			mv.addObject("addSuccess", addSuccess);
-			mv.setViewName("confirmation");
+			mv.addObject("addLocationSuccess", addSuccess);
+			mv.setViewName("profile");
 		}
 		return mv;
 	}
@@ -580,34 +587,60 @@ public class AdminController {
 	}
 
 	// Maps user to update.jsp to update a location
-		@RequestMapping(path = "adminUpdateRestroom.do", method = RequestMethod.GET)
-		public ModelAndView goToUpdateRestroom(@RequestParam("restroomId") int restroomId, 
-				@RequestParam("locationId") int locationId, HttpSession session) {
-			ModelAndView mv = new ModelAndView();
-			Restroom updateRestroom = restroomDAO.getRestroom(restroomId);
-			session.setAttribute("locationId", locationId);
-			mv.addObject("updateRestroom", updateRestroom);
-			mv.addObject("adminUpdateRestroomModel", new Restroom());
-			mv.addObject("adminUpdatingRestroom", true);
-			mv.setViewName("update");
-			return mv;
-		}
+	@RequestMapping(path = "adminUpdateRestroom.do", method = RequestMethod.GET)
+	public ModelAndView goToUpdateRestroom(@RequestParam("restroomId") int restroomId, 
+			@RequestParam("locationId") int locationId, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		Restroom updateRestroom = restroomDAO.getRestroom(restroomId);
+		session.setAttribute("locationId", locationId);
+		mv.addObject("updateRestroom", updateRestroom);
+		mv.addObject("adminUpdateRestroomModel", new Restroom());
+		mv.addObject("adminUpdatingRestroom", true);
+		mv.setViewName("update");
+		return mv;
+	}
+	
+	@RequestMapping(path="adminUpdateRestroomAdmin.do", method = RequestMethod.POST)
+	public ModelAndView adminUpdateRestroom(@Valid @ModelAttribute("adminUpdateRestroomModel") Restroom restroom,
+			Errors errors, @RequestParam("restroomId") int restroomId, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
 		
-		@RequestMapping(path="adminUpdateRestroomAdmin.do", method = RequestMethod.POST)
-		public ModelAndView userUpdateRestroom(@Valid @ModelAttribute("adminUpdateRestroomModel") Restroom restroom,
-				Errors errors, @RequestParam("restroomId") int restroomId, HttpSession session) {
-			ModelAndView mv = new ModelAndView();
-			
-			if (errors.getErrorCount() != 0) {
-				mv.setViewName("update");
-				mv.addObject("updatingRestroom", true);
-			} else {
-				restroomDAO.updateRestroom(restroomId, restroom);
-				Integer updatedRestroomAtLocation = (Integer) session.getAttribute("locationId");
-				Location locationById = locationDAO.getLocationById(updatedRestroomAtLocation);
-				mv.addObject("location", locationById);
-				mv.setViewName("detailedResults");
-			}
-			return mv;
+		if (errors.getErrorCount() != 0) {
+			mv.setViewName("update");
+			mv.addObject("updatingRestroom", true);
+		} else {
+			restroomDAO.updateRestroom(restroomId, restroom);
+			Integer updatedRestroomAtLocation = (Integer) session.getAttribute("locationId");
+			Location locationById = locationDAO.getLocationById(updatedRestroomAtLocation);
+			mv.addObject("location", locationById);
+			mv.setViewName("detailedResults");
 		}
+		return mv;
+	}
+	
+	@RequestMapping(path="deleteConfirmation.do")
+	public ModelAndView adminDeleteLocationConfirm(int id) {
+		ModelAndView mv = new ModelAndView();
+		Location locationToDelete = locationDAO.getLocationById(id);
+		mv.addObject("locationToDelete", locationToDelete);
+		mv.setViewName("confirmation");
+		return mv;
+	}
+	
+	@RequestMapping(path="deleteLocation.do")
+	public ModelAndView adminDeleteLocation (int id) {
+		ModelAndView mv = new ModelAndView();
+		boolean deletedLocation = locationDAO.deleteLocation(id);
+		if(deletedLocation) {
+			mv.addObject("locationDeleted", deletedLocation);
+			mv.setViewName("profile");
+		}
+		else {
+			Location locationAttemptedToDelete = locationDAO.getLocationById(id);
+			mv.addObject("location", locationAttemptedToDelete);
+			mv.addObject("locationNotDeleted", deletedLocation);
+			mv.setViewName("detailedResults");
+		}
+		return mv;
+	}
 }

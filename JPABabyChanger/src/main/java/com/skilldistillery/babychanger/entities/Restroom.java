@@ -40,7 +40,7 @@ public class Restroom {
 	@Column(name = "flagged_date")
 	private Date flaggedDate;
 
-//	@NotNull
+//	@NotEmpty(message = "Required field")
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
 
@@ -59,28 +59,28 @@ public class Restroom {
 
 	private String description;
 
-//	@NotNull
+//	@NotEmpty(message = "Required field")
 	@Column(name = "changing_table")
 	private Boolean changingTable;
 
 	@ManyToOne
 	@JoinColumn(name = "location_id")
 	private Location location;
-	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "restroom",  cascade=CascadeType.ALL)
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "restroom", cascade = CascadeType.ALL)
 	private List<Comment> comments;
 
 	@Column(name = "flagged")
 	private Boolean flagRestroom;
-	
+
 	/*
 	 * getters / setters
 	 */
-	
+
 	public int getId() {
 		return id;
 	}
-	
+
 	public Boolean getChangingTable() {
 		return changingTable;
 	}
@@ -96,7 +96,6 @@ public class Restroom {
 	public void setPicture(String picture) {
 		this.picture = picture;
 	}
-
 
 	public String getFlaggedReason() {
 		return flaggedReason;
@@ -179,36 +178,37 @@ public class Restroom {
 	}
 
 	public void setFlagRestroom(Boolean flagRestroom) {
-		this.flagRestroom = flagRestroom; 
+		this.flagRestroom = flagRestroom;
 	}
-	
 
 	public Boolean getFlagRestroom() {
 		return flagRestroom;
 	}
 
 	public void addComment(Comment comment) {
-		if(comments == null) comments = new ArrayList<>();
-		
-		if(!comments.contains(comment)) {
+		if (comments == null)
+			comments = new ArrayList<>();
+
+		if (!comments.contains(comment)) {
 			comments.add(comment);
-			if(comment.getRestroom() != null) {
+			if (comment.getRestroom() != null) {
 				comment.getRestroom().getComments().remove(comment);
 			}
 			comment.setRestroom(this);
 		}
 	}
+
 	public void removeComment(Comment comment) {
 		comment.setRestroom(null);
-		if(comments != null) {
+		if (comments != null) {
 			comments.remove(comment);
 		}
 	}
-	
+
 	/*
 	 * hashCode and equals
 	 */
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -234,36 +234,28 @@ public class Restroom {
 	/*
 	 * toString
 	 */
-	
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Restroom [id=").append(id)
-				.append(", picture=").append(picture)
-				.append(", flagged=").append(flagRestroom)
-				.append(", flaggedReason=").append(flaggedReason)
-				.append(", flaggedDate=").append(flaggedDate)
-				.append(", gender=").append(gender)
-				.append(", directions=").append(directions)
-				.append(", pAccess=").append(pAccess)
-				.append(", userId=").append(userId)
-				.append(", dateCreated=").append(dateCreated)
-				.append(", description=").append(description)
-				.append(", changingTable=").append(changingTable)
-				.append(", location=").append(location)
-				.append(", comments=").append(comments.size())
-				.append("]");
+		builder.append("Restroom [id=").append(id).append(", picture=").append(picture).append(", flagged=")
+				.append(flagRestroom).append(", flaggedReason=").append(flaggedReason).append(", flaggedDate=")
+				.append(flaggedDate).append(", gender=").append(gender).append(", directions=").append(directions)
+				.append(", pAccess=").append(pAccess).append(", userId=").append(userId).append(", dateCreated=")
+				.append(dateCreated).append(", description=").append(description).append(", changingTable=")
+				.append(changingTable).append(", location=").append(location).append(", comments=")
+				.append(comments.size()).append("]");
 		return builder.toString();
 	}
 
 	/*
 	 * constructors
 	 */
-	
-	public Restroom () {
-		
+
+	public Restroom() {
+
 	}
-	
+
 	public Restroom(int id, String picture, Boolean flagged, String flaggedReason, Date flaggedDate, Gender gender,
 			String directions, Boolean pAccess, int userId, Date dateCreated, String description, Boolean changingTable,
 			Location location, List<Comment> comments) {

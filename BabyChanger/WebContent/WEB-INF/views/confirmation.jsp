@@ -14,10 +14,22 @@
 	rel="stylesheet"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
-<title>Insert title here</title>
+<title>Confirmation</title>
 </head>
 <body>
+
 	<%@ include file="navigation.jsp"%>
+	
+	<h4>Confirm Deletion</h4>
+	Are you sure you want to delete:
+	${locationToDelete.name }
+	<form action="deleteLocation.do">
+		<input type="hidden" name="id" value="${location.id }">
+		<input type="submit" value="Confirm">
+	</form>
+	<form action="detailedResultsFlagged.do?restroomId=${location.id }">
+		<input type="Submit" value="Cancel"/>
+	</form>
 	<c:if test="${deleteSuccess}">
 		delete successful
 	</c:if>
