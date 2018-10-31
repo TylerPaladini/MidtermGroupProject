@@ -21,6 +21,9 @@
 	<c:if test="${not empty locationNotDeleted }">
 		<h1>Error deleting location</h1>
 	</c:if>
+	<c:if test="${commentAdded }">
+		<h1>Successfully added comment</h1>
+	</c:if>
 	<c:if test="${not empty location }">
 		<div style="background-color: lightyellow">
 			<h1>Location Info</h1>

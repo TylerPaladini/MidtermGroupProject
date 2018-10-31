@@ -1,9 +1,10 @@
 package com.skilldistillery.babychanger.entities;
 
 import java.sql.Time;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -17,7 +18,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -55,7 +55,7 @@ public class Location {
 	private Time closeTime;
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "location", cascade = CascadeType.ALL)
-	private List<Restroom> restrooms;
+	private Set<Restroom> restrooms;
 
 	@Column(name = "date_created")
 	@Temporal(TemporalType.TIMESTAMP)
@@ -148,17 +148,17 @@ public class Location {
 		this.dateCreated = dateCreated;
 	}
 
-	public List<Restroom> getRestrooms() {
+	public Set<Restroom> getRestrooms() {
 		return restrooms;
 	}
 
-	public void setRestrooms(List<Restroom> restrooms) {
+	public void setRestrooms(Set<Restroom> restrooms) {
 		this.restrooms = restrooms;
 	}
 
 	public void addRestroom(Restroom restroom) {
 		if (restrooms == null)
-			restrooms = new ArrayList<>();
+			restrooms = new HashSet<>();
 
 		if (!restrooms.contains(restroom)) {
 			restrooms.add(restroom);
@@ -242,7 +242,7 @@ public class Location {
 	}
 
 	public Location(int id, String name, Address address, String accessLimits, boolean purchaseRequired, String phone,
-			Time openTime, Time closeTime, List<Restroom> restrooms, Date dateCreated) {
+			Time openTime, Time closeTime, Set<Restroom> restrooms, Date dateCreated) {
 		super();
 		this.id = id;
 		this.name = name;
