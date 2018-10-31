@@ -1,21 +1,47 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
-<head>
+<title>RESULTS</title>
 <meta charset="UTF-8">
-<meta name="viewport"
-    content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link
-    href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-    rel="stylesheet"
-    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-    crossorigin="anonymous">
-<title>Results</title>
-</head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amatic+SC">
+<style>
+body, html {height: 100%}
+body,h1,h2,h3,h4,h5,h6 {font-family: "Amatic SC", sans-serif; font-size: 30px}
+.menu {display: none}
+.bgimg {
+    background-repeat: no-repeat;
+    background-size: cover;
+/*     background-image: url("https://media.giphy.com/media/tJ4oUTsMHbqAZyqsBo/giphy.gif");*/ 
+ 	   min-height: 90%;
+}
+</style>
 <body>
-		<%@ include file="navigation.jsp"%>
+
+<!-- Navbar (sit on top) -->
+<div class="w3-top w3-hide-small">
+  <div class="w3-bar w3-xlarge w3-black w3-opacity w3-hover-opacity-off" id="myNavbar">
+    <a href="home.do" class="w3-bar-item w3-button">HOME</a>
+    <a href="loginPage.do" class="w3-bar-item w3-button">LOGIN</a>
+    <a href="registerPage.do" class="w3-bar-item w3-button">REGISTER</a>
+  </div>
+
+</div>
+  
+<!-- Header with image -->
+<header class="bgimg w3-display-container w3-grayscale-min" id="home">
+  <div class="w3-display-bottomleft w3-padding">
+    <span class="w3-tag w3-xlarge">Open 24/7 because babies don't sleep on your time</span>
+  </div>
+  <div class="w3-display-middle w3-center">
+    <span class="w3-text-white w3-hide-small" style="font-size:100px">BABY CHANGER</span>
+<!--     <span class="w3-text-white w3-hide-large w3-hide-medium" style="font-size:60px"><b>thin<br>CRUST PIZZA</b></span>
+ --><!--     <p><a href="#menu" class="w3-button w3-xxlarge w3-black">Let me see the menu</a></p> -->
+    
+    <%@ include file="newNav.jsp"%>
+    
+    
+    	
 	<c:if test="${not empty allUsers }">
 		<c:forEach items="${allUsers }" var="user">
 			${user.id }
@@ -138,11 +164,10 @@
 		</c:forEach>
 	</c:if> 
 	
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-		crossorigin="anonymous"></script>
 	
+    
+  </div>
+</header>
 
 </body>
 </html>
