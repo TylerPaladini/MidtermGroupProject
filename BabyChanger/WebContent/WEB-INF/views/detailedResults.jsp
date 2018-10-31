@@ -30,6 +30,12 @@
 	<c:if test="${updateComment }">
 		<h1>Comment Updated</h1>
 	</c:if>
+	<c:if test="${disabledComment }">
+		<h1>Comment Deleted</h1>
+	</c:if>
+	<c:if test="${flaggedComment }">
+		<h1>Comment Reported</h1>
+	</c:if>
 	<c:if test="${not empty location }">
 		<div style="background-color: lightyellow">
 			<h1>Location Info</h1>

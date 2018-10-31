@@ -153,10 +153,12 @@ public class AdminController {
 
 	// Disables comments made by a user
 	@RequestMapping(path = "disableCommentAdmin.do", method = RequestMethod.POST)
-	public ModelAndView disableComment(int id) {
+	public ModelAndView disableComment(int id, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
 
 		commentDAO.disableComment(id);
+		int locationId = commentDAO.findCommentById(id).getRestroom().getLocation().getId();
+		redir.addFlashAttribute("location", locationDAO.getLocationById(locationId));
 		mv.setViewName("redirect:disabledCommentAdmin.do");
 
 		return mv;
@@ -166,8 +168,8 @@ public class AdminController {
 	public ModelAndView disabledComment() {
 
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("confirmation");
-
+		mv.addObject("disabledComment", true);
+		mv.setViewName("detailedResults");
 		return mv;
 
 	}
@@ -215,10 +217,12 @@ public class AdminController {
 
 	// Marks comment with flag (true/false)
 	@RequestMapping(path = "updateFlagCommentAdmin.do", method = RequestMethod.POST)
-	public ModelAndView updateFlag(int id, boolean isFlag) {
+	public ModelAndView updateFlag(int id, boolean isFlag, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
 
 		commentDAO.updateFlag(id, isFlag);
+		int locationId = commentDAO.findCommentById(id).getRestroom().getLocation().getId();
+		redir.addFlashAttribute("location", locationDAO.getLocationById(locationId));
 		mv.setViewName("redirect:updatedFlagCommentAdmin.do");
 
 		return mv;
@@ -227,7 +231,8 @@ public class AdminController {
 	@RequestMapping(path = "updatedFlagCommentAdmin.do", method = RequestMethod.GET)
 	public ModelAndView updatedFlag() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("confirmation");
+		mv.setViewName("detailedResults");
+		mv.addObject("flaggedComment", true);
 
 		return mv;
 	}
