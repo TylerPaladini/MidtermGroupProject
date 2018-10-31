@@ -578,10 +578,15 @@ public class AdminController {
 		List<Restroom> allFlaggedRestrooms = restroomDAO.getRestroomsByFlag(true);
 		System.out.println("***********************************************8");
 		System.out.println(allFlaggedRestrooms);
-
+		if(allFlaggedRestrooms.size()!=0 ) {
 		mv.addObject("flaggedRestrooms", allFlaggedRestrooms);
 //		mv.addObject("restroomsFlagged", true);
 		mv.setViewName("results");
+		}
+		else {
+			mv.addObject("noFlaggedRestrooms", true);
+			mv.setViewName("results");
+		}
 
 		return mv;
 	}
