@@ -1,14 +1,17 @@
 package com.skilldistillery.babychanger.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -405,4 +408,11 @@ public class UsersController {
 		}
 		return mv;
 	}
+	
+	@InitBinder("userUpdateLocationModel")
+	public void customizedTimeFormat(WebDataBinder binder) {
+		SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm");
+		binder.registerCustomEditor(Date.class, "openTime", new CustomDateEditor(dateFormatter, true));
+	}
+	
 }
