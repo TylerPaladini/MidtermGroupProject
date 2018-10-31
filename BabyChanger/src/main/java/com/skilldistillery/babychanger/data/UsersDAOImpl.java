@@ -60,9 +60,11 @@ public class UsersDAOImpl implements UsersDAO {
 	@Override
 	public boolean disableUser(int id) {
 		Users disableUser = em.find(Users.class, id);
-
+		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" +disableUser);
 		if (disableUser != null) {
 			disableUser.setActive(false);
+			System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" +disableUser);
+
 		}
 		return false;
 

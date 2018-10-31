@@ -36,7 +36,7 @@ public class Users {
 	private String email;
 
 	@NotEmpty(message = "Required field")
-	@Pattern(regexp = "(?=^.{6,15}$)(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?\\/&gt;.&lt;,])(?!.*\\s).*$",
+	@Pattern(regexp = "(?=^.{5,15}$)(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?\\/&gt;.&lt;,])(?!.*\\s).*$",
 			message = "Password must contain, one lower-case letter, one upper-case letter, one number, and one special character")
 	private String password;
 
