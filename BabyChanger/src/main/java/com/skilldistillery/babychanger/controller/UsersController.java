@@ -262,13 +262,12 @@ public class UsersController {
 	}
 
 	@RequestMapping(path = "addCommentUser.do", method = RequestMethod.POST)
-	public ModelAndView addComment(Comment comment, RedirectAttributes redir, HttpSession session) {
+	public ModelAndView addComment(Comment comment, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
+		comment.setUser((Users) session.getAttribute("loggedIn"));
+		comment.setRestroom((Restroom) session.getAttribute("commentedRestroom"));
+		comment.setDateCreated(new Date());
 		Comment addComment = commentDAO.addComment(comment);
-		addComment.setUser((Users) session.getAttribute("loggedIn"));
-		addComment.setRestroom((Restroom) session.getAttribute("commentedRestroom"));
-		addComment.setDateCreated(new Date());
-		redir.addFlashAttribute("addComment", addComment);
 		System.out.println("number of restrooms for that location " + addComment.getRestroom().getLocation().getRestrooms().size());
 		mv.setViewName("redirect:addedCommentAdmin.do");
 
