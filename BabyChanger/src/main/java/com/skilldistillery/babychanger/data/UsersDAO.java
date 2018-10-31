@@ -20,4 +20,5 @@ public interface UsersDAO {
 
 	public boolean userDoesExist(String userName);
 	
+	public boolean isUserActive(String userName);
 }

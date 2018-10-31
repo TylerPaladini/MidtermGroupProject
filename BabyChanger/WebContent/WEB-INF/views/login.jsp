@@ -17,6 +17,12 @@
 <%@ include file="navigation.jsp"%>
 
 
+<c:if test="${notCurrentUser}">
+Please Create an Account
+
+</c:if>
+
+
 <form action="login.do" method="POST">
 Username:
 	<input type="text" name="userName">

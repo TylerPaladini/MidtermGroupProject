@@ -17,13 +17,11 @@ import com.skilldistillery.babychanger.entities.Users;
 @Transactional
 @Repository
 public class UsersDAOImpl implements UsersDAO {
-	
+
 	@PersistenceContext
 	private EntityManager em;
-	
-	
+
 	// Login the user
-	
 
 // Creates a new user
 	@Override
@@ -50,13 +48,12 @@ public class UsersDAOImpl implements UsersDAO {
 			updateUser.setEmail(users.getEmail());
 			updateUser.setPassword(users.getPassword());
 			updateUser.setUserName(users.getUserName());
-			
 
 		}
 		return updateUser;
-		
-		
+
 	}
+
 //  Changes the user from active to inactive, does not delete from the database. 
 	@Override
 	public boolean disableUser(int id) {
@@ -90,7 +87,7 @@ public class UsersDAOImpl implements UsersDAO {
 	@Override
 	public List<Users> listAllUsers() {
 		String query = "SELECT users FROM Users users";
-		
+
 		List<Users> allUsers = em.createQuery(query, Users.class).getResultList();
 		return allUsers;
 	}
@@ -100,22 +97,38 @@ public class UsersDAOImpl implements UsersDAO {
 		Users user = null;
 		List<Users> allUsers = listAllUsers();
 		for (Users checkUser : allUsers) {
-			if(checkUser.getUserName().equals(userName) && checkUser.getPassword().equals(password)) {
+			if (checkUser.getUserName().equals(userName) && checkUser.getPassword().equals(password)) {
 				user = checkUser;
 				break;
 			}
-		}		
+		}
 		return user;
 	}
-	
+
 	@Override
 	public boolean userDoesExist(String userName) {
 		boolean userExist;
 		String query = "SELECT COUNT(x.userName) FROM Users x WHERE x.userName = :userName";
-		Long userCount = em.createQuery(query, Long.class)
-								.setParameter("userName", userName)
-								.getSingleResult();
+		Long userCount = em.createQuery(query, Long.class).setParameter("userName", userName).getSingleResult();
 		userExist = userCount == 0 ? false : true;
 		return userExist;
+	}
+
+	@Override
+	public boolean isUserActive(String userName) {
+		String query = "SELECT x.active FROM Users x WHERE x.userName = :userName";
+		List<Boolean> userActive = em.createQuery(query, Boolean.class).setParameter("userName", userName)
+				.getResultList();
+
+		boolean userActiveCheck = false;
+
+		if (!userActive.isEmpty()) {
+			Boolean userCheck = userActive.get(0);
+			if (userCheck) {
+				userActiveCheck = true;
+			}
+		}
+
+		return userActiveCheck;
 	}
 }
