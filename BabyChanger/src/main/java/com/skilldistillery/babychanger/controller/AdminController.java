@@ -250,8 +250,8 @@ public class AdminController {
 		comment.setUser((Users) session.getAttribute("loggedIn"));
 		comment.setRestroom((Restroom) session.getAttribute("commentedRestroom"));
 		comment.setDateCreated(new Date());
-		Comment addcomment = commentDAO.addComment(comment);
-		redir.addFlashAttribute("addComment", addcomment);
+		Comment addComment = commentDAO.addComment(comment);
+		redir.addFlashAttribute("location", locationDAO.getLocationById(addComment.getRestroom().getLocation().getId()));
 		mv.setViewName("redirect:addedCommentAdmin.do");
 
 		return mv;
@@ -262,7 +262,7 @@ public class AdminController {
 	public ModelAndView addedComment() {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("commentAdded", true);
-		mv.setViewName("confirmation");
+		mv.setViewName("detailedResults");
 
 		return mv;
 
@@ -555,6 +555,8 @@ public class AdminController {
 		int commentId = ((Comment) session.getAttribute("updatedComment")).getId();
 		comment.setDateCreated(new Date());
 		Comment newUpdatedComment = commentDAO.editComment(commentId, comment);
+		int locationId = newUpdatedComment.getRestroom().getLocation().getId();
+		redir.addFlashAttribute("location",  locationDAO.getLocationById(locationId));
 		mv.setViewName("redirect:updatedCommentAdmin.do");
 
 		return mv;
@@ -564,7 +566,8 @@ public class AdminController {
 	@RequestMapping(path = "updatedCommentAdmin.do", method = RequestMethod.GET)
 	public ModelAndView updatedComment() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("confirmation");
+		mv.addObject("updateComment", true);
+		mv.setViewName("detailedResults");
 
 		return mv;
 
