@@ -67,7 +67,7 @@ public class UsersController {
 	@RequestMapping(path = "createdUser.do", method = RequestMethod.GET)
 	public ModelAndView createdUser() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("profile");
+		mv.setViewName("home");
 		return mv;
 	}
 
@@ -109,7 +109,7 @@ public class UsersController {
 	}
 
 	// Disable user profile
-	@RequestMapping(path = "disableUser.do", method = RequestMethod.POST)
+	@RequestMapping(path = "disableUser.do", method = RequestMethod.GET)
 	public ModelAndView disableUser(int userId) {
 		ModelAndView mv = new ModelAndView();
 
@@ -120,9 +120,10 @@ public class UsersController {
 	}
 
 	@RequestMapping(path = "disabledUser.do", method = RequestMethod.GET)
-	public ModelAndView disabledUser() {
+	public ModelAndView disabledUser(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("profile");
+		session.removeAttribute("loggedIn");
+		mv.setViewName("home");
 
 		return mv;
 
