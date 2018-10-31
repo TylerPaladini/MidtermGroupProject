@@ -101,21 +101,22 @@ public class AdminController {
 		return mv;
 	}
 	
-	@RequestMapping(path = "searchUserToDisable.do", method = RequestMethod.GET)
+	@RequestMapping(path = "disableDelete.do", method = RequestMethod.POST)
 	public ModelAndView searchUserToDisablePage() {
 		ModelAndView mv = new ModelAndView();
+		mv.addObject("searchForDisableDelete", true);
 		mv.setViewName("searchUser");
-		mv.addObject("searchForDisable", true);
-		
 		return mv;
 	}
+
 	
 	// Disable user profile
 	@RequestMapping(path = "disableUserAdmin.do", method = RequestMethod.POST)
-	public ModelAndView disableUserAdmin(int userId) {
+	public ModelAndView disableUserAdmin(int userId, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
 
-		usersDAO.disableUser(userId);
+		boolean disabledUser = usersDAO.disableUser(userId);
+		redir.addFlashAttribute("disableSuccess", disabledUser);
 		mv.setViewName("redirect:disabledUserAdmin.do");
 
 		return mv;
@@ -124,10 +125,30 @@ public class AdminController {
 	@RequestMapping(path = "disabledUserAdmin.do", method = RequestMethod.GET)
 	public ModelAndView disabledUserAdmin() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("profile");
+		mv.setViewName("adminProfile");
 
 		return mv;
 
+	}
+	// Delete user profile
+	@RequestMapping(path = "deleteUserAdmin.do", method = RequestMethod.POST)
+	public ModelAndView deleteUserAdmin(int userId, RedirectAttributes redir) {
+		ModelAndView mv = new ModelAndView();
+		
+		boolean deletedUser = usersDAO.deleteUsers(userId);
+		redir.addFlashAttribute("deleteSuccess", deletedUser);
+		mv.setViewName("redirect:disabledUserAdmin.do");
+		
+		return mv;
+	}
+	
+	@RequestMapping(path = "deletedUserAdmin.do", method = RequestMethod.GET)
+	public ModelAndView deletedUserAdmin() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("adminProfile");
+		
+		return mv;
+		
 	}
 
 	// comes here when admin has confirmed they are deleting

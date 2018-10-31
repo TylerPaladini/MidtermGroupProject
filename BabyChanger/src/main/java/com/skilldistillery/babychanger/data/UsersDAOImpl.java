@@ -1,5 +1,6 @@
 package com.skilldistillery.babychanger.data;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -12,6 +13,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
+import com.skilldistillery.babychanger.entities.Location;
 import com.skilldistillery.babychanger.entities.Users;
 
 @Transactional
@@ -131,4 +133,53 @@ public class UsersDAOImpl implements UsersDAO {
 
 		return userActiveCheck;
 	}
+	
+	
+
+	@Override
+	public Users getUsersById(int id) {
+		return em.find(Users.class, id);
+	}
+
+	@Override
+	public List<Users> getUsersByFirstName(String firstName) {
+		String query = "SELECT u FROM Users u where u.firstName like :fName";
+		
+		return em.createQuery(query, Users.class).setParameter("fName", "%" + firstName + "%").getResultList();
+	}
+
+	@Override
+	public List<Users> getUsersByLastName(String lastName) {
+		String query = "SELECT u FROM Users u where u.lastName like :lName";
+		
+		return em.createQuery(query, Users.class).setParameter("lName", "%" + lastName + "%").getResultList();
+	}
+
+	@Override
+	public List<Users> getUsersByUsername(String username) {
+		String query = "SELECT u FROM Users u where u.userName like :uName";
+		return em.createQuery(query, Users.class).setParameter("uName", "%" + username + "%").getResultList();
+	}
+
+	@Override
+	public List<Users> getUsersByEmail(String email) {
+		String query = "SELECT u FROM Users u where u.email like :email";
+		
+		return em.createQuery(query, Users.class).setParameter("email", "%" + email + "%").getResultList();
+	}
+
+	@Override
+	public Set<Users> usersByKeywords(String keywords) {
+		Set<Users> usersByKeyword = new HashSet<>();
+		String[] words = keywords.trim().split("\\s+");
+		for (String word : words) {
+			usersByKeyword.addAll(getUsersByFirstName(word));
+			usersByKeyword.addAll(getUsersByLastName(word));
+			usersByKeyword.addAll(getUsersByUsername(word));
+			usersByKeyword.addAll(getUsersByEmail(word));
+		}
+		return usersByKeyword;
+	}
+	
+	
 }

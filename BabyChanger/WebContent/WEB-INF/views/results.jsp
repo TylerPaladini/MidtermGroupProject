@@ -109,6 +109,27 @@
 		${locationUpdate.phone }<br />
 		<br>
 		
+	</c:if>
+	
+	<c:if test="${not empty allUsersToDisableDelete }">
+		<c:forEach items="${allUsersToDisableDelete }" var="user">
+			First Name: <h3>${user.firstName }</h3>
+			Last Name: <h3>${user.lastName }</h3>
+			Username: <h3>${user.userName }</h3>
+			Email: <h3>${user.email }</h3>
+			
+			<form action="deleteUserAdmin.do" method="post">
+			
+				<input type="hidden" name="userId" value="${user.id }">
+				<input type="submit" value="Delete User">
+			</form>
+			<form action="disableUserAdmin.do" method="post">
+			
+				<input type="hidden" name="userId" value="${user.id }">
+				<input type="submit" value="Disable User">
+			</form>
+		
+		</c:forEach>
 	</c:if> 
 	
 	<script
