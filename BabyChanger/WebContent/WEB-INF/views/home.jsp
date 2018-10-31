@@ -28,6 +28,12 @@
 	<form action="searchOpenLocations.do">
 		<input type="Submit" value="Open Locations" />
 	</form>
+	
+	<c:if test="${not empty loggedIn}">
+	<form action="userAddsAddressLocationRestroom.do">
+		<input type="Submit" value="Add Location" />
+	</form>
+	</c:if>
 
 
 
