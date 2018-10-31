@@ -22,9 +22,15 @@
 <c:if test="${deleteSuccess }">
 	<h1>Delete Successful</h1>
 </c:if>
+<c:if test="${profileUpdateSuccess }">
+	<h1>Profile Update Success</h1>
+</c:if>
+<c:if test="${locationDeletedSuccess }">
+		<h1>Location has been deleted</h1>
+</c:if>
 <h1>Admin Profile</h1>
 
-${loggedIn.id}
+
 ${loggedIn.firstName}
 ${loggedIn.lastName}
 
@@ -42,6 +48,9 @@ ${loggedIn.lastName}
 	
 	<form action="listAllFlaggedRestrooms.do">
 		<input type="Submit" value="Show Flagged Restrooms"/>
+	</form>
+	<form action="listAllFlaggedComments.do">
+		<input type="Submit" value="Show Flagged Comments"/>
 	</form>
 	
 	<form action="deleteConfirmation.do">
