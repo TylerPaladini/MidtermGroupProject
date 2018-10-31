@@ -40,7 +40,7 @@ public class Restroom {
 	@Column(name = "flagged_date")
 	private Date flaggedDate;
 
-//	@NotEmpty
+//	@NotEmpty(message = "Required field")
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
 
@@ -59,7 +59,7 @@ public class Restroom {
 
 	private String description;
 
-//	@NotEmpty
+//	@NotEmpty(message = "Required field")
 	@Column(name = "changing_table")
 	private Boolean changingTable;
 
