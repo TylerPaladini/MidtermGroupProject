@@ -29,43 +29,43 @@ public class Location {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@NotEmpty(message = "Required field")
 	private String name;
-	
+
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "address_id")
 	private Address address;
-	
+
 	@Column(name = "access_limits")
 	private String accessLimits;
-	
+
 	@Column(name = "purchase_required")
 	private boolean purchaseRequired;
-	
-	@Pattern(regexp="(?:[0-9]{3}-[0-9]{3}-[0-9]{4})?", message="Please enter a US phone number with leading area code")
+
+	@Pattern(regexp = "(?:[0-9]{3}-[0-9]{3}-[0-9]{4})?", message = "Please enter a US phone number with leading area code")
 	private String phone;
-	
-//	@Pattern(regexp="(^([01]\\d|2[0-3]):([0-5]\\d)$")
+
+	@Pattern(regexp="([01]?[0-9]|2[0-3]):[0-5][0-9]", message = "Enter 24 hour format")
 	@Column(name = "open_time")
 	private Time openTime;
-	
-//	@Pattern(regexp="(^([01]\\d|2[0-3]):([0-5]\\d)$")
+
+	@Pattern(regexp="([01]?[0-9]|2[0-3]):[0-5][0-9]", message = "Enter 24 hour format")
 	@Column(name = "closed_time")
 	private Time closeTime;
-	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy="location", cascade=CascadeType.ALL)
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "location", cascade = CascadeType.ALL)
 	private List<Restroom> restrooms;
-	
-	@Column(name="date_created")
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreationTimestamp
+
+	@Column(name = "date_created")
+	@Temporal(TemporalType.TIMESTAMP)
+	@CreationTimestamp
 	private Date dateCreated;
-	
+
 	/*
 	 * getters / setters
 	 */
-	
+
 	public int getId() {
 		return id;
 	}
@@ -122,7 +122,6 @@ public class Location {
 //		this.openTime = Time.valueOf( openTime + ":00");
 //		
 //	}
-	
 
 	public Time getCloseTime() {
 		return closeTime;
@@ -132,7 +131,7 @@ public class Location {
 //		
 //		this.closeTime = Time.valueOf(closeTime + ":00");
 //	}
-	
+
 	public void setOpenTime(Time openTime) {
 		this.openTime = openTime;
 	}
@@ -152,25 +151,27 @@ public class Location {
 	public List<Restroom> getRestrooms() {
 		return restrooms;
 	}
-	
+
 	public void setRestrooms(List<Restroom> restrooms) {
 		this.restrooms = restrooms;
 	}
-	
+
 	public void addRestroom(Restroom restroom) {
-		if(restrooms == null) restrooms = new ArrayList<>();
-		
-		if(!restrooms.contains(restroom)) {
+		if (restrooms == null)
+			restrooms = new ArrayList<>();
+
+		if (!restrooms.contains(restroom)) {
 			restrooms.add(restroom);
-			if(restroom.getLocation() != null) {
+			if (restroom.getLocation() != null) {
 				restroom.getLocation().getRestrooms().remove(restroom);
 			}
 			restroom.setLocation(this);
 		}
 	}
+
 	public void removeRestroom(Restroom restroom) {
 		restroom.setLocation(null);
-		if(restrooms != null) {
+		if (restrooms != null) {
 			restrooms.remove(restroom);
 		}
 	}
@@ -178,7 +179,7 @@ public class Location {
 	/*
 	 * hashCode and equals
 	 */
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -186,7 +187,7 @@ public class Location {
 		result = prime * result + id;
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -200,11 +201,11 @@ public class Location {
 			return false;
 		return true;
 	}
-	
+
 	/*
 	 * toString
 	 */
-	
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -235,7 +236,7 @@ public class Location {
 	/*
 	 * constructors
 	 */
-	
+
 	public Location() {
 		super();
 	}
