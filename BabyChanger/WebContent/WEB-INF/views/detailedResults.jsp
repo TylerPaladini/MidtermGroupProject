@@ -54,6 +54,10 @@
 					<input type="hidden" name="id" value="${location.id }">
 					<input type="Submit" value="Delete Location"/>
 				</form>
+				<form action="disableLocation.do">
+					<input type="hidden" name="id" value="${location.id }">
+					<input type="Submit" value="Disable Location"/>
+				</form>
 			</c:if>
 		</c:if>
 		<c:if test="${empty loggedIn }">
@@ -111,7 +115,7 @@
 					<input type="submit" value="Add Comment">
 
 					</form>
-					<c:if test="${!loggedIn.admin }">
+					<c:if test="${!loggedIn.admin && !restroom.flagRestroom}">
 						<form action="flagRestroom.do" method="post">
 							<input type="hidden" name="id" value="${restroom.id }"> 
 							<input type="hidden" name="isFlag" value="true">
