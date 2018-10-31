@@ -553,8 +553,9 @@ public class AdminController {
 			address.setId(addressId);
 			updatedLocation.setAddress(address);
 			Location locationUpdate = locationDAO.updateLocation(updatedLocation.getId(), updatedLocation, address);
-			mv.addObject("locationUpdate", locationUpdate);
-			mv.setViewName("results");
+			mv.addObject("locationUpdateSuccess", true);
+			mv.addObject("location", locationUpdate);
+			mv.setViewName("detailedResults");
 		}
 		return mv;
 	}
