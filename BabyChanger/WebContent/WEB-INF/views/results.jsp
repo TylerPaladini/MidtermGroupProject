@@ -117,24 +117,27 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Amatic SC", sans-serif; font-size: 30px}
 	There are no flagged restrooms
 	</c:if>
 	
-	<c:if test="${not empty locationUpdate }">
+	
+	
+	<c:if test="${not empty allUsersToDisableDelete }">
+		<c:forEach items="${allUsersToDisableDelete }" var="user">
+			First Name: <h3>${user.firstName }</h3>
+			Last Name: <h3>${user.lastName }</h3>
+			Username: <h3>${user.userName }</h3>
+			Email: <h3>${user.email }</h3>
+			
+			<form action="deleteUserAdmin.do" method="post">
+			
+				<input type="hidden" name="userId" value="${user.id }">
+				<input type="submit" value="Delete User">
+			</form>
+			<form action="disableUserAdmin.do" method="post">
+			
+				<input type="hidden" name="userId" value="${user.id }">
+				<input type="submit" value="Disable User">
+			</form>
 		
-		${locationUpdate.name }<br />
-		${locationUpdate.address.street }
-		<c:if test="${not empty locationUpdate.address.street2 }">
-			${locationUpdate.address.street2 }
-		</c:if><br />
-		${locationUpdate.address.city }
-		${locationUpdate.address.state }
-		${locationUpdate.address.zipCode }<br />
-		<c:if test="${not empty locationUpdate.openTime and not empty locationUpdate.closeTime }">
-			${location.openTime } - ${location.closeTime }
-		</c:if>
-		${locationUpdate.accessLimits }<br />
-		${locationUpdate.purchaseRequired }<br />
-		${locationUpdate.phone }<br />
-		<br>
-		
+		</c:forEach>
 	</c:if> 
 	
 	

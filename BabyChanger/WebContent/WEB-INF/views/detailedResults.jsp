@@ -17,7 +17,11 @@
 <body>
 	<%@ include file="map.jsp"%>
 	<%@ include file="navigation.jsp"%>
-
+	
+	
+	<c:if test="${not empty locationUpdateSuccess }">
+		<h2>Update Location Successful</h2>
+	</c:if>
 	<c:if test="${locationNotDeleted }">
 		<h1>Error deleting location</h1>
 	</c:if>
@@ -35,6 +39,9 @@
 	</c:if>
 	<c:if test="${flaggedComment }">
 		<h1>Comment Reported</h1>
+	</c:if>
+	<c:if test="${updateRestroomSuccess }">
+		<h1>Update Restroom Successful</h1>
 	</c:if>
 	<c:if test="${not empty location }">
 		<div style="background-color: lightyellow">

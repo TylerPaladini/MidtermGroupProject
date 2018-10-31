@@ -3,11 +3,8 @@ package com.skilldistillery.babychanger.controller;
 import java.util.List;
 import java.util.Set;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.skilldistillery.babychanger.data.LocationDAO;
 import com.skilldistillery.babychanger.data.RestroomDAO;
+import com.skilldistillery.babychanger.data.UsersDAO;
 import com.skilldistillery.babychanger.entities.Gender;
 import com.skilldistillery.babychanger.entities.Location;
 import com.skilldistillery.babychanger.entities.Rating;
@@ -28,6 +26,8 @@ public class SearchController {
 	
 	@Autowired
 	private RestroomDAO restroomDAO;
+	@Autowired
+	private UsersDAO userDAO;
 	
 	@RequestMapping(path = "home.do", method = RequestMethod.GET)
 	public String index() {
@@ -167,6 +167,20 @@ public class SearchController {
 		Location relatedLocation = locationDAO.getLocationById(flaggedRestroom.getLocation().getId());
 		mv.addObject("location", relatedLocation);
 		mv.setViewName("detailedResults");
+		return mv;
+	}
+	@RequestMapping(path="getAllUsers.do", method = RequestMethod.POST)
+	public ModelAndView getAllUsers() {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("allUsersToDisableDelete", userDAO.listAllUsers());
+		mv.setViewName("results");
+		return mv;
+	}
+	@RequestMapping(path="getUsersByKeywords.do", method = RequestMethod.POST)
+	public ModelAndView getUsersByKeywords(String keywords) {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("allUsersToDisableDelete", userDAO.usersByKeywords(keywords));
+		mv.setViewName("results");
 		return mv;
 	}
 }

@@ -16,6 +16,15 @@
 <body>
 <%@ include file="navigation.jsp"%>
 
+<c:if test="${disableSuccess}">
+	<h1>Disable Successful</h1>
+</c:if>
+<c:if test="${deleteSuccess }">
+	<h1>Delete Successful</h1>
+</c:if>
+<c:if test="${profileUpdateSuccess }">
+	<h1>Profile Update Success</h1>
+</c:if>
 <h1>Admin Profile</h1>
 
 ${loggedIn.id}
@@ -42,15 +51,10 @@ ${loggedIn.lastName}
 		<input type="hidden" name="id" value="${location.id }">
 		<input type="Submit" value="Delete Location"/>
 	</form>
-	<form action="deleteConfirmation.do">
-		<input type="Submit" value="Delete User"/>
+	<form action="disableDelete.do" method="post">
+		<input type="Submit" value="Disable/Delete User"/>
 	</form>
-	<form action="searchUserToDisable.do">
-		<input type="Submit" value="Disable User"/>
-	</form>
-	<form action="searchUserToDelete.do">
-		<input type="Submit" value="Delete User"/>
-	</form>
+	
 
 <script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
