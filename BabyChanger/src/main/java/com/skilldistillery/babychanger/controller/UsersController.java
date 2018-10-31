@@ -268,7 +268,7 @@ public class UsersController {
 		comment.setRestroom((Restroom) session.getAttribute("commentedRestroom"));
 		comment.setDateCreated(new Date());
 		Comment addComment = commentDAO.addComment(comment);
-		redir.addFlashAttribute("location", ((Restroom) session.getAttribute("commentedRestroom")).getLocation());
+		redir.addFlashAttribute("location", locationDAO.getLocationById(addComment.getRestroom().getLocation().getId()));
 		mv.setViewName("redirect:addedCommentUser.do");
 	
 
