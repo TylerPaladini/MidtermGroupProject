@@ -31,36 +31,44 @@ public class LoginController {
 	@Autowired
 	private UsersDAO usersDAO;
 
-	
 	// Logs in the user
 	@RequestMapping(path = "login.do", method = RequestMethod.POST)
-	public ModelAndView userLogin( Users user, Errors errors, HttpSession session) {
+	public ModelAndView userLogin(Users user, Errors errors, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		String userName = user.getUserName();
 		String password = user.getPassword();
-		
-		Users loginUser = usersDAO.getUserByUsernameAndPassword(userName, password);
-		
-		if(loginUser != null ) {
-			session.setAttribute("loggedIn", loginUser);
-			mv.setViewName("home");
+
+		boolean userActive = usersDAO.isUserActive(user.getUserName());
+		System.out.println("***************************" + userActive);
+		if (userActive) {
+			Users loginUser = usersDAO.getUserByUsernameAndPassword(userName, password);
+
+			if (loginUser != null) {
+				session.setAttribute("loggedIn", loginUser);
+				mv.setViewName("home");
+			} else {
+				mv.setViewName("login");
+			}
 		}
 		else {
+			mv.addObject("notCurrentUser", true);
 			mv.setViewName("login");
 		}
 		return mv;
 	}
-	
-	@RequestMapping ( path = "logout.do", method = RequestMethod.GET)
-	public String logout( HttpSession session) {
+
+	@RequestMapping(path = "logout.do", method = RequestMethod.GET)
+	public String logout(HttpSession session) {
 		session.removeAttribute("loggedIn");
 		return "home";
 	}
-	@RequestMapping ( path = "loginPage.do", method = RequestMethod.GET)
+
+	@RequestMapping(path = "loginPage.do", method = RequestMethod.GET)
 	public String loginPage() {
 		return "login";
 	}
-	@RequestMapping ( path = "registerPage.do", method = RequestMethod.GET)
+
+	@RequestMapping(path = "registerPage.do", method = RequestMethod.GET)
 	public String registerPage(Model model) {
 		model.addAttribute("registerUserModel", new Users());
 		return "register";
