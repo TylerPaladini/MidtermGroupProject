@@ -81,7 +81,7 @@
 				<div style="background-color: lightgreen">
 					<h1>Restroom Info: ${restroom.description }</h1>
 					<c:if test="${restroom.flagRestroom }">
-					RESTROOM HAS BEEN FLAGGED
+					RESTROOM HAS BEEN FLAGGED FOR ${restroom.flaggedReason }
 					</c:if> 
 					<h5>Changing Table?</h5>
 					${restroom.changingTable } <br>
