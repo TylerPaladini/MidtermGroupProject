@@ -16,13 +16,27 @@
 <body>
 	<%@ include file="navigation.jsp"%>
 	
+	<c:if test="${updateUserSuccess }">
+		<h1>Update successful</h1>
+	</c:if>
+	<c:if test="${updateUserFailed }">
+		<h1>Update Failed</h1>
+	</c:if>
+	
 	<h1>User Profile</h1>
 
 	${loggedIn.id}
 	${loggedIn.firstName}
 	${loggedIn.lastName}
 	
-	<form action="updateProfilePageUser.do">
+	<c:if test="${loggedIn.admin }">
+		<form action="updateProfilePageAdmin.do">
+	
+	</c:if>
+	<c:if test="${!loggedIn.admin }">
+		<form action="updateProfilePageUser.do">
+	
+	</c:if>
 		<input type="submit" value="Edit Profile">
 	</form>
 	

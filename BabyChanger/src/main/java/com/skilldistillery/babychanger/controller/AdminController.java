@@ -66,24 +66,30 @@ public class AdminController {
 	// Update user profile
 
 	@RequestMapping(path = "updateProfilePageAdmin.do", method = RequestMethod.GET)
-	public String updateAdminPage() {
-		return "update";
+	public ModelAndView updateAdminPage() {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("updatedUser", true);
+		mv.setViewName("update");
+		
+		
+		return mv;
 	}
 
 	@RequestMapping(path = "updateUserAdmin.do", method = RequestMethod.POST)
 	public ModelAndView updateUserAdmin(Users updatedUser, int id, RedirectAttributes redir, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-
+		updatedUser.setAdmin(true);
 		Users userUpdated = usersDAO.updateUsers(id, updatedUser);
 		if (userUpdated != null) {
 			session.setAttribute("loggedIn", userUpdated);
-			redir.addFlashAttribute("user", userUpdated);
-			mv.setViewName("redirect:updatedUserAdmin.do");
+			redir.addFlashAttribute("updateUserSuccess", true);
 		} else {
-			mv.setViewName("confirmation");
+			redir.addFlashAttribute("updateUserFailed", true);
 		}
+		mv.setViewName("redirect:updatedUserAdmin.do");
 
 		return mv;
+
 
 	}
 
