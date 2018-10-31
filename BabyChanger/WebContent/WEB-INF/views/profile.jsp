@@ -22,6 +22,9 @@
 	<c:if test="${updateUserFailed }">
 		<h1>Update Failed</h1>
 	</c:if>
+	<c:if test="${addLocationSuccess }">
+		<h1>Adding Location Successful</h1>
+	</c:if>
 	
 	<h1>User Profile</h1>
 

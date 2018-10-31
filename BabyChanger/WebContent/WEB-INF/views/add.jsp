@@ -17,10 +17,13 @@
 </head>
 <body>
 	<%@ include file="navigation.jsp"%>
-	<h2>Add A New Entry</h2>
+	
+	<c:if test="${addLocationFailed }">
+		<h1>Add Location Failed</h1>
+	</c:if>
 	<h6>* Required</h6>
 	<c:if test="${newEntry }">
-	
+		<h2>Add A New Entry</h2>
 		<c:if test="${loggedIn.admin }">
 			<form:form action="adminAddsAddress.do" method="POST" modelAttribute="createAddressModel">
 				<h5>Address</h5>
@@ -81,19 +84,19 @@
 			<form:form action="adminAddsLocation.do" method="POST" modelAttribute="createLocationModel">
 				<input type="hidden" name="newAddress" value="${newAddress }">
 				<h5>Location</h5>
-				<form:label path="name">Name Of Location</form:label> 
+				<form:label path="name">*Name Of Location</form:label> 
 				<form:input path="name" />
 				<form:errors path="name" />
 				<br>
-				<label>Access Limits (e.g. Club membership required)</label>
-				<input type="text" name="accessLimits" /> 
+				<label>*Access Limits</label>
+				<input type="text" name="accessLimits" placeholder="e.g. Club membership required"/> 
 				<br> 
 				<label>*Purchased Required?</label> 
 				Yes<input type="radio" name="purchaseRequired" value="true" />
 				No<input type="radio" name="purchaseRequired" value="false" checked /> 
 				<br>
-				<form:label path="phone">Phone Number(format like 555-555-5555)</form:label> 
-				<form:input type="tel" path="phone" />
+				<form:label path="phone">*Phone Number</form:label> 
+				<form:input type="tel" path="phone" placeholder="555-555-5555"/>
 				<form:errors path="phone" />
 				<br>
 				<form:label path="openTime">*Open Time(24 hour format e.g. 15:30)</form:label> 
@@ -113,19 +116,19 @@
 		
 				<input type="hidden" name="newAddress" value="${newAddress }">
 				<h5>Location</h5>
-				<form:label path="name">Name Of Location</form:label> 
+				<form:label path="name">*Name Of Location</form:label> 
 				<form:input path="name" />
 				<form:errors path="name" />
 				<br>
-				<label>Access Limits (e.g. Club membership required)</label>
-				<input type="text" name="accessLimits" /> 
+				<label>Access Limits </label>
+				<input type="text" name="accessLimits" placeholder="e.g. Club membership required"/> 
 				<br> 
 				<label>*Purchased Required?</label> 
 				Yes<input type="radio" name="purchaseRequired" value="true" />
 				No<input type="radio" name="purchaseRequired" value="false" checked /> 
 				<br>
-				<form:label path="phone">Phone Number(format like 555-555-5555)</form:label> 
-				<form:input type="tel" path="phone" />
+				<form:label path="phone">*Phone Number</form:label> 
+				<form:input type="tel" path="phone" placeholder="555-555-5555"/>
 				<form:errors path="phone" />
 				<br>
 				<form:label path="openTime">*Open Time(24 hour format e.g. 15:30)</form:label> 
@@ -160,7 +163,7 @@
 				<form:label path="gender">*Gender?</form:label>
 				Male <form:radiobutton path="gender" value="M" /> 
 				Female <form:radiobutton path="gender" value="F" /> 
-				Unisex/Family <form:radiobutton path="gender" value="U" /> 
+				Unisex/Family <form:radiobutton path="gender" value="U"/> 
 				<form:errors path="gender" />
 				<br> 
 				
@@ -205,7 +208,7 @@
 				<form:label path="gender">*Gender?</form:label>
 				Male <form:radiobutton path="gender" value="M" /> 
 				Female <form:radiobutton path="gender" value="F" /> 
-				Unisex/Family <form:radiobutton path="gender" value="U" /> 
+				Unisex/Family <form:radiobutton path="gender" value="U"/> 
 				<form:errors path="gender" />
 				<br> 
 				
