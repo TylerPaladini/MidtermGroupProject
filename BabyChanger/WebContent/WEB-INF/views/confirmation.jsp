@@ -24,10 +24,11 @@
 	Are you sure you want to delete:
 	${locationToDelete.name }
 	<form action="deleteLocation.do">
-		<input type="hidden" name="id" value="${location.id }">
+		<input type="hidden" name="id" value="${locationToDelete.id }">
 		<input type="submit" value="Confirm">
 	</form>
-	<form action="detailedResultsFlagged.do?restroomId=${location.id }">
+	<form action="detailedResults.do" method="GET">
+		<input type="hidden" name="locationId" value="${locationToDelete.id }">
 		<input type="Submit" value="Cancel"/>
 	</form>
 	<c:if test="${deleteSuccess}">

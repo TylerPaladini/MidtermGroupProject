@@ -18,11 +18,14 @@
 	<%@ include file="map.jsp"%>
 	<%@ include file="navigation.jsp"%>
 
-	<c:if test="${not empty locationNotDeleted }">
+	<c:if test="${locationNotDeleted }">
 		<h1>Error deleting location</h1>
 	</c:if>
 	<c:if test="${commentAdded }">
 		<h1>Successfully added comment</h1>
+		</c:if>
+	<c:if test="${locationDisabled }">
+		<h1>Location disabled</h1>
 	</c:if>
 	<c:if test="${not empty location }">
 		<div style="background-color: lightyellow">
@@ -54,6 +57,10 @@
 					<input type="hidden" name="id" value="${location.id }">
 					<input type="Submit" value="Delete Location"/>
 				</form>
+				<form action="disableLocation.do">
+					<input type="hidden" name="id" value="${location.id }">
+					<input type="Submit" value="Disable Location"/>
+				</form>
 			</c:if>
 		</c:if>
 		<c:if test="${empty loggedIn }">
@@ -81,7 +88,7 @@
 				<div style="background-color: lightgreen">
 					<h1>Restroom Info: ${restroom.description }</h1>
 					<c:if test="${restroom.flagRestroom }">
-					RESTROOM HAS BEEN FLAGGED
+					RESTROOM HAS BEEN FLAGGED FOR ${restroom.flaggedReason }
 					</c:if> 
 					<h5>Changing Table?</h5>
 					${restroom.changingTable } <br>
@@ -111,7 +118,7 @@
 					<input type="submit" value="Add Comment">
 
 					</form>
-					<c:if test="${!loggedIn.admin }">
+					<c:if test="${!loggedIn.admin && !restroom.flagRestroom}">
 						<form action="flagRestroom.do" method="post">
 							<input type="hidden" name="id" value="${restroom.id }"> 
 							<input type="hidden" name="isFlag" value="true">

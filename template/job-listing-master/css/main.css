@@ -1886,9 +1886,9 @@ h1, h2, h3, h4, h5, h6 {
   transition: all 0.5s;
   z-index: 997;
 }
-
+/* scrolling header color */
 #header.header-scrolled {
-  background: rgba(0, 0, 0, 0.8);
+  background-color: #ff0000;
   transition: all 0.5s;
 }
 
@@ -2217,10 +2217,10 @@ body.mobile-nav-active #mobile-nav-toggle {
     display: none;
   }
 }
-
+/* opacity background color */
 .p1-gradient-bg, .banner-area .overlay-bg, .sidebar .single-slidebar .cat-list li:hover, .callto-action-area, .single-price:hover .price-bottom, .single-service:hover, .submit-right, .submit-left, .contact-btns, .form-area .primary-btn {
   background-image: -moz-linear-gradient(0deg, #bfacff 0%, #795fff 100%);
-  background-image: -webkit-linear-gradient(0deg, #bfacff 0%, #795fff 100%);
+  background-image: -webkit-linear-gradient(0deg, #bfacff 0%, #ffffcc 100%);
   background-image: -ms-linear-gradient(0deg, #bfacff 0%, #795fff 100%);
 }
 
@@ -2301,16 +2301,23 @@ body.mobile-nav-active #mobile-nav-toggle {
   right: 0;
   top: 0;
   bottom: 0;
-}
 
+}
+/* background video */
 .banner-area {
   background: url(https://media.giphy.com/media/tJ4oUTsMHbqAZyqsBo/giphy.gif) center;
   background-size:cover;
 
-}
 
+
+
+
+
+
+}
+/* adjusts the opacity of background color */
 .banner-area .overlay-bg {
-  opacity: .50;
+  opacity: .60;
 }
 
 .banner-content {
@@ -2324,9 +2331,9 @@ body.mobile-nav-active #mobile-nav-toggle {
   line-height: 1em;
   margin-top: 20px;
 }
-
+/* color of numbers in banner */
 .banner-content h1 span {
-  color: #49e4fa;
+  color: #1aff1a;
 }
 
 @media (max-width: 991.98px) {
@@ -2352,19 +2359,20 @@ body.mobile-nav-active #mobile-nav-toggle {
     font-size: 32px;
   }
 }
-
+/* color of search by tag */
 .banner-content p span {
-  color: #49e4fa;
+  color: #1aff1a;
 }
 
 @media (max-width: 1280px) {
   .banner-content br {
     display: none;
+
   }
 }
-
+/* color of search box */
 .banner-content .form-wrap {
-  background-color: #a998f6;
+  background-color: #1aff1a;
   border: 1px solid #b8aaf3;
   padding: 20px 0;
   margin: 40px 0;
@@ -2379,12 +2387,12 @@ body.mobile-nav-active #mobile-nav-toggle {
   border-radius: 0;
   font-size: 14px;
 }
-
+/* search box color and font */
 .banner-content .form-wrap .btn-info {
-  background-color: #49e4fa;
+  background-color: #ff4dff;
   width: 100%;
   height: 100%;
-  color: #fff;
+  color: #1aff1a;
   border-radius: 0;
   border: none;
   text-transform: uppercase;
@@ -2455,9 +2463,9 @@ body.mobile-nav-active #mobile-nav-toggle {
     margin-bottom: 50px;
   }
 }
-
+/* creative designer box */
 .single-popular-post {
-  background-color: #222;
+  background-color: #ff4dff;
   padding: 20px;
 }
 
@@ -2509,11 +2517,11 @@ body.mobile-nav-active #mobile-nav-toggle {
 .features-area {
   margin-top: -65px;
 }
-
+/* static boxes */
 .single-feature {
   text-align: center;
   border-radius: 5px;
-  background-color: white;
+  background-color: #6666ff;
   box-shadow: 0px 0px 40px 0px rgba(132, 144, 255, 0.2);
   padding: 25px 0;
 }
