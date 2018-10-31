@@ -1,10 +1,12 @@
+
 <!DOCTYPE html>
 <html>
 <title>W3.CSS Template</title>
-<meta charset="UTF-8">
+<meta charset="UTF-8"> 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amatic+SC">
+
 <style>
 body, html {height: 100%}
 body,h1,h2,h3,h4,h5,h6 {font-family: "Amatic SC", sans-serif}
@@ -22,6 +24,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Amatic SC", sans-serif}
 <div class="w3-top w3-hide-small">
   <div class="w3-bar w3-xlarge w3-black w3-opacity w3-hover-opacity-off" id="myNavbar">
     <a href="home.do" class="w3-bar-item w3-button">HOME</a>
+  
     <a href="loginPage.do" class="w3-bar-item w3-button">LOGIN</a>
     <a href="registerPage.do" class="w3-bar-item w3-button">REGISTER</a>
 <!--     <a href="#googleMap" class="w3-bar-item w3-button">CONTACT</a> -->
