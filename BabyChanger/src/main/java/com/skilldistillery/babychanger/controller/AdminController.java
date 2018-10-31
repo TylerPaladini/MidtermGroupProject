@@ -96,8 +96,8 @@ public class AdminController {
 	@RequestMapping(path = "updatedUserAdmin.do", method = RequestMethod.GET)
 	public ModelAndView updatedUserAdmin() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("profile");
-
+		mv.setViewName("adminProfile");
+		mv.addObject("profileUpdateSuccess", true);
 		return mv;
 	}
 	
@@ -657,6 +657,7 @@ public class AdminController {
 			Integer updatedRestroomAtLocation = (Integer) session.getAttribute("locationId");
 			Location locationById = locationDAO.getLocationById(updatedRestroomAtLocation);
 			mv.addObject("location", locationById);
+			mv.addObject("updateRestroomSuccess", true);
 			mv.setViewName("detailedResults");
 		}
 		return mv;

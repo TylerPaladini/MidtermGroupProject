@@ -22,6 +22,9 @@
 <c:if test="${deleteSuccess }">
 	<h1>Delete Successful</h1>
 </c:if>
+<c:if test="${profileUpdateSuccess }">
+	<h1>Profile Update Success</h1>
+</c:if>
 <h1>Admin Profile</h1>
 
 ${loggedIn.id}
