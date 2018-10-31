@@ -601,7 +601,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping(path="adminUpdateRestroomAdmin.do", method = RequestMethod.POST)
-	public ModelAndView userUpdateRestroom(@Valid @ModelAttribute("adminUpdateRestroomModel") Restroom restroom,
+	public ModelAndView adminUpdateRestroom(@Valid @ModelAttribute("adminUpdateRestroomModel") Restroom restroom,
 			Errors errors, @RequestParam("restroomId") int restroomId, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		
@@ -618,5 +618,17 @@ public class AdminController {
 		return mv;
 	}
 	
-//	@RequestMapping(path="")
+	@RequestMapping(path="deleteConfirmation.do")
+	public ModelAndView adminDeleteLocationConfirm(int id) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("confirmation");
+		return mv;
+	}
+	
+	@RequestMapping(path="deleteLocation.do")
+	public ModelAndView adminDeleteLocation (int id) {
+		ModelAndView mv = new ModelAndView();
+		
+		return mv;
+	}
 }

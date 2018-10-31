@@ -30,10 +30,6 @@ ${loggedIn.lastName}
 		<input type="Submit" value="Add Location" />
 	</form>
 	
-	<form action="confirmDeleteAdmin.do">
-	<input type="Submit" value="Delete Location"/>
-	</form>
-	
 	<form action="listAllLocations.do">
 	<input type="Submit" value="Update Location"/>
 	</form>
@@ -42,6 +38,10 @@ ${loggedIn.lastName}
 	<input type="Submit" value="Show Flagged Restrooms"/>
 	</form>
 	
+	<form action="deleteConfirmation.do">
+	<input type="hidden" name="id" value="${location.id }">
+	<input type="Submit" value="Delete Location"/>
+	</form>
 
 <script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
