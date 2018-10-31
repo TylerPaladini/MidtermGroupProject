@@ -30,7 +30,7 @@ public class Location {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@NotEmpty
+	@NotEmpty(message = "Required field")
 	private String name;
 	
 	@OneToOne(cascade = CascadeType.ALL)

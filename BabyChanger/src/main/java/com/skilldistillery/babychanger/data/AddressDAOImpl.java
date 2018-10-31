@@ -62,7 +62,7 @@ public class AddressDAOImpl implements AddressDAO {
 			updateAddress.setStreet(address.getStreet());
 			updateAddress.setStreet2(address.getStreet2());
 			updateAddress.setCity(address.getCity());
-			updateAddress.setState(address.getState());
+			updateAddress.setState(address.getState().toUpperCase());
 			updateAddress.setZipCode(address.getZipCode());
 		}	
 		return updateAddress;
