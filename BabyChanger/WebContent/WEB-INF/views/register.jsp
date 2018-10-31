@@ -31,9 +31,6 @@
 		<form:input path="email"/>
 		<form:errors path="email" /><br />
 		<form:label path="password">Password:</form:label>
-		<form:input path="password" />
-		<form:errors path="password"/><br />
-		<form:label path="password">Confirm Password:</form:label>
 		<form:password path="password" />
 		<form:errors path="password"/><br />
 		  

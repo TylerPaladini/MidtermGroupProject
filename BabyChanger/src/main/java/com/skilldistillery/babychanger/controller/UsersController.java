@@ -304,6 +304,8 @@ public class UsersController {
 		int commentId = ((Comment) session.getAttribute("updatedComment")).getId();
 		comment.setDateCreated(new Date());
 		Comment newUpdatedComment = commentDAO.editComment(commentId, comment);
+		int locationId = newUpdatedComment.getRestroom().getLocation().getId();
+		redir.addFlashAttribute("location",  locationDAO.getLocationById(locationId));
 		mv.setViewName("redirect:updatedCommentUser.do");
 		return mv;
 	}
@@ -311,15 +313,18 @@ public class UsersController {
 	@RequestMapping(path = "updatedCommentUser.do", method = RequestMethod.GET)
 	public ModelAndView updatedComment() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("confirmation");
+		mv.addObject("updateComment", true);
+		mv.setViewName("detailedResults");
 		return mv;
 	}
 
 	// Disables comments made by a user
 	@RequestMapping(path = "disableCommentUser.do", method = RequestMethod.POST)
-	public ModelAndView disableComment(int id) {
+	public ModelAndView disableComment(int id, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
 		commentDAO.disableComment(id);
+		int locationId = commentDAO.findCommentById(id).getRestroom().getLocation().getId();
+		redir.addFlashAttribute("location", locationDAO.getLocationById(locationId));
 		mv.setViewName("redirect:disabledCommentUser.do");
 		return mv;
 	}
@@ -327,15 +332,18 @@ public class UsersController {
 	@RequestMapping(path = "disabledCommentUser.do", method = RequestMethod.GET)
 	public ModelAndView disabledComment() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("confirmation");
+		mv.addObject("disabledComment", true);
+		mv.setViewName("detailedResults");
 		return mv;
 	}
 
 	// Marks comment with flag (true/false)
 	@RequestMapping(path = "updateFlagCommentUser.do", method = RequestMethod.POST)
-	public ModelAndView updateFlag(int id, boolean isFlag) {
+	public ModelAndView updateFlag(int id, boolean isFlag, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
 		commentDAO.updateFlag(id, isFlag);
+		int locationId = commentDAO.findCommentById(id).getRestroom().getLocation().getId();
+		redir.addFlashAttribute("location", locationDAO.getLocationById(locationId));
 		mv.setViewName("redirect:updatedFlagCommentUser.do");
 		return mv;
 	}
@@ -343,7 +351,8 @@ public class UsersController {
 	@RequestMapping(path = "updatedFlagCommentUser.do", method = RequestMethod.GET)
 	public ModelAndView updatedFlag() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("confirmation");
+		mv.setViewName("detailedResults");
+		mv.addObject("flaggedComment", true);
 
 		return mv;
 	}

@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -26,7 +27,7 @@ public class Users {
 	private int id;
 
 	@NotEmpty(message = "Required field")
-	@Size(min = 6, max = 35)
+	@Size(min = 5, max = 35)
 	@Column(name = "username")
 	private String userName;
 
@@ -35,7 +36,8 @@ public class Users {
 	private String email;
 
 	@NotEmpty(message = "Required field")
-	@Size(min = 6, max = 35)
+	@Pattern(regexp = "(?=^.{6,15}$)(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?\\/&gt;.&lt;,])(?!.*\\s).*$",
+			message = "Password must contain, one lower-case letter, one upper-case letter, one number, and one special character")
 	private String password;
 
 	@Column(name = "first_name")
