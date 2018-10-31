@@ -43,6 +43,12 @@
 				<input type="hidden" name="id" value="${location.id }" /> <input
 					type="submit" value="Update" />
 			</form>
+			<c:if test="${loggedIn.admin }">
+				<form action="deleteConfirmation.do">
+					<input type="hidden" name="id" value="${location.id }">
+					<input type="Submit" value="Delete Location"/>
+				</form>
+			</c:if>
 		</c:if>
 		<c:if test="${empty loggedIn }">
 			<h4>Register to update locations</h4>

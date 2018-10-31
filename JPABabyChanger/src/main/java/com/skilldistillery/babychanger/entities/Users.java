@@ -25,16 +25,16 @@ public class Users {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@NotEmpty
+	@NotEmpty(message = "Required field")
 	@Size(min = 6, max = 35)
 	@Column(name = "username")
 	private String userName;
 
-	@NotEmpty
+	@NotEmpty(message = "Required field")
 	@Email
 	private String email;
 
-	@NotEmpty
+	@NotEmpty(message = "Required field")
 	@Size(min = 6, max = 35)
 	private String password;
 

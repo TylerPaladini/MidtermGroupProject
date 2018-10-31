@@ -176,8 +176,7 @@ public class UsersController {
 		ModelAndView mv = new ModelAndView();
 		if (errors.getErrorCount() != 0) {
 			mv.setViewName("add");
-			mv.addObject("addLocationFailed", true);
-			mv.addObject("newEntry", true);
+			mv.addObject("addRestoomNext", true);
 		} else {
 			Address newAddress = (Address) session.getAttribute("newAddress");
 			Location newLocation = (Location) session.getAttribute("newLocation");

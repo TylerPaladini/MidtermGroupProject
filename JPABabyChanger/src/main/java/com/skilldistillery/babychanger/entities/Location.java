@@ -46,11 +46,11 @@ public class Location {
 	@Pattern(regexp = "(?:[0-9]{3}-[0-9]{3}-[0-9]{4})?", message = "Please enter a US phone number with leading area code")
 	private String phone;
 
-	@Pattern(regexp="([01]?[0-9]|2[0-3]):[0-5][0-9]", message = "Enter 24 hour format")
+//	@Pattern(regexp="([01]?[0-9]|2[0-3]):[0-5][0-9]", message = "Enter 24 hour format")
 	@Column(name = "open_time")
 	private Time openTime;
 
-	@Pattern(regexp="([01]?[0-9]|2[0-3]):[0-5][0-9]", message = "Enter 24 hour format")
+//	@Pattern(regexp="([01]?[0-9]|2[0-3]):[0-5][0-9]", message = "Enter 24 hour format")
 	@Column(name = "closed_time")
 	private Time closeTime;
 

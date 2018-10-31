@@ -14,10 +14,17 @@
 	rel="stylesheet"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
-<title>Insert title here</title>
+<title>Confirmation</title>
 </head>
 <body>
+
 	<%@ include file="navigation.jsp"%>
+	
+	<h4>Confirm Deletion</h4>
+	<form action="deleteLocation.do">
+		<input type="hidden" value="Confirm">
+	</form>
+	<form action=""></form>
 	<c:if test="${deleteSuccess}">
 		delete successful
 	</c:if>
