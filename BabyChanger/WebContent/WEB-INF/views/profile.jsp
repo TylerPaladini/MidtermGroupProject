@@ -24,7 +24,7 @@
 	</c:if>
 	<c:if test="${addLocationSuccess }">
 		<h1>Adding Location Successful</h1>
-	</c:if>
+	</c:if> 
 	
 	<c:if test="${not empty locationDeleted }">
 		<h1>Location has been deleted</h1>
@@ -47,9 +47,10 @@
 		<input type="submit" value="Edit Profile">
 	</form>
 	
-	<form action="userAddsAddressLocationRestroom.do">
+	<!-- removed from here and placed in the home.jsp -->
+	<!-- <form action="userAddsAddressLocationRestroom.do">
 		<input type="Submit" value="Add Location" />
-	</form>
+	</form> -->
 	
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"

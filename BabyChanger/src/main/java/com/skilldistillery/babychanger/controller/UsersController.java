@@ -262,15 +262,15 @@ public class UsersController {
 	}
 
 	@RequestMapping(path = "addCommentUser.do", method = RequestMethod.POST)
-	public ModelAndView addComment(Comment comment, RedirectAttributes redir, HttpSession session) {
+	public ModelAndView addComment(Comment comment,  RedirectAttributes redir, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
+		comment.setUser((Users) session.getAttribute("loggedIn"));
+		comment.setRestroom((Restroom) session.getAttribute("commentedRestroom"));
+		comment.setDateCreated(new Date());
 		Comment addComment = commentDAO.addComment(comment);
-		addComment.setUser((Users) session.getAttribute("loggedIn"));
-		addComment.setRestroom((Restroom) session.getAttribute("commentedRestroom"));
-		addComment.setDateCreated(new Date());
-		redir.addFlashAttribute("addComment", addComment);
-		System.out.println("number of restrooms for that location " + addComment.getRestroom().getLocation().getRestrooms().size());
-		mv.setViewName("redirect:addedCommentAdmin.do");
+		redir.addFlashAttribute("location", locationDAO.getLocationById(addComment.getRestroom().getLocation().getId()));
+		mv.setViewName("redirect:addedCommentUser.do");
+	
 
 		return mv;
 
@@ -280,8 +280,7 @@ public class UsersController {
 	public ModelAndView addedComment() {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("commentAdded", true);
-		
-		mv.setViewName("confirmation");
+		mv.setViewName("detailedResults");
 
 		return mv;
 
@@ -305,6 +304,8 @@ public class UsersController {
 		int commentId = ((Comment) session.getAttribute("updatedComment")).getId();
 		comment.setDateCreated(new Date());
 		Comment newUpdatedComment = commentDAO.editComment(commentId, comment);
+		int locationId = newUpdatedComment.getRestroom().getLocation().getId();
+		redir.addFlashAttribute("location",  locationDAO.getLocationById(locationId));
 		mv.setViewName("redirect:updatedCommentUser.do");
 		return mv;
 	}
@@ -312,7 +313,8 @@ public class UsersController {
 	@RequestMapping(path = "updatedCommentUser.do", method = RequestMethod.GET)
 	public ModelAndView updatedComment() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("confirmation");
+		mv.addObject("updateComment", true);
+		mv.setViewName("detailedResults");
 		return mv;
 	}
 

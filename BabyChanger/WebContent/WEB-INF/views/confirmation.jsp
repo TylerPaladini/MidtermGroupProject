@@ -31,21 +31,7 @@
 		<input type="hidden" name="locationId" value="${locationToDelete.id }">
 		<input type="Submit" value="Cancel"/>
 	</form>
-	<c:if test="${deleteSuccess}">
-		delete successful
-	</c:if>
-	<c:if test="${!deleteSuccess}">
-		delete failed
-	</c:if>
-	<c:if test="${addSuccess}">
-		add successful
-	</c:if>
-	<c:if test="${!addSuccess}">
-		add successful
-	</c:if>
-	<c:if test="${commentAdded }">
-		comment added
-	</c:if>
+	
 	<c:if test="${restroomFlagged }">
 		restroom flagged
 	</c:if>

@@ -87,7 +87,7 @@
 	</c:forEach>
 	</c:if>
 	
-	<c:if test="${empty flaggedRestrooms }">
+	<c:if test="${noFlaggedRestrooms }">
 	There are no flagged restrooms
 	</c:if>
 	
