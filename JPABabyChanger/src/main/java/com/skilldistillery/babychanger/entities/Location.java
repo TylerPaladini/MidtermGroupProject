@@ -43,7 +43,7 @@ public class Location {
 	@Column(name = "purchase_required")
 	private boolean purchaseRequired;
 	
-	@Pattern(regexp="[0-9]{3}-[0-9]{3}-[0-9]{4}")
+	@Pattern(regexp="(?:[0-9]{3}-[0-9]{3}-[0-9]{4})?", message="Please enter a US phone number with leading area code")
 	private String phone;
 	
 //	@Pattern(regexp="(^([01]\\d|2[0-3]):([0-5]\\d)$")
