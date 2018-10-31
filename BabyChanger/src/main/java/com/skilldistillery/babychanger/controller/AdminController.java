@@ -443,7 +443,8 @@ public class AdminController {
 
 		if (errors.getErrorCount() != 0) {
 			mv.setViewName("add");
-			mv.addObject("addRestroomNext", true);
+			mv.addObject("addLocationFailed", true);
+			mv.addObject("newEntry", true);
 		} else {
 			Address newAddress = (Address) session.getAttribute("newAddress");
 			Location newLocation = (Location) session.getAttribute("newLocation");
@@ -459,8 +460,8 @@ public class AdminController {
 
 			boolean addSuccess = addedRestroom != null && addedLocation != null && newAddress != null;
 
-			mv.addObject("addSuccess", addSuccess);
-			mv.setViewName("confirmation");
+			mv.addObject("addLocationSuccess", addSuccess);
+			mv.setViewName("profile");
 		}
 		return mv;
 	}

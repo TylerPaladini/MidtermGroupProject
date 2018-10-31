@@ -176,7 +176,8 @@ public class UsersController {
 		ModelAndView mv = new ModelAndView();
 		if (errors.getErrorCount() != 0) {
 			mv.setViewName("add");
-			mv.addObject("addRestroomNext", true);
+			mv.addObject("addLocationFailed", true);
+			mv.addObject("newEntry", true);
 		} else {
 			Address newAddress = (Address) session.getAttribute("newAddress");
 			Location newLocation = (Location) session.getAttribute("newLocation");
@@ -186,8 +187,8 @@ public class UsersController {
 			restroom.setUserId(userId);
 			Restroom addedRestroom = restroomDAO.createRestroom(restroom);
 			boolean addSuccess = addedRestroom != null && addedLocation != null && newAddress != null;
-			mv.addObject("addSuccess", addSuccess);
-			mv.setViewName("confirmation");
+			mv.addObject("addLocationSuccess", addSuccess);
+			mv.setViewName("profile");
 		}
 		return mv;
 	}
