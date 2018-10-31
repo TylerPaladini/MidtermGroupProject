@@ -39,7 +39,6 @@ public class LoginController {
 		String password = user.getPassword();
 
 		boolean userActive = usersDAO.isUserActive(user.getUserName());
-		System.out.println("***************************" + userActive);
 		if (userActive) {
 			Users loginUser = usersDAO.getUserByUsernameAndPassword(userName, password);
 
