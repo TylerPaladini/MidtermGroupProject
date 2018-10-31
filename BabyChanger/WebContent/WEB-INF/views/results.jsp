@@ -91,25 +91,7 @@
 	There are no flagged restrooms
 	</c:if>
 	
-	<c:if test="${not empty locationUpdate }">
-		
-		${locationUpdate.name }<br />
-		${locationUpdate.address.street }
-		<c:if test="${not empty locationUpdate.address.street2 }">
-			${locationUpdate.address.street2 }
-		</c:if><br />
-		${locationUpdate.address.city }
-		${locationUpdate.address.state }
-		${locationUpdate.address.zipCode }<br />
-		<c:if test="${not empty locationUpdate.openTime and not empty locationUpdate.closeTime }">
-			${location.openTime } - ${location.closeTime }
-		</c:if>
-		${locationUpdate.accessLimits }<br />
-		${locationUpdate.purchaseRequired }<br />
-		${locationUpdate.phone }<br />
-		<br>
-		
-	</c:if>
+	
 	
 	<c:if test="${not empty allUsersToDisableDelete }">
 		<c:forEach items="${allUsersToDisableDelete }" var="user">
