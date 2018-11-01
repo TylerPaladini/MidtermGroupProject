@@ -16,6 +16,7 @@
 </head>
 <body>
 	<%@ include file="map.jsp"%>
+	<%-- <%@ include file="locater.jsp"%> --%>
 	<%@ include file="navigation.jsp"%>
 	
 	
@@ -74,6 +75,8 @@
 			${location.accessLimits } <br>
 			<h4>Purchase Required</h4>
 			${location.purchaseRequired }
+
+	
 		</div>
 		<c:if test="${ not empty loggedIn }">
 			<form action="userUpdateLocation.do">
