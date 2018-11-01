@@ -115,18 +115,18 @@ body, h1, h2, h3, h4, h5, h6 {
 				<h1>
 					<b>Zach Lamb, SCRUM MASTER</b> <span
 						class="w3-right w3-tag w3-dark-grey w3-round"><img alt=""
-						src="https://cdn.vox-cdn.com/thumbor/qYKuikX8VynuXPGDXNcQ7F67CMo=/0x0:1025x657/1820x1213/filters:focal(405x159:569x323):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/54719431/judgedredd.0.jpg"
+						src="https://vignette.wikia.nocookie.net/marvelcentral/images/9/97/Tony-Stark.jpg/revision/latest?cb=20130429010603"
 						height=150 width=150></span>
 				</h1>
-				<p class="w3-text-grey">Zach is the best of us, chosen by the
-					powers that be to lead this motley crue.</p>
+				<p class="w3-text-grey">The best of us, chosen by the
+					powers that be to lead our motley crue.</p>
 				<hr>
 
 				<h1>
 					<b>Joshua Ciccone-Okodo, Tech God</b> <span
 						class="w3-right w3-tag w3-dark-grey w3-round"><img alt=""
-						src="https://cdn.vox-cdn.com/thumbor/qYKuikX8VynuXPGDXNcQ7F67CMo=/0x0:1025x657/1820x1213/filters:focal(405x159:569x323):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/54719431/judgedredd.0.jpg"
-						height=150 width=150></span>
+						src="https://cdn1.thr.com/sites/default/files/imagecache/scale_crop_768_433/2011/04/thor-gallery-1-2011-a-l.jpg"
+						height=150 width=250></span>
 				</h1>
 				<p class="w3-text-grey">Josh is the strong, silent type. Leading
 					by coding.</p>
@@ -136,7 +136,7 @@ body, h1, h2, h3, h4, h5, h6 {
 					<b>Tyler Paladini, Enforcer</b> <span
 						class="w3-right w3-tag w3-dark-grey w3-round"><img alt=""
 						src="https://cdn.vox-cdn.com/thumbor/qYKuikX8VynuXPGDXNcQ7F67CMo=/0x0:1025x657/1820x1213/filters:focal(405x159:569x323):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/54719431/judgedredd.0.jpg"
-						height=150 width=150></span>
+						height=150 width=250></span>
 				</h1>
 				<p class="w3-text-grey">Tyler is the law!</p>
 				<hr>
@@ -144,8 +144,8 @@ body, h1, h2, h3, h4, h5, h6 {
 				<h1>
 					<b>Rob Thompson, DBA</b> <span
 						class="w3-right w3-tag w3-dark-grey w3-round"><img alt=""
-						src="https://cdn.vox-cdn.com/thumbor/qYKuikX8VynuXPGDXNcQ7F67CMo=/0x0:1025x657/1820x1213/filters:focal(405x159:569x323):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/54719431/judgedredd.0.jpg"
-						height=150 width=150></span>
+						src="https://carboncostume.com/wordpress/wp-content/uploads/2013/03/miltonwaddams.jpg"
+						height=150 width=250></span>
 				</h1>
 				<p class="w3-text-grey">Rob loves the command line.</p>
 				<hr>
