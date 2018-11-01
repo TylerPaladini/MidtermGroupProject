@@ -99,12 +99,12 @@
 				<form:input type="tel" path="phone" placeholder="555-555-5555"/>
 				<form:errors path="phone" />
 				<br>
-				<form:label path="openTime">*Open Time(24 hour format e.g. 15:30)</form:label> 
-				<form:input path="openTime" />
+				<form:label path="openTime" >*Open Time</form:label> 
+				<form:input path="openTime" placeholder="e.g. 06:00:00"/>
 				<form:errors path="openTime" />
 				<br> 
-				<form:label path="closeTime">*Close Time(24 hour format e.g. 23:30)</form:label>
-				<form:input path="closeTime" /> 
+				<form:label path="closeTime" >*Close Time</form:label>
+				<form:input path="closeTime" placeholder="e.g. 23:30:00"/> 
 				<form:errors path="closeTime" />
 				<br> 
 				<br> 
@@ -131,12 +131,12 @@
 				<form:input type="tel" path="phone" placeholder="555-555-5555"/>
 				<form:errors path="phone" />
 				<br>
-				<form:label path="openTime">*Open Time(24 hour format e.g. 15:30)</form:label> 
-				<form:input path="openTime" />
+				<form:label path="openTime" >*Open Time</form:label> 
+				<form:input path="openTime" placeholder="e.g. 06:00:00"/>
 				<form:errors path="openTime" />
 				<br> 
-				<form:label path="closeTime">*Close Time(24 hour format e.g. 23:30)</form:label>
-				<form:input path="closeTime" /> 
+				<form:label path="closeTime" >*Close Time</form:label>
+				<form:input path="closeTime" placeholder="e.g. 23:30:00"/> 
 				<form:errors path="closeTime" /> 
 				<br> 
 				<br> 
@@ -152,18 +152,18 @@
 				<h5>Restroom Information</h5>
 	
 				<form:label path="changingTable">*Changing Table Available?</form:label> 
-				Yes <form:radiobutton path="changingTable" value="true"/> 
-				No <form:radiobutton path="changingTable" value="false" checked/> 
+				Yes <form:radiobutton path="changingTable" value="true" checked="checked"/> 
+				No <form:radiobutton path="changingTable" value="false" /> 
 				<form:errors path="changingTable" />
 				<br> 
 				<label>*Public?</label>
-				Yes <input type="radio" name="pAccess" value="true" checked /> 
+				Yes <input type="radio" name="pAccess" value="true" checked="checked" /> 
 				No <input type="radio" name="pAccess" value="false" /> 
 				<br> 
 				<form:label path="gender">*Gender?</form:label>
 				Male <form:radiobutton path="gender" value="M" /> 
 				Female <form:radiobutton path="gender" value="F" /> 
-				Unisex/Family <form:radiobutton path="gender" value="U" checked/> 
+				Unisex/Family <form:radiobutton path="gender" value="U" checked="checked"/> 
 				<form:errors path="gender" />
 				<br> 
 				
@@ -197,18 +197,18 @@
 				<h5>Restroom Information</h5>
 	
 				<form:label path="changingTable">*Changing Table Available?</form:label> 
-				Yes <form:radiobutton path="changingTable" value="true" checked/> 
+				Yes <form:radiobutton path="changingTable" value="true" checked="checked"/> 
 				No <form:radiobutton path="changingTable" value="false"/> 
 				<form:errors path="changingTable" />
 				<br> 
 				<label>*Public?</label>
-				Yes <input type="radio" name="pAccess" value="true" checked /> 
+				Yes <input type="radio" name="pAccess" value="true" checked="checked" /> 
 				No <input type="radio" name="pAccess" value="false" /> 
 				<br> 
 				<form:label path="gender">*Gender?</form:label>
 				Male <form:radiobutton path="gender" value="M" /> 
 				Female <form:radiobutton path="gender" value="F" /> 
-				Unisex/Family <form:radiobutton path="gender" value="U" checked/> 
+				Unisex/Family <form:radiobutton path="gender" value="U" checked="checked"/> 
 				<form:errors path="gender" />
 				<br> 
 				
