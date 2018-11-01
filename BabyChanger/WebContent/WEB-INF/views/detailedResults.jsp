@@ -4,8 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="css/w3.css">
+<link rel="stylesheet" href="css/body.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Amatic+SC">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 body, html {
 	height: 100%
@@ -40,24 +42,11 @@ body, h1, h2, h3, h4, h5, h6 {
 <%-- 	<%@ include file="map.jsp"%> --%>
 	<%-- <%@ include file="locater.jsp"%> --%>
 <%-- 	<%@ include file="newNav.jsp"%> --%>
-	<div class="w3-display-middle w3-left ">
+	<div class="w3-display-topmiddle w3-left ">
 		<div class="container" >
-			<BR><BR><BR><BR><BR><BR><BR>
-			<BR><BR><BR><BR><BR><BR><BR>
-			<BR><BR><BR><BR><BR><BR><BR>
-			<BR><BR><BR><BR><BR><BR><BR>
-			<BR><BR><BR><BR><BR><BR><BR>
-			<BR><BR><BR><BR><BR><BR><BR>
-			<BR><BR><BR><BR><BR><BR><BR>
-			<BR><BR><BR><BR><BR><BR><BR>
-			<BR><BR><BR><BR><BR><BR><BR>
-			<BR><BR><BR><BR><BR><BR><BR>
 
-			<BR><BR><BR><BR><BR><BR><BR>
-			<BR><BR><BR><BR><BR><BR><BR>
+			<BR><BR>
 			
-			<span><img src="WebContent/img/whitebox.png"></span>
-			<span><img src="file:///Users/robthompson/SD/Java/MidtermGroupProject/BabyChanger/WebContent/img/whitebox.png"></span>
 
 		</div>
 		
@@ -103,6 +92,11 @@ body, h1, h2, h3, h4, h5, h6 {
 			<h1>Location Info</h1>
 			<h2>${location.name }</h2>
 			<h2>Average Rating:${averageRating == null ? 0 : averageRating }</h2>
+			<span class="fa fa-star ${averageRating >= 0.5 ? 'checked': ''}"></span>
+			<span class="fa fa-star ${averageRating >= 1.5 ? 'checked': ''}"></span>
+			<span class="fa fa-star ${averageRating >= 2.5 ? 'checked': ''}"></span>
+			<span class="fa fa-star ${averageRating >= 3.5 ? 'checked': ''}"></span>
+			<span class="fa fa-star ${averageRating >= 4.5 ? 'checked': ''}"></span>
 			<h6>Date Created:</h6>
 			<em>${location.dateCreated }</em> <br>
 			<h4>Phone Number:</h4>
@@ -255,6 +249,12 @@ body, h1, h2, h3, h4, h5, h6 {
 								<h5>Date Created</h5>
 								${comment.dateCreated }
 								<h5>Rating: ${comment.rating.value }</h5>
+								
+								<span class="fa fa-star ${comment.rating.value >= 1 ? 'checked': ''}"></span>
+								<span class="fa fa-star ${comment.rating.value >= 2 ? 'checked': ''}"></span>
+								<span class="fa fa-star ${comment.rating.value >= 3 ? 'checked': ''}"></span>
+								<span class="fa fa-star ${comment.rating.value >= 4 ? 'checked': ''}"></span>
+								<span class="fa fa-star ${comment.rating.value >= 5 ? 'checked': ''}"></span>
 								 <br>
 								<p>${comment.comment }</p>
 								
