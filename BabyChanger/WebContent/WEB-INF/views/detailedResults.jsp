@@ -54,7 +54,7 @@ body, h1, h2, h3, h4, h5, h6 {
 			<BR><BR><BR><BR><BR><BR><BR>
 
 			<BR><BR><BR><BR><BR><BR><BR>
-			<BR><BR><BR><BR><BR><BR><BR>
+			<BR><BR><BR><BR><BR><BR><BR> 
 			
 			<span><img src="WebContent/img/whitebox.png"></span>
 			<span><img src="file:///Users/robthompson/SD/Java/MidtermGroupProject/BabyChanger/WebContent/img/whitebox.png"></span>
