@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="css/w3.css">
 <link rel="stylesheet" href="css/body.css">
-
+<link rel="stylesheet" href="css/diapers.css">
 
 <body>
+
 	<!-- Navbar (sit on top) -->
 	<%@ include file="newNav.jsp"%>
 	<header class="bgimg w3-display-container w3-grayscale-min" id="home">
@@ -15,7 +16,7 @@
 	</header>
 
 	<div class="w3-display-topmiddle w3-center ">
-		<div class="container" >
+		<div class="container">
 		<BR><BR>
 						
 		</div>
