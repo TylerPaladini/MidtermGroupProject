@@ -7,9 +7,12 @@
 <title>Te igitur in puppi deturbat</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
+<link rel="stylesheet" href="css/w3.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Amatic+SC">
+<link rel="stylesheet"
+	href="css/button.css">
 
 <style>
 body, html {
@@ -83,7 +86,6 @@ body, h1, h2, h3, h4, h5, h6 {
 			<form action="searchOpenLocations.do">
 				<input type="Submit" value="Open Locations" />
 			</form>
-
 			<c:if test="${not empty loggedIn}">
 				<form action="userAddsAddressLocationRestroom.do">
 					<input type="Submit" value="Add Location" />
@@ -177,20 +179,9 @@ body, h1, h2, h3, h4, h5, h6 {
 				crowdsourced, what do you expect?</p>
 			<form action="/action_page.php" target="_blank">
 				<p>
-					<span class="w3-tag">Send us a message below! 
+					<A HREF="mailto:rob@10thHuman.com" subject="Your website is awesome!"><span class="w3-tag">Send us a message below!</span></A>
 				</p>
-				<p>
-					<input class="w3-input w3-padding-16 w3-border" type="text"
-						placeholder="Name" required name="Name">
-				</p>
-				<p>
-					<input class="w3-input w3-padding-16 w3-border" type="text"
-						placeholder="Message \ How can we help?" required name="Message">
-				</p>
-				<p>
-					<button class="w3-button w3-light-grey w3-block" type="submit">SEND
-						MESSAGE</button>
-				</p>
+	
 			</form>
 		</div>
 	</div>
