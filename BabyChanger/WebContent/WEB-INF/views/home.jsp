@@ -18,7 +18,7 @@
 	<header class="bgimg w3-display-container w3-grayscale-min" id="home">
 		<div class="w3-display-bottomleft w3-padding">
 			<span class="w3-tag w3-xlarge">Open 24/7 because babies don't
-				sleep on your time</span>
+				poo on your time</span>
 		</div>
 		<div class="w3-display-middle w3-center">
 			<span class="w3-text-white w3-hide-small" style="font-size: 100px">BABY
