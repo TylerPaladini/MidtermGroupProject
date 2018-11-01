@@ -9,13 +9,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
 <link rel="stylesheet" href="css/w3.css">
+<link rel="stylesheet" href="css/body.css">
+<link rel="stylesheet" href="css/dancingbaby.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Amatic+SC">
 <link rel="stylesheet"
-	href="css/button.css">
+	href="css/body.css">
 
 <style>
-body, html {
+/* body, html {
 	height: 100%
 }
 
@@ -33,7 +35,7 @@ body, h1, h2, h3, h4, h5, h6 {
 	background-image:
 		url("https://media.giphy.com/media/tJ4oUTsMHbqAZyqsBo/giphy.gif");
 	min-height: 90%;
-}
+} */
 </style>
 <body>
 <%@ include file="newNav.jsp"%>
