@@ -7,64 +7,12 @@
 <title>Te igitur in puppi deturbat</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
 <link rel="stylesheet" href="css/w3.css">
 <link rel="stylesheet" href="css/body.css">
 <link rel="stylesheet" href="css/dancingbaby.css">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Amatic+SC">
-<link rel="stylesheet"
-	href="css/body.css">
 
-<style>
-/* body, html {
-	height: 100%
-}
-
-body, h1, h2, h3, h4, h5, h6 {
-	font-family: "Amatic SC", sans-serif
-}
-
-.menu {
-	display: none
-}
-
-.bgimg {
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-image:
-		url("https://media.giphy.com/media/tJ4oUTsMHbqAZyqsBo/giphy.gif");
-	min-height: 90%;
-} */
-</style>
 <body>
-<%@ include file="newNav.jsp"%>
-
-	<%-- <!-- Navbar (sit on top) -->
-	<div class="w3-top w3-hide-small">
-		<div class="w3-bar w3-xlarge w3-black w3-opacity w3-hover-opacity-off"
-			id="myNavbar">
-			<a href="home.do" class="w3-bar-item w3-button">HOME</a>
-
-			<c:if test="${empty loggedIn }">
-				<a href="loginPage.do" class="w3-bar-item w3-button">Login</a>
-				<a href="registerPage.do" class="w3-bar-item w3-button">Register</a>
-
-			</c:if>
-
-			<c:if test="${not empty loggedIn }">
-				<c:if test="${loggedIn.admin }">
-				<a href="profileAdmin.do" class="w3-bar-item w3-button">Admin Profile</a>
-				</c:if>
-				
-				<c:if test="${!loggedIn.admin }">
-				<a href="profileUser.do" class="w3-bar-item w3-button">User Profile</a>
-				</c:if>
-
-				<a href="logout.do" class="w3-bar-item w3-button">Logout</a>
-			</c:if>	
-		</div>
-	</div> --%>
+	<%@ include file="newNav.jsp"%>
 
 	<!-- Header with image -->
 	<header class="bgimg w3-display-container w3-grayscale-min" id="home">
@@ -75,9 +23,6 @@ body, h1, h2, h3, h4, h5, h6 {
 		<div class="w3-display-middle w3-center">
 			<span class="w3-text-white w3-hide-small" style="font-size: 100px">BABY
 				CHANGER</span>
-			<!--     <span class="w3-text-white w3-hide-large w3-hide-medium" style="font-size:60px"><b>thin<br>CRUST PIZZA</b></span>
- -->
-			<!--     <p><a href="#menu" class="w3-button w3-xxlarge w3-black">Let me see the menu</a></p> -->
 
 			<form action="getLocationsByKeywordSearch.do" method="GET">
 				<input type="search" name="keyword" size="50" /> <input
@@ -103,27 +48,25 @@ body, h1, h2, h3, h4, h5, h6 {
 			<h1 class="w3-center w3-jumbo" style="margin-bottom: 64px">THE
 				TEAM</h1>
 			<div class="w3-row w3-center w3-border w3-border-dark-grey">
-				<a href="javascript:void(0)" onclick="openMenu(event, 'Pizza');"
+				<a href="javascript:void(0)" onclick="openMenu(event, 'Peeps');"
 					id="myLink">
-					<div class="w3-col s4 tablink w3-padding-large w3-hover-red">MEET</div>
-				</a>
-				<!--  <a href="javascript:void(0)" onclick="openMenu(event, 'Pasta');"> -->
-				<div class="w3-col s4 tablink w3-padding-large w3-hover-red">OUR</div>
-				</a>
-				<!--      <a href="javascript:void(0)" onclick="openMenu(event, 'Starter');"> -->
-				<div class="w3-col s4 tablink w3-padding-large w3-hover-red">TEAM</div>
+					<div class="w3-col s12 tablink w3-padding-large w3-hover-red">SKILL DISTILLERY TEAM: Steel Assault</div>
+
+					<!-- <div class="w3-col s4 tablink w3-padding-large w3-hover-red">OUR</div>
+
+ 					<div class="w3-col s4 tablink w3-padding-large w3-hover-red">TEAM</div> -->
 				</a>
 			</div>
 
-			<div id="Pizza" class="w3-container menu w3-padding-32 w3-white">
+			<div id="Peeps" class="w3-container menu w3-padding-32 w3-white">
 				<h1>
 					<b>Zach Lamb, SCRUM MASTER</b> <span
 						class="w3-right w3-tag w3-dark-grey w3-round"><img alt=""
 						src="https://vignette.wikia.nocookie.net/marvelcentral/images/9/97/Tony-Stark.jpg/revision/latest?cb=20130429010603"
 						height=150 width=150></span>
 				</h1>
-				<p class="w3-text-grey">The best of us, chosen by the
-					powers that be to lead our motley crue.</p>
+				<p class="w3-text-grey">The best of us, chosen by the powers
+					that be to lead our motley crue.</p>
 				<hr>
 
 				<h1>
@@ -181,9 +124,11 @@ body, h1, h2, h3, h4, h5, h6 {
 				crowdsourced, what do you expect?</p>
 			<form action="/action_page.php" target="_blank">
 				<p>
-					<A HREF="mailto:rob@10thHuman.com" subject="Your website is awesome!"><span class="w3-tag">Send us a message below!</span></A>
+					<A HREF="mailto:rob@10thHuman.com"
+						subject="Your website is awesome!"><span class="w3-tag">Send
+							us a message below!</span></A>
 				</p>
-	
+
 			</form>
 		</div>
 	</div>

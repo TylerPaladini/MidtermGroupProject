@@ -1,6 +1,6 @@
 package com.skilldistillery.babychanger.data;
 
-import java.time.LocalDateTime;
+import java.text.DecimalFormat;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -177,8 +177,7 @@ public class LocationDAOImpl implements LocationDAO {
 
 	@Override
 	public Double getAverageRating(int id) {
-//		String query = "SELECT  avg(r.comments.rating.value) from Restroom r where r.location.id = :id";
-		String query = "select avg(c.rating) from Comment c where c.restroom.location.id = :id";
+		String query = "select avg(c.rating) from Comment c where c.restroom.location.id = :id AND c.active = true";
 		
 		Double averageRating = em.createQuery(query, Double.class).setParameter("id", id).getSingleResult();
 		return averageRating;

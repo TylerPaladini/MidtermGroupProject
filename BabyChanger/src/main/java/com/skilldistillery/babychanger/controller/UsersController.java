@@ -190,7 +190,9 @@ public class UsersController {
 			restroom.setUserId(userId);
 			Restroom addedRestroom = restroomDAO.createRestroom(restroom);
 			boolean addSuccess = addedRestroom != null && addedLocation != null && newAddress != null;
+			Double averageRating = locationDAO.getAverageRating(addedLocation.getId());
 			mv.addObject("location", addedLocation);
+			mv.addObject("averageRating", averageRating);
 			mv.addObject("addLocationSuccess", addSuccess);
 			mv.setViewName("detailedResults");
 		}
@@ -248,8 +250,10 @@ public class UsersController {
 			address.setId(addressId);
 			updatedLocation.setAddress(address);
 			Location locationUpdate = locationDAO.updateLocation(updatedLocation.getId(), updatedLocation, address);
+			Double averageRating = locationDAO.getAverageRating(locationUpdate.getId());
 			mv.addObject("locationUpdateSuccess", true);
 			mv.addObject("location", locationUpdate);
+			mv.addObject("averageRating", averageRating);
 			mv.setViewName("detailedResults");
 		}
 		return mv;
@@ -276,7 +280,10 @@ public class UsersController {
 		comment.setDateCreated(new Date());
 		Comment addComment = commentDAO.addComment(comment);
 		commentDAO.editComment(addComment.getId(), addComment);
-		redir.addFlashAttribute("location", locationDAO.getLocationById(addComment.getRestroom().getLocation().getId()));
+		int locationId = addComment.getRestroom().getLocation().getId();
+		Double averageRating = locationDAO.getAverageRating(locationId);
+		redir.addFlashAttribute("location", locationDAO.getLocationById(locationId));
+		redir.addFlashAttribute("averageLocation", averageRating);
 		mv.setViewName("redirect:addedCommentUser.do");
 		return mv;
 	}
@@ -310,7 +317,9 @@ public class UsersController {
 		comment.setDateCreated(new Date());
 		Comment newUpdatedComment = commentDAO.editComment(commentId, comment);
 		int locationId = newUpdatedComment.getRestroom().getLocation().getId();
+		Double averageRating = locationDAO.getAverageRating(locationId);
 		redir.addFlashAttribute("location",  locationDAO.getLocationById(locationId));
+		redir.addFlashAttribute("averageRating", averageRating);
 		mv.setViewName("redirect:updatedCommentUser.do");
 		return mv;
 	}
@@ -331,7 +340,9 @@ public class UsersController {
 		ModelAndView mv = new ModelAndView();
 		commentDAO.disableComment(id);
 		int locationId = commentDAO.findCommentById(id).getRestroom().getLocation().getId();
+		Double averageRating = locationDAO.getAverageRating(locationId);
 		redir.addFlashAttribute("location", locationDAO.getLocationById(locationId));
+		redir.addFlashAttribute("averageRating", averageRating);
 		mv.setViewName("redirect:disabledCommentUser.do");
 		return mv;
 	}
@@ -352,7 +363,9 @@ public class UsersController {
 		ModelAndView mv = new ModelAndView();
 		commentDAO.updateFlag(id, isFlag);
 		int locationId = commentDAO.findCommentById(id).getRestroom().getLocation().getId();
+		Double averageRating = locationDAO.getAverageRating(locationId);
 		redir.addFlashAttribute("location", locationDAO.getLocationById(locationId));
+		redir.addFlashAttribute("averageRating", averageRating);
 		mv.setViewName("redirect:updatedFlagCommentUser.do");
 		return mv;
 	}
@@ -369,7 +382,9 @@ public class UsersController {
 	public ModelAndView updateFlagRestroom(int id, boolean isFlag, String flaggedReason, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
 		restroomDAO.updateFlag(id, isFlag, flaggedReason);
+		Double averageRating = locationDAO.getAverageRating(restroomDAO.getRestroom(id).getLocation().getId());
 		redir.addFlashAttribute("location", restroomDAO.getRestroom(id).getLocation());
+		redir.addFlashAttribute("averageRating", averageRating);
 		mv.setViewName("redirect:updatedFlagRestroom.do");
 		return mv;
 	}
@@ -410,7 +425,9 @@ public class UsersController {
 			restroomDAO.updateRestroom(restroomId, restroom);
 			Integer updatedRestroomAtLocation = (Integer) session.getAttribute("locationId");
 			Location locationById = locationDAO.getLocationById(updatedRestroomAtLocation);
+			Double averageRating = locationDAO.getAverageRating(locationById.getId());
 			mv.addObject("location", locationById);
+			mv.addObject("averageRating", averageRating);
 			mv.setViewName("detailedResults");
 		}
 		return mv;
