@@ -1,5 +1,6 @@
 package com.skilldistillery.babychanger.controller;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -160,6 +161,56 @@ public class SearchController {
 	public ModelAndView getUsersByKeywords(String keywords) {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("allUsersToDisableDelete", userDAO.usersByKeywords(keywords));
+		mv.setViewName("results");
+		return mv;
+	}
+	@RequestMapping(path="searchLocationsToUpdatePage.do", method = RequestMethod.GET)
+	public ModelAndView searchLocationToUpdatePage() {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("searchLocationUpdate", true);
+		mv.setViewName("search");
+		return mv;
+	}
+	@RequestMapping(path="searchLocationsToDeletePage.do", method = RequestMethod.GET)
+	public ModelAndView searchLocationToDeletePage() {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("searchLocationDelete", true);
+		mv.setViewName("search");
+		return mv;
+	}
+	@RequestMapping(path="getLocationsByKeywordToDelete.do", method = RequestMethod.POST)
+	public ModelAndView searchLocationToDelete(String keyword) {
+		ModelAndView mv = new ModelAndView();
+		Set<Location> locations = locationDAO.getLocationsByKeyword(keyword);
+		mv.addObject("deleteDisableOption", true);
+		mv.addObject("locations", locations);
+		mv.setViewName("results");
+		return mv;
+	}
+	@RequestMapping(path="listAllLocationsDelete.do", method = RequestMethod.POST)
+	public ModelAndView allLocationsToDelete() {
+		ModelAndView mv = new ModelAndView();
+		List<Location> locations = locationDAO.getAllLocations();
+		mv.addObject("deleteDisableOption", true);
+		mv.addObject("locations", locations);
+		mv.setViewName("results");
+		return mv;
+	}
+	@RequestMapping(path="getLocationsByKeywordToUpdate.do", method = RequestMethod.POST)
+	public ModelAndView searchLocationToUpdate(String keyword) {
+		ModelAndView mv = new ModelAndView();
+		Set<Location> locations = locationDAO.getLocationsByKeyword(keyword);
+		mv.addObject("updateOption", true);
+		mv.addObject("locations", locations);
+		mv.setViewName("results");
+		return mv;
+	}
+	@RequestMapping(path="listAllLocationsUpdate.do", method = RequestMethod.POST)
+	public ModelAndView allLocationsToUpdate() {
+		ModelAndView mv = new ModelAndView();
+		List<Location> locations = locationDAO.getAllLocations();
+		mv.addObject("updateOption", true);
+		mv.addObject("locations", locations);
 		mv.setViewName("results");
 		return mv;
 	}

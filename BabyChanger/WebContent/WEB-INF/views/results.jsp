@@ -164,6 +164,13 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Amatic SC", sans-serif; font-size: 30px}
 		</c:forEach>
 	</c:if> 
 	
+	<c:if test="${not empty locations }">
+		<c:forEach items="${locations }" var="location">
+		
+		</c:forEach> 
+	
+	</c:if>
+	
 	
     
   </div>
