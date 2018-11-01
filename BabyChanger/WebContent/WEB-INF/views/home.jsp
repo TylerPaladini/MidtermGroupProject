@@ -129,8 +129,8 @@
 				crowdsourced, what do you expect?</p>
 			<form action="/action_page.php" target="_blank">
 				<p>
-					<A HREF="mailto:rob@10thHuman.com?subject=Your website is awesome!"><span class="w3-tag">Send
-							us a message below!</span></A>
+					<A HREF="mailto:rob@10thHuman.com,lamb.zachary@gmail.com,tylerpaladini@yahoo.com,joshokodo@gmail.com?&subject=Your website is awesome!"><span class="w3-tag">Click here to send
+							us a message!</span></A>
 				</p>
 
 			</form>
