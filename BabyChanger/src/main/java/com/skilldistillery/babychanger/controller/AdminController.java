@@ -68,28 +68,28 @@ public class AdminController {
 		return mv;
 	}
 
-//	@RequestMapping(path = "updateUserAdmin.do", method = RequestMethod.POST)
-//	public ModelAndView updateUserAdmin(Users updatedUser, int id, RedirectAttributes redir, HttpSession session) {
-//		ModelAndView mv = new ModelAndView();
-//		updatedUser.setAdmin(true);
-//		Users userUpdated = usersDAO.updateUsers(id, updatedUser);
-//		if (userUpdated != null) {
-//			session.setAttribute("loggedIn", userUpdated);
-//			redir.addFlashAttribute("updateUserSuccess", true);
-//		} else {
-//			redir.addFlashAttribute("updateUserFailed", true);
-//		}
-//		mv.setViewName("redirect:updatedUserAdmin.do");
-//		return mv;
-//	}
+	@RequestMapping(path = "updateUserAdmin.do", method = RequestMethod.POST)
+	public ModelAndView updateUserAdmin(Users updatedUser, int id, RedirectAttributes redir, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		updatedUser.setAdmin(true);
+		Users userUpdated = usersDAO.updateUsers(id, updatedUser);
+		if (userUpdated != null) {
+			session.setAttribute("loggedIn", userUpdated);
+			redir.addFlashAttribute("updateUserSuccess", true);
+		} else {
+			redir.addFlashAttribute("updateUserFailed", true);
+		}
+		mv.setViewName("redirect:updatedUserAdmin.do");
+		return mv;
+	}
 
-//	@RequestMapping(path = "updatedUserAdmin.do", method = RequestMethod.GET)
-//	public ModelAndView updatedUserAdmin() {
-//		ModelAndView mv = new ModelAndView();
-//		mv.setViewName("adminProfile");
-//		mv.addObject("profileUpdateSuccess", true);
-//		return mv;
-//	}
+	@RequestMapping(path = "updatedUserAdmin.do", method = RequestMethod.GET)
+	public ModelAndView updatedUserAdmin() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("adminProfile");
+		mv.addObject("profileUpdateSuccess", true);
+		return mv;
+	}
 	
 	@RequestMapping(path = "disableDeleteUserSearch.do", method = RequestMethod.POST)
 	public ModelAndView searchUserToDisablePage() {
@@ -564,7 +564,7 @@ public class AdminController {
 	 * update a location
 	 */
 	@RequestMapping(path = "adminUpdateLocationAdmin.do", method = RequestMethod.POST)
-	public ModelAndView adminUpdateLocation(@Valid @ModelAttribute("adminUpdateLocation") Location location,
+	public ModelAndView adminUpdateLocation(@Valid @ModelAttribute("adminUpdateLocationModel") Location location,
 			Errors errors, @RequestParam("locationId") int locationId, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		if (errors.getErrorCount() != 0) {
