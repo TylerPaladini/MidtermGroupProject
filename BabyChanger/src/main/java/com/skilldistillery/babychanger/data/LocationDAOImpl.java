@@ -175,6 +175,15 @@ public class LocationDAOImpl implements LocationDAO {
 		return locationList;
 	}
 
+	@Override
+	public Integer getAverageRating(int id) {
+		String query = "SELECT  avg(r.comment.rating.value) from Restroom r where r.location.id = :id";
+		Integer averageRating = em.createQuery(query, Integer.class).setParameter("id", id).getSingleResult();
+		return averageRating;
+	}
+	
+	
+
 //	********* We went form this code to the code above *********
 //	@Override
 //	public List<Location> getLocationsByOpen() {

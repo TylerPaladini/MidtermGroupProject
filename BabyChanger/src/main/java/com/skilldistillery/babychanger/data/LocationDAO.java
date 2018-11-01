@@ -40,4 +40,6 @@ public interface LocationDAO {
 	
 	public List<Location> getLocationsByOpen();
 	
+	public Integer getAverageRating(int id);
+	
 }
