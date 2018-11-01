@@ -39,8 +39,9 @@ body, h1, h2, h3, h4, h5, h6 {
 
 	</header>
 	
-	<div class="w3-display-middle w3-left ">
-	
+<div class="w3-display-middle w3-left ">
+<!-- 	<div class="w3-display-left w3-left ">
+ -->	
 	<c:if test="${addLocationFailed }">
 		<h1>Add Location Failed</h1>
 	</c:if>
@@ -189,27 +190,16 @@ body, h1, h2, h3, h4, h5, h6 {
 				Unisex/Family <form:radiobutton path="gender" value="U" checked="checked"/> 
 				<form:errors path="gender" />
 				<br> 
-				
-				<div class="container">
-					<div class="row">
-						<div class="col-5">
 					        <label for="comment">Description:</label>
-					        <textarea class="form-control" rows="4" name="description"></textarea>
-						</div>
-					</div>
+					        <textarea class="form-control" name="description"></textarea>
 					<br>
-					<div class="row">
-						<div class="col-5">
-						    <label for="comment">Directions:</label>
-						    <textarea class="form-control" rows="4" name="directions"></textarea>
-						</div>
-					</div>
-				
-				</div>
-				<br> 
-				<br>
+						    <label for="comment">Directions:&nbsp&nbsp</label>
+						    <textarea class="form-control" name="directions"></textarea><BR>
 				<input type="submit" value="Submit Entry" />
 				<input type="hidden" name="userId" value="${loggedIn.id }">
+					
+				<br> 
+				<br>
 			</form:form>
 		</c:if>
 		<c:if test="${!loggedIn.admin }">
@@ -235,7 +225,8 @@ body, h1, h2, h3, h4, h5, h6 {
 				<form:errors path="gender" />
 				<br> 
 				
-				<div class="container">
+			 <div class="container"> 
+				
 					<div class="row">
 						<div class="col-5">
 					        <label for="comment">Description:</label>
