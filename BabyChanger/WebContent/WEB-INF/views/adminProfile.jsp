@@ -1,21 +1,3 @@
-<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport"
-    content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link
-    href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-    rel="stylesheet"
-    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-    crossorigin="anonymous">
-<title>Admin Profile</title>
-</head>
-<body>
-<%@ include file="navigation.jsp"%> --%>
-
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <!DOCTYPE html>
@@ -24,29 +6,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="css/w3.css">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Amatic+SC">
-<style>
-body, html {
-	height: 100%
-}
+<link rel="stylesheet" href="css/body.css">
+<link rel="stylesheet" href="css/diapers.css">
+<link rel="icon" href="https://www.freeiconspng.com/uploads/changing-table-icon-18.png">
 
-body, h1, h2, h3, h4, h5, h6 {
-	font-family: "Amatic SC", sans-serif;
-	font-size: 30px
-}
 
-.menu {
-	display: none
-}
-
-.bgimg {
-	background-repeat: no-repeat;
-	background-size: cover;
-	/*     background-image: url("https://media.giphy.com/media/tJ4oUTsMHbqAZyqsBo/giphy.gif");*/
-	min-height: 90%;
-}
-</style>
 <body>
 
 	<!-- Navbar (sit on top) -->

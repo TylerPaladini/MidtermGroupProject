@@ -6,6 +6,8 @@
 <link rel="stylesheet" href="css/w3.css">
 <link rel="stylesheet" href="css/body.css">
 <link rel="stylesheet" href="css/diapers.css">
+<link rel="icon" href="https://www.freeiconspng.com/uploads/changing-table-icon-18.png">
+
 
 <body>
 
