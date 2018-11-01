@@ -52,6 +52,9 @@
 	<c:if test="${unflagCommentSuccess }">
 		<h1>Unflagged Comment success</h1>
 	</c:if> 
+	<c:if test="${restroomFlagged }">
+		<h1>Restroom Flagged Successful</h1>
+	</c:if> 
 	<c:if test="${not empty location }">
 		<div style="background-color: lightyellow">
 			<h1>Location Info</h1>
@@ -81,10 +84,6 @@
 				<form action="deleteConfirmation.do">
 					<input type="hidden" name="id" value="${location.id }">
 					<input type="Submit" value="Delete Location"/>
-				</form>
-				<form action="disableLocation.do">
-					<input type="hidden" name="id" value="${location.id }">
-					<input type="Submit" value="Disable Location"/>
 				</form>
 			</c:if>
 		</c:if>

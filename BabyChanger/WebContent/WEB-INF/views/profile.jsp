@@ -20,7 +20,10 @@
 		<h1>Update successful</h1>
 	</c:if>
 	<c:if test="${updateUserFailed }">
-		<h1>Update Failed</h1>
+		<h1>Update Profile Failed</h1>
+	</c:if>
+	<c:if test="${profileUpdateSuccess }">
+		<h1>Update Profile success</h1>
 	</c:if>
 
 	<h1>User Profile</h1>

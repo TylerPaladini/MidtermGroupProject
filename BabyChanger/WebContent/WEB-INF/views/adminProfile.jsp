@@ -60,6 +60,7 @@ ${loggedIn.lastName}
 	<form action="disableDelete.do" method="post">
 		<input type="Submit" value="Disable/Delete User"/>
 	</form>
+
 	
 
 <script

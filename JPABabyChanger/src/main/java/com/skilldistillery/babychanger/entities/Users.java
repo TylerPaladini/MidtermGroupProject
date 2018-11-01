@@ -57,7 +57,7 @@ public class Users {
 
 	private boolean admin;
 
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Comment> comments;
 
 	/*

@@ -92,10 +92,10 @@ public class UsersController {
 		if (userUpdated != null) {
 			session.setAttribute("loggedIn", userUpdated);
 			redir.addFlashAttribute("user", userUpdated);
-			mv.setViewName("redirect:updatedUser.do");
 		} else {
-			mv.setViewName("confirmation");
+			redir.addFlashAttribute("updateUserFailed", true);
 		}
+		mv.setViewName("redirect:updatedUser.do");
 
 		return mv;
 	}
@@ -104,7 +104,7 @@ public class UsersController {
 	public ModelAndView updatedUser() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("profile");
-
+		mv.addObject("profileUpdateSuccess", true);
 		return mv;
 	}
 
@@ -187,8 +187,9 @@ public class UsersController {
 			restroom.setUserId(userId);
 			Restroom addedRestroom = restroomDAO.createRestroom(restroom);
 			boolean addSuccess = addedRestroom != null && addedLocation != null && newAddress != null;
+			mv.addObject("location", addedLocation);
 			mv.addObject("addLocationSuccess", addSuccess);
-			mv.setViewName("profile");
+			mv.setViewName("detailedResults");
 		}
 		return mv;
 	}
@@ -244,8 +245,10 @@ public class UsersController {
 			address.setId(addressId);
 			updatedLocation.setAddress(address);
 			Location locationUpdate = locationDAO.updateLocation(updatedLocation.getId(), updatedLocation, address);
-			mv.addObject("locationUpdate", locationUpdate);
-			mv.setViewName("results");
+			mv.addObject("locationUpdateSuccess", true);
+			mv.addObject("location", locationUpdate);
+			mv.setViewName("detailedResults");
+		
 		}
 		return mv;
 	}
@@ -265,10 +268,16 @@ public class UsersController {
 	@RequestMapping(path = "addCommentUser.do", method = RequestMethod.POST)
 	public ModelAndView addComment(Comment comment,  RedirectAttributes redir, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		comment.setUser((Users) session.getAttribute("loggedIn"));
-		comment.setRestroom((Restroom) session.getAttribute("commentedRestroom"));
-		comment.setDateCreated(new Date());
-		Comment addComment = commentDAO.addComment(comment);
+//		comment.setUser((Users) session.getAttribute("loggedIn"));
+//		comment.setRestroom((Restroom) session.getAttribute("commentedRestroom"));
+//		comment.setDateCreated(new Date());
+		Users user = usersDAO.getUsersById(((Users) session.getAttribute("loggedIn")).getId());
+		int restroomId = ((Restroom) session.getAttribute("commentedRestroom")).getId();
+		System.out.println(user);
+		comment.setUser(user);
+		user.addComment(comment);
+		Comment addComment = commentDAO.addComment(comment,restroomDAO.getRestroom(restroomId) );
+		
 		redir.addFlashAttribute("location", locationDAO.getLocationById(addComment.getRestroom().getLocation().getId()));
 		mv.setViewName("redirect:addedCommentUser.do");
 	
@@ -359,11 +368,12 @@ public class UsersController {
 	}
 
 	@RequestMapping(path = "flagRestroom.do", method = RequestMethod.POST)
-	public ModelAndView updateFlagRestroom(int id, boolean isFlag, String flaggedReason) {
+	public ModelAndView updateFlagRestroom(int id, boolean isFlag, String flaggedReason, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
 		restroomDAO.updateFlag(id, isFlag, flaggedReason);
+		redir.addFlashAttribute("location", restroomDAO.getRestroom(id).getLocation());
 		mv.setViewName("redirect:updatedFlagRestroom.do");
-
+		
 		return mv;
 	}
 
@@ -371,7 +381,8 @@ public class UsersController {
 	public ModelAndView updatedFlagRestroom() {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("restroomFlagged", true);
-		mv.setViewName("confirmation");
+		
+		mv.setViewName("detailedResults");
 		return mv;
 	}
 

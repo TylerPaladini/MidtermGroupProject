@@ -82,10 +82,13 @@ public class CommentDAOImpl implements CommentDAO {
 	}
 
 	@Override
-	public Comment addComment(Comment comment) {
+	public Comment addComment(Comment comment, Restroom restroom) {
 		Boolean active = true;
 		comment.setActive(active);
 		comment.setFlagComment(false);
+		comment.getUser().addComment(comment);
+//		comment.setRestroom(restroom);
+		System.out.println(comment);
 		em.persist(comment);
 		em.flush();
 		if (comment.getId() == 0) {

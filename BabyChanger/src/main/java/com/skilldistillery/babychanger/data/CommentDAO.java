@@ -18,7 +18,7 @@ public interface CommentDAO {
 	List<Comment> findCommentsByRating(int rating);
 	List<Comment> findCommentsByActiveByRestroom(int id, Boolean active);
 	List<Comment> findCommentsByDateCreated(Date date);
-	Comment addComment(Comment comment);
+	Comment addComment(Comment comment, Restroom restroom);
 	Comment editComment(int id, Comment comment);
 	boolean disableComment(int id);
 	boolean enableComment(int id);

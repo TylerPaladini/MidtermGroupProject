@@ -164,10 +164,10 @@ public class Comment {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Comment [id=");
 		builder.append(id);
-		builder.append(", user=");
-		builder.append(user.getFirstName());
-		builder.append(", restroom=");
-		builder.append(restroom.getDescription());
+//		builder.append(", user=");
+//		builder.append(user);
+//		builder.append(", restroom=");
+//		builder.append(restroom);
 		builder.append(", comment=");
 		builder.append(comment);
 		builder.append(", flagComment=");
