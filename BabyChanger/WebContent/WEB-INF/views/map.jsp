@@ -1,6 +1,11 @@
 <div id="googleMap" style="width: 300px; height: 300px;"></div>
 
 <script>
+
+	/* import ${location.address.street }${location.address.street2 }
+	${location.address.city } ${location.address.state }
+	${location.address.zipCode } from './detailedResults.jsp'; */
+	
 	function myMap() {
 		var mapProp = {
 			center : new google.maps.LatLng(39.608852, -104.902814),
@@ -9,22 +14,11 @@
 		var map = new google.maps.Map(document.getElementById("googleMap"),
 				mapProp);
 	}
-
+	
 </script>
 
 <script
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuasZ77g0MHSWUPiLZdB_ckxl69Fa_iis&callback=myMap"></script>
-
-
-
-
-
-
-
-
-
-
-
 
 <!-- if allow to see your location, will  -->
 <!-- 	<style>
