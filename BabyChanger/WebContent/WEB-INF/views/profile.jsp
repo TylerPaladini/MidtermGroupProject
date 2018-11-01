@@ -20,19 +20,15 @@
 		<h1>Update successful</h1>
 	</c:if>
 	<c:if test="${updateUserFailed }">
-		<h1>Update Failed</h1>
+		<h1>Update Profile Failed</h1>
 	</c:if>
-	<c:if test="${addLocationSuccess }">
-		<h1>Adding Location Successful</h1>
-	</c:if> 
-	
-	<c:if test="${not empty locationDeleted }">
-		<h1>Location has been deleted</h1>
+	<c:if test="${profileUpdateSuccess }">
+		<h1>Update Profile success</h1>
 	</c:if>
-	
+
 	<h1>User Profile</h1>
 
-	${loggedIn.id}
+
 	${loggedIn.firstName}
 	${loggedIn.lastName}
 	
@@ -46,6 +42,20 @@
 	</c:if>
 		<input type="submit" value="Edit Profile">
 	</form>
+	
+	<form action="userAddsAddressLocationRestroom.do">
+		<input type="Submit" value="Add Location" />
+	</form>
+	
+	<c:if test="${!loggedIn.admin}">
+		<form action="disableUser.do">
+		<input type="hidden" name="userId" value="${loggedIn.id }">
+		<input type="Submit" value="Delete Account">
+		</form>
+	</c:if>
+		
+		
+	
 	
 	<!-- removed from here and placed in the home.jsp -->
 	<!-- <form action="userAddsAddressLocationRestroom.do">

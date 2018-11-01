@@ -1,14 +1,17 @@
 package com.skilldistillery.babychanger.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -67,7 +70,7 @@ public class UsersController {
 	@RequestMapping(path = "createdUser.do", method = RequestMethod.GET)
 	public ModelAndView createdUser() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("profile");
+		mv.setViewName("home");
 		return mv;
 	}
 
@@ -92,10 +95,10 @@ public class UsersController {
 		if (userUpdated != null) {
 			session.setAttribute("loggedIn", userUpdated);
 			redir.addFlashAttribute("user", userUpdated);
-			mv.setViewName("redirect:updatedUser.do");
 		} else {
-			mv.setViewName("confirmation");
+			redir.addFlashAttribute("updateUserFailed", true);
 		}
+		mv.setViewName("redirect:updatedUser.do");
 
 		return mv;
 	}
@@ -104,12 +107,12 @@ public class UsersController {
 	public ModelAndView updatedUser() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("profile");
-
+		mv.addObject("profileUpdateSuccess", true);
 		return mv;
 	}
 
 	// Disable user profile
-	@RequestMapping(path = "disableUser.do", method = RequestMethod.POST)
+	@RequestMapping(path = "disableUser.do", method = RequestMethod.GET)
 	public ModelAndView disableUser(int userId) {
 		ModelAndView mv = new ModelAndView();
 
@@ -120,9 +123,10 @@ public class UsersController {
 	}
 
 	@RequestMapping(path = "disabledUser.do", method = RequestMethod.GET)
-	public ModelAndView disabledUser() {
+	public ModelAndView disabledUser(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("profile");
+		session.removeAttribute("loggedIn");
+		mv.setViewName("home");
 
 		return mv;
 
@@ -131,7 +135,6 @@ public class UsersController {
 	@RequestMapping(path = "userAddsAddressLocationRestroom.do")
 	public ModelAndView addAddressLocationRestroom() {
 		ModelAndView mv = new ModelAndView();
-
 		mv.addObject("createAddressModel", new Address());
 		mv.addObject("newEntry", true);
 		mv.setViewName("add");
@@ -157,6 +160,7 @@ public class UsersController {
 	@RequestMapping(path = "userAddsLocation.do", method = RequestMethod.POST)
 	public ModelAndView userAddsLocation(@Valid @ModelAttribute("createLocationModel") Location location, Errors errors,
 			HttpSession session) {
+		System.out.println(location.toString());
 		ModelAndView mv = new ModelAndView();
 		if (errors.getErrorCount() != 0) {
 			mv.setViewName("add");
@@ -186,8 +190,9 @@ public class UsersController {
 			restroom.setUserId(userId);
 			Restroom addedRestroom = restroomDAO.createRestroom(restroom);
 			boolean addSuccess = addedRestroom != null && addedLocation != null && newAddress != null;
+			mv.addObject("location", addedLocation);
 			mv.addObject("addLocationSuccess", addSuccess);
-			mv.setViewName("profile");
+			mv.setViewName("detailedResults");
 		}
 		return mv;
 	}
@@ -243,8 +248,10 @@ public class UsersController {
 			address.setId(addressId);
 			updatedLocation.setAddress(address);
 			Location locationUpdate = locationDAO.updateLocation(updatedLocation.getId(), updatedLocation, address);
-			mv.addObject("locationUpdate", locationUpdate);
-			mv.setViewName("results");
+			mv.addObject("locationUpdateSuccess", true);
+			mv.addObject("location", locationUpdate);
+			mv.setViewName("detailedResults");
+		
 		}
 		return mv;
 	}
@@ -268,6 +275,7 @@ public class UsersController {
 		comment.setRestroom((Restroom) session.getAttribute("commentedRestroom"));
 		comment.setDateCreated(new Date());
 		Comment addComment = commentDAO.addComment(comment);
+		commentDAO.editComment(addComment.getId(), addComment);
 		redir.addFlashAttribute("location", locationDAO.getLocationById(addComment.getRestroom().getLocation().getId()));
 		mv.setViewName("redirect:addedCommentUser.do");
 	
@@ -358,11 +366,12 @@ public class UsersController {
 	}
 
 	@RequestMapping(path = "flagRestroom.do", method = RequestMethod.POST)
-	public ModelAndView updateFlagRestroom(int id, boolean isFlag, String flaggedReason) {
+	public ModelAndView updateFlagRestroom(int id, boolean isFlag, String flaggedReason, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
 		restroomDAO.updateFlag(id, isFlag, flaggedReason);
+		redir.addFlashAttribute("location", restroomDAO.getRestroom(id).getLocation());
 		mv.setViewName("redirect:updatedFlagRestroom.do");
-
+		
 		return mv;
 	}
 
@@ -370,7 +379,8 @@ public class UsersController {
 	public ModelAndView updatedFlagRestroom() {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("restroomFlagged", true);
-		mv.setViewName("confirmation");
+		
+		mv.setViewName("detailedResults");
 		return mv;
 	}
 
@@ -404,4 +414,11 @@ public class UsersController {
 		}
 		return mv;
 	}
+	
+	@InitBinder("userUpdateLocationModel")
+	public void customizedTimeFormat(WebDataBinder binder) {
+		SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm");
+		binder.registerCustomEditor(Date.class, "openTime", new CustomDateEditor(dateFormatter, true));
+	}
+	
 }

@@ -96,26 +96,41 @@ public class AdminController {
 	@RequestMapping(path = "updatedUserAdmin.do", method = RequestMethod.GET)
 	public ModelAndView updatedUserAdmin() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("profile");
-
+		mv.setViewName("adminProfile");
+		mv.addObject("profileUpdateSuccess", true);
 		return mv;
 	}
 	
-	@RequestMapping(path = "searchUserToDisable.do", method = RequestMethod.GET)
+	@RequestMapping(path = "disableDeleteUserSearch.do", method = RequestMethod.POST)
 	public ModelAndView searchUserToDisablePage() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("searchUser");
-		mv.addObject("searchForDisable", true);
-		
+		mv.addObject("searchForDisableDelete", true);
+		mv.setViewName("search");
 		return mv;
 	}
+	@RequestMapping(path = "updateLocationSearch.do", method = RequestMethod.POST)
+	public ModelAndView searchUpdateLocationPage() {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("searchForUpdateLocation", true);
+		mv.setViewName("search");
+		return mv;
+	}
+	@RequestMapping(path = "deleteLocationSearch.do", method = RequestMethod.POST)
+	public ModelAndView searchDeleteLocationPage() {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("searchForDeleteLocation", true);
+		mv.setViewName("search");
+		return mv;
+	}
+
 	
 	// Disable user profile
 	@RequestMapping(path = "disableUserAdmin.do", method = RequestMethod.POST)
-	public ModelAndView disableUserAdmin(int userId) {
+	public ModelAndView disableUserAdmin(int userId, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
 
-		usersDAO.disableUser(userId);
+		boolean disabledUser = usersDAO.disableUser(userId);
+		redir.addFlashAttribute("disableSuccess", disabledUser);
 		mv.setViewName("redirect:disabledUserAdmin.do");
 
 		return mv;
@@ -124,10 +139,30 @@ public class AdminController {
 	@RequestMapping(path = "disabledUserAdmin.do", method = RequestMethod.GET)
 	public ModelAndView disabledUserAdmin() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("profile");
+		mv.setViewName("adminProfile");
 
 		return mv;
 
+	}
+	// Delete user profile
+	@RequestMapping(path = "deleteUserAdmin.do", method = RequestMethod.POST)
+	public ModelAndView deleteUserAdmin(int userId, RedirectAttributes redir) {
+		ModelAndView mv = new ModelAndView();
+		
+		boolean deletedUser = usersDAO.deleteUsers(userId);
+		redir.addFlashAttribute("deleteSuccess", deletedUser);
+		mv.setViewName("redirect:disabledUserAdmin.do");
+		
+		return mv;
+	}
+	
+	@RequestMapping(path = "deletedUserAdmin.do", method = RequestMethod.GET)
+	public ModelAndView deletedUserAdmin() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("adminProfile");
+		
+		return mv;
+		
 	}
 
 	// comes here when admin has confirmed they are deleting
@@ -243,6 +278,35 @@ public class AdminController {
 		mv.setViewName("detailedResults");
 		mv.addObject("flaggedComment", true);
 
+		return mv;
+	}
+	
+	//unflag flagged restrooms
+	@RequestMapping(path = "unflagRestroom.do", method = RequestMethod.POST)
+	public ModelAndView updateFlag(int restroomId, String unflaggedReason) {
+		ModelAndView mv = new ModelAndView();
+		boolean unflagSuccess = restroomDAO.updateFlag(restroomId, false, unflaggedReason);
+		
+		int locationId = restroomDAO.getRestroom(restroomId).getLocation().getId();
+		Location location = locationDAO.getLocationById(locationId);
+		mv.addObject("location",location);
+		mv.addObject("unflagSuccess", unflagSuccess);
+		mv.setViewName("detailedResults");
+		
+		return mv;
+	}
+	//unflag flagged restrooms
+	@RequestMapping(path = "unflagComment.do", method = RequestMethod.POST)
+	public ModelAndView updateFlag(int commentId) {
+		ModelAndView mv = new ModelAndView();
+		boolean unflagCommentSuccess = commentDAO.updateFlag(commentId, false);
+		
+		int locationId = commentDAO.findCommentById(commentId).getRestroom().getLocation().getId();
+		Location location = locationDAO.getLocationById(locationId);
+		mv.addObject("location",location);
+		mv.addObject("unflagCommentSuccess", unflagCommentSuccess);
+		mv.setViewName("detailedResults");
+		
 		return mv;
 	}
 
@@ -473,9 +537,9 @@ public class AdminController {
 			Restroom addedRestroom = restroomDAO.createRestroom(restroom);
 
 			boolean addSuccess = addedRestroom != null && addedLocation != null && newAddress != null;
-
+			mv.addObject("location", addedLocation);
 			mv.addObject("addLocationSuccess", addSuccess);
-			mv.setViewName("profile");
+			mv.setViewName("detailedResults");
 		}
 		return mv;
 	}
@@ -532,8 +596,9 @@ public class AdminController {
 			address.setId(addressId);
 			updatedLocation.setAddress(address);
 			Location locationUpdate = locationDAO.updateLocation(updatedLocation.getId(), updatedLocation, address);
-			mv.addObject("locationUpdate", locationUpdate);
-			mv.setViewName("results");
+			mv.addObject("locationUpdateSuccess", true);
+			mv.addObject("location", locationUpdate);
+			mv.setViewName("detailedResults");
 		}
 		return mv;
 	}
@@ -587,24 +652,40 @@ public class AdminController {
 
 	}
 
-	// Lists all restrooms that have been flaed
+	// Lists all restrooms that have been flagged
 	@RequestMapping(path= "listAllFlaggedRestrooms.do", method= RequestMethod.GET)
 	public ModelAndView getAllFlaggedRestrooms() {
 		ModelAndView mv = new ModelAndView();
 		
 		List<Restroom> allFlaggedRestrooms = restroomDAO.getRestroomsByFlag(true);
-		System.out.println("***********************************************8");
-		System.out.println(allFlaggedRestrooms);
-		if(allFlaggedRestrooms.size()!=0 ) {
+		if(allFlaggedRestrooms != null && allFlaggedRestrooms.size()!=0 ) {
 		mv.addObject("flaggedRestrooms", allFlaggedRestrooms);
-//		mv.addObject("restroomsFlagged", true);
 		mv.setViewName("results");
 		}
 		else {
 			mv.addObject("noFlaggedRestrooms", true);
+			mv.addObject("allLocations", locationDAO.getAllLocations());
 			mv.setViewName("results");
 		}
 
+		return mv;
+	}
+	// Lists all comments that have been flagged
+	@RequestMapping(path= "listAllFlaggedComments.do", method= RequestMethod.GET)
+	public ModelAndView getAllFlaggedComments() {
+		ModelAndView mv = new ModelAndView();
+		
+		List<Comment> allFlaggedComments = commentDAO.findCommentsByFlagComment(true);
+		if(allFlaggedComments != null && allFlaggedComments.size()!=0 ) {
+			mv.addObject("flaggedComments", allFlaggedComments);
+			mv.setViewName("results");
+		}
+		else {
+			mv.addObject("noFlaggedComments", true);
+			mv.addObject("allLocations", locationDAO.getAllLocations());
+			mv.setViewName("results");
+		}
+		
 		return mv;
 	}
 
@@ -635,6 +716,7 @@ public class AdminController {
 			Integer updatedRestroomAtLocation = (Integer) session.getAttribute("locationId");
 			Location locationById = locationDAO.getLocationById(updatedRestroomAtLocation);
 			mv.addObject("location", locationById);
+			mv.addObject("updateRestroomSuccess", true);
 			mv.setViewName("detailedResults");
 		}
 		return mv;
@@ -654,8 +736,8 @@ public class AdminController {
 		ModelAndView mv = new ModelAndView();
 		boolean deletedLocation = locationDAO.deleteLocation(id);
 		if(deletedLocation) {
-			mv.addObject("locationDeleted", deletedLocation);
-			mv.setViewName("profile");
+			mv.addObject("locationDeletedSuccess", true);
+			mv.setViewName("adminProfile");
 		}
 		else {
 			Location locationAttemptedToDelete = locationDAO.getLocationById(id);

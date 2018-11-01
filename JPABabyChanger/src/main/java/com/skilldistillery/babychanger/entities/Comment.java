@@ -2,10 +2,12 @@ package com.skilldistillery.babychanger.entities;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,11 +25,11 @@ public class Comment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "user_id")
 	private Users user;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "restroom_id")
 	private Restroom restroom;
 
@@ -162,10 +164,10 @@ public class Comment {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Comment [id=");
 		builder.append(id);
-		builder.append(", user=");
-		builder.append(user.getFirstName());
-		builder.append(", restroom=");
-		builder.append(restroom.getDescription());
+//		builder.append(", user=");
+//		builder.append(user);
+//		builder.append(", restroom=");
+//		builder.append(restroom);
 		builder.append(", comment=");
 		builder.append(comment);
 		builder.append(", flagComment=");

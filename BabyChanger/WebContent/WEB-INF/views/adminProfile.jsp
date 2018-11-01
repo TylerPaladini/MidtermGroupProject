@@ -16,9 +16,21 @@
 <body>
 <%@ include file="navigation.jsp"%>
 
+<c:if test="${disableSuccess}">
+	<h1>Disable Successful</h1>
+</c:if>
+<c:if test="${deleteSuccess }">
+	<h1>Delete Successful</h1>
+</c:if>
+<c:if test="${profileUpdateSuccess }">
+	<h1>Profile Update Success</h1>
+</c:if>
+<c:if test="${locationDeletedSuccess }">
+		<h1>Location has been deleted</h1>
+</c:if>
 <h1>Admin Profile</h1>
 
-${loggedIn.id}
+
 ${loggedIn.firstName}
 ${loggedIn.lastName}
 
@@ -30,27 +42,26 @@ ${loggedIn.lastName}
 		<input type="Submit" value="Add Location" />
 	</form>
 	
-	<form action="listAllLocations.do">
+	<form action="listAllLocations.do" method="get">
 		<input type="Submit" value="Update Location"/>
 	</form>
 	
 	<form action="listAllFlaggedRestrooms.do">
 		<input type="Submit" value="Show Flagged Restrooms"/>
 	</form>
+	<form action="listAllFlaggedComments.do">
+		<input type="Submit" value="Show Flagged Comments"/>
+	</form>
 	
-	<form action="deleteConfirmation.do">
+	<form action="listAllLocations.do" method="get">
 		<input type="hidden" name="id" value="${location.id }">
 		<input type="Submit" value="Delete Location"/>
 	</form>
-	<form action="deleteConfirmation.do">
-		<input type="Submit" value="Delete User"/>
+	<form action="disableDeleteUserSearch.do" method="post">
+		<input type="Submit" value="Disable/Delete User"/>
 	</form>
-	<form action="searchUserToDisable.do">
-		<input type="Submit" value="Disable User"/>
-	</form>
-	<form action="searchUserToDelete.do">
-		<input type="Submit" value="Delete User"/>
-	</form>
+
+	
 
 <script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"

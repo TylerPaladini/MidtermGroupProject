@@ -18,7 +18,11 @@
 	<%@ include file="map.jsp"%>
 	<%-- <%@ include file="locater.jsp"%> --%>
 	<%@ include file="navigation.jsp"%>
-
+	
+	
+	<c:if test="${not empty locationUpdateSuccess }">
+		<h2>Update Location Successful</h2>
+	</c:if>
 	<c:if test="${locationNotDeleted }">
 		<h1>Error deleting location</h1>
 	</c:if>
@@ -37,6 +41,21 @@
 	<c:if test="${flaggedComment }">
 		<h1>Comment Reported</h1>
 	</c:if>
+	<c:if test="${updateRestroomSuccess }">
+		<h1>Update Restroom Successful</h1>
+	</c:if>
+	<c:if test="${addLocationSuccess }">
+		<h1>Adding Location Successful</h1>
+	</c:if> 
+	<c:if test="${unflagSuccess }">
+		<h1>Unflagged Restroom success</h1>
+	</c:if> 
+	<c:if test="${unflagCommentSuccess }">
+		<h1>Unflagged Comment success</h1>
+	</c:if> 
+	<c:if test="${restroomFlagged }">
+		<h1>Restroom Flagged Successful</h1>
+	</c:if> 
 	<c:if test="${not empty location }">
 		<div style="background-color: lightyellow">
 			<h1>Location Info</h1>
@@ -68,10 +87,6 @@
 				<form action="deleteConfirmation.do">
 					<input type="hidden" name="id" value="${location.id }">
 					<input type="Submit" value="Delete Location"/>
-				</form>
-				<form action="disableLocation.do">
-					<input type="hidden" name="id" value="${location.id }">
-					<input type="Submit" value="Disable Location"/>
 				</form>
 			</c:if>
 		</c:if>
@@ -134,8 +149,16 @@
 						<form action="flagRestroom.do" method="post">
 							<input type="hidden" name="id" value="${restroom.id }"> 
 							<input type="hidden" name="isFlag" value="true">
-							<input type="text" name="flaggedReason" value="Why you flag?"> 
+							<input type="text" name="flaggedReason" placeholder="reason for flag"> 
 							<input type="submit" value="Flag Restroom">
+						</form>
+					</c:if>
+					<c:if test="${loggedIn.admin && restroom.flagRestroom }">
+						<form action="unflagRestroom.do" method="post">
+							<input type="text" name="unflaggedReason" placeholder="reason for unflag"> 
+							<input type="hidden" name="restroomId" value="${restroom.id }"> 
+							<input type="submit" value="Unflag Restroom">
+							
 						</form>
 					</c:if>
 
@@ -181,7 +204,7 @@
 					<hr>
 					<c:forEach items="${restroom.comments }" var="comment">
 
-						<c:if test="${comment.active }">
+						<c:if test="${comment.active}">
 							<div style="background-color: lightblue">
 								<c:if test="${comment.flagComment }">
 									<p style="font-color: red">Flagged</p>
@@ -228,7 +251,7 @@
 
 
 									</c:if>
-									<c:if test="${comment.user.id != loggedIn.id }">
+									<c:if test="${comment.user.id != loggedIn.id && !comment.flagComment}">
 
 										<c:if test="${loggedIn.admin }">
 											<form action="updateFlagCommentAdmin.do" method="post">
@@ -239,7 +262,7 @@
 
 										<input type="hidden" name="id" value="${comment.id }">
 										<input type="hidden" name="isFlag" value="true">
-										<input type="submit" value="Report Comment">
+										<input type="submit" value="Flag Comment">
 										</form>
 
 

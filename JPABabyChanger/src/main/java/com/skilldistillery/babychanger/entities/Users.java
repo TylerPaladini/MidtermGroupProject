@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,7 +38,7 @@ public class Users {
 	private String email;
 
 	@NotEmpty(message = "Required field")
-	@Pattern(regexp = "(?=^.{6,15}$)(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?\\/&gt;.&lt;,])(?!.*\\s).*$",
+	@Pattern(regexp = "(?=^.{5,15}$)(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?\\/&gt;.&lt;,])(?!.*\\s).*$",
 			message = "Password must contain, one lower-case letter, one upper-case letter, one number, and one special character")
 	private String password;
 
@@ -55,7 +57,7 @@ public class Users {
 
 	private boolean admin;
 
-	@OneToMany(mappedBy = "user")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Comment> comments;
 
 	/*

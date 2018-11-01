@@ -3,7 +3,6 @@ package com.skilldistillery.babychanger.entities;
 import java.sql.Time;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -46,11 +45,15 @@ public class Location {
 	@Pattern(regexp = "(?:[0-9]{3}-[0-9]{3}-[0-9]{4})?", message = "Please enter a US phone number with leading area code")
 	private String phone;
 
+//	@NotNull
 //	@Pattern(regexp="([01]?[0-9]|2[0-3]):[0-5][0-9]", message = "Enter 24 hour format")
+//	@Temporal(TemporalType.TIME)
 	@Column(name = "open_time")
 	private Time openTime;
-
+	
+//	@NotNull
 //	@Pattern(regexp="([01]?[0-9]|2[0-3]):[0-5][0-9]", message = "Enter 24 hour format")
+//	@Temporal(TemporalType.TIME)
 	@Column(name = "closed_time")
 	private Time closeTime;
 
@@ -132,9 +135,17 @@ public class Location {
 //		this.closeTime = Time.valueOf(closeTime + ":00");
 //	}
 
+//	public void setOpenTime(String openTime) {
+//		this.openTime = null;
+//	}
+
 	public void setOpenTime(Time openTime) {
 		this.openTime = openTime;
 	}
+
+//	public void setCloseTime(String closeTime) {
+//		this.closeTime = null;
+//	}
 
 	public void setCloseTime(Time closeTime) {
 		this.closeTime = closeTime;
