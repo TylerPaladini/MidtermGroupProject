@@ -198,7 +198,9 @@ public class AdminController {
 		ModelAndView mv = new ModelAndView();
 		commentDAO.disableComment(id);
 		int locationId = commentDAO.findCommentById(id).getRestroom().getLocation().getId();
+		Double averageRating = locationDAO.getAverageRating(locationId);
 		redir.addFlashAttribute("location", locationDAO.getLocationById(locationId));
+		redir.addFlashAttribute("averageRating", averageRating);
 		mv.setViewName("redirect:disabledCommentAdmin.do");
 		return mv;
 	}
@@ -259,7 +261,9 @@ public class AdminController {
 		ModelAndView mv = new ModelAndView();
 		commentDAO.updateFlag(id, isFlag);
 		int locationId = commentDAO.findCommentById(id).getRestroom().getLocation().getId();
+		Double averageRating = locationDAO.getAverageRating(locationId);
 		redir.addFlashAttribute("location", locationDAO.getLocationById(locationId));
+		redir.addFlashAttribute("averageRating", averageRating);
 		mv.setViewName("redirect:updatedFlagCommentAdmin.do");
 		return mv;
 	}
@@ -282,7 +286,9 @@ public class AdminController {
 		
 		int locationId = restroomDAO.getRestroom(restroomId).getLocation().getId();
 		Location location = locationDAO.getLocationById(locationId);
+		Double averageRating = locationDAO.getAverageRating(locationId);
 		mv.addObject("location",location);
+		mv.addObject("averageRating", averageRating);
 		mv.addObject("unflagSuccess", unflagSuccess);
 		mv.setViewName("detailedResults");
 		
@@ -298,7 +304,9 @@ public class AdminController {
 		boolean unflagCommentSuccess = commentDAO.updateFlag(commentId, false);
 		int locationId = commentDAO.findCommentById(commentId).getRestroom().getLocation().getId();
 		Location location = locationDAO.getLocationById(locationId);
+		Double averageRating = locationDAO.getAverageRating(locationId);
 		mv.addObject("location",location);
+		mv.addObject("averageRating",averageRating);
 		mv.addObject("unflagCommentSuccess", unflagCommentSuccess);
 		mv.setViewName("detailedResults");
 		return mv;
@@ -325,7 +333,10 @@ public class AdminController {
 		comment.setRestroom((Restroom) session.getAttribute("commentedRestroom"));
 		comment.setDateCreated(new Date());
 		Comment addComment = commentDAO.addComment(comment);
-		redir.addFlashAttribute("location", locationDAO.getLocationById(addComment.getRestroom().getLocation().getId()));
+		int locationId = addComment.getRestroom().getLocation().getId();
+		Double averageRating = locationDAO.getAverageRating(locationId);
+		redir.addFlashAttribute("location", locationDAO.getLocationById(locationId));
+		redir.addFlashAttribute("averageRating", averageRating);
 		mv.setViewName("redirect:addedCommentAdmin.do");
 		return mv;
 	}
@@ -530,7 +541,11 @@ public class AdminController {
 			
 			// ensure all successful and send to detailedResults
 			boolean addSuccess = addedRestroom != null && addedLocation != null && newAddress != null;
+			
+			Double averageRating = locationDAO.getAverageRating(addedLocation.getId());
+			
 			mv.addObject("location", addedLocation);
+			mv.addObject("averageRating", averageRating);
 			mv.addObject("addLocationSuccess", addSuccess);
 			mv.setViewName("detailedResults");
 		}
@@ -595,8 +610,10 @@ public class AdminController {
 			address.setId(addressId);
 			updatedLocation.setAddress(address);
 			Location locationUpdate = locationDAO.updateLocation(updatedLocation.getId(), updatedLocation, address);
+			Double averageRating = locationDAO.getAverageRating(updatedLocation.getId());
 			mv.addObject("locationUpdateSuccess", true);
 			mv.addObject("location", locationUpdate);
+			mv.addObject("averageRating", averageRating);
 			mv.setViewName("detailedResults");
 		}
 		return mv;
@@ -635,7 +652,9 @@ public class AdminController {
 		comment.setDateCreated(new Date());
 		Comment newUpdatedComment = commentDAO.editComment(commentId, comment);
 		int locationId = newUpdatedComment.getRestroom().getLocation().getId();
+		Double averageRating = locationDAO.getAverageRating(locationId);
 		redir.addFlashAttribute("location",  locationDAO.getLocationById(locationId));
+		redir.addFlashAttribute("averageRating", averageRating);
 		mv.setViewName("redirect:updatedCommentAdmin.do");
 		return mv;
 	}
@@ -713,7 +732,9 @@ public class AdminController {
 			restroomDAO.updateRestroom(restroomId, restroom);
 			Integer updatedRestroomAtLocation = (Integer) session.getAttribute("locationId");
 			Location locationById = locationDAO.getLocationById(updatedRestroomAtLocation);
+			Double averageRating = locationDAO.getAverageRating(locationById.getId());
 			mv.addObject("location", locationById);
+			mv.addObject("averageRating", averageRating);
 			mv.addObject("updateRestroomSuccess", true);
 			mv.setViewName("detailedResults");
 		}
@@ -739,7 +760,9 @@ public class AdminController {
 		}
 		else {
 			Location locationAttemptedToDelete = locationDAO.getLocationById(id);
+			Double averageRating = locationDAO.getAverageRating(locationAttemptedToDelete.getId());
 			mv.addObject("location", locationAttemptedToDelete);
+			mv.addObject("averageRating", averageRating);
 			mv.addObject("locationNotDeleted", deletedLocation);
 			mv.setViewName("detailedResults");
 		}
@@ -751,7 +774,9 @@ public class AdminController {
 		ModelAndView mv = new ModelAndView();
 		Location locationById = locationDAO.getLocationById(id);
 		locationById.setAccessLimits("This location no longer available");
+		Double averageRating = locationDAO.getAverageRating(locationById.getId());
 		mv.addObject("location", locationById);
+		mv.addObject("averageRating", averageRating);
 		mv.addObject("locationDisabled", true);
 		mv.setViewName("detailedResults");
 		return mv;
