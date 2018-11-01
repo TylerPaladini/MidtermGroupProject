@@ -138,30 +138,56 @@
 
 
 
-	<c:if test="${not empty allUsersToDisableDelete }">
-			<c:forEach items="${allUsersToDisableDelete }" var="user">
-			First Name: <h3>${user.firstName }</h3>
-			Last Name: <h3>${user.lastName }</h3>
-			Username: <h3>${user.userName }</h3>
-			Email: <h3>${user.email }</h3>
-
-			
-			<form action="deleteUserAdmin.do" method="post">
-			
-				<input type="hidden" name="userId" value="${user.id }">
-				<input type="submit" value="Delete User">
-			</form>
-			<form action="disableUserAdmin.do" method="post">
-			
-				<input type="hidden" name="userId" value="${user.id }">
-				<input type="submit" value="Disable User">
-			</form>
+	<c:if test="${not empty allUsersToEdit }">
+			<c:forEach items="${allUsersToEdit }" var="user">
+				<c:if test="${user.id != loggedIn.id }">
+					 <h3>First Name: ${user.firstName }</h3>
+					 <h3>Last Name: ${user.lastName }</h3>
+					 <h3>Username: ${user.userName }</h3>
+					 <h3>Email: ${user.email }</h3>
+					 <h3>Active Account? ${user.active }</h3>
+					 <h3>Admin? ${user.admin }</h3>
 		
+					
+					<form action="deleteUserAdmin.do" method="post">
+					
+						<input type="hidden" name="userId" value="${user.id }">
+						<input type="submit" value="Delete User">
+					</form>
+					<c:if test="${user.active }">
+					
+						<form action="disableUserAdmin.do" method="post">
+						
+							<input type="hidden" name="userId" value="${user.id }">
+							<input type="submit" value="Disable User">
+						</form>
+					</c:if>
+					<c:if test="${!user.active }">
+						<form action="activateUserAdmin.do" method="post">
+							<input type="hidden" name="userId" value="${user.id }">
+							<input type="submit" value="Activate User">
+						</form>
+					</c:if>
+					<c:if test="${!user.admin }">
+						<form action="giveAdminPowerToUserAdmin.do" method="post">
+						
+							<input type="hidden" name="userId" value="${user.id }">
+							<input type="submit" value="Give Admin Privileges">
+						</form>
+					</c:if>
+					<c:if test="${user.admin }">
+						<form action="takeAdminPowerFromUserAdmin.do" method="post">
+							<input type="hidden" name="userId" value="${user.id }">
+							<input type="submit" value="Strip Admin Privileges">
+						</form>
+					</c:if>
+				</c:if>
+			 
 		</c:forEach>
 	</c:if> 
 	
-	<c:if test="${not empty locations }">
-		<c:forEach items="${locations }" var="location">
+	<c:if test="${not empty allLocationsToEdit }">
+		<c:forEach items="${allLocationsToEdit }" var="location">
 			<a href="detailedResults.do?locationId=${location.id }">${location.name }</a>
 			<br />
 			${location.address.street }
@@ -172,24 +198,20 @@
 			${location.address.city }
 			${location.address.state }
 			${location.address.zipCode }<br />
-				<c:if
+			<c:if
 					test="${not empty location.openTime and not empty location.closeTime }">
 			${location.openTime } - ${location.closeTime }
 			</c:if>
-			<c:if test="${deleteDisableOption }">
 				<form action="deleteConfirmation.do">
 					<input type="submit" value="Delete Location">
 					<input type="hidden" name="id" value="${location.id }">
 				</form>
-			
-			</c:if>
-			<c:if test="${updateOption }">
 				<form action="adminUpdateLocation.do">
 					<input type="submit" value="Update Location">
 					<input type="hidden" name="id" value="${location.id }">
 				</form>
 			
-			</c:if>
+			
 		</c:forEach> 
 	
 	</c:if>

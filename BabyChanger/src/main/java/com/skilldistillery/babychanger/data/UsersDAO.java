@@ -12,6 +12,7 @@ public interface UsersDAO {
 	public Users updateUsers(int id, Users users);
 	
 	public boolean disableUser(int id);
+	public boolean activateUser(int id);
 	
 	public boolean deleteUsers(int id);
 	
@@ -22,6 +23,9 @@ public interface UsersDAO {
 	public boolean userDoesExist(String userName);
 	
 	public boolean isUserActive(String userName);
+	
+	public boolean giveUserAdminPower(int id);
+	public boolean takeAdminPowerFromUser(int id);
 	
 	public Users getUsersById(int id);
 	public List<Users> getUsersByFirstName(String firstName);

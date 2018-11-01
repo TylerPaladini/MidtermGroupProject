@@ -40,8 +40,8 @@ body, h1, h2, h3, h4, h5, h6 {
 	
 	<div class="w3-display-middle w3-left ">
 
-	<c:if test="${searchForDisableDelete }">
-		<h1>Find User to Disable/Delete</h1>
+	<c:if test="${adminPowerOnUser }">
+		<h1>Find User(s)</h1>
 
 
 		<form action="getAllUsers.do" method="post">
@@ -54,32 +54,20 @@ body, h1, h2, h3, h4, h5, h6 {
 			<input type="submit" value="Find Users">
 		</form>
 	</c:if>
-	<c:if test="${searchLocationUpdate }">
-		<h1>Find Location to Update</h1>
+	<c:if test="${adminPowerOnLocation }">
+		<h1>Find Location(s)</h1>
 
 
-		<form action="listAllLocationsUpdate.do" method="post">
+		<form action="listAllLocations.do" method="post">
 			<input type="submit" value="List All Locations">
 		</form>
-		<form action="getLocationsByKeywordToUpdate.do" method="post">
+		<form action="getLocationsByKeyword.do" method="post">
 
 			Search<input type="search" name="keyword">
 			<input type="submit" value="Find Location">
 		</form>
 	</c:if>
-	<c:if test="${searchLocationDelete }">
-		<h1>Find User to Disable/Delete</h1>
 
-
-		<form action="listAllLocationsDelete.do" method="post">
-			<input type="submit" value="List All Locations">
-		</form>
-		<form action="getLocationsByKeywordToDelete.do" method="post">
-
-			Search<input type="search" name="keyword">
-			<input type="submit" value="Find Location">
-		</form>
-	</c:if>
 
 </div>
 
