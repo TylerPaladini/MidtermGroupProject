@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,12 +13,66 @@
 	crossorigin="anonymous">
 <title>Detailed Results View</title>
 
-</head>
+</head> --%>
+
+<!DOCTYPE html>
+<html>
+<title>DETAILED RESULTS</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Amatic+SC">
+<style>
+body, html {
+	height: 100%
+}
+
+body, h1, h2, h3, h4, h5, h6 {
+	font-family: "Amatic SC", sans-serif;
+	font-size: 30px
+}
+
+.menu {
+	display: none
+}
+
+.bgimg {
+	background-repeat: no-repeat;
+	background-size: cover;
+	/*     background-image: url("https://media.giphy.com/media/tJ4oUTsMHbqAZyqsBo/giphy.gif");*/
+	min-height: 90%;
+}
+</style>
 <body>
-	<%@ include file="map.jsp"%>
-	<%-- <%@ include file="locater.jsp"%> --%>
-	<%@ include file="navigation.jsp"%>
+
+	<!-- Navbar (sit on top) -->
+	<%@ include file="newNav.jsp"%>
+
+	<header class="bgimg w3-display-container w3-grayscale-min" id="home">
+
+	</header>
 	
+<!-- <body> -->
+<%-- 	<%@ include file="map.jsp"%> --%>
+	<%-- <%@ include file="locater.jsp"%> --%>
+<%-- 	<%@ include file="newNav.jsp"%> --%>
+	<div class="w3-display-middle w3-center ">
+		<div class="container" >
+			<BR><BR><BR><BR><BR><BR><BR>
+			<BR><BR><BR><BR><BR><BR><BR>
+			<BR><BR><BR><BR><BR><BR><BR>
+			<BR><BR><BR><BR><BR><BR><BR>
+			<BR><BR><BR><BR><BR><BR><BR>
+
+			
+			<BR><BR><BR><BR><BR><BR><BR>
+			<BR><BR><BR><BR><BR><BR><BR>
+			<BR><BR><BR><BR><BR><BR><BR>
+			<BR><BR><BR><BR><BR><BR><BR>
+			<BR><BR><BR><BR><BR><BR><BR>  
+			
+		</div>
 	
 	<c:if test="${not empty locationUpdateSuccess }">
 		<h2>Update Location Successful</h2>
@@ -303,10 +357,11 @@
 
 	</c:if>
 
+</div>
 
-	<script
+<!-- 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
 		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-		crossorigin="anonymous"></script>
+		crossorigin="anonymous"></script> -->
 </body>
 </html>

@@ -31,27 +31,27 @@
 			<input type="submit" value="Find Users">
 		</form>
 	</c:if>
-	<c:if test="${searchForUpdateLocation }">
-		<h1>Find User to Disable/Delete</h1>
+	<c:if test="${searchLocationUpdate }">
+		<h1>Find Location to Update</h1>
 
 
-		<form action="listAllLocations.do" method="post">
+		<form action="listAllLocationsUpdate.do" method="post">
 			<input type="submit" value="List All Locations">
 		</form>
-		<form action="getLocationsByKeywordSearch.do" method="get">
+		<form action="getLocationsByKeywordToUpdate.do" method="post">
 
 			Search<input type="search" name="keyword">
 			<input type="submit" value="Find Location">
 		</form>
 	</c:if>
-	<c:if test="${searchForDeleteLocation }">
+	<c:if test="${searchLocationDelete }">
 		<h1>Find User to Disable/Delete</h1>
 
 
-		<form action="listAllLocations.do" method="post">
+		<form action="listAllLocationsDelete.do" method="post">
 			<input type="submit" value="List All Locations">
 		</form>
-		<form action="getLocationsByKeywordSearch.do" method="get">
+		<form action="getLocationsByKeywordToDelete.do" method="post">
 
 			Search<input type="search" name="keyword">
 			<input type="submit" value="Find Location">
