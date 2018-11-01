@@ -6,10 +6,10 @@
 <link rel="stylesheet" href="css/w3.css">
 <link rel="stylesheet" href="css/body.css">
 
+
 <body>
 	<!-- Navbar (sit on top) -->
 	<%@ include file="newNav.jsp"%>
-
 	<header class="bgimg w3-display-container w3-grayscale-min" id="home">
 
 	</header>

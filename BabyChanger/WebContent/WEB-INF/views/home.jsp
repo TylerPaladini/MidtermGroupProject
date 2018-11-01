@@ -4,12 +4,14 @@
 
 <!DOCTYPE html>
 <html>
-<title>Te igitur in puppi deturbat</title>
+<title>Baby Changer</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="css/w3.css">
 <link rel="stylesheet" href="css/body.css">
 <link rel="stylesheet" href="css/dancingbaby.css">
+<link rel="icon" href="https://www.freeiconspng.com/uploads/changing-table-icon-18.png">
+
 
 <body>
 	<%@ include file="newNav.jsp"%>
@@ -129,8 +131,8 @@
 				crowdsourced, what do you expect?</p>
 			<form action="/action_page.php" target="_blank">
 				<p>
-					<A HREF="mailto:rob@10thHuman.com?subject=Your website is awesome!"><span class="w3-tag">Send
-							us a message below!</span></A>
+					<A HREF="mailto:rob@10thHuman.com,lamb.zachary@gmail.com,tylerpaladini@yahoo.com,joshokodo@gmail.com?&subject=Your website is awesome!"><span class="w3-tag">Click here to send
+							us a message!</span></A>
 				</p>
 
 			</form>
