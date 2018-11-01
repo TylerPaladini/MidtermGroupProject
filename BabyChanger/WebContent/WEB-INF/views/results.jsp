@@ -182,23 +182,32 @@ body, h1, h2, h3, h4, h5, h6 {
 			Username: <h3>${user.userName }</h3>
 			Email: <h3>${user.email }</h3>
 
-				<form action="deleteUserAdmin.do" method="post">
-
-					<input type="hidden" name="userId" value="${user.id }"> <input
-						type="submit" value="Delete User">
-				</form>
-				<form action="disableUserAdmin.do" method="post">
-
-					<input type="hidden" name="userId" value="${user.id }"> <input
-						type="submit" value="Disable User">
-				</form>
-
-			</c:forEach>
-		</c:if>
-
-
-
-	</div>
+			
+			<form action="deleteUserAdmin.do" method="post">
+			
+				<input type="hidden" name="userId" value="${user.id }">
+				<input type="submit" value="Delete User">
+			</form>
+			<form action="disableUserAdmin.do" method="post">
+			
+				<input type="hidden" name="userId" value="${user.id }">
+				<input type="submit" value="Disable User">
+			</form>
+		
+		</c:forEach>
+	</c:if> 
+	
+	<c:if test="${not empty locations }">
+		<c:forEach items="${locations }" var="location">
+		
+		</c:forEach> 
+	
+	</c:if>
+	
+	
+    
+  </div>
+</header>
 
 
 </body>
