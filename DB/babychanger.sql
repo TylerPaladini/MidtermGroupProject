@@ -180,11 +180,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `babychangerdb`;
-INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `active`, `admin`, `date_created`) VALUES (1, 'Jane', 'Doe', 'janedoe', 'janedoe@gmail.com', 'janedoe', true, false, NULL);
-INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `active`, `admin`, `date_created`) VALUES (2, 'John', 'Doe', 'johndoe', 'johndoe@hotmail.com', 'johndoe', true, false, NULL);
-INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `active`, `admin`, `date_created`) VALUES (3, 'Mike', 'Myers', 'mikem', 'mikeym@aol.com', 'mikeym', true, false, NULL);
-INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `active`, `admin`, `date_created`) VALUES (4, 'Rob', 'Thompson', 'robthompson', 'rob@10thHuman.com', 'robthompson', true, true, NULL);
-INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `active`, `admin`, `date_created`) VALUES (5, 'admin', 'admin', 'admin', 'admin@admin.com', 'admin', true, true, '2018-10-01');
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `active`, `admin`, `date_created`) VALUES (1, 'Jane', 'Doe', 'janedoe', 'janedoe@gmail.com', 'JaneDoe1!', true, false, NULL);
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `active`, `admin`, `date_created`) VALUES (2, 'John', 'Doe', 'johndoe', 'johndoe@hotmail.com', 'JohnDoe1!', true, false, NULL);
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `active`, `admin`, `date_created`) VALUES (3, 'Mike', 'Myers', 'mikem', 'mikeym@aol.com', 'MikeMyers1!', true, false, NULL);
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `active`, `admin`, `date_created`) VALUES (4, 'Rob', 'Thompson', 'robthompson', 'rob@10thHuman.com', 'RobThompson1!', true, true, NULL);
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `active`, `admin`, `date_created`) VALUES (5, 'admin', 'admin', 'admin', 'admin@admin.com', 'Admin1!', true, true, '2018-10-01');
 
 COMMIT;
 
@@ -194,17 +194,17 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `babychangerdb`;
-INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (2, 'Shell on E Orchard', 'must get key from attendant', true, '3037702637', '06:00', '23:59', 2, DEFAULT);
-INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (3, 'Lake Loop Picnic Area', 'none, public access', false, NULL, '06:00', '23:59', 3, DEFAULT);
-INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (4, 'Target on Briarwood', 'none ', false, '7202146000', '08:00', '22:00', 4, DEFAULT);
-INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (5, 'Land of Nod', 'closes 9 PM', true, '3036499922', '10:00', '21:00', 5, DEFAULT);
-INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (6, 'buybuy Baby', 'closes at 9 ', false, '3033051130', '0900', '21:00', 6, DEFAULT);
-INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (7, 'Koala Kare Products', 'kloses at 4:30', false, '3035398300', '07:00', '21:30', 6, DEFAULT);
-INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (8, 'Bed Bath & Beyond', 'none', false, '3037081577', '09:00', '21:00', 8, DEFAULT);
-INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (9, 'Park Meadows Mall', 'closes at 9 PM, loud', false, '3037922533', '10:00', '21:00', 5, DEFAULT);
-INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (10, 'Southgate Shopping Center', 'closes at 6 PM', false, NULL, '00:01', '18:00', 9, DEFAULT);
-INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (11, 'DIA ', '24 hr', false, NULL, '00:00', '23:59', 10, DEFAULT);
-INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (1, 'Solarium', 'have to be a student', false, '3033025234', '08:00', '18:00', 1, '2018-10-01');
+INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (2, 'Shell on E Orchard', 'must get key from attendant', true, '303-770-2637', '06:00:00', '23:59:00', 2, DEFAULT);
+INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (3, 'Lake Loop Picnic Area', 'none, public access', false, NULL, '06:00:00', '23:59:00', 3, DEFAULT);
+INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (4, 'Target on Briarwood', 'none ', false, '720-214-6000', '08:00:00', '22:00:00', 4, DEFAULT);
+INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (5, 'Land of Nod', 'closes 9 PM', true, '303-649-9922', '10:00:00', '21:00:00', 5, DEFAULT);
+INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (6, 'buybuy Baby', 'closes at 9 ', false, '303-305-1130', '09:00:00', '21:00:00', 6, DEFAULT);
+INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (7, 'Koala Kare Products', 'kloses at 4:30', false, '303-539-8300', '07:00:00', '21:30:00', 6, DEFAULT);
+INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (8, 'Bed Bath & Beyond', 'none', false, '303-708-1577', '09:00:00', '21:00:00', 8, DEFAULT);
+INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (9, 'Park Meadows Mall', 'closes at 9 PM, loud', false, '303-792-2533', '10:00:00', '21:00:00', 5, DEFAULT);
+INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (10, 'Southgate Shopping Center', 'closes at 6 PM', false, NULL, '00:01:00', '18:00:00', 9, DEFAULT);
+INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (11, 'DIA ', '24 hr', false, NULL, '00:00:00', '23:59:00', 10, DEFAULT);
+INSERT INTO `location` (`id`, `name`, `access_limits`, `purchase_required`, `phone`, `open_time`, `closed_time`, `address_id`, `date_created`) VALUES (1, 'Solarium', 'have to be a student', false, '303-302-5234', '08:00:00', '18:00:00', 1, '2018-10-01');
 
 COMMIT;
 

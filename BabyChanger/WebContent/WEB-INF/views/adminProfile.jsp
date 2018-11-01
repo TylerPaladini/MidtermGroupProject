@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,7 +14,49 @@
 <title>Admin Profile</title>
 </head>
 <body>
-<%@ include file="navigation.jsp"%>
+<%@ include file="navigation.jsp"%> --%>
+
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+
+<!DOCTYPE html>
+<html>
+<title>ADMIN PROFILE</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Amatic+SC">
+<style>
+body, html {
+	height: 100%
+}
+
+body, h1, h2, h3, h4, h5, h6 {
+	font-family: "Amatic SC", sans-serif;
+	font-size: 30px
+}
+
+.menu {
+	display: none
+}
+
+.bgimg {
+	background-repeat: no-repeat;
+	background-size: cover;
+	/*     background-image: url("https://media.giphy.com/media/tJ4oUTsMHbqAZyqsBo/giphy.gif");*/
+	min-height: 90%;
+}
+</style>
+<body>
+
+	<!-- Navbar (sit on top) -->
+	<%@ include file="newNav.jsp"%>
+
+	<header class="bgimg w3-display-container w3-grayscale-min" id="home">
+
+	</header>
+	
+	<div class="w3-display-middle w3-left ">
 
 <c:if test="${disableSuccess}">
 	<h1>Disable Successful</h1>
@@ -62,9 +104,10 @@ ${loggedIn.lastName}
 
 	
 
-<script
+<!-- <script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
 		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-		crossorigin="anonymous"></script>
+		crossorigin="anonymous"></script> -->
+</div>		
 </body>
 </html>
