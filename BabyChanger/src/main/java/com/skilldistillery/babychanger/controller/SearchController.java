@@ -146,6 +146,8 @@ public class SearchController {
 		ModelAndView mv = new ModelAndView();
 		Restroom flaggedRestroom = restroomDAO.getRestroom(id);
 		Location relatedLocation = locationDAO.getLocationById(flaggedRestroom.getLocation().getId());
+		Double averageRating = locationDAO.getAverageRating(id);
+		mv.addObject("averageRating", averageRating);
 		mv.addObject("location", relatedLocation);
 		mv.setViewName("detailedResults");
 		return mv;

@@ -145,6 +145,61 @@ CREATE TABLE IF NOT EXISTS `comment` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
+
+-- -----------------------------------------------------
+-- Table `location_days`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `location_days` ;
+
+CREATE TABLE IF NOT EXISTS `location_days` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `Sunday` TINYINT(1) NULL,
+  `Monday` TINYINT(1) NULL,
+  `Tuesday` TINYINT(1) NULL,
+  `Wednesday` TINYINT(1) NULL,
+  `Thursday` TINYINT(1) NULL,
+  `Friday` TINYINT(1) NULL,
+  `Saturday` TINYINT(1) NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `location_hours`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `location_hours` ;
+
+CREATE TABLE IF NOT EXISTS `location_hours` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `open_time` TIME NULL,
+  `closed_time` TIME NULL,
+  PRIMARY KEY (`ID`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `location_days_has_location_hours`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `location_days_has_location_hours` ;
+
+CREATE TABLE IF NOT EXISTS `location_days_has_location_hours` (
+  `location_days_id` INT NOT NULL,
+  `location_hours_ID` INT NOT NULL,
+  PRIMARY KEY (`location_days_id`, `location_hours_ID`),
+  INDEX `fk_location_days_has_location_hours_location_hours1_idx` (`location_hours_ID` ASC),
+  INDEX `fk_location_days_has_location_hours_location_days1_idx` (`location_days_id` ASC),
+  CONSTRAINT `fk_location_days_has_location_hours_location_days1`
+    FOREIGN KEY (`location_days_id`)
+    REFERENCES `location_days` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_location_days_has_location_hours_location_hours1`
+    FOREIGN KEY (`location_hours_ID`)
+    REFERENCES `location_hours` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 SET SQL_MODE = '';
 DROP USER IF EXISTS stercus@localhost;
 SET SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
