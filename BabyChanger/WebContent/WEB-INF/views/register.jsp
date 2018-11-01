@@ -17,7 +17,7 @@
 
 	</header>
 	
-	<div class="w3-display-middle w3-center ">
+	<div class="w3-display-middle w3-left ">
 	
 	<h5>Create User</h5>
 	<form:form action="createUser.do" method="POST" modelAttribute="registerUserModel">
