@@ -9,35 +9,16 @@
 	href="https://fonts.googleapis.com/css?family=Amatic+SC">
 
 <body>
-
 	<!-- Navbar (sit on top) -->
 	<%@ include file="newNav.jsp"%>
-
-	<!-- <div class="w3-top w3-hide-small">
-  <div class="w3-bar w3-xlarge w3-black w3-opacity w3-hover-opacity-off" id="myNavbar">
-    <a href="home.do" class="w3-bar-item w3-button">HOME</a>
-    <a href="loginPage.do" class="w3-bar-item w3-button">LOGIN</a>
-    <a href="registerPage.do" class="w3-bar-item w3-button">REGISTER</a>
-  </div>
-
-</div> -->
-
-	<!-- Header with image -->
-
 
 	<header class="bgimg w3-display-container w3-grayscale-min" id="home">
 
 	</header>
 
-	<div class="w3-display-middle w3-center ">
+	<div class="w3-display-topmiddle w3-center ">
 		<div class="container" >
-			<BR><BR><BR><BR><BR><BR><BR>
-			<BR><BR><BR><BR><BR><BR><BR>
-			<BR><BR><BR><BR><BR><BR><BR>
-			<BR><BR><BR><BR><BR><BR><BR>
-			<BR><BR><BR><BR><BR><BR><BR> 
-			<BR><BR><BR><BR><BR><BR><BR> 
-			<BR><BR><BR><BR><BR><BR><BR> 
+		<BR><BR>
 						
 		</div>
 
@@ -213,12 +194,7 @@
 		</c:forEach> 
 	
 	</c:if>
-	
-	
-    
   	</div>
-
-
 
 </body>
 </html>
