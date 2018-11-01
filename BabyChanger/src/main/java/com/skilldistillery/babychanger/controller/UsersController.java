@@ -283,7 +283,7 @@ public class UsersController {
 		int locationId = addComment.getRestroom().getLocation().getId();
 		Double averageRating = locationDAO.getAverageRating(locationId);
 		redir.addFlashAttribute("location", locationDAO.getLocationById(locationId));
-		redir.addFlashAttribute("averageLocation", averageRating);
+		redir.addFlashAttribute("averageRating", averageRating);
 		mv.setViewName("redirect:addedCommentUser.do");
 		return mv;
 	}

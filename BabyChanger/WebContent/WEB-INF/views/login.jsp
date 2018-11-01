@@ -45,10 +45,10 @@ Please Create an Account
 
 
 <form action="login.do" method="POST">
-Username:
-	<input type="text" name="userName">
-	Password:
-	<input type="password" name="password">
+	<label for="userName">Username: <input type="text" name="userName"></label>
+	<br>
+	<label for="password">Password: <input type="password" name="password"></label>
+	<br>
 	<input type="Submit" value="Login">
 	
 
