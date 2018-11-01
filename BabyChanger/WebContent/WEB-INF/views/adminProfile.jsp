@@ -42,7 +42,7 @@ ${loggedIn.lastName}
 		<input type="Submit" value="Add Location" />
 	</form>
 	
-	<form action="listAllLocations.do" method="get">
+	<form action="searchLocationsToUpdatePage.do" method="get">
 		<input type="Submit" value="Update Location"/>
 	</form>
 	
@@ -53,8 +53,7 @@ ${loggedIn.lastName}
 		<input type="Submit" value="Show Flagged Comments"/>
 	</form>
 	
-	<form action="listAllLocations.do" method="get">
-		<input type="hidden" name="id" value="${location.id }">
+	<form action="searchLocationsToDeletePage.do" method="get">
 		<input type="Submit" value="Delete Location"/>
 	</form>
 	<form action="disableDeleteUserSearch.do" method="post">
