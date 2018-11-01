@@ -4,12 +4,14 @@
 
 <!DOCTYPE html>
 <html>
-<title>Te igitur in puppi deturbat</title>
+<title>Baby Changer</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="css/w3.css">
 <link rel="stylesheet" href="css/body.css">
 <link rel="stylesheet" href="css/dancingbaby.css">
+<link rel="icon" href="https://www.freeiconspng.com/uploads/changing-table-icon-18.png">
+
 
 <body>
 	<%@ include file="newNav.jsp"%>
