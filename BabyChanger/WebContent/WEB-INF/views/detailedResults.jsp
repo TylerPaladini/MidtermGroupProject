@@ -64,15 +64,20 @@ body, h1, h2, h3, h4, h5, h6 {
 			<BR><BR><BR><BR><BR><BR><BR>
 			<BR><BR><BR><BR><BR><BR><BR>
 			<BR><BR><BR><BR><BR><BR><BR>
+			<BR><BR><BR><BR><BR><BR><BR>
+			<BR><BR><BR><BR><BR><BR><BR>
+			<BR><BR><BR><BR><BR><BR><BR>
+			<BR><BR><BR><BR><BR><BR><BR>
+			<BR><BR><BR><BR><BR><BR><BR>
 
+			<BR><BR><BR><BR><BR><BR><BR>
+			<BR><BR><BR><BR><BR><BR><BR>
 			
-			<BR><BR><BR><BR><BR><BR><BR>
-			<BR><BR><BR><BR><BR><BR><BR>
-			<BR><BR><BR><BR><BR><BR><BR>
-			<BR><BR><BR><BR><BR><BR><BR>
-			<BR><BR><BR><BR><BR><BR><BR>  
-			
+			<span><img src="WebContent/img/whitebox.png"></span>
+			<span><img src="file:///Users/robthompson/SD/Java/MidtermGroupProject/BabyChanger/WebContent/img/whitebox.png"></span>
+
 		</div>
+		
 	
 	<c:if test="${not empty locationUpdateSuccess }">
 		<h2>Update Location Successful</h2>
@@ -166,7 +171,7 @@ body, h1, h2, h3, h4, h5, h6 {
 			
 			
 			
-				<div style="background-color: lightgreen">
+				<div style="background-color: lightgray">
 					<h1>Restroom Info: ${restroom.description }</h1>
 					<c:if test="${restroom.flagRestroom }">
 					RESTROOM HAS BEEN FLAGGED FOR ${restroom.flaggedReason }

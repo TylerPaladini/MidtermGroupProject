@@ -55,7 +55,9 @@ body, h1, h2, h3, h4, h5, h6 {
 			<BR><BR><BR><BR><BR><BR><BR>
 			<BR><BR><BR><BR><BR><BR><BR>
 			<BR><BR><BR><BR><BR><BR><BR> 
-			
+			<BR><BR><BR><BR><BR><BR><BR> 
+			<BR><BR><BR><BR><BR><BR><BR> 
+						
 		</div>
 
 	<c:if test="${not empty allUsers }">
