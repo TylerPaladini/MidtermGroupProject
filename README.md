@@ -20,7 +20,7 @@ The landing page of our website allows anyone that comes to the website to searc
 | JPA                |
 | JDBC               |
 | AWS                |
-| Creating Database  |
+| Develop Database   |
 | MVC                |
 | Sprint Tools Suite |
 | Enums              |
@@ -43,10 +43,14 @@ The landing page of our website allows anyone that comes to the website to searc
 
 #### Problems/Issues
 We ran into many issues during the process of this project. Listed are a few that we decided to highlight.
-- One that took us about a day to figure out was how to *****Tyler*****
+- One issue that took us about a day to figure out, was that updating two tables using a single form was extremely difficult. After a day of trying multiple approaches, we found that using two forms instead of a single form would allow us to complete the functionality that we needed. 
 - Another problem we ran into was validation. We believe that validation for all of the items that a user would enter into the website is good but it caused some issues while trying to make the project. We would often see a validation error when not working on a validation part of the project. This was because we would be working with an entity that has the validation of each item but in the database.
 - When a user would like to make an update to anything and the form has a radio button it does not bring back the previous radio button that was already in the form. These radio buttons are also required items. So if the user does not select one of the buttons it would crash the program. Our work around this is to mark one of them as checked even though that may have not been the option that was previously selected.
 - Another issue we ran into was attempting to accept a string and convert it to type Time with validation. 
 
 #### Things we were unable to add or incorporate
-- 
+- Mapping locations with GPS functionality
+- Ability to create a road trip that would map locations along route
+- Ability to upload pictures
+- Ability to submit the hours for the different days of a location
+- Build larger database of confirmed locations
