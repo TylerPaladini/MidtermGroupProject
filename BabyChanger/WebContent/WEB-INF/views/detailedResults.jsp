@@ -102,6 +102,7 @@ body, h1, h2, h3, h4, h5, h6 {
 		<div style="background-color: lightyellow">
 			<h1>Location Info</h1>
 			<h2>${location.name }</h2>
+			<h2>Average Rating:${averageRating == null ? 0 : averageRating }</h2>
 			<h6>Date Created:</h6>
 			<em>${location.dateCreated }</em> <br>
 			<h4>Phone Number:</h4>
@@ -253,8 +254,8 @@ body, h1, h2, h3, h4, h5, h6 {
 								</c:if>
 								<h5>Date Created</h5>
 								${comment.dateCreated }
-								<h5>Rating</h5>
-								${comment.rating } <br>
+								<h5>Rating: ${comment.rating.value }</h5>
+								 <br>
 								<p>${comment.comment }</p>
 								
 								

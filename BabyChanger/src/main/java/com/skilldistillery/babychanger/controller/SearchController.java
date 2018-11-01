@@ -134,7 +134,7 @@ public class SearchController {
 	public ModelAndView detailsResultsPage(@RequestParam("locationId")int id) {
 		ModelAndView mv = new ModelAndView();
 		Location location = locationDAO.getLocationById(id);
-		Integer averageRating = locationDAO.getAverageRating(id);
+		Double averageRating = locationDAO.getAverageRating(id);
 		mv.addObject("location", location);
 		mv.addObject("averageRating", averageRating);
 		mv.setViewName("detailedResults");
@@ -216,4 +216,6 @@ public class SearchController {
 		mv.setViewName("results");
 		return mv;
 	}
+	
+	
 }
