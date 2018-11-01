@@ -104,10 +104,10 @@ public class LocationDAOImpl implements LocationDAO {
 		Set<Location> locationByKeyword = new HashSet<>();
 		String[] keywords = keyword.trim().split("\\s+");
 		for (String keywordList : keywords) {
+			locationByKeyword.addAll(getLocationsByName(keywordList));
+			locationByKeyword.addAll(getLocationsLikeAddress(keywordList));
 			locationByKeyword.addAll(getLocationsByCity(keywordList));
 			locationByKeyword.addAll(getLocationsByState(keywordList));
-			locationByKeyword.addAll(getLocationsLikeAddress(keywordList));
-			locationByKeyword.addAll(getLocationsByName(keywordList));
 			locationByKeyword.addAll(getLocationsByZipCode(keywordList));
 		}
 		return locationByKeyword;
