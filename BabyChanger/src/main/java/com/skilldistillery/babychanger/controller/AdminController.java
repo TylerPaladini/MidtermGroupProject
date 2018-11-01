@@ -91,10 +91,17 @@ public class AdminController {
 		return mv;
 	}
 	
-	@RequestMapping(path = "disableDeleteUserSearch.do", method = RequestMethod.POST)
-	public ModelAndView searchUserToDisablePage() {
+	@RequestMapping(path = "userEditSearchPage.do", method = RequestMethod.POST)
+	public ModelAndView searchUserToEditPage() {
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("searchForDisableDelete", true);
+		mv.addObject("adminPowerOnUser", true);
+		mv.setViewName("search");
+		return mv;
+	}
+	@RequestMapping(path = "locationEditSearchPage.do", method = RequestMethod.POST)
+	public ModelAndView searchLocationToEditPage() {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("adminPowerOnLocation", true);
 		mv.setViewName("search");
 		return mv;
 	}
@@ -119,23 +126,83 @@ public class AdminController {
 	/*
 	 * Disable user profile
 	 */
-//	@RequestMapping(path = "disableUserAdmin.do", method = RequestMethod.POST)
-//	public ModelAndView disableUserAdmin(int userId, RedirectAttributes redir) {
-//		ModelAndView mv = new ModelAndView();
-//		boolean disabledUser = usersDAO.disableUser(userId);
-//		redir.addFlashAttribute("disableSuccess", disabledUser);
-//		mv.setViewName("redirect:disabledUserAdmin.do");
-//		return mv;
-//	}
+	@RequestMapping(path = "disableUserAdmin.do", method = RequestMethod.POST)
+	public ModelAndView disableUserAdmin(int userId, RedirectAttributes redir) {
+		ModelAndView mv = new ModelAndView();
+		boolean disabledUser = usersDAO.disableUser(userId);
+		redir.addFlashAttribute("disableUserSuccess", true);
+		mv.setViewName("redirect:disabledUserAdmin.do");
+		return mv;
+	}
 
-//	@RequestMapping(path = "disabledUserAdmin.do", method = RequestMethod.GET)
-//	public ModelAndView disabledUserAdmin() {
-//		ModelAndView mv = new ModelAndView();
-//		mv.setViewName("adminProfile");
-//
-//		return mv;
-//
-//	}
+	@RequestMapping(path = "disabledUserAdmin.do", method = RequestMethod.GET)
+	public ModelAndView disabledUserAdmin() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("adminProfile");
+
+		return mv;
+
+	}
+	/*
+	 * Activate user profile
+	 */
+	@RequestMapping(path = "activateUserAdmin.do", method = RequestMethod.POST)
+	public ModelAndView activateUserAdmin(int userId, RedirectAttributes redir) {
+		ModelAndView mv = new ModelAndView();
+		boolean activateUser = usersDAO.activateUser(userId);
+		redir.addFlashAttribute("activateUserSuccess", true);
+		mv.setViewName("redirect:activatedUserAdmin.do");
+		return mv;
+	}
+	
+	@RequestMapping(path = "activatedUserAdmin.do", method = RequestMethod.GET)
+	public ModelAndView activatedUserAdmin() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("adminProfile");
+		
+		return mv;
+		
+	}
+	/*
+	 * Give admin privileges to user profile
+	 */
+	@RequestMapping(path = "giveAdminPowerToUserAdmin.do", method = RequestMethod.POST)
+	public ModelAndView givePowerToUserAdmin(int userId, RedirectAttributes redir) {
+		ModelAndView mv = new ModelAndView();
+		boolean gavePowerToUser = usersDAO.giveUserAdminPower(userId);
+		redir.addFlashAttribute("gavePowerToUser", true);
+		mv.setViewName("redirect:gavePowerToUserAdmin.do");
+		return mv;
+	}
+	
+	@RequestMapping(path = "gavePowerToUserAdmin.do", method = RequestMethod.GET)
+	public ModelAndView gavePowerToUserAdmin() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("adminProfile");
+		
+		return mv;
+		
+	}
+	/*
+	 * take admin privileges to user profile
+	 */
+	@RequestMapping(path = "takeAdminPowerFromUserAdmin.do", method = RequestMethod.POST)
+	public ModelAndView takePowerFromUserAdmin(int userId, RedirectAttributes redir) {
+		ModelAndView mv = new ModelAndView();
+		boolean takePowerFromUser = usersDAO.takeAdminPowerFromUser(userId);
+		redir.addFlashAttribute("takePowerFromUser", true);
+		mv.setViewName("redirect:takenPowerFromUserAdmin.do");
+		return mv;
+	}
+	
+	@RequestMapping(path = "takenPowerFromUserAdmin.do", method = RequestMethod.GET)
+	public ModelAndView takenPowerUserAdmin() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("adminProfile");
+		
+		return mv;
+		
+	}
 	
 	/*
 	 * Delete user profile
@@ -145,8 +212,8 @@ public class AdminController {
 		ModelAndView mv = new ModelAndView();
 		
 		boolean deletedUser = usersDAO.deleteUsers(userId);
-		redir.addFlashAttribute("deleteSuccess", deletedUser);
-		mv.setViewName("redirect:disabledUserAdmin.do");
+		redir.addFlashAttribute("deleteUserSuccess", true);
+		mv.setViewName("redirect:deletedUserAdmin.do");
 		
 		return mv;
 	}
@@ -616,18 +683,6 @@ public class AdminController {
 			mv.addObject("averageRating", averageRating);
 			mv.setViewName("detailedResults");
 		}
-		return mv;
-	}
-
-	/*
-	 * Lists all locations
-	 */
-	@RequestMapping(path = "listAllLocations.do", method = RequestMethod.GET)
-	public ModelAndView getAllLocations() {
-		ModelAndView mv = new ModelAndView();
-		List<Location> allLocations = locationDAO.getAllLocations();
-		mv.addObject("allLocations", allLocations);
-		mv.setViewName("results");
 		return mv;
 	}
 
