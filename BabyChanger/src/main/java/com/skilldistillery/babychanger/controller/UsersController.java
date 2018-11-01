@@ -48,7 +48,7 @@ public class UsersController {
 	 */
 	@RequestMapping(path = "createUser.do", method = RequestMethod.POST)
 	public ModelAndView createUser(@Valid @ModelAttribute("registerUserModel") Users user, Errors errors,
-			RedirectAttributes redir) {
+			RedirectAttributes redir, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		// Determine if there are any errors.
 		if (errors.getErrorCount() != 0) {
@@ -61,7 +61,7 @@ public class UsersController {
 		// If no errors, send the user forward to the profile view.
 		else {
 			Users userCreated = usersDAO.createUsers(user);
-			redir.addFlashAttribute("userCreated", userCreated);
+			session.setAttribute("loggedIn", userCreated);
 			mv.setViewName("redirect:createdUser.do");
 		}
 		return mv;
@@ -70,7 +70,7 @@ public class UsersController {
 	@RequestMapping(path = "createdUser.do", method = RequestMethod.GET)
 	public ModelAndView createdUser() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("home");
+		mv.setViewName("profile");
 		return mv;
 	}
 
