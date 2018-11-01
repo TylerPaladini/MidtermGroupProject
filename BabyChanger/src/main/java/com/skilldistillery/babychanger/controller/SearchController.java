@@ -121,14 +121,14 @@ public class SearchController {
 //		return mv;
 //	}
 	
-//	@RequestMapping(path="searchOpenLocations.do", method = RequestMethod.GET)
-//	public ModelAndView addAddressLocationRestroom() {
-//		ModelAndView mv = new ModelAndView();
-//		List<Location> openLocations = locationDAO.getLocationsByOpen();
-//		mv.addObject("open", openLocations);
-//		mv.setViewName("results");
-//		return mv;
-//	}
+	@RequestMapping(path="searchOpenLocations.do", method = RequestMethod.GET)
+	public ModelAndView addAddressLocationRestroom() {
+		ModelAndView mv = new ModelAndView();
+		List<Location> openLocations = locationDAO.getLocationsByOpen();
+		mv.addObject("open", openLocations);
+		mv.setViewName("results");
+		return mv;
+	}
 	
 	@RequestMapping(path="detailedResults.do", method = RequestMethod.GET)
 	public ModelAndView detailsResultsPage(@RequestParam("locationId")int id) {

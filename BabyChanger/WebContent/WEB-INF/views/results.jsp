@@ -58,15 +58,15 @@ body, h1, h2, h3, h4, h5, h6 {
 			
 		</div>
 
-		<c:if test="${not empty allUsers }">
+	<c:if test="${not empty allUsers }">
 			<c:forEach items="${allUsers }" var="user">
 			${user.id }
 			${user.firstName }
 			<br>
 			</c:forEach>
-		</c:if>
+	</c:if>
 
-		<c:if test="${not empty allKeywords }">
+	<c:if test="${not empty allKeywords }">
 			<c:forEach items="${allKeywords }" var="keywordSearch">
 				<a href="detailedResults.do?locationId=${keywordSearch.id }">${keywordSearch.name }</a>
 				<br />
@@ -85,9 +85,9 @@ body, h1, h2, h3, h4, h5, h6 {
 				<br />
 				<br />
 			</c:forEach>
-		</c:if>
+	</c:if>
 
-		<c:if test="${not empty open }">
+	<c:if test="${not empty open }">
 			<c:forEach items="${open }" var="openRestroom">
 				<a href="detailedResults.do?locationId=${openRestroom.id }">${openRestroom.name }</a>
 				<br />
@@ -106,9 +106,9 @@ body, h1, h2, h3, h4, h5, h6 {
 				<br />
 				<br />
 			</c:forEach>
-		</c:if>
+	</c:if>
 
-		<c:if test="${not empty allLocations }">
+	<c:if test="${not empty allLocations }">
 			<c:forEach items="${allLocations }" var="location">
 				<a href="detailedResults.do?locationId=${location.id }">${location.name }</a>
 				<br />
@@ -130,9 +130,9 @@ body, h1, h2, h3, h4, h5, h6 {
 						type="submit" value="update Location">
 				</form>
 			</c:forEach>
-		</c:if>
+	</c:if>
 
-		<c:if test="${not empty flaggedRestrooms }">
+	<c:if test="${not empty flaggedRestrooms }">
 			<h5>All Flagged Restrooms</h5>
 			<c:forEach items="${flaggedRestrooms }" var="allFlaggedRestrooms">
 
@@ -143,15 +143,15 @@ body, h1, h2, h3, h4, h5, h6 {
 				<br>
 
 			</c:forEach>
-		</c:if>
+	</c:if>
 
-		<c:if test="${noFlaggedRestrooms }">
-	There are no flagged restrooms
+	<c:if test="${noFlaggedRestrooms }">
+		There are no flagged restrooms
 	</c:if>
 
 
 
-		<c:if test="${not empty flaggedComments }">
+	<c:if test="${not empty flaggedComments }">
 			<h5>All Flagged Comments</h5>
 			<hr>
 			<c:forEach items="${flaggedComments }" var="comment">
@@ -167,15 +167,15 @@ body, h1, h2, h3, h4, h5, h6 {
 				</form>
 				<hr>
 			</c:forEach>
-		</c:if>
+	</c:if>
 
-		<c:if test="${noFlaggedCommetns }">
+	<c:if test="${noFlaggedCommetns }">
 		There are no flagged Comments
 	</c:if>
 
 
 
-		<c:if test="${not empty allUsersToDisableDelete }">
+	<c:if test="${not empty allUsersToDisableDelete }">
 			<c:forEach items="${allUsersToDisableDelete }" var="user">
 			First Name: <h3>${user.firstName }</h3>
 			Last Name: <h3>${user.lastName }</h3>
@@ -199,15 +199,42 @@ body, h1, h2, h3, h4, h5, h6 {
 	
 	<c:if test="${not empty locations }">
 		<c:forEach items="${locations }" var="location">
-		
+			<a href="detailedResults.do?locationId=${location.id }">${location.name }</a>
+			<br />
+			${location.address.street }
+			<c:if test="${not empty location.address.street2 }">
+				${location.address.street2 }
+			</c:if>
+			<br />
+			${location.address.city }
+			${location.address.state }
+			${location.address.zipCode }<br />
+				<c:if
+					test="${not empty location.openTime and not empty location.closeTime }">
+			${location.openTime } - ${location.closeTime }
+			</c:if>
+			<c:if test="${deleteDisableOption }">
+				<form action="deleteConfirmation.do">
+					<input type="submit" value="Delete Location">
+					<input type="hidden" name="id" value="${location.id }">
+				</form>
+			
+			</c:if>
+			<c:if test="${updateOption }">
+				<form action="adminUpdateLocation.do">
+					<input type="submit" value="Update Location">
+					<input type="hidden" name="id" value="${location.id }">
+				</form>
+			
+			</c:if>
 		</c:forEach> 
 	
 	</c:if>
 	
 	
     
-  </div>
-</header>
+  	</div>
+
 
 
 </body>
