@@ -3,41 +3,30 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <nav>
 
-	<div class="container">
+	<div class="w3-top w3-hide-small">
+		<div class="w3-bar w3-xlarge w3-black w3-opacity w3-hover-opacity-off"
+			id="myNavbar">
+			<a href="home.do" class="w3-bar-item w3-button">HOME</a>
 
-		<div class="row">
+			<c:if test="${empty loggedIn }">
+				<a href="loginPage.do" class="w3-bar-item w3-button">Login</a>
+				<a href="registerPage.do" class="w3-bar-item w3-button">Register</a>
 
-			<div class="col-4">
-				<form action="getLocationsByKeywordSearch.do" method="GET">
-					<input type="search" name="keyword" size="30" /> <input
-						type="submit" name="search" value="Search" />
+			</c:if>
 
-				</form>
-			</div>
-			<div class="col-6"></div>
-			<div class="col-2">
-			
-				
-
-								<c:if test="${not empty loggedIn }">
-					<c:if test="${loggedIn.admin }">
-						<form action="profileAdmin.do">
-							<input type="Submit" value="Admin Profile" />
-						</form>
-					</c:if>
-					<c:if test="${!loggedIn.admin }">
-						<form action="profileUser.do">
-							<input type="Submit" value="User Profile" />
-						</form>
-					</c:if>
-
-					<form action="logout.do">
-						<input type="Submit" value="Log Out" />
-					</form>
+			<c:if test="${not empty loggedIn }">
+				<c:if test="${loggedIn.admin }">
+					<a href="profileAdmin.do" class="w3-bar-item w3-button">Admin
+						Profile</a>
 				</c:if>
 
-			</div>
+				<c:if test="${!loggedIn.admin }">
+					<a href="profileUser.do" class="w3-bar-item w3-button">User
+						Profile</a>
+				</c:if>
 
+				<a href="logout.do" class="w3-bar-item w3-button">Logout</a>
+			</c:if>
 		</div>
 	</div>
 </nav>
