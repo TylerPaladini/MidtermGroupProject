@@ -60,17 +60,47 @@ public class UsersDAOImpl implements UsersDAO {
 	@Override
 	public boolean disableUser(int id) {
 		Users disableUser = em.find(Users.class, id);
-		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" +disableUser);
 		if (disableUser != null) {
 			disableUser.setActive(false);
-			System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" +disableUser);
-
+			return true;
 		}
 		return false;
 
 	}
+	@Override
+	public boolean activateUser(int id) {
+		Users disableUser = em.find(Users.class, id);
+		if (disableUser != null) {
+			disableUser.setActive(true);
+			return true;
+		}
+		return false;
+		
+	}
+	
+	
 
-//	Permanently deletes user from the database
+	@Override
+	public boolean giveUserAdminPower(int id) {
+	Users disableUser = em.find(Users.class, id);
+	if (disableUser != null) {
+		disableUser.setAdmin(true);
+		return true;
+	}
+	return false;
+	}
+
+	@Override
+	public boolean takeAdminPowerFromUser(int id) {
+		Users disableUser = em.find(Users.class, id);
+		if (disableUser != null) {
+			disableUser.setAdmin(false);
+			return true;
+		}
+		return false;
+	}
+
+	//	Permanently deletes user from the database
 	@Override
 	public boolean deleteUsers(int id) {
 		Users deleteUser = em.find(Users.class, id);

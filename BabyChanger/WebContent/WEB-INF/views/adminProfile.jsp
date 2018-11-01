@@ -70,6 +70,21 @@ body, h1, h2, h3, h4, h5, h6 {
 <c:if test="${locationDeletedSuccess }">
 		<h1>Location has been deleted</h1>
 </c:if>
+<c:if test="${deleteUserSuccess}">
+		<h1>User has been deleted</h1>
+</c:if>
+<c:if test="${disableUserSuccess}">
+		<h1>User has been disabled</h1>
+</c:if>
+<c:if test="${activateUserSuccess}">
+		<h1>User has been Activated</h1>
+</c:if>
+<c:if test="${gavePowerToUser}">
+		<h1>User has been Made an Admin</h1>
+</c:if>
+<c:if test="${takePowerFromUser}">
+		<h1>User has been stripped of Admin privileges</h1>
+</c:if>
 <h1>Admin Profile</h1>
 
 
@@ -83,11 +98,6 @@ ${loggedIn.lastName}
 	<form action="adminAddsAddressLocationRestroom.do">
 		<input type="Submit" value="Add Location" />
 	</form>
-	
-	<form action="searchLocationsToUpdatePage.do" method="get">
-		<input type="Submit" value="Update Location"/>
-	</form>
-	
 	<form action="listAllFlaggedRestrooms.do">
 		<input type="Submit" value="Show Flagged Restrooms"/>
 	</form>
@@ -95,11 +105,11 @@ ${loggedIn.lastName}
 		<input type="Submit" value="Show Flagged Comments"/>
 	</form>
 	
-	<form action="searchLocationsToDeletePage.do" method="get">
-		<input type="Submit" value="Delete Location"/>
+	<form action="locationEditSearchPage.do" method="post">
+		<input type="Submit" value="Use Admin Privileges On Locations"/>
 	</form>
-	<form action="disableDeleteUserSearch.do" method="post">
-		<input type="Submit" value="Disable/Delete User"/>
+	<form action="userEditSearchPage.do" method="post">
+		<input type="Submit" value="Use Admin Privileges On Users"/>
 	</form>
 
 	
