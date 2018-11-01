@@ -101,11 +101,25 @@ public class AdminController {
 		return mv;
 	}
 	
-	@RequestMapping(path = "disableDelete.do", method = RequestMethod.POST)
+	@RequestMapping(path = "disableDeleteUserSearch.do", method = RequestMethod.POST)
 	public ModelAndView searchUserToDisablePage() {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("searchForDisableDelete", true);
-		mv.setViewName("searchUser");
+		mv.setViewName("search");
+		return mv;
+	}
+	@RequestMapping(path = "updateLocationSearch.do", method = RequestMethod.POST)
+	public ModelAndView searchUpdateLocationPage() {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("searchForUpdateLocation", true);
+		mv.setViewName("search");
+		return mv;
+	}
+	@RequestMapping(path = "deleteLocationSearch.do", method = RequestMethod.POST)
+	public ModelAndView searchDeleteLocationPage() {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("searchForDeleteLocation", true);
+		mv.setViewName("search");
 		return mv;
 	}
 

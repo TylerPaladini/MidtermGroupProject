@@ -183,4 +183,6 @@ public class SearchController {
 		mv.setViewName("results");
 		return mv;
 	}
+	
+	
 }

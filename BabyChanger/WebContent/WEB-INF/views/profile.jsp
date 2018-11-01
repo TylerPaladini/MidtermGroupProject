@@ -43,6 +43,10 @@
 		<input type="submit" value="Edit Profile">
 	</form>
 	
+	<form action="userAddsAddressLocationRestroom.do">
+		<input type="Submit" value="Add Location" />
+	</form>
+	
 	<c:if test="${!loggedIn.admin}">
 		<form action="disableUser.do">
 		<input type="hidden" name="userId" value="${loggedIn.id }">

@@ -271,16 +271,11 @@ public class UsersController {
 	@RequestMapping(path = "addCommentUser.do", method = RequestMethod.POST)
 	public ModelAndView addComment(Comment comment,  RedirectAttributes redir, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-//		comment.setUser((Users) session.getAttribute("loggedIn"));
-//		comment.setRestroom((Restroom) session.getAttribute("commentedRestroom"));
-//		comment.setDateCreated(new Date());
-		Users user = usersDAO.getUsersById(((Users) session.getAttribute("loggedIn")).getId());
-		int restroomId = ((Restroom) session.getAttribute("commentedRestroom")).getId();
-		System.out.println(user);
-		comment.setUser(user);
-		user.addComment(comment);
-		Comment addComment = commentDAO.addComment(comment,restroomDAO.getRestroom(restroomId) );
-		
+		comment.setUser((Users) session.getAttribute("loggedIn"));
+		comment.setRestroom((Restroom) session.getAttribute("commentedRestroom"));
+		comment.setDateCreated(new Date());
+		Comment addComment = commentDAO.addComment(comment);
+		commentDAO.editComment(addComment.getId(), addComment);
 		redir.addFlashAttribute("location", locationDAO.getLocationById(addComment.getRestroom().getLocation().getId()));
 		mv.setViewName("redirect:addedCommentUser.do");
 	
