@@ -29,7 +29,7 @@
 		<input type="number" min=1 max=5 name="rating" value="${updatedComment.rating.value }">
 		
 		Comment
-		<textarea rows="3" cols="10" name="comment" value="${updatedComment.comment }">${updatedComment.comment }</textarea>
+		<textarea rows="3" cols="10" name="comment" >${updatedComment.comment }</textarea>
 		<input type="submit" value="submit">
 		</form>
 	</c:if>
@@ -77,7 +77,7 @@
 			<br> 
 			<label>*Purchased Required?</label> 
 			Yes<input type="radio" name="purchaseRequired" value="true" />
-			No<input type="radio" name="purchaseRequired" value="false" /> 
+			No<input type="radio" name="purchaseRequired" value="false" checked /> 
 			<br>
 			<form:label path="phone">Phone Number(format like 555-555-5555)</form:label> 
 			<form:input type="tel" path="phone" value="${updateLocation.phone }"/>
@@ -135,7 +135,7 @@
 			<br> 
 			<label>*Purchased Required?</label> 
 			Yes<input type="radio" name="purchaseRequired" value="true" />
-			No<input type="radio" name="purchaseRequired" value="false" /> 
+			No<input type="radio" name="purchaseRequired" value="false" checked /> 
 			<br>
 			<form:label path="phone">Phone Number(format like 555-555-5555)</form:label> 
 			<form:input type="tel" path="phone" value="${updateLocation.phone }"/>
@@ -185,7 +185,7 @@
 		<h5>Update Restroom</h5>
 		<form:form action="userUpdateRestroomUser.do" method = "POST" modelAttribute="userUpdateRestroomModel">
 			<form:label path="changingTable">*Changing Table Available?</form:label> 
-			Yes <form:radiobutton path="changingTable" value="true"/> 
+			Yes <form:radiobutton path="changingTable" value="true" checked/> 
 			No <form:radiobutton path="changingTable" value="false"/> 
 			<form:errors path="changingTable" />
 			<br> 
@@ -196,7 +196,7 @@
 			<form:label path="gender">*Gender?</form:label>
 			Male <form:radiobutton path="gender" value="M" /> 
 			Female <form:radiobutton path="gender" value="F" /> 
-			Unisex/Family <form:radiobutton path="gender" value="U" /> 
+			Unisex/Family <form:radiobutton path="gender" value="U" checked/> 
 			<form:errors path="gender" />
 			<br> 
 			
@@ -226,7 +226,7 @@
 		<h5>Update Restroom</h5>
 		<form:form action="adminUpdateRestroomAdmin.do" method = "POST" modelAttribute="adminUpdateRestroomModel">
 			<form:label path="changingTable">*Changing Table Available?</form:label> 
-			Yes <form:radiobutton path="changingTable" value="true"/> 
+			Yes <form:radiobutton path="changingTable" value="true" checked /> 
 			No <form:radiobutton path="changingTable" value="false"/> 
 			<form:errors path="changingTable" />
 			<br> 
@@ -237,7 +237,7 @@
 			<form:label path="gender">*Gender?</form:label>
 			Male <form:radiobutton path="gender" value="M" /> 
 			Female <form:radiobutton path="gender" value="F" /> 
-			Unisex/Family <form:radiobutton path="gender" value="U" /> 
+			Unisex/Family <form:radiobutton path="gender" value="U" checked /> 
 			<form:errors path="gender" />
 			<br> 
 			

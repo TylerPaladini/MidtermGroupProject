@@ -153,7 +153,7 @@
 	
 				<form:label path="changingTable">*Changing Table Available?</form:label> 
 				Yes <form:radiobutton path="changingTable" value="true"/> 
-				No <form:radiobutton path="changingTable" value="false"/> 
+				No <form:radiobutton path="changingTable" value="false" checked/> 
 				<form:errors path="changingTable" />
 				<br> 
 				<label>*Public?</label>
@@ -163,7 +163,7 @@
 				<form:label path="gender">*Gender?</form:label>
 				Male <form:radiobutton path="gender" value="M" /> 
 				Female <form:radiobutton path="gender" value="F" /> 
-				Unisex/Family <form:radiobutton path="gender" value="U"/> 
+				Unisex/Family <form:radiobutton path="gender" value="U" checked/> 
 				<form:errors path="gender" />
 				<br> 
 				
@@ -197,7 +197,7 @@
 				<h5>Restroom Information</h5>
 	
 				<form:label path="changingTable">*Changing Table Available?</form:label> 
-				Yes <form:radiobutton path="changingTable" value="true"/> 
+				Yes <form:radiobutton path="changingTable" value="true" checked/> 
 				No <form:radiobutton path="changingTable" value="false"/> 
 				<form:errors path="changingTable" />
 				<br> 
@@ -208,7 +208,7 @@
 				<form:label path="gender">*Gender?</form:label>
 				Male <form:radiobutton path="gender" value="M" /> 
 				Female <form:radiobutton path="gender" value="F" /> 
-				Unisex/Family <form:radiobutton path="gender" value="U"/> 
+				Unisex/Family <form:radiobutton path="gender" value="U" checked/> 
 				<form:errors path="gender" />
 				<br> 
 				
