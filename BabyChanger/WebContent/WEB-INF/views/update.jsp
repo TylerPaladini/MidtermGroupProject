@@ -29,7 +29,7 @@
 		<input type="number" min=1 max=5 name="rating" value="${updatedComment.rating.value }">
 		
 		Comment
-		<textarea rows="3" cols="10" name="comment" value="${updatedComment.comment }">${updatedComment.comment }</textarea>
+		<textarea rows="3" cols="10" name="comment" >${updatedComment.comment }</textarea>
 		<input type="submit" value="submit">
 		</form>
 	</c:if>
@@ -76,18 +76,18 @@
 			<input type="text" name="accessLimits" value="${updateLocation.accessLimits }"/> 
 			<br> 
 			<label>*Purchased Required?</label> 
-			Yes<input type="radio" name="purchaseRequired" value="true" />
-			No<input type="radio" name="purchaseRequired" value="false" /> 
+			Yes<input type="radio" name="purchaseRequired" value="true" checked="${updateLocation.purchaseRequired == true ? 'checked' : ''}"/>
+			No<input type="radio" name="purchaseRequired" value="false" checked="${updateLocation.purchaseRequired == false ? 'checked' : ''}" /> 
 			<br>
-			<form:label path="phone">Phone Number(format like 555-555-5555)</form:label> 
+			<form:label path="phone">Phone Number</form:label> 
 			<form:input type="tel" path="phone" value="${updateLocation.phone }"/>
 			<form:errors path="phone" />
 			<br>
-			<form:label path="openTime">*Open Time(24 hour format e.g. 15:30)</form:label> 
+			<form:label path="openTime" >*Open Time</form:label> 
 			<form:input path="openTime" value="${updateLocation.openTime }" />
 			<form:errors path="openTime" />
 			<br> 
-			<form:label path="closeTime">*Close Time(24 hour format e.g. 23:30)</form:label>
+			<form:label path="closeTime">*Close Time</form:label>
 			<form:input path="closeTime" value="${updateLocation.closeTime }"/> 
 			<form:errors path="closeTime" />
 			<br> 
@@ -134,18 +134,18 @@
 			<input type="text" name="accessLimits" value="${updateLocation.accessLimits }"/> 
 			<br> 
 			<label>*Purchased Required?</label> 
-			Yes<input type="radio" name="purchaseRequired" value="true" />
-			No<input type="radio" name="purchaseRequired" value="false" /> 
+			Yes<input type="radio" name="purchaseRequired" value="true" checked="${updateLocation.purchaseRequired == true ? 'checked' : ''}"/>
+			No<input type="radio" name="purchaseRequired" value="false" checked="${updateLocation.purchaseRequired == false ? 'checked' : ''}" /> 
 			<br>
-			<form:label path="phone">Phone Number(format like 555-555-5555)</form:label> 
+			<form:label path="phone">Phone Number</form:label> 
 			<form:input type="tel" path="phone" value="${updateLocation.phone }"/>
 			<form:errors path="phone" />
 			<br>
-			<form:label path="openTime">*Open Time(24 hour format e.g. 15:30)</form:label> 
+			<form:label path="openTime">*Open Time</form:label> 
 			<form:input path="openTime" value="${updateLocation.openTime }" />
 			<form:errors path="openTime" />
 			<br> 
-			<form:label path="closeTime">*Close Time(24 hour format e.g. 23:30)</form:label>
+			<form:label path="closeTime">*Close Time</form:label>
 			<form:input path="closeTime" value="${updateLocation.closeTime }"/> 
 			<form:errors path="closeTime" />
 			<br> 
@@ -185,18 +185,18 @@
 		<h5>Update Restroom</h5>
 		<form:form action="userUpdateRestroomUser.do" method = "POST" modelAttribute="userUpdateRestroomModel">
 			<form:label path="changingTable">*Changing Table Available?</form:label> 
-			Yes <form:radiobutton path="changingTable" value="true"/> 
-			No <form:radiobutton path="changingTable" value="false"/> 
+			Yes <form:radiobutton path="changingTable" value="true" checked="${updateRestroom.changingTable == true ? 'checked':''}"/> 
+			No <form:radiobutton path="changingTable" value="false" checked="${updateRestroom.changingTable == false ? 'checked':''}"/> 
 			<form:errors path="changingTable" />
 			<br> 
 			<label>*Public?</label>
-			Yes <input type="radio" name="pAccess" value="true" checked /> 
-			No <input type="radio" name="pAccess" value="false" /> 
+			Yes <input type="radio" name="pAccess" value="true" checked="${updateRestroom.pAccess == true ? 'checked':''}" /> 
+			No <input type="radio" name="pAccess" value="false" checked="${updateRestroom.pAccess == false ? 'checked':''}"/> 
 			<br> 
 			<form:label path="gender">*Gender?</form:label>
-			Male <form:radiobutton path="gender" value="M" /> 
-			Female <form:radiobutton path="gender" value="F" /> 
-			Unisex/Family <form:radiobutton path="gender" value="U" /> 
+			Male <form:radiobutton path="gender" value="M" checked="${updateRestroom.gender == 'M' ? 'checked':''}"/> 
+			Female <form:radiobutton path="gender" value="F" checked="${updateRestroom.gender == 'F' ? 'checked':''}"/> 
+			Unisex/Family <form:radiobutton path="gender" value="U" checked="${updateRestroom.gender == 'U' ? 'checked':''}"/> 
 			<form:errors path="gender" />
 			<br> 
 			
@@ -226,18 +226,18 @@
 		<h5>Update Restroom</h5>
 		<form:form action="adminUpdateRestroomAdmin.do" method = "POST" modelAttribute="adminUpdateRestroomModel">
 			<form:label path="changingTable">*Changing Table Available?</form:label> 
-			Yes <form:radiobutton path="changingTable" value="true"/> 
-			No <form:radiobutton path="changingTable" value="false"/> 
+			Yes <form:radiobutton path="changingTable" value="true" checked="${updateRestroom.changingTable == true ? 'checked':''}" /> 
+			No <form:radiobutton path="changingTable" value="false" checked="${updateRestroom.changingTable == false ? 'checked':''}"/> 
 			<form:errors path="changingTable" />
 			<br> 
 			<label>*Public?</label>
-			Yes <input type="radio" name="pAccess" value="true" checked /> 
-			No <input type="radio" name="pAccess" value="false" /> 
+			Yes <input type="radio" name="pAccess" value="true" checked="${updateRestroom.pAccess == true ? 'checked':''}" /> 
+			No <input type="radio" name="pAccess" value="false" checked="${updateRestroom.pAccess == false ? 'checked':''}"/> 
 			<br> 
 			<form:label path="gender">*Gender?</form:label>
-			Male <form:radiobutton path="gender" value="M" /> 
-			Female <form:radiobutton path="gender" value="F" /> 
-			Unisex/Family <form:radiobutton path="gender" value="U" /> 
+			Male <form:radiobutton path="gender" value="M" checked="${updateRestroom.gender == 'M' ? 'checked':''}"/> 
+			Female <form:radiobutton path="gender" value="F" checked="${updateRestroom.gender == 'F' ? 'checked':''}"/> 
+			Unisex/Family <form:radiobutton path="gender" value="U" checked="${updateRestroom.gender == 'U' ? 'checked':''}"/> 
 			<form:errors path="gender" />
 			<br> 
 			
