@@ -247,6 +247,7 @@ body, h1, h2, h3, h4, h5, h6 {
 								<c:if test="${comment.flagComment }">
 									<p style="font-color: red">Flagged</p>
 								</c:if>
+								<h5>Created by ${comment.user.id == loggedIn.id ? "YOU" : comment.user.userName }</h5>
 								<h5>Date Created</h5>
 								${comment.dateCreated }
 								<h5>Rating: ${comment.rating.value }</h5>

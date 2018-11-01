@@ -63,8 +63,8 @@
 				<h1>
 					<b>Zach Lamb, SCRUM MASTER</b> <span
 						class="w3-right w3-tag w3-dark-grey w3-round"><img alt=""
-						src="https://vignette.wikia.nocookie.net/marvelcentral/images/9/97/Tony-Stark.jpg/revision/latest?cb=20130429010603"
-						height=150 width=150></span>
+						src="img/tony.jpg"
+						height=100 width=100></span>
 				</h1>
 				<p class="w3-text-grey">The best of us, chosen by the powers
 					that be to lead our motley crue.</p>
@@ -72,28 +72,29 @@
 
 				<h1>
 					<b>Joshua Ciccone-Okodo, Tech God</b> <span
-						class="w3-right w3-tag w3-dark-grey w3-round"><img alt=""
-						src="https://cdn1.thr.com/sites/default/files/imagecache/scale_crop_768_433/2011/04/thor-gallery-1-2011-a-l.jpg"
-						height=150 width=250></span>
+						class="w3-right w3-tag w3-dark-grey w3-round">
+						<img alt=""
+						src="img/heimdall.jpg"
+						height=125 width=150></span>
 				</h1>
 				<p class="w3-text-grey">Josh is the strong, silent type. Leading
 					by coding.</p>
 				<hr>
 
 				<h1>
-					<b>Tyler Paladini, Enforcer</b> <span
+					<b>Tyler Paladini, Assistant to the Regional Manager</b> <span
 						class="w3-right w3-tag w3-dark-grey w3-round"><img alt=""
-						src="https://cdn.vox-cdn.com/thumbor/qYKuikX8VynuXPGDXNcQ7F67CMo=/0x0:1025x657/1820x1213/filters:focal(405x159:569x323):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/54719431/judgedredd.0.jpg"
-						height=150 width=250></span>
+						src="img/dwight.jpg"
+						height=100 width=125></span>
 				</h1>
-				<p class="w3-text-grey">Tyler is the law!</p>
+				<p class="w3-text-grey">Tyler loves troubleshooting.</p>
 				<hr>
 
 				<h1>
 					<b>Rob Thompson, DBA</b> <span
 						class="w3-right w3-tag w3-dark-grey w3-round"><img alt=""
-						src="https://carboncostume.com/wordpress/wp-content/uploads/2013/03/miltonwaddams.jpg"
-						height=150 width=250></span>
+						src="img/milton.jpg"
+						height=100 width=125></span>
 				</h1>
 				<p class="w3-text-grey">Rob loves the command line.</p>
 				<hr>
@@ -108,7 +109,12 @@
 		<div class="w3-content">
 			<h1 class="w3-center w3-jumbo" style="margin-bottom: 64px">About</h1>
 			<p>Baby Changer was born of a cross crounty road trip. The story
-				goes that Zach and Gretchen were...</p>
+				goes that Zach and Gretchen, venturous souls they are, embarked upon a road trip through our great country, two diaper age children in tow. 
+				<BR>This trip, as fate would have it though neither knew it, would lead to the developement of this very application.<BR>
+				Gretchen observed at one point in this fateful journey about the overall unfairness to moms that there was a serious lack of changing tables in men's 
+				bathrooms. <BR>
+				Zach likely agreed, as he was changing his child from a makeshift changing "table". <BR>
+				What followed revolutionized the finding of restrooms with changing tables. <BR></p>
 
 
 		</div>
@@ -119,15 +125,13 @@
 		class="w3-container w3-padding-64 w3-blue-grey w3-grayscale-min w3-xlarge">
 		<div class="w3-content">
 			<h1 class="w3-center w3-jumbo" style="margin-bottom: 64px">Contact</h1>
-			<p>Find us at some address at some place or call us at
-				05050515-122330</p>
+			<p>Find us at 7400 E Orchard St, Greenwood Village, CO 80111! Call us at <A HREF="tel:303-302-5234">303-302-5234! </A> </p>
 			<p class="w3-xxlarge">Information is not warranted. It's
 				crowdsourced, what do you expect?</p>
 			<form action="/action_page.php" target="_blank">
 				<p>
-					<A HREF="mailto:rob@10thHuman.com"
-						subject="Your website is awesome!"><span class="w3-tag">Send
-							us a message below!</span></A>
+					<A HREF="mailto:rob@10thHuman.com,lamb.zachary@gmail.com,tylerpaladini@yahoo.com,joshokodo@gmail.com?&subject=Your website is awesome!"><span class="w3-tag">Click here to send
+							us a message!</span></A>
 				</p>
 
 			</form>
@@ -139,6 +143,9 @@
 		<p>
 			Powered by <a href="https://www.w3schools.com/w3css/default.asp"
 				title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a>
+		</p>
+		<p>
+			Modified by Steel Assault!</a>
 		</p>
 	</footer>
 

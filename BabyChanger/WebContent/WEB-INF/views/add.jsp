@@ -277,7 +277,7 @@ body, h1, h2, h3, h4, h5, h6 {
 			    <label for="star3" title="text">3 stars</label>
 			    <input type="radio" id="star2" name="rating" value="2" />
 			    <label for="star2" title="text">2 stars</label>
-			    <input type="radio" id="star1" name="rating" value="1" />
+			    <input type="radio" id="star1" name="rating" value="1" checked/>
 			    <label for="star1" title="text">1 star</label>
  			</div>
 			
