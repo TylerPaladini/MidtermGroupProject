@@ -4,29 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="css/w3.css">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Amatic+SC">
-<style>
-body, html {
-	height: 100%
-}
+<link rel="stylesheet" href="css/body.css">
 
-body, h1, h2, h3, h4, h5, h6 {
-	font-family: "Amatic SC", sans-serif;
-	font-size: 30px
-}
-
-.menu {
-	display: none
-}
-
-.bgimg {
-	background-repeat: no-repeat;
-	background-size: cover;
-	/*     background-image: url("https://media.giphy.com/media/tJ4oUTsMHbqAZyqsBo/giphy.gif");*/
-	min-height: 90%;
-}
-</style>
 <body>
 
 	<!-- Navbar (sit on top) -->
@@ -45,14 +24,16 @@ Please Create an Account
 
 
 <form action="login.do" method="POST">
-	<label for="userName">Username: <input type="text" name="userName"></label>
+
+
+	<label for="userName">Username: <font face="verdana"><input type="text" name="userName"></font></label>
 	<br>
-	<label for="password">Password: <input type="password" name="password"></label>
+	<label for="password">Password:  <font face="verdana"><input type="password" name="password"></font></label>
 	<br>
 	<input type="Submit" value="Login">
-	
 
 </form>
+
 
 </div>
 
