@@ -43,13 +43,13 @@ public class UsersController {
 	@Autowired
 	private UsersDAO usersDAO;
 
-	// create new user
-
+	/*
+	 * create new user
+	 */
 	@RequestMapping(path = "createUser.do", method = RequestMethod.POST)
 	public ModelAndView createUser(@Valid @ModelAttribute("registerUserModel") Users user, Errors errors,
 			RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
-
 		// Determine if there are any errors.
 		if (errors.getErrorCount() != 0) {
 			// If there are any errors, return the login form.
@@ -86,11 +86,12 @@ public class UsersController {
 		return mv;
 	}
 
-	// Update user profile
+	/*
+	 * Update user profile
+	 */
 	@RequestMapping(path = "updateUser.do", method = RequestMethod.POST)
 	public ModelAndView updateUser(Users updatedUser, int id, RedirectAttributes redir, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-
 		Users userUpdated = usersDAO.updateUsers(id, updatedUser);
 		if (userUpdated != null) {
 			session.setAttribute("loggedIn", userUpdated);
@@ -99,7 +100,6 @@ public class UsersController {
 			redir.addFlashAttribute("updateUserFailed", true);
 		}
 		mv.setViewName("redirect:updatedUser.do");
-
 		return mv;
 	}
 
@@ -115,10 +115,8 @@ public class UsersController {
 	@RequestMapping(path = "disableUser.do", method = RequestMethod.GET)
 	public ModelAndView disableUser(int userId) {
 		ModelAndView mv = new ModelAndView();
-
 		usersDAO.disableUser(userId);
 		mv.setViewName("redirect:disabledUser.do");
-
 		return mv;
 	}
 
@@ -127,11 +125,13 @@ public class UsersController {
 		ModelAndView mv = new ModelAndView();
 		session.removeAttribute("loggedIn");
 		mv.setViewName("home");
-
 		return mv;
-
 	}
 
+	/*
+	 * add location
+	 * see admin controller for explanation
+	 */
 	@RequestMapping(path = "userAddsAddressLocationRestroom.do")
 	public ModelAndView addAddressLocationRestroom() {
 		ModelAndView mv = new ModelAndView();
@@ -251,12 +251,13 @@ public class UsersController {
 			mv.addObject("locationUpdateSuccess", true);
 			mv.addObject("location", locationUpdate);
 			mv.setViewName("detailedResults");
-		
 		}
 		return mv;
 	}
 
-	// Adds comment
+	/*
+	 *  Adds comment
+	 */
 	@RequestMapping(path = "addedCommentPageUser.do", method = RequestMethod.GET)
 	public ModelAndView goToAddCommentPage(int restroomId, HttpSession session) {
 		Restroom commentedRestroom = restroomDAO.getRestroom(restroomId);
@@ -265,7 +266,6 @@ public class UsersController {
 		mv.addObject("addingComment", true);
 		mv.setViewName("add");
 		return mv;
-
 	}
 
 	@RequestMapping(path = "addCommentUser.do", method = RequestMethod.POST)
@@ -278,10 +278,7 @@ public class UsersController {
 		commentDAO.editComment(addComment.getId(), addComment);
 		redir.addFlashAttribute("location", locationDAO.getLocationById(addComment.getRestroom().getLocation().getId()));
 		mv.setViewName("redirect:addedCommentUser.do");
-	
-
 		return mv;
-
 	}
 
 	@RequestMapping(path = "addedCommentUser.do", method = RequestMethod.GET)
@@ -289,12 +286,12 @@ public class UsersController {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("commentAdded", true);
 		mv.setViewName("detailedResults");
-
 		return mv;
-
 	}
 
-	// user updates comment
+	/*
+	 * user updates comment
+	 */
 	@RequestMapping(path = "updateCommentPageUser.do", method = RequestMethod.GET)
 	public ModelAndView goToUpdateCommentPage(int commentId, HttpSession session) {
 		Comment updatedComment = commentDAO.findCommentById(commentId);
@@ -326,7 +323,9 @@ public class UsersController {
 		return mv;
 	}
 
-	// Disables comments made by a user
+	/*
+	 * Disables comments made by a user
+	 */
 	@RequestMapping(path = "disableCommentUser.do", method = RequestMethod.POST)
 	public ModelAndView disableComment(int id, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
@@ -345,7 +344,9 @@ public class UsersController {
 		return mv;
 	}
 
-	// Marks comment with flag (true/false)
+	/*
+	 * Marks comment with flag (true/false)
+	 */
 	@RequestMapping(path = "updateFlagCommentUser.do", method = RequestMethod.POST)
 	public ModelAndView updateFlag(int id, boolean isFlag, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
@@ -361,7 +362,6 @@ public class UsersController {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("detailedResults");
 		mv.addObject("flaggedComment", true);
-
 		return mv;
 	}
 
@@ -371,7 +371,6 @@ public class UsersController {
 		restroomDAO.updateFlag(id, isFlag, flaggedReason);
 		redir.addFlashAttribute("location", restroomDAO.getRestroom(id).getLocation());
 		mv.setViewName("redirect:updatedFlagRestroom.do");
-		
 		return mv;
 	}
 
@@ -384,7 +383,9 @@ public class UsersController {
 		return mv;
 	}
 
-	// Maps user to update.jsp to update a location
+	/*
+	 * Maps user to update.jsp to update a location
+	 */
 	@RequestMapping(path = "userUpdateRestroom.do", method = RequestMethod.GET)
 	public ModelAndView goToUpdateRestroom(@RequestParam("restroomId") int restroomId,
 			@RequestParam("locationId") int locationId, HttpSession session) {
@@ -415,10 +416,12 @@ public class UsersController {
 		return mv;
 	}
 	
+	/*
+	 * attempt to see if we could get the time functionality to work
+	 */
 	@InitBinder("userUpdateLocationModel")
 	public void customizedTimeFormat(WebDataBinder binder) {
 		SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm");
 		binder.registerCustomEditor(Date.class, "openTime", new CustomDateEditor(dateFormatter, true));
 	}
-	
 }

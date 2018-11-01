@@ -10,10 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.skilldistillery.babychanger.data.AddressDAO;
-import com.skilldistillery.babychanger.data.CommentDAO;
-import com.skilldistillery.babychanger.data.LocationDAO;
-import com.skilldistillery.babychanger.data.RestroomDAO;
 import com.skilldistillery.babychanger.data.UsersDAO;
 import com.skilldistillery.babychanger.entities.Users;
 
@@ -21,27 +17,19 @@ import com.skilldistillery.babychanger.entities.Users;
 public class LoginController {
 
 	@Autowired
-	private AddressDAO addressDAO;
-	@Autowired
-	private CommentDAO commentDAO;
-	@Autowired
-	private LocationDAO locationDAO;
-	@Autowired
-	private RestroomDAO restroomDAO;
-	@Autowired
 	private UsersDAO usersDAO;
 
-	// Logs in the user
+	/*
+	 * Logs in the user
+	 */
 	@RequestMapping(path = "login.do", method = RequestMethod.POST)
 	public ModelAndView userLogin(Users user, Errors errors, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		String userName = user.getUserName();
 		String password = user.getPassword();
-
 		boolean userActive = usersDAO.isUserActive(user.getUserName());
 		if (userActive) {
 			Users loginUser = usersDAO.getUserByUsernameAndPassword(userName, password);
-
 			if (loginUser != null) {
 				session.setAttribute("loggedIn", loginUser);
 				mv.setViewName("home");
