@@ -5,30 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="css/w3.css">
 <link rel="stylesheet" href="css/body.css">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Amatic+SC">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-body, html {
-	height: 100%
-}
+<link rel="stylesheet" href="css/diapers.css">
 
-body, h1, h2, h3, h4, h5, h6 {
-	font-family: "Amatic SC", sans-serif;
-	font-size: 30px
-}
-
-.menu {
-	display: none
-}
-
-.bgimg {
-	background-repeat: no-repeat;
-	background-size: cover;
-	/*     background-image: url("https://media.giphy.com/media/tJ4oUTsMHbqAZyqsBo/giphy.gif");*/
-	min-height: 90%;
-}
-</style>
 <body>
 
 	<!-- Navbar (sit on top) -->
@@ -37,20 +15,11 @@ body, h1, h2, h3, h4, h5, h6 {
 	<header class="bgimg w3-display-container w3-grayscale-min" id="home">
 
 	</header>
-	
-<!-- <body> -->
-<%-- 	<%@ include file="map.jsp"%> --%>
-	<%-- <%@ include file="locater.jsp"%> --%>
-<%-- 	<%@ include file="newNav.jsp"%> --%>
+
 	<div class="w3-display-topmiddle w3-left ">
 		<div class="container" >
-
-
 			<BR><BR>
-			
-
 		</div>
-		
 	
 	<c:if test="${not empty locationUpdateSuccess }">
 		<h2>Update Location Successful</h2>

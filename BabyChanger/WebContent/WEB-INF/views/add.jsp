@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="css/w3.css">
 <link rel="stylesheet" href="css/body.css">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Amatic+SC">
+<link rel="stylesheet" href="css/diapers.css">
+
 <style>
 body, html {
 	height: 100%
@@ -58,7 +58,7 @@ body, h1, h2, h3, h4, h5, h6 {
 				<label>Street2</label> 
 				<input type="text" name="street2" /> 
 				<br> 
-				<form:label path="city">*City</form:label>
+				<form:label path="city">*City&nbsp&nbsp&nbsp</form:label>
 				<form:input path="city" /> 
 				<form:errors path="city" />
 				<br>
