@@ -29,15 +29,15 @@
 		</c:if>
 		Rating
 		<div class="rating">
-			    <input type="radio" id="star5" name="rating" value="5" />
+			    <input type="radio" id="star5" name="rating" value="5" ${updatedComment.rating.value == 5 ? 'checked' : '' }/>
 			    <label for="star5" title="text">5 stars</label>
-			    <input type="radio" id="star4" name="rating" value="4" />
+			    <input type="radio" id="star4" name="rating" value="4" ${updatedComment.rating.value == 4 ? 'checked' : '' }/>
 			    <label for="star4" title="text">4 stars</label>
-			    <input type="radio" id="star3" name="rating" value="3" />
+			    <input type="radio" id="star3" name="rating" value="3" ${updatedComment.rating.value == 3 ? 'checked' : '' }/>
 			    <label for="star3" title="text">3 stars</label>
-			    <input type="radio" id="star2" name="rating" value="2" />
+			    <input type="radio" id="star2" name="rating" value="2" ${updatedComment.rating.value == 2 ? 'checked' : '' }/>
 			    <label for="star2" title="text">2 stars</label>
-			    <input type="radio" id="star1" name="rating" value="1" />
+			    <input type="radio" id="star1" name="rating" value="1" ${updatedComment.rating.value == 1 ? 'checked' : '' }/>
 			    <label for="star1" title="text">1 star</label>
  			</div>
 		
