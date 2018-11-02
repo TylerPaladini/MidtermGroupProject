@@ -26,21 +26,21 @@
 	<form:form action="createUser.do" method="POST" modelAttribute="registerUserModel">
 	
 		<form:label path="userName">User Name:</form:label>
-		<form:input path="userName" />
+		 <font face="verdana"><form:input path="userName" /></font>
 		
 		<form:errors path="userName" /><br />
 		First Name:
-		<input type="text" name="firstName"/><br />
+		 <font face="verdana"><input type="text" name="firstName"/></font><br />
 		
 		Last Name:
-		<input type="text" name="lastName"/><br />
+		 <font face="verdana"><input type="text" name="lastName"/></font><br />
 		
 		<form:label path="email">Email:</form:label>
-		<form:input path="email"/>
+		 <font face="verdana"><form:input path="email"/></font>
 		<form:errors path="email" /><br />
 
 		<form:label path="password">Password:</form:label>
-		<form:password path="password" />
+		 <font face="verdana"><form:password path="password" /></font>
 		<form:errors path="password"/><br />
 		  
 		<input type="Submit" value="Create User"/>
