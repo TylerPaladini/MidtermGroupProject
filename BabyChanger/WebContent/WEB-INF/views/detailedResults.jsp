@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="css/body.css">
 <link rel="stylesheet" href="css/diapers.css">
 <link rel="icon" href="https://www.freeiconspng.com/uploads/changing-table-icon-18.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <body>
 
