@@ -202,13 +202,25 @@ public class UsersDAOImpl implements UsersDAO {
 
 	@Override
 	public Set<Users> usersByKeywords(String keywords) {
+		String query = "SELECT u FROM Users u where u.email LIKE :email "
+				+ " OR u.firstName LIKE :fName "
+				+ " OR u.lastName LIKE :lName "
+				+ " OR u.userName LIKE :uName";
 		Set<Users> usersByKeyword = new HashSet<>();
 		String[] words = keywords.trim().split("\\s+");
 		for (String word : words) {
-			usersByKeyword.addAll(getUsersByFirstName(word));
-			usersByKeyword.addAll(getUsersByLastName(word));
-			usersByKeyword.addAll(getUsersByUsername(word));
-			usersByKeyword.addAll(getUsersByEmail(word));
+			usersByKeyword.addAll(em.createQuery(query,Users.class)
+									.setParameter("email", "%" + word + "%")
+									.setParameter("fName", "%" + word + "%")
+									.setParameter("lName", "%" + word + "%")
+									.setParameter("uName", "%" + word + "%")
+									.getResultList()
+								 );
+			// old code
+//			usersByKeyword.addAll(getUsersByFirstName(word));
+//			usersByKeyword.addAll(getUsersByLastName(word));
+//			usersByKeyword.addAll(getUsersByUsername(word));
+//			usersByKeyword.addAll(getUsersByEmail(word));
 		}
 		return usersByKeyword;
 	}

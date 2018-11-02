@@ -101,14 +101,33 @@ public class LocationDAOImpl implements LocationDAO {
 
 	@Override
 	public Set<Location> getLocationsByKeyword(String keyword) {
+		String query = "SELECT location FROM Location location WHERE location.address.state LIKE :state "
+				+ " OR location.name LIKE :name "
+				+ " OR location.address.street LIKE :street "
+				+ " OR location.address.street2 LIKE :street2 "
+				+ " OR location.address.city LIKE :city "
+				+ " OR location.address.zipCode LIKE :zip ";
 		Set<Location> locationByKeyword = new HashSet<>();
 		String[] keywords = keyword.trim().split("\\s+");
-		for (String keywordList : keywords) {
-			locationByKeyword.addAll(getLocationsByName(keywordList));
-			locationByKeyword.addAll(getLocationsLikeAddress(keywordList));
-			locationByKeyword.addAll(getLocationsByCity(keywordList));
-			locationByKeyword.addAll(getLocationsByState(keywordList));
-			locationByKeyword.addAll(getLocationsByZipCode(keywordList));
+		
+		for (String word : keywords) {
+			locationByKeyword.addAll(em.createQuery(query, Location.class)
+									   .setParameter("state","%" + word + "%")
+									   .setParameter("name", "%" +word  + "%")
+									   .setParameter("street", "%" +word  + "%")
+									   .setParameter("street2","%" + word  + "%")
+									   .setParameter("city","%" + word  + "%")
+									   .setParameter("zip", "%" +word  + "%")
+									   .getResultList()
+									);
+			// old code
+//			locationByKeyword.addAll(getLocationsByName(word));
+//			locationByKeyword.addAll(getLocationsLikeAddress(word));
+//			locationByKeyword.addAll(getLocationsByCity(word));
+//			locationByKeyword.addAll(getLocationsByState(word));
+//			locationByKeyword.addAll(getLocationsByZipCode(word));
+		
+
 		}
 		return locationByKeyword;
 	}
